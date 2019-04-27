@@ -15,13 +15,13 @@ class CreateSubscribedsTable extends Migration
     {
         Schema::create('subscribeds', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('subscribtion_id');
+            $table->unsignedBigInteger('subscription_id');
             $table->date('expired_date');
             $table->timestamps();
 
-            $table->foreign('subscribtion_id')
+            $table->foreign('subscription_id')
                 ->references('id')
-                ->on('subscribtions')
+                ->on('subscriptions')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
