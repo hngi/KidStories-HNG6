@@ -1,9 +1,13 @@
 <?php
+	// Route check 1... 2... :-)
+	Route::get('/test', function () {
+		return response()->json(['message' => 'You are set!']);
+	});
 	
 	/**
 	 * Routes for users
 	 */
-	Route::post('/user/register',"UserController@register");
+	Route::post('/user/register', "UserController@register");
 
 	Route::post('/user/login', "UserController@login");
 
