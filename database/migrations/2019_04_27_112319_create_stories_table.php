@@ -21,7 +21,7 @@ class CreateStoriesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('image_url')->nullable();
             $table->string('image_name')->nullable();
-            $table->integer('age');
+            $table->string('age');
             $table->string('author');
             $table->time('story_duration');
             $table->boolean('is_premium')->default(false);
