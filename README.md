@@ -46,3 +46,13 @@ php artisan passport:install
 ```
 php artisan serve
 ```
+8. Test to see if API is up. Launch Postman or Insomia and send a GET request to
+```
+http://localhost:8000/api/v1/test
+```
+You should get a response:
+```
+{
+  "message": "You are set!"
+}
+```
