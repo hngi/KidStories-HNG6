@@ -3,40 +3,73 @@
 	Route::get('/test', function () {
 		return response()->json(['message' => 'You are set!']);
 	});
+
+	/**
+	 * Routes for authentication
+	 */
+	Route::post('/auth/register', "AuthController@register");
+
+	Route::post('/auth/login', "AuthController@login");
+
+	Route::post('/auth/logout', "AuthController@logout");
+
+	Route::middleware('auth:api')->get('/auth/user', "AuthController@details");
+
+	Route::middleware('auth:api')->put('/auth/change-password', "AuthController@changePassword");
+
 	
 	/**
 	 * Routes for users
 	 */
-	Route::post('/user/register', "UserController@register");
+	Route::middleware('auth:api')->get('/users/{id}', "UserController@show");
 
-	Route::post('/user/login', "UserController@login");
+	Route::middleware('auth:api')->put('/users/{id}', "UserController@update");
 
-	Route::middleware('auth:api')->get('/user/profile/{id}', "UserController@profile");
+	Route::middleware('auth:api')->put('/users/{id}/profile-image', "UserController@updateProfileImage");
 
-	Route::get('/user/login', "UserController@login");
-
-	Route::middleware('auth:api')->get('/user/edit/{id}', "UserController@update");
-
-	Route::get('/user/all', "UserController@index");
+	Route::get('/users', "UserController@index");
 
 	/**
 	 * Routes for bookmarks
 	 */
-	Route::middleware('auth:api')->post('/bookmark/story/{storyId}/user/{userId}', "BookmarkController@add");
+	Route::middleware('auth:api')->post('/bookmarks/stories/{storyId}', "BookmarkController@add");
 
-	Route::middleware('auth:api')->delete('/bookmark/story/{storyId}/user/{userId}', "BookmarkController@remove");
+	Route::middleware('auth:api')->delete('/bookmarks/stories/{storyId}', "BookmarkController@remove");
 
 	/**
 	 * Routes for bookmarks
 	 */
-	Route::middleware('auth:api')->post('/story/create', "StoryController@create");
+	Route::get('/categories', "CategoryController@index");
 
-	Route::get('/story', "StoryController@index");
+	Route::get('/categories/{id}', "CategoryController@show");
 
-	Route::get('/story/{id}', "StoryController@show");
+	Route::get('/categories/{id}/stories', "StoryController@categoryStories");
 
-	Route::get('/story/category/{categoryId}', "StoryController@storyByCategory");
+	/**
+	 * Routes for stories
+	 */
+	Route::middleware('auth:api')->post('/stories', "StoryController@store");
 
-	Route::middleware('auth:api')->put('/story/edit/{id}', "StoryController@update");
+	Route::get('/stories', "StoryController@index");
 
-	Route::middleware('auth:api')->put('/story/like/{storyId}', "StoryController@storyReaction");
+	Route::get('/stories/{id}', "StoryController@show");
+
+	Route::middleware('auth:api')->post('/stories/{id}', "StoryController@update");
+
+	Route::middleware('auth:api')->post('/stories/{storyId}/reactions/like', "StoryController@like");
+
+	Route::middleware('auth:api')->post('/stories/{storyId}/reactions/dislike', "StoryController@dislike");
+
+	/**
+	 * Routes for comment
+	 */
+	Route::middleware('auth:api')->post('/comments', "CommentsController@store");
+
+	Route::middleware('auth:api')->put('/comments', "CommentsController@update");
+
+	Route::middleware('auth:api')->delete('/comments', "CommentsController@destory");
+
+	/**
+	 * Routes for payment
+	 */
+	Route::middleware('auth:api')->post('/payments', "PaymentController@store");
