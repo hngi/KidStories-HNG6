@@ -41,11 +41,35 @@ class User extends Authenticatable
     //Relationship start
 
     /*
+     * A User has  many stories
+     */
+    public function story()
+    {
+        return $this->hasMany(Story::class);
+    }
+
+    /*
+     * A User has  many comments
+     */
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /*
      * A User has  many bookmarks
      */
     public function bookmarks()
     {
         return $this->hasMany(Bookmark::class);
+    }
+
+    /*
+     * A User has  many reactions
+     */
+    public function reaction()
+    {
+        return $this->hasMany(Reaction::class);
     }
 
     //Relationship end
