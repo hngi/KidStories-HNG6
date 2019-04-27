@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bookmark extends Model
 {
+
+    //Relationship start
+
+    /*
+     * A Bookmark belong to a user
+     */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class)->withDefault();
     }
 
-    public function story()
-    {
-        return $this->belongsTo('App\Story');
-    }
+    //Relationship end
 }

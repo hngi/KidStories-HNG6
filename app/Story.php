@@ -6,23 +6,39 @@ use Illuminate\Database\Eloquent\Model;
 
 class Story extends Model
 {
+    //Relationship start
+
+    /*
+     * A Story belong to a user
+     */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class)->withDefault();
     }
 
-    public function reaction()
-    {
-        return $this->hasMany('App\Reaction');
-    }
-
+    /*
+     * A Story belong to a category
+     */
     public function category()
     {
-        return $this->hasMany('App\Category');
+        return $this->belongsTo(Category::class)->withDefault();
     }
 
-    public function comment()
+    /*
+     * A Story has many comments
+     */
+    public function comments()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(Comment::class)->withDefault();
     }
+
+    /*
+     * A Story has many reactions
+     */
+    public function reaction()
+    {
+        return $this->hasMany(Reaction::class)->withDefault();
+    }
+
+    //Relationship end
 }

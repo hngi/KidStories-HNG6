@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public function user()
+
+    //Relationship start
+
+    /*
+     * A category has many stories
+     */
+    public function stories()
     {
-        return $this->belongsTo('App\User');
+        return $this->hasMany(Story::class)->withDefault();
     }
 
-    public function story()
-    {
-        return $this->hasMany('App\Story');
-    }
+    //Relationship end
 }

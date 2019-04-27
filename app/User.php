@@ -38,33 +38,39 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //Relationship start
+
+    /*
+     * A User has  many stories
+     */
     public function story()
     {
-        return $this->hasMany('App\Story');
+        return $this->hasMany(Story::class);
     }
 
-    public function reaction()
-    {
-        return $this->hasMany('App\Reaction');
-    }
-
+    /*
+     * A User has  many comments
+     */
     public function comment()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(Comment::class);
     }
 
-    public function bookmark()
+    /*
+     * A User has  many bookmarks
+     */
+    public function bookmarks()
     {
-        return $this->hasMany('App\Bookmark');
+        return $this->hasMany(Bookmark::class);
     }
 
-    public function category()
+    /*
+     * A User has  many reactions
+     */
+    public function reaction()
     {
-        return $this->hasMany('App\Category');
+        return $this->hasMany(Reaction::class);
     }
 
-    public function payment()
-    {
-        return $this->hasMany('App\Payment');
-    }
+    //Relationship end
 }
