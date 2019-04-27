@@ -17,8 +17,7 @@ class CreateSubscriptionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->double('cost');
-            $table->time('duration');
-            //$table->string('benefits');
+            $table->unsignedBigInteger('duration');
             $table->timestamps();
         });
     }
