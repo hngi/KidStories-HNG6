@@ -37,4 +37,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //Relationship start
+
+    /*
+     * A User has  many bookmarks
+     */
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
+    //Relationship end
 }
