@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Validator;
+use DB;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -20,14 +23,16 @@ class AuthController extends Controller
 
            
 
-			$response = [
-                'id' => $user->id,
-				'first_name' => $user->first_name,
-				'last_name' => $user->last_name,
-				'is_admin' => $user->is_admin,
-				'email' => $user->email,
-				'token' => $user->createToken('MyApp')->accessToken,
-                
+				$response = [
+            'id' => $user->id,
+			'first_name' => $user->first_name,
+			'last_name' => $user->last_name,
+			'is_admin' => $user->is_admin,
+			'email' => $user->email,
+			'location'=>$user->location,
+			'postal_code'=>$user->postal_code,
+			'phone'=>$user->phone,
+			'token' => $user->createToken('MyApp')->accessToken
 			];
 
             return response()->json([
@@ -50,11 +55,19 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
+
+    
+
+
+
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|min:2',
             'last_name' => 'required|min:2',
 			'email' => 'required|email|unique:users',
             'password' => 'required',
+            'phone'=>'required',
+            'location'=>'required',
+            'postal_code'=>'required'
         ]);
 
         if ($validator->fails()) {
@@ -77,7 +90,9 @@ class AuthController extends Controller
             'is_admin' => false,
             'postal_code'=>$request->get('postal_code'),
             'phone'=>$request->get('phone'),
-            
+            'location'=>$request->get('location'),
+
+
         ]);
 
 		DB::commit();
@@ -88,6 +103,9 @@ class AuthController extends Controller
 			'last_name' => $user->last_name,
 			'is_admin' => $user->is_admin,
 			'email' => $user->email,
+			'location'=>$user->location,
+			'postal_code'=>$user->postal_code,
+			'phone'=>$user->phone,
 			'token' => $user->createToken('MyApp')->accessToken
 		];
 
@@ -108,6 +126,7 @@ class AuthController extends Controller
      */
     public function details()
     {
+    	
         $user = User::where('id', Auth::user()->id)->first();
 
         return response()->json([
@@ -132,10 +151,10 @@ class AuthController extends Controller
         return response()->json(['status' => true]);
     }
 
-    public function update(Request $request)
+    public function changePassword(Request $request)
     {
         $user=User::findOrFail(Auth::user()->id);
-        $user->update($request->all());
+        $user->update(['password'=>$request->password]);
 
         return response()->json([
             "status"=>"success",
@@ -146,7 +165,7 @@ class AuthController extends Controller
 
     }
 
-    public function allUsers()
+ /**   public function allUsers()
     {
         $users=User::where('is_admin',false)->get();
 
@@ -159,5 +178,6 @@ class AuthController extends Controller
         ]);
 
     }
+    **/
 
 }
