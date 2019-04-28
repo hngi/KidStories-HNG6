@@ -136,7 +136,11 @@ class AuthController extends Controller
 	        ->where('user_id', Auth::user()->id)
 	        ->update(['revoked' => true]);
 
-        return response()->json(['status' => true]);
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK'
+        ], 200);
     }
 
     /**
@@ -147,13 +151,13 @@ class AuthController extends Controller
      */
     public function changePassword(Request $request)
     {
-        $user=User::findOrFail(Auth::user()->id);
-        $user->update(['password'=>$request->password]);
+        $user = User::findOrFail(Auth::user()->id);
+        $user->update(['password' => bcrypt($request->password)]);
 
         return response()->json([
-            "status" => "success",
-            "code" => 200,
-            "data" => $user
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK'
         ]);
     }
 

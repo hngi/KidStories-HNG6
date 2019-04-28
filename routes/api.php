@@ -11,7 +11,7 @@
 
 	Route::post('/auth/login', "AuthController@login");
 
-	Route::post('/auth/logout', "AuthController@logout");
+	Route::middleware('auth:api')->post('/auth/logout', "AuthController@logout");
 
 	Route::middleware('auth:api')->get('/auth/user', "AuthController@details");
 
@@ -35,6 +35,8 @@
 	Route::middleware('auth:api')->post('/bookmarks/stories/{storyId}', "BookmarkController@add");
 
 	Route::middleware('auth:api')->delete('/bookmarks/stories/{storyId}', "BookmarkController@remove");
+
+	Route::middleware('auth:api')->get('/bookmarks/stories/{storyId}/status', "BookmarkController@status");
 
 	/**
 	 * Routes for categories
