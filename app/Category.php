@@ -15,7 +15,7 @@ class Category extends Model
      */
     public function stories()
     {
-        return $this->hasMany(Story::class)->withDefault();
+        return $this->hasMany(Story::class);
     }
 
     //Relationship end

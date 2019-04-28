@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Subscribed;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\StoryResource;
+use App\Http\Controllers\Controller;
 
 class StoryController extends Controller
 {
