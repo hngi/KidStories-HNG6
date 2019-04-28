@@ -16,6 +16,7 @@ class CreateSubscribedsTable extends Migration
         Schema::create('subscribeds', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('subscription_id');
+            $table->unsignedBigInteger('user_id');
             $table->date('expired_date');
             $table->timestamps();
 
