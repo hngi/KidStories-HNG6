@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\SuperAdmin;
 
+use DB;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Services\FileUploadService;
@@ -62,6 +63,8 @@ class CategoryController extends Controller
             return redirect()->back()->withError(__("Category '{$request->name}' already exists."));
         }
 
+        DB::beginTransaction();
+
         // Upload image if included in the request
         if($request->hasFile('photo')) {
             $image = $this->fileUploadService->uploadFile($request->file('photo'));
@@ -72,6 +75,8 @@ class CategoryController extends Controller
             "image_url" => $image['secure_url'] ?? null,
             "image_name" => $image['public_id'] ?? null
         ]);
+
+        DB::commit();
 
         return redirect()->back()->withStatus(__('Category successfully created.'));
     }
@@ -113,6 +118,8 @@ class CategoryController extends Controller
             return redirect()->back()->withError(__("Category '{$request->name}' already exists."));
         }
 
+        DB::beginTransaction();
+
         // Upload image if included in the request
         if($request->hasFile('photo')) {
             $image = $this->fileUploadService->uploadFile($request->file('photo'));
@@ -127,6 +134,8 @@ class CategoryController extends Controller
             "image_url" => $image['secure_url'] ?? $category->image_url,
             "image_name" => $image['public_id'] ?? $category->image_name
         ]);
+
+        DB::commit();
 
         return redirect()->route('categories.index')->withStatus(__('Category successfully updated.'));
     }
