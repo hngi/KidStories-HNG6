@@ -71,6 +71,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reaction::class);
     }
+    /**
+     * users has many subscription
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscribed::class);
+    }
 
     //Relationship end
 }
