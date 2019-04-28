@@ -118,6 +118,9 @@ $factory->define(App\Subscribed::class, function (Faker $faker) {
        'subscription_id'=>function(){
            return factory('App\Subscription')->create()->id;
        },
+       'user_id'=>function(){
+           return factory('App\User')->create()->id;
+       },
        'expired_date'=>$faker->dateTimeBetween('-1 years','+1 years'),
     ];
 });
