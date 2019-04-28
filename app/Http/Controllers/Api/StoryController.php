@@ -39,6 +39,7 @@ class StoryController extends Controller
         //     'message'=> 'success',
         //     'data' => StoryResource::collection($stories)
         // ],Response.HTTP_OK);
+        
         $stories = Story::all();
         return response()->json([
             'status' => 'success',
