@@ -35,7 +35,7 @@ class CreateStoriesTable extends Migration
 
             $table->foreign('user_id')
                 ->references('id')
-                ->on('stories')
+                ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
