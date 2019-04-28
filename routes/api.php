@@ -65,9 +65,9 @@
 	 */
 	Route::middleware('auth:api')->post('/comments', "CommentsController@store");
 
-	Route::middleware('auth:api')->put('/comments', "CommentsController@update");
+	Route::middleware('auth:api')->put('/comments/{id}', "CommentsController@update");
 
-	Route::middleware('auth:api')->delete('/comments', "CommentsController@destory");
+	Route::middleware('auth:api')->delete('/comments/{id}', "CommentsController@destory");
 
 	/**
 	 * Routes for payment
