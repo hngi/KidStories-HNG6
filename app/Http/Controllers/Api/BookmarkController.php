@@ -9,8 +9,6 @@ use Auth;
 
 class BookmarkController extends Controller
 {
-  
-
     /**
      * Store a newly created resource in storage.
      *
@@ -67,26 +65,26 @@ class BookmarkController extends Controller
         ], 204);
     }
 
-
-    public function status($story_id)
+    /**
+     * Check the status of a bookmark
+     *
+     * @param  int  $storyId
+     * @return \Illuminate\Http\Response
+     */
+    public function status($storyId)
     {
-        $status=Bookmark::where([['story_id','=',$story_id],['user_id','=',Auth::user()->id]])->first();
+        $status = Bookmark::where('user_id', auth()->id())
+                                ->where('story_id', $storyId)
+                                ->first();
 
-        if($status == null)
-        {
-            return response()->json([
-                "status"=>201,
-                "message"=>"user has bookmarked already",
-                "data"=>true
-            ]);
-        }
-
-         return response()->json([
-                "status"=>201,
-                "message"=>"user has not bookmarked this story",
-                "data"=>false
-            ]);
-
-
+        $response = is_null($status) ? false : true;
+        
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK',
+            "data" => $response
+        ], 200);
     }
+    
 }
