@@ -37,13 +37,13 @@
 	Route::middleware('auth:api')->delete('/bookmarks/stories/{storyId}', "BookmarkController@remove");
 
 	/**
-	 * Routes for bookmarks
+	 * Routes for categories
 	 */
 	Route::get('/categories', "CategoryController@index");
 
 	Route::get('/categories/{id}', "CategoryController@show");
 
-	Route::get('/categories/{id}/stories', "StoryController@categoryStories");
+	Route::get('/categories/{id}/stories', "CategoryController@categoryStories");
 
 	/**
 	 * Routes for stories
