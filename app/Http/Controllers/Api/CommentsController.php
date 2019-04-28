@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Story;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,20 +19,24 @@ class CommentsController extends Controller
     public function store(Request $request)
     {   
         $request->validate([
-            'body' => ['required', 'string','min:3']
+            'body' => ['required', 'string','min:3'],
+            'story_id' => ['required']
         ]);
 
+        Story::findOrFail($request->story_id);
+
         $comment = Comment::create([
-            'story_id'=>$request->story_id,
-            'user_id'=>auth()->id(),
-            'body'=>$request->body
+            'story_id' => $request->story_id,
+            'user_id' => auth()->id(),
+            'body' => $request->body
         ]);
 
         return response()->json([
-            "status"=>201,
-            "message"=>"created",
-            "data"=>$comment
-        ],201);
+            'status' => 'suucess',
+            'code' => 201,
+            'message' => 'created',
+            "data" => $comment
+        ], 201);
     }
 
 
@@ -48,17 +53,20 @@ class CommentsController extends Controller
             'body' => ['required', 'string','min:3']
         ]);
 
-        $comment = Comment::findOrFail($id);
+        $comment = Comment::where('id', $id)
+                        ->where('user_id', auth()->id())
+                        ->firstOrFail();
 
         $comment->update([
             'body'=>$request->body
         ]);
 
         return response()->json([
-            "status"=>201,
-            "message"=>"created",
-            "data"=>$comment
-        ],201);
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'created',
+            'data' => $comment
+        ], 200);
     }
 
     /**
@@ -69,13 +77,16 @@ class CommentsController extends Controller
      */
     public function destory($id)
     {
-        $comment = Comment::findOrFail($id);
+        $comment = Comment::where('id', $id)
+                        ->where('user_id', auth()->id())
+                        ->firstOrFail();
 
         $comment->delete();
 
         return response()->json([
-            'status'=>204,
-            'message'=>'deleted'
+            'status' => 'success',
+            'code' => 204,
+            'message' => 'deleted'
         ], 204);
     }
 }
