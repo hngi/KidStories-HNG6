@@ -61,7 +61,7 @@ class BookmarkController extends Controller
           return response()->json([
             'status' => 'success',
             'code' => 204,
-            'message' => 'Deleted',
+            'message' => 'deleted',
         ], 204);
     }
 
