@@ -23,6 +23,8 @@ class CreateStoriesTable extends Migration
             $table->string('image_name')->nullable();
             $table->string('age');
             $table->string('author');
+            $table->integer('likes_count')->default(0);
+            $table->integer('dislikes_count')->default(0);
             $table->time('story_duration');
             $table->boolean('is_premium')->default(false);
             $table->timestamps();
