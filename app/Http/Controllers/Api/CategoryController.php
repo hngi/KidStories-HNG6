@@ -57,7 +57,7 @@ class CategoryController extends Controller
      */
     public function categoryStories($id)
     {
-        $category = Category::where('id', $id)->with('stories')->first();
+        $category = Category::where('id', $id)->with(['stories.user'])->first();
 
         if (!$category) {
             return response()->json([
