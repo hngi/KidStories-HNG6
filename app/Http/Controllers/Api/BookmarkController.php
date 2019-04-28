@@ -21,7 +21,7 @@ class BookmarkController extends Controller
     public function add(Request $request, $storyId)
     {
         //check if the person has bookmarked before
-        $bookmark = Bookmark::where('user_id', Auth::user()->id)
+        $bookmark = Bookmark::where('user_id', auth()->id())
                                 ->where('story_id', $storyId)
                                 ->first();
 
@@ -35,7 +35,7 @@ class BookmarkController extends Controller
          }
 
         Bookmark::create([
-            "user_id" => Auth::user()->id,
+            "user_id" => auth()->id(),
             "story_id" => $storyId
         ]);
 
@@ -56,15 +56,15 @@ class BookmarkController extends Controller
      */
     public function remove($storyId)
     {
-        Bookmark::where('user_id', Auth::user()->id)
+        Bookmark::where('user_id', auth()->id())
                 ->where('story_id',$storyId)
                 ->delete();
 
           return response()->json([
             'status' => 'success',
-            'code' => 200,
-            'message' => 'OK',
-        ], 200);
+            'code' => 204,
+            'message' => 'Deleted',
+        ], 204);
     }
 
 
