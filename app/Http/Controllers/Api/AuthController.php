@@ -1,19 +1,20 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Validator;
+
 use DB;
 use Auth;
+use App\User;
+use Validator;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
-    //
 	/**
      * Login API
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function login(Request $request){
@@ -21,18 +22,16 @@ class AuthController extends Controller
 
             $user = Auth::user();
 
-           
-
-				$response = [
-            'id' => $user->id,
-			'first_name' => $user->first_name,
-			'last_name' => $user->last_name,
-			'is_admin' => $user->is_admin,
-			'email' => $user->email,
-			'location'=>$user->location,
-			'postal_code'=>$user->postal_code,
-			'phone'=>$user->phone,
-			'token' => $user->createToken('MyApp')->accessToken
+			$response = [
+                'id' => $user->id,
+    			'first_name' => $user->first_name,
+    			'last_name' => $user->last_name,
+    			'is_admin' => $user->is_admin,
+    			'email' => $user->email,
+    			'location'=>$user->location,
+    			'postal_code'=>$user->postal_code,
+    			'phone'=>$user->phone,
+    			'token' => $user->createToken('MyApp')->accessToken
 			];
 
             return response()->json([
@@ -51,23 +50,17 @@ class AuthController extends Controller
 	/**
      * Register API
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
     {
-
-    
-
-
-
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|min:2',
             'last_name' => 'required|min:2',
 			'email' => 'required|email|unique:users',
             'password' => 'required',
-            'phone'=>'required',
-            'location'=>'required',
-            'postal_code'=>'required'
+            'phone'=>'required'
         ]);
 
         if ($validator->fails()) {
@@ -90,9 +83,7 @@ class AuthController extends Controller
             'is_admin' => false,
             'postal_code'=>$request->get('postal_code'),
             'phone'=>$request->get('phone'),
-            'location'=>$request->get('location'),
-
-
+            'location'=>$request->get('location')
         ]);
 
 		DB::commit();
@@ -116,8 +107,6 @@ class AuthController extends Controller
             'data' => $response
         ], 201);
     }
-
-
   
 	/**
      * Returns the details of a logged in user
@@ -126,7 +115,6 @@ class AuthController extends Controller
      */
     public function details()
     {
-    	
         $user = User::where('id', Auth::user()->id)->first();
 
         return response()->json([
@@ -148,36 +136,29 @@ class AuthController extends Controller
 	        ->where('user_id', Auth::user()->id)
 	        ->update(['revoked' => true]);
 
-        return response()->json(['status' => true]);
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK'
+        ], 200);
     }
 
+    /**
+     * Change logged in user's password
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function changePassword(Request $request)
     {
-        $user=User::findOrFail(Auth::user()->id);
-        $user->update(['password'=>$request->password]);
+        $user = User::findOrFail(Auth::user()->id);
+        $user->update(['password' => bcrypt($request->password)]);
 
         return response()->json([
-            "status"=>"success",
-            "code"=>200,
-            "data"=>$user
-
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK'
         ]);
-
     }
-
- /**   public function allUsers()
-    {
-        $users=User::where('is_admin',false)->get();
-
-        return response()->json([
-
-            "status"=>'success',
-            "code"=>200,
-            "data"=>$users
-
-        ]);
-
-    }
-    **/
 
 }

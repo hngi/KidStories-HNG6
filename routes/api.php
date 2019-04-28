@@ -11,7 +11,7 @@
 
 	Route::post('/auth/login', "AuthController@login");
 
-	Route::post('/auth/logout', "AuthController@logout");
+	Route::middleware('auth:api')->post('/auth/logout', "AuthController@logout");
 
 	Route::middleware('auth:api')->get('/auth/user', "AuthController@details");
 
@@ -36,14 +36,16 @@
 
 	Route::middleware('auth:api')->delete('/bookmarks/stories/{storyId}', "BookmarkController@remove");
 
+	Route::middleware('auth:api')->get('/bookmarks/stories/{storyId}/status', "BookmarkController@status");
+
 	/**
-	 * Routes for bookmarks
+	 * Routes for categories
 	 */
 	Route::get('/categories', "CategoryController@index");
 
 	Route::get('/categories/{id}', "CategoryController@show");
 
-	Route::get('/categories/{id}/stories', "StoryController@categoryStories");
+	Route::get('/categories/{id}/stories', "CategoryController@categoryStories");
 
 	/**
 	 * Routes for stories
@@ -65,9 +67,9 @@
 	 */
 	Route::middleware('auth:api')->post('/comments', "CommentsController@store");
 
-	Route::middleware('auth:api')->put('/comments', "CommentsController@update");
+	Route::middleware('auth:api')->put('/comments/{id}', "CommentsController@update");
 
-	Route::middleware('auth:api')->delete('/comments', "CommentsController@destory");
+	Route::middleware('auth:api')->delete('/comments/{id}', "CommentsController@destory");
 
 	/**
 	 * Routes for payment
