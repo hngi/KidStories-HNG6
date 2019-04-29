@@ -25,7 +25,7 @@
             <button onclick="react(event);" class="dislike" data-story-id="{{ $story->id }}">Unlike</button>
             <span id="dislikes-count-{{ $story->id }}">{{ $story->dislikes_count }}</span>
         </div>
-
+        <div class="hidden">{{ $token }}</div>
 
     </div>
     @endforeach

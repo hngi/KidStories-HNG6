@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('admin.welcome');
 });
 
-Route::get('/story', 'ReactionController@index')->name('reaction');
+Route::get('/story', 'StoriesController@index')->name('reaction');
 
 Auth::routes();
 

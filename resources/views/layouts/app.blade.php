@@ -85,17 +85,19 @@
             var text = event.target.textContent;
             //console.log(text)
             var storyId = event.target.dataset.storyId;
-            // var action = event.target.textContent;
-            // toggleButtonText[action](event.target);
-            // updateStoryStats[action](storyId);
+            var token = $('.hidden').html;
+            console.log(token);
             if (text === "Like") {
                 console.log(1)
                 const action = await axios.post('/api/v1/stories/' + storyId + '/reactions/like', {
-                    action: text
+                    action: text,
+                    header: {
+
+                    }
                 });
                 console.log(action)
             } else {
-                const action = await axios.post('/stories/' + storyId + '/reactions/dislike', {
+                const action = await axios.post('/api/v1/stories/' + storyId + '/reactions/dislike', {
                     action: text
                 });
             }
