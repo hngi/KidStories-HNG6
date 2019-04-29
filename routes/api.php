@@ -1,22 +1,22 @@
 <?php
-// Route check 1... 2... :-)
-Route::get('/test', function () {
-    return response()->json(['message' => 'You are set!']);
-});
+	// Route check 1... 2... :-)
+	Route::get('/test', function () {
+	    return response()->json(['message' => 'You are set!']);
+	});
 
-/**
- * Routes for authentication
- */
-Route::post('/auth/register', "AuthController@register");
+	/**
+	 * Routes for authentication
+	 */
+	Route::post('/auth/register', "AuthController@register");
 
-Route::post('/auth/login', "AuthController@login");
+	Route::post('/auth/login', "AuthController@login");
 
-Route::middleware('auth:api')->post('/auth/logout', "AuthController@logout");
+	Route::middleware('auth:api')->post('/auth/logout', "AuthController@logout");
 
 
-Route::middleware('auth:api')->get('/auth/user', "AuthController@details");
+	Route::middleware('auth:api')->get('/auth/user', "AuthController@details");
 
-Route::middleware('auth:api')->put('/auth/change-password', "AuthController@changePassword");
+	Route::middleware('auth:api')->put('/auth/change-password', "AuthController@changePassword");
 
 	/**
 	 * Routes for users
@@ -27,49 +27,49 @@ Route::middleware('auth:api')->put('/auth/change-password', "AuthController@chan
 
 	Route::middleware('auth:api')->post('/users/profile/update-image', "UserController@updateProfileImage");
 
-Route::get('/users', "UserController@index");
+	Route::get('/users', "UserController@index");
 
-/**
- * Routes for bookmarks
- */
-Route::middleware('auth:api')->post('/bookmarks/stories/{storyId}', "BookmarkController@add");
+	/**
+	 * Routes for bookmarks
+	 */
+	Route::middleware('auth:api')->post('/bookmarks/stories/{storyId}', "BookmarkController@add");
 
-Route::middleware('auth:api')->delete('/bookmarks/stories/{storyId}', "BookmarkController@remove");
+	Route::middleware('auth:api')->delete('/bookmarks/stories/{storyId}', "BookmarkController@remove");
 
 	Route::middleware('auth:api')->get('/bookmarks/stories/{storyId}/status', "BookmarkController@status");
 
-/**
- * Routes for categories
- */
-Route::get('/categories', "CategoryController@index");
+	/**
+	 * Routes for categories
+	 */
+	Route::get('/categories', "CategoryController@index");
 
-Route::get('/categories/{id}/stories', "CategoryController@categoryStories");
+	Route::get('/categories/{id}/stories', "CategoryController@categoryStories");
 
-/**
- * Routes for stories
- */
-Route::middleware('auth:api')->post('/stories', "StoryController@store");
+	/**
+	 * Routes for stories
+	 */
+	Route::middleware('auth:api')->post('/stories', "StoryController@store");
 
-Route::get('/stories', "StoryController@index");
+	Route::get('/stories', "StoryController@index");
 
-Route::get('/stories/{id}', "StoryController@show");
+	Route::get('/stories/{id}', "StoryController@show");
 
-Route::middleware('auth:api')->post('/stories/{id}', "StoryController@update");
+	Route::middleware('auth:api')->post('/stories/{id}', "StoryController@update");
 
-Route::middleware('auth:api')->post('/stories/{storyId}/reactions/like', "StoryController@like");
+	Route::middleware('auth:api')->post('/stories/{storyId}/reactions/like', "StoryController@like");
 
-Route::middleware('auth:api')->post('/stories/{storyId}/reactions/dislike', "StoryController@dislike");
+	Route::middleware('auth:api')->post('/stories/{storyId}/reactions/dislike', "StoryController@dislike");
 
-/**
- * Routes for comment
- */
-Route::middleware('auth:api')->post('/comments', "CommentsController@store");
+	/**
+	 * Routes for comment
+	 */
+	Route::middleware('auth:api')->post('/comments', "CommentsController@store");
 
-Route::middleware('auth:api')->put('/comments/{id}', "CommentsController@update");
+	Route::middleware('auth:api')->put('/comments/{id}', "CommentsController@update");
 
-Route::middleware('auth:api')->delete('/comments/{id}', "CommentsController@destory");
+	Route::middleware('auth:api')->delete('/comments/{id}', "CommentsController@destory");
 
-/**
- * Routes for payment
- */
-Route::middleware('auth:api')->post('/payments', "PaymentController@store");
+	/**
+	 * Routes for payment
+	 */
+	Route::middleware('auth:api')->post('/payments', "PaymentController@store");
