@@ -61,7 +61,7 @@ class AuthController extends Controller
             'last_name' => 'required|min:2',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            'phone' => 'required'
+            'phone' => 'nullable|min:8'
         ]);
 
         if ($validator->fails()) {
@@ -137,7 +137,11 @@ class AuthController extends Controller
             ->where('user_id', Auth::user()->id)
             ->update(['revoked' => true]);
 
-        return response()->json(['status' => true]);
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK'
+        ], 200);
     }
 
     /**
@@ -149,12 +153,12 @@ class AuthController extends Controller
     public function changePassword(Request $request)
     {
         $user = User::findOrFail(Auth::user()->id);
-        $user->update(['password' => $request->password]);
+        $user->update(['password' => bcrypt($request->password)]);
 
         return response()->json([
-            "status" => "success",
-            "code" => 200,
-            "data" => $user
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK'
         ]);
     }
 }

@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Story extends Model
 {
+    protected $fillable = [
+        'title', 'body', 'category_id', 'age', 'author', 'image_url', 'image_name', 
+        'story_duration', 'user_id', 'is_premium'
+    ];
+
     //Relationship start
 
     /*
@@ -29,15 +34,15 @@ class Story extends Model
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class)->withDefault();
+        return $this->hasMany(Comment::class);
     }
 
     /*
      * A Story has many reactions
      */
-    public function reaction()
+    public function reactions()
     {
-        return $this->hasMany(Reaction::class)->withDefault();
+        return $this->hasMany(Reaction::class);
     }
 
     //Relationship end

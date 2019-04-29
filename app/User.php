@@ -17,7 +17,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'email', 'password','last_name','phone','location','postal_code','is_admin'
+        'first_name', 'email', 'password','last_name','phone','location',
+        'postal_code','is_admin', 'image_url', 'image_name'
     ];
 
     /**
@@ -43,7 +44,7 @@ class User extends Authenticatable
     /*
      * A User has  many stories
      */
-    public function story()
+    public function stories()
     {
         return $this->hasMany(Story::class);
     }
@@ -51,7 +52,7 @@ class User extends Authenticatable
     /*
      * A User has  many comments
      */
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }
@@ -67,7 +68,7 @@ class User extends Authenticatable
     /*
      * A User has  many reactions
      */
-    public function reaction()
+    public function reactions()
     {
         return $this->hasMany(Reaction::class);
     }
