@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use DB;
+use Validator;
 use App\Story;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Subscribed;
-use Illuminate\Routing\Controller;
-use Symfony\Component\HttpFoundation\Response;
-use App\Http\Resources\StoryResource;
-use App\Services\FileUploadService;
+use App\Category;
 use App\Reaction;
+use Illuminate\Http\Request; 
+use App\Services\FileUploadService;
+use App\Http\Controllers\Controller;
 
 class StoryController extends Controller
 {
@@ -18,6 +17,7 @@ class StoryController extends Controller
     {
         $this->fileUploadService = $fileUploadService;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,39 +25,18 @@ class StoryController extends Controller
      */
     public function index()
     {
-        // if($this->isUserSubscribe())
-        // {
-        //     $stories = Story::all();
-        // }else
-        // {
-        //     $stories = Story::where('is_premium','=',false)->get();
-        // }
+        $stories = Story::with([
+                        'user:id,first_name,last_name,image_url', 
+                        'category:id,name',
+                        'reactions:id,story_id,user_id,reaction'
+                    ])->get();
 
-        // return response([
-        //     'status' => Response.HTTP_OK,
-        //     'method' => 'GET',
-        //     'message'=> 'success',
-        //     'data' => StoryResource::collection($stories)
-        // ],Response.HTTP_OK);
-        
-        $stories = Story::all();
         return response()->json([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
-            'data' => StoryResource::collection($stories)
+            'data' => $stories
         ], 200);
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -68,168 +47,225 @@ class StoryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = request()->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
             'body' => 'required',
             'category_id' => 'required|numeric',
-            'image_url' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'age' => 'required',
             'author' => 'required',
             'story_duration' => 'required',
         ]);
-        $data['user_id'] = Auth::user()->id();
-        if($request->hasfile('story_image'))
-        {
-            $image = $this->fileUploadService->uploadFile($request->file('story_image'));
-            $data['image_url'] = $image['secure_url'] ?? null;
-            $data['image_name'] = $image['public_id'] ?? null;
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => [
+                    'code' => 422,
+                    'message' => "Unprocessable Entity",
+                    'errors' => $validator->errors()
+                ]
+            ], 422);
         }
-        $story = Story::create($data);
+
+        $category = Category::find($request->category_id);
+
+        if (!$category) {
+            return response()->json([
+                'error' => 'Resource not found',
+                'message' => 'Not found',
+                'code' => 404
+            ], 404);
+        }
+
+        DB::beginTransaction();
+
+        if ($request->hasfile('photo')) {
+            $image = $this->fileUploadService->uploadFile($request->file('photo'));
+        }
+
+        $story = Story::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'category_id' => $request->category_id,
+            'user_id' => auth()->id(),
+            'age' => $request->age,
+            'author' => $request->author,
+            'story_duration' => $request->story_duration,
+            "image_url" => $image['secure_url'] ?? null,
+            "image_name" => $image['public_id'] ?? null
+        ]);
+
+        DB::commit();
+
         return response()->json([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
-            'data' => StoryResource::collection($story)
+            'data' => $story,
         ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Story  $story
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $story = Story::find($id);
-        if($story){
-            return response()->json([
-                'status' => 'success',
-                'data' => $story
-            ], 200);
-        }
-        else {
-            return response()->json([
-                'error' => ['code' => 404, 'message' => 'Story not found']
-            ], 404);
-        }
-    }
+        $story = Story::where('id', $id)
+                    ->with([
+                        'user:id,first_name,last_name,image_url', 
+                        'category:id,name',
+                        'reactions:id,story_id,user_id,reaction',
+                        'comments.user:id,first_name,last_name,image_url'
+                    ])
+                    ->firstOrFail();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Story  $story
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Story $story)
-    {
-        //
+        return response()->json([
+            'status' => 'success',
+            'data' => $story
+        ], 200);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Story  $story
+     * @param  int  $if
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $story = Story::find($id);
-        $data = request()->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
             'body' => 'required',
             'category_id' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'age' => 'required',
             'author' => 'required',
             'story_duration' => 'required',
         ]);
-        $data['user_id'] = Auth::user()->id();
-        if($request->hasfile('story_image'))
-        {
-            $image = $this->fileUploadService->uploadFile($request->file('story_image'));
-            $data['image_url'] = $image['secure_url'] ?? null;
-            $data['image_name'] = $image['public_id'] ?? null;
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => [
+                    'code' => 422,
+                    'message' => "Unprocessable Entity",
+                    'errors' => $validator->errors()
+                ]
+            ], 422);
         }
-        $story->update($data);
+
+        $category = Category::find($request->category_id);
+
+        if (!$category) {
+            return response()->json([
+                'error' => 'Category not found',
+                'message' => 'Not found',
+                'code' => 404
+            ], 404);
+        }
+
+        $story = Story::where('id', $id)->where('user_id', auth()->id())->first();
+
+        if (!$story) {
+            return response()->json([
+                'error' => 'Story not found',
+                'message' => 'Not found',
+                'code' => 404
+            ], 404);
+        }
+
+        DB::beginTransaction();
+
+        if ($request->hasfile('photo')) {
+            $image = $this->fileUploadService->uploadFile($request->file('photo'));
+
+            if(!is_null($story->image_name)) {
+                $this->fileUploadService->deleteFile($story->image_name);
+            }
+        }
+
+        $story->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'category_id' => $request->category_id,
+            'user_id' => auth()->id(),
+            'age' => $request->age,
+            'author' => $request->author,
+            'story_duration' => $request->story_duration,
+            "image_url" => $image['secure_url'] ?? $story->image_url,
+            "image_name" => $image['public_id'] ?? $story->image_name
+        ]);
+
+        DB::commit();
+
         return response()->json([
             'status' => 'success',
             'code' => 200,
-            'message' => 'OK',
-            'data' => StoryResource::collection($story)
+            'message' => 'OK'
+        ], 200);
+    }
+    
+    /**
+     * Like a story
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function like($id)
+    {
+        $reaction = Reaction::where('story_id', $id)
+                            ->where('user_id', auth()->id())
+                            ->first();
+        
+        if ($reaction && $reaction->reaction == 1) {
+            $reaction->delete();
+        } else {
+            $reaction = Reaction::updateOrCreate([
+                'story_id' => $id,
+                'user_id' => auth()->id()
+            ], [
+                'reaction' => 1
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK'
         ], 200);
     }
 
-
     /**
-     * Remove the specified resource from storage.
+     * Dislike a story
      *
-     * @param  \App\Story  $story
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Story $story)
+    public function dislike($id)
     {
-        //
-    }
-
-    public function isUserSubscribe(){
-        $id = Auth::user()->id();
-        $subscribed = Subscribed::where('user_id','=',$id)
-                        ->where('expired_date','>=',Carbon::now()->toDateString())->latest()->first();
-        if($subscribed !=null){
-            return true;
-        }
-        return false;
-    }
-    
-    public function like($id)
-    {
-        $user_id = Auth::user()->id();
-        $reaction = Reaction::where('story_id','=',$id)->where('user_id','=',$user_id);
-        if($reaction->count()){
-            $reaction = $reaction->update([
-                'reaction'  => 1,
-            ]);
-            return response()->json([
-                'status' => 'success',
-                'data' => 'Story Liked'
-            ], 200);
-        }else {
-            Reaction::create([
+        $reaction = Reaction::where('story_id', $id)
+                            ->where('user_id', auth()->id())
+                            ->first();
+        
+        if ($reaction && $reaction->reaction == 0) {
+            $reaction->delete();
+            
+        } else {
+            $reaction = Reaction::updateOrCreate([
                 'story_id' => $id,
-                'user_id' => 1,
-                'reaction'  => 1,
+                'user_id' => auth()->id()
+            ], [
+                'reaction' => 0
             ]);
-            return response()->json([
-                'status' => 'success',
-                'data' => 'Story Liked'
-            ], 200);
         }
-    }
 
-    public function dislike($id)    
-    {
-        $user_id = Auth::user()->id();
-        $reaction = Reaction::where('story_id','=',$id)->where('user_id','=',$user_id);
-        if($reaction->count()){
-            $reaction = $reaction->update([
-                'reaction'  => 0,
-            ]);
-            return response()->json([
-                'status' => 'success',
-                'data' => 'Story Disiked'
-            ], 200);
-        }else {
-            Reaction::create([
-                'story_id' => $id,
-                'user_id' => $user_id,
-                'reaction'  => 0,
-            ]);
-            return response()->json([
-                'status' => 'success',
-                'data' => 'Story Disliked'
-            ], 200);
-        }
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK'
+        ], 200);
     }
 }
