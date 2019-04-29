@@ -37,13 +37,11 @@ Route::middleware('auth:api')->post('/bookmarks/stories/{storyId}', "BookmarkCon
 Route::middleware('auth:api')->delete('/bookmarks/stories/{storyId}', "BookmarkController@remove");
 
 /**
- * Routes for bookmarks
+ * Routes for categories
  */
 Route::get('/categories', "CategoryController@index");
 
-Route::get('/categories/{id}', "CategoryController@show");
-
-Route::get('/categories/{id}/stories', "StoryController@categoryStories");
+Route::get('/categories/{id}/stories', "CategoryController@categoryStories");
 
 /**
  * Routes for stories
@@ -56,7 +54,7 @@ Route::get('/stories/{id}', "StoryController@show");
 
 Route::middleware('auth:api')->post('/stories/{id}', "StoryController@update");
 
-Route::post('/stories/{storyId}/reactions/like', "ReactionController@like");
+Route::middleware('auth:api')->post('/stories/{storyId}/reactions/like', "StoryController@like");
 
 Route::middleware('auth:api')->post('/stories/{storyId}/reactions/dislike', "StoryController@dislike");
 
@@ -65,9 +63,9 @@ Route::middleware('auth:api')->post('/stories/{storyId}/reactions/dislike', "Sto
  */
 Route::middleware('auth:api')->post('/comments', "CommentsController@store");
 
-Route::middleware('auth:api')->put('/comments', "CommentsController@update");
+Route::middleware('auth:api')->put('/comments/{id}', "CommentsController@update");
 
-Route::middleware('auth:api')->delete('/comments', "CommentsController@destory");
+Route::middleware('auth:api')->delete('/comments/{id}', "CommentsController@destory");
 
 /**
  * Routes for payment
