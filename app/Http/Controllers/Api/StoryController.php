@@ -10,6 +10,7 @@ use App\Reaction;
 use Illuminate\Http\Request; 
 use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
+use App\Reaction;
 
 class StoryController extends Controller
 {
@@ -237,14 +238,14 @@ class StoryController extends Controller
             'message' => 'OK'
         ], 200);
     }
-
-    /**
+  
+   /**
      * Dislike a story
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function dislike($id)
+  public function dislike($id)
     {
         $reaction = Reaction::where('story_id', $id)
                             ->where('user_id', auth()->id())
@@ -261,11 +262,124 @@ class StoryController extends Controller
                 'reaction' => 0
             ]);
         }
-
         return response()->json([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK'
         ], 200);
+  }
+
+    /**
+     * User can like a story or remove like.
+     *
+     * @param  $storyId
+     * @return \Illuminate\Http\Response
+     */
+    public function checklike($id)
+    {
+
+        $user = $this->user();
+        $story = $this->findstory($id);
+
+        $reaction = Reaction::where('story_id', $story->id)->where('user_id', $user->id)->where('reaction', true)->first();
+        if ($reaction) {
+            $reaction->delete();
+            $story->decrement('likes_count');
+            return response()->json([
+                'status' => 'success',
+                'code' => 201,
+                'message' => "User has removed like",
+                'data' => [$reaction, $story, $user]
+            ], 201);
+        } else {
+            $reaction = new Reaction();
+        }
+
+        $story->increment('likes_count');
+        $reaction->user_id = $user->id;
+        $reaction->story_id = $story->id;
+        $reaction->reaction = true;
+        $reaction->save();
+
+        return response()->json([
+            'status' => 'success',
+            'code' => 201,
+            'message' => 'User has liked story',
+            'data' => [$reaction, $story, $user]
+        ], 201);
+
+        //return [$reaction, $story, $user];
+    }
+
+    /**
+     * User can dislike a story or remove dislike.
+     *
+     * @param  $storyId
+     * @return \Illuminate\Http\Response
+     */
+    public function checkdislike($id)
+    {
+
+        $user = $this->user();
+        $story = $this->findstory($id);
+
+        $reaction = Reaction::where('story_id', $story->id)->where('user_id', $user->id)->where('reaction', false)->first();
+        if ($reaction) {
+            $reaction->delete();
+            $story->decrement('dislikes_count');
+            return response()->json([
+                'status' => 'success',
+                'code' => 201,
+                'message' => "User has removed dislike",
+                'data' => [$reaction, $story, $user]
+            ], 201);
+        } else {
+            $reaction = new Reaction();
+        }
+
+        $story->increment('dislikes_count');
+        $reaction->user_id = $user->id;
+        $reaction->story_id = $story->id;
+        $reaction->reaction = false;
+        $reaction->save();
+
+        return response()->json([
+            'status' => 'success',
+            'code' => 201,
+            'message' => 'User has disliked story',
+            'data' => [$reaction, $story, $user]
+        ], 201);
+
+        //return [$reaction, $story, $user];
+    }
+
+    public function findstory($storyId)
+    {
+        $story = Story::find($storyId);
+        if (!$story) {
+            return response()->json([
+                'status' => 'Not found',
+                'code' => 404,
+                'message' => "Story does not exist",
+                'data' => null
+            ], 404);
+        } else {
+            return $story;
+        }
+    }
+
+    public function user()
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json([
+                'status' => 'failed',
+                'code' => 401,
+                'message' => 'User unauthenticated',
+                'data' => null
+            ], 401);
+        } else {
+            return $user;
+        }
     }
 }
