@@ -1,3 +1,5 @@
+/* Styles for Favourite page */
+
 @import url('https://fonts.googleapis.com/css?family=Lato');
 * {
     margin: 0;
@@ -7,7 +9,6 @@
 }
 
 .favourites_header {
-    /* background-image: url(https://res.cloudinary.com/mrphemi/image/upload/v1555435595/tablet-1075790_1280.jpg); */
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://res.cloudinary.com/mrphemi/image/upload/v1555435595/tablet-1075790_1280.jpg);
     background-size: cover;
     background-repeat: no-repeat;
