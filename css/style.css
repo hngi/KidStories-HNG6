@@ -156,4 +156,9 @@ footer section {
     .title-input {
         margin-bottom: 20px;
     }
+
+    footer section {
+        width: 100%;
+        margin-bottom: 20px
+    }
 }
