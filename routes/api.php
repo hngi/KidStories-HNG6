@@ -21,11 +21,11 @@
 	/**
 	 * Routes for users
 	 */
-	Route::middleware('auth:api')->get('/users/{id}', "UserController@show");
+	Route::middleware('auth:api')->get('/users/profile', "UserController@showProfile");
 
-	Route::middleware('auth:api')->put('/users/{id}', "UserController@update");
+	Route::middleware('auth:api')->put('/users/profile', "UserController@updateProfile");
 
-	Route::middleware('auth:api')->put('/users/{id}/profile-image', "UserController@updateProfileImage");
+	Route::middleware('auth:api')->post('/users/profile/update-image', "UserController@updateProfileImage");
 
 	Route::get('/users', "UserController@index");
 
