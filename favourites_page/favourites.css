@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+.favourites_header {
+    /* background-image: url(https://res.cloudinary.com/mrphemi/image/upload/v1555435595/tablet-1075790_1280.jpg); */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://res.cloudinary.com/mrphemi/image/upload/v1555435595/tablet-1075790_1280.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 50vh;
+}
+
+.story_card .card-title {
+    color: #333333;
+}
+
+.story_card .card-text:first-of-type {
+    color: #4F4F4F;
+}
+
+.story_card .card-text:nth-of-type(2) {
+    color: #666666;
+}
+
+.story_card .author {
+    color: #718CFB;
+}
+
+.story_card .reactions i {
+    color: #A6A6A6;
+}
+
+.story_card .reactions i.liked,
+.story_card .reactions i.dislike {
+    color: #718CFB;
+}
