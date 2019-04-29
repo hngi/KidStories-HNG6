@@ -11,21 +11,21 @@ Route::post('/auth/register', "AuthController@register");
 
 Route::post('/auth/login', "AuthController@login");
 
-Route::post('/auth/logout', "AuthController@logout");
+Route::middleware('auth:api')->post('/auth/logout', "AuthController@logout");
+
 
 Route::middleware('auth:api')->get('/auth/user', "AuthController@details");
 
 Route::middleware('auth:api')->put('/auth/change-password', "AuthController@changePassword");
 
+	/**
+	 * Routes for users
+	 */
+	Route::middleware('auth:api')->get('/users/profile', "UserController@showProfile");
 
-/**
- * Routes for users
- */
-Route::middleware('auth:api')->get('/users/{id}', "UserController@show");
+	Route::middleware('auth:api')->put('/users/profile', "UserController@updateProfile");
 
-Route::middleware('auth:api')->put('/users/{id}', "UserController@update");
-
-Route::middleware('auth:api')->put('/users/{id}/profile-image', "UserController@updateProfileImage");
+	Route::middleware('auth:api')->post('/users/profile/update-image', "UserController@updateProfileImage");
 
 Route::get('/users', "UserController@index");
 
@@ -35,6 +35,8 @@ Route::get('/users', "UserController@index");
 Route::middleware('auth:api')->post('/bookmarks/stories/{storyId}', "BookmarkController@add");
 
 Route::middleware('auth:api')->delete('/bookmarks/stories/{storyId}', "BookmarkController@remove");
+
+	Route::middleware('auth:api')->get('/bookmarks/stories/{storyId}/status', "BookmarkController@status");
 
 /**
  * Routes for categories

@@ -33,13 +33,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::find($id);
-
-        if (!$category) {
-            return response()->json([
-                'error' => ['code' => 404, 'message' => 'Category not found']
-            ], 404);
-        }
+        $category = Category::findOrFail($id);
 
         return response([
             'status' => 'success',
@@ -57,14 +51,8 @@ class CategoryController extends Controller
      */
     public function categoryStories($id)
     {
-        $category = Category::where('id', $id)->with(['stories.user'])->first();
-
-        if (!$category) {
-            return response()->json([
-                'error' => ['code' => 404, 'message' => 'Category not found']
-            ], 404);
-        }
-
+        $category = Category::where('id', $id)->with(['stories.user'])->firstOrFail();
+        
         return response([
             'status' => 'success',
             'code' => 200,
