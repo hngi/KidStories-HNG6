@@ -20,7 +20,7 @@
             <!--Image Column-->
             <div class="image-column col-lg-6 col-md-12 col-sm-12">
                 <div class="image paroller" data-paroller-factor="0.15" data-paroller-factor-lg="0.15" data-paroller-factor-md="0.10" data-paroller-factor-sm="0.10" data-paroller-type="foreground" data-paroller-direction="horizontal">
-                    <img src="images/resources/frame.png" alt="" />
+                    <img src="images/resources/Frame.png" alt="" />
                 </div>
             </div>
 
