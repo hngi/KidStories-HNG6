@@ -29,7 +29,7 @@ class StoryController extends Controller
      */
     public function index()
     {
-        $stories = Story::latest()->with(['user', 'category'])->paginate(10);
+        $stories = Story::latest()->paginate(10);
 
         return view('admin.stories.index', compact('stories'));
     }
@@ -57,6 +57,12 @@ class StoryController extends Controller
             'photo'=>'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB
         ]);
 
+        $exists = Stories::where('name', 'LIKE', "%{$request->name}")->first();
+
+        if ($exists) {
+            return redirect()->back()->withError(__("Stories '{$request->name}' already exists."));
+        }
+
         DB::beginTransaction();
 
         // Upload image if included in the request
@@ -81,7 +87,7 @@ class StoryController extends Controller
 
         DB::commit();
 
-        return redirect()->back()->withStatus(__('Story successfully created.'));
+        return redirect()->back()->withStatus(__('Stories successfully created.'));
     }
 
     /**
@@ -107,8 +113,7 @@ class StoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required|string|max:255',
-            'body' => 'required|string',
+            'name' => 'required|string|max:255',
             'photo'=>'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB
         ]);
 
