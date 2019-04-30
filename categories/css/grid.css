@@ -1,4 +1,19 @@
+/* Global */
+body, input, button {
+    font-family: 'Lato', san-serif;
+}
 
+
+.container1 {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.content {
+    padding-bottom: 50px;
+}
+/* Global ends */
 
 /* Top Container */
 .top-container {
@@ -61,6 +76,7 @@ h1.span {
     font-size: 30px;
     font-weight: normal;
 }
+/* Top-container and Showcase ends */
 
 /* Picture Container */
 .wrapper {
@@ -93,6 +109,14 @@ h1.span {
     background: #abb8be;
 }
 
+img.category {
+    min-width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 2;
+}
+
 div.info {
     width: 100%;
     height: 60px;
@@ -109,4 +133,25 @@ div.info {
 
 div.info:hover {
     background: rgba(168, 117, 255, 0.6);
+}
+/* Picture Container ends */
+
+/* Media Queries for responsiveness */
+@media(max-width: 768px) {
+    .min-nav ul {
+        padding-left: 30px;     
+    }
+}
+
+@media(max-width: 430px) {
+    .min-nav ul {
+        padding-left: 0;     
+    }
+}
+
+@media(max-width: 320px) {
+    .wrapper {
+       width: 20%;
+       padding-right: 300px;   
+    }
 }
