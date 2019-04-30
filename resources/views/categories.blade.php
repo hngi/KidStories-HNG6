@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('custom_css')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/categories.css') }}">
+<link rel="stylesheet" type="text/css" href="css/categories.css">
 @endsection
 
 @section('content')
@@ -52,5 +52,7 @@
     </div>
 
     <!-- Footer goes here -->
+    <!--Scroll to top-->
+    <div class="scroll-to-top scroll-to-target" data-target="html"><span class="icon fa fa-angle-double-up"></span></div>
 
 @endsection
