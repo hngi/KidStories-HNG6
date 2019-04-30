@@ -11,29 +11,28 @@ use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
-    /**
+	/**
      * Login API
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function login(Request $request)
-    {
+    public function login(Request $request){
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
 
             $user = Auth::user();
 
-            $response = [
+			$response = [
                 'id' => $user->id,
-                'first_name' => $user->first_name,
-                'last_name' => $user->last_name,
-                'is_admin' => $user->is_admin,
-                'email' => $user->email,
-                'location' => $user->location,
-                'postal_code' => $user->postal_code,
-                'phone' => $user->phone,
-                'token' => $user->createToken('MyApp')->accessToken
-            ];
+    			'first_name' => $user->first_name,
+    			'last_name' => $user->last_name,
+    			'is_admin' => $user->is_admin,
+    			'email' => $user->email,
+    			'location'=>$user->location,
+    			'postal_code'=>$user->postal_code,
+    			'phone'=>$user->phone,
+    			'token' => $user->createToken('MyApp')->accessToken
+			];
 
             return response()->json([
                 'status' => 'success',
@@ -48,7 +47,7 @@ class AuthController extends Controller
         }
     }
 
-    /**
+	/**
      * Register API
      *
      * @param  \Illuminate\Http\Request  $request
@@ -59,9 +58,9 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|min:2',
             'last_name' => 'required|min:2',
-            'email' => 'required|email|unique:users',
+			'email' => 'required|email|unique:users',
             'password' => 'required',
-            'phone' => 'nullable|min:8'
+            'phone'=>'nullable|min:8'
         ]);
 
         if ($validator->fails()) {
@@ -74,32 +73,32 @@ class AuthController extends Controller
             ], 422);
         }
 
-        DB::beginTransaction();
+		DB::beginTransaction();
 
         $user = User::create([
-            'first_name' => $request->get('first_name'),
-            'last_name' => $request->get('last_name'),
-            'email' => $request->get('email'),
-            'password' => bcrypt($request->get('password')),
+            'first_name'=>$request->get('first_name'),
+            'last_name'=>$request->get('last_name'),
+            'email'=>$request->get('email'),
+            'password'=>bcrypt($request->get('password')),
             'is_admin' => false,
-            'postal_code' => $request->get('postal_code'),
-            'phone' => $request->get('phone'),
-            'location' => $request->get('location')
+            'postal_code'=>$request->get('postal_code'),
+            'phone'=>$request->get('phone'),
+            'location'=>$request->get('location')
         ]);
 
-        DB::commit();
+		DB::commit();
 
-        $response = [
+		$response = [
             'id' => $user->id,
-            'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'is_admin' => $user->is_admin,
-            'email' => $user->email,
-            'location' => $user->location,
-            'postal_code' => $user->postal_code,
-            'phone' => $user->phone,
-            'token' => $user->createToken('MyApp')->accessToken
-        ];
+			'first_name' => $user->first_name,
+			'last_name' => $user->last_name,
+			'is_admin' => $user->is_admin,
+			'email' => $user->email,
+			'location'=>$user->location,
+			'postal_code'=>$user->postal_code,
+			'phone'=>$user->phone,
+			'token' => $user->createToken('MyApp')->accessToken
+		];
 
         return response()->json([
             'status' => 'success',
@@ -108,8 +107,8 @@ class AuthController extends Controller
             'data' => $response
         ], 201);
     }
-
-    /**
+  
+	/**
      * Returns the details of a logged in user
      *
      * @return \Illuminate\Http\Response
@@ -126,7 +125,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    /**
+	/**
      * Log user out
      *
      * @return \Illuminate\Http\Response
@@ -134,8 +133,8 @@ class AuthController extends Controller
     public function logout()
     {
         DB::table('oauth_access_tokens')
-            ->where('user_id', Auth::user()->id)
-            ->update(['revoked' => true]);
+	        ->where('user_id', Auth::user()->id)
+	        ->update(['revoked' => true]);
 
         return response()->json([
             'status' => 'success',
@@ -161,4 +160,5 @@ class AuthController extends Controller
             'message' => 'OK'
         ]);
     }
+
 }
