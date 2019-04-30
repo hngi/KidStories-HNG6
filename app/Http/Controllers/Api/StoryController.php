@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Auth;
 use DB;
 use Validator;
 use App\Story;
@@ -209,149 +210,103 @@ class StoryController extends Controller
     }
 
     /**
-     * Like a story
+     * User can like a story or remove like.
      *
-     * @param  int  $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function like($id)
     {
-        $reaction = Reaction::where('story_id', $id)
-            ->where('user_id', auth()->id())
+        $user = $this->user();
+
+        $story = $this->findStory($id);
+
+        $reaction = Reaction::where('story_id', $story->id)
+            ->where('user_id', $user->id)
             ->first();
+
+        DB::beginTransaction();
 
         if ($reaction && $reaction->reaction == 1) {
             $reaction->delete();
+            $story->decrement('likes_count', 1);
+        } else if ($reaction && $reaction->reaction == 0) {
+
+            $story->increment('likes_count', 1);
+
+            $story->decrement('dislikes_count', 1);
+
+            $reaction = Reaction::updateOrCreate(
+                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['reaction' => 0]
+            );
         } else {
-            $reaction = Reaction::updateOrCreate([
-                'story_id' => $id,
-                'user_id' => auth()->id()
-            ], [
-                'reaction' => 1
-            ]);
+            $story->increment('likes_count', 1);
+
+            $reaction = Reaction::updateOrCreate(
+                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['reaction' => 1]
+            );
         }
 
         return response()->json([
             'status' => 'success',
             'code' => 200,
-            'message' => 'OK'
+            'message' => 'OK',
+            'likes' => $story->likes_count
         ], 200);
-    }
-
-    /**
-     * Dislike a story
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function dislike($id)
-    {
-        $reaction = Reaction::where('story_id', $id)
-            ->where('user_id', auth()->id())
-            ->first();
-
-        if ($reaction && $reaction->reaction == 0) {
-            $reaction->delete();
-        } else {
-            $reaction = Reaction::updateOrCreate([
-                'story_id' => $id,
-                'user_id' => auth()->id()
-            ], [
-                'reaction' => 0
-            ]);
-        }
-        return response()->json([
-            'status' => 'success',
-            'code' => 200,
-            'message' => 'OK'
-        ], 200);
-    }
-
-    /**
-     * User can like a story or remove like.
-     *
-     * @param  $storyId
-     * @return \Illuminate\Http\Response
-     */
-    public function checklike($id)
-    {
-
-        $user = $this->user();
-        $story = $this->findstory($id);
-
-        $reaction = Reaction::where('story_id', $story->id)->where('user_id', $user->id)->where('reaction', true)->first();
-        if ($reaction) {
-            $reaction->delete();
-            $story->decrement('likes_count');
-            return response()->json([
-                'status' => 'success',
-                'code' => 201,
-                'message' => "User has removed like",
-                'data' => [$reaction, $story, $user]
-            ], 201);
-        } else {
-            $reaction = new Reaction();
-        }
-
-        $story->increment('likes_count');
-        $reaction->user_id = $user->id;
-        $reaction->story_id = $story->id;
-        $reaction->reaction = true;
-        $reaction->save();
-
-        return response()->json([
-            'status' => 'success',
-            'code' => 201,
-            'message' => 'User has liked story',
-            'data' => [$reaction, $story, $user]
-        ], 201);
-
-        //return [$reaction, $story, $user];
     }
 
     /**
      * User can dislike a story or remove dislike.
      *
-     * @param  $storyId
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function checkdislike($id)
+    public function dislike($id)
     {
-
         $user = $this->user();
-        $story = $this->findstory($id);
 
-        $reaction = Reaction::where('story_id', $story->id)->where('user_id', $user->id)->where('reaction', false)->first();
-        if ($reaction) {
+        $story = $this->findStory($id);
+
+        $reaction = Reaction::where('story_id', $story->id)
+            ->where('user_id', $user->id)
+            ->first();
+
+        DB::beginTransaction();
+
+        if ($reaction && $reaction->reaction == 0) {
             $reaction->delete();
-            $story->decrement('dislikes_count');
-            return response()->json([
-                'status' => 'success',
-                'code' => 201,
-                'message' => "User has removed dislike",
-                'data' => [$reaction, $story, $user]
-            ], 201);
+            $story->decrement('dislikes_count', 1);
+        } else if ($reaction && $reaction->reaction == 1) {
+
+            $story->increment('dislikes_count', 1);
+
+            $story->decrement('likes_count', 1);
+
+            $reaction = Reaction::updateOrCreate(
+                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['reaction' => 0]
+            );
         } else {
-            $reaction = new Reaction();
+            $story->increment('dislikes_count', 1);
+
+            $reaction = Reaction::updateOrCreate(
+                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['reaction' => 0]
+            );
         }
 
-        $story->increment('dislikes_count');
-        $reaction->user_id = $user->id;
-        $reaction->story_id = $story->id;
-        $reaction->reaction = false;
-        $reaction->save();
+        DB::commit();
 
         return response()->json([
             'status' => 'success',
-            'code' => 201,
-            'message' => 'User has disliked story',
-            'data' => [$reaction, $story, $user]
-        ], 201);
-
-        //return [$reaction, $story, $user];
+            'code' => 200,
+            'message' => 'OK'
+        ], 200);
     }
 
-    public function findstory($storyId)
+    public function findStory($storyId)
     {
         $story = Story::find($storyId);
         if (!$story) {
@@ -380,4 +335,64 @@ class StoryController extends Controller
             return $user;
         }
     }
+
+    /**
+     * Like a story
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    /*public function likezzzzzz($id)
+    {
+        $reaction = Reaction::where('story_id', $id)
+                            ->where('user_id', auth()->id())
+                            ->first();
+
+        if ($reaction && $reaction->reaction == 1) {
+            $reaction->delete();
+        } else {
+            $reaction = Reaction::updateOrCreate([
+                'story_id' => $id,
+                'user_id' => auth()->id()
+            ], [
+                'reaction' => 1
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK'
+        ], 200);
+    }*/
+
+    /**
+     * Dislike a story
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    /*public function dislikezzzzzzz$id)
+    {
+        $reaction = Reaction::where('story_id', $id)
+                            ->where('user_id', auth()->id())
+                            ->first();
+
+        if ($reaction && $reaction->reaction == 0) {
+            $reaction->delete();
+
+        } else {
+            $reaction = Reaction::updateOrCreate([
+                'story_id' => $id,
+                'user_id' => auth()->id()
+            ], [
+                'reaction' => 0
+            ]);
+        }
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK'
+        ], 200);
+    }*/
 }

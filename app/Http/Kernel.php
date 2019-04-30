@@ -41,6 +41,7 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
             'cors',
+            'authApi',
         ],
     ];
 
@@ -62,6 +63,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\AuthenticateAdmin::class,
+        'authApi' => \App\Http\Middleware\authenticateApi::class,
         'cors'=>\Barryvdh\Cors\HandleCors::class,
     ];
 
