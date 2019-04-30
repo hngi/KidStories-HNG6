@@ -1,11 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php include 'partials/header.php';?>
+<?php include 'partials/header.php'; ?>
+
+    <link rel="stylesheet" href="favourites_page/favourites.css">
+
+
 <body>
-    <div class="container">
-        <main class="banner">
-            <h1>Add New Story</h1>
-        </main>
+<div class="page-wrapper">
+
+    <!-- Main Navigation-->
+        <?php include 'partials/navbar.php'; ?>
+    <!--End Main Navigation -->
+        <!-- Header with BG Image -->
+        <div class="favourites_header d-flex justify-content-center align-items-center">
+            <h1 class="text-white">Add New Story</h1>
+        </div>
+
+    <div class="auto-container">
+
         <section class="add-story">
             <form action="">
                 <div class="top-form">
@@ -29,6 +39,17 @@
             </form>
         </section>
     </div>
-    <?php include 'partials/footer.php';?>
+
+    
+</div>
+<!--End pagewrapper-->
+
+<?php include 'partials/footer.php'; ?>
+
+<!--Scroll to top-->
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="icon fa fa-angle-double-up"></span></div>
+
+<script src="tjs/script.js"></script>
+
 </body>
 </html>
