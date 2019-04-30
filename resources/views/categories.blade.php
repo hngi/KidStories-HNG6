@@ -31,12 +31,18 @@
             </span>    
 
             <div class="wrapper">     
-                <div class="item"><a href="#"> <img class="category" src="images/categories/Myth.jpg"> <div class="info"> Myths </div> </a></div>
+                @foreach ($categories as $category)
+
+                    <div class="item"><a href="#"> <img class="category" src="{{ $category->image_url }}"> <div class="info"> {{ $category->name }} </div> </a></div>
+
+                @endforeach
+
+                {{-- <div class="item"><a href="#"> <img class="category" src="images/categories/Myth.jpg"> <div class="info"> Myths </div> </a></div>
                 <div class="item"><a href="#"> <img class="category" src="images/categories/fairytales.JPG"> <div class="info"> Fairytales </div> </a></div>
                 <div class="item"><a href="#"> <img class="category" src="images/categories/animals.jpeg"> <div class="info"> Animals </div> </a></div>
                 <div class="item"><a href="#"> <img class="category" src="images/categories/fearful2.png"> <div class="info"> Fearful </div> </a></div>
                 <div class="item"><a href="#"> <img class="category" src="images/categories/fables.jpeg"> <div class="info"> Fables </div> </a></div>
-                <div class="item"><a href="#"> <img class="category" src="images/categories/history.png"> <div class="info"> History </div> </a></div>         
+                <div class="item"><a href="#"> <img class="category" src="images/categories/history.png"> <div class="info"> History </div> </a></div> --}}         
             </div>
 
             <!-- Poem Categories-->
