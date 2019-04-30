@@ -11,15 +11,11 @@
 |
 */
 
-Route::get('/admin', function () {
+Route::get('/', function () {
     return view('admin.welcome');
 });
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/story', 'StoriesController@index')->name('reaction');
+Route::get('/story', 'ReactionController@index')->name('reaction');
 
 Auth::routes();
 

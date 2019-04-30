@@ -8,7 +8,7 @@ use Validator;
 use App\Story;
 use App\Category;
 use App\Reaction;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
 
@@ -27,10 +27,10 @@ class StoryController extends Controller
     public function index()
     {
         $stories = Story::with([
-            'user:id,first_name,last_name,image_url',
-            'category:id,name',
-            'reactions:id,story_id,user_id,reaction'
-        ])->get();
+                        'user:id,first_name,last_name,image_url', 
+                        'category:id,name',
+                        'reactions:id,story_id,user_id,reaction'
+                    ])->get();
 
         return response()->json([
             'status' => 'success',
@@ -115,13 +115,13 @@ class StoryController extends Controller
     public function show($id)
     {
         $story = Story::where('id', $id)
-            ->with([
-                'user:id,first_name,last_name,image_url',
-                'category:id,name',
-                'reactions:id,story_id,user_id,reaction',
-                'comments.user:id,first_name,last_name,image_url'
-            ])
-            ->firstOrFail();
+                    ->with([
+                        'user:id,first_name,last_name,image_url', 
+                        'category:id,name',
+                        'reactions:id,story_id,user_id,reaction',
+                        'comments.user:id,first_name,last_name,image_url'
+                    ])
+                    ->firstOrFail();
 
         return response()->json([
             'status' => 'success',
@@ -183,7 +183,7 @@ class StoryController extends Controller
         if ($request->hasfile('photo')) {
             $image = $this->fileUploadService->uploadFile($request->file('photo'));
 
-            if (!is_null($story->image_name)) {
+            if(!is_null($story->image_name)) {
                 $this->fileUploadService->deleteFile($story->image_name);
             }
         }
@@ -222,14 +222,15 @@ class StoryController extends Controller
         $story = $this->findStory($id);
 
         $reaction = Reaction::where('story_id', $story->id)
-            ->where('user_id', $user->id)
-            ->first();
-
+                            ->where('user_id', $user->id)
+                            ->first();
+        
         DB::beginTransaction();
-
+        
         if ($reaction && $reaction->reaction == 1) {
             $reaction->delete();
             $story->decrement('likes_count', 1);
+
         } else if ($reaction && $reaction->reaction == 0) {
 
             $story->increment('likes_count', 1);
@@ -237,23 +238,25 @@ class StoryController extends Controller
             $story->decrement('dislikes_count', 1);
 
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['story_id' => $id, 'user_id' => auth()->id()], 
                 ['reaction' => 0]
             );
+
         } else {
             $story->increment('likes_count', 1);
 
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['story_id' => $id, 'user_id' => auth()->id()], 
                 ['reaction' => 1]
             );
         }
 
+        DB::commit();
+        
         return response()->json([
             'status' => 'success',
             'code' => 200,
-            'message' => 'OK',
-            'likes' => $story->likes_count
+            'message' => 'OK'
         ], 200);
     }
 
@@ -270,14 +273,15 @@ class StoryController extends Controller
         $story = $this->findStory($id);
 
         $reaction = Reaction::where('story_id', $story->id)
-            ->where('user_id', $user->id)
-            ->first();
+                            ->where('user_id', $user->id)
+                            ->first();
 
         DB::beginTransaction();
 
         if ($reaction && $reaction->reaction == 0) {
             $reaction->delete();
             $story->decrement('dislikes_count', 1);
+
         } else if ($reaction && $reaction->reaction == 1) {
 
             $story->increment('dislikes_count', 1);
@@ -285,14 +289,15 @@ class StoryController extends Controller
             $story->decrement('likes_count', 1);
 
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['story_id' => $id, 'user_id' => auth()->id()], 
                 ['reaction' => 0]
             );
+
         } else {
             $story->increment('dislikes_count', 1);
 
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['story_id' => $id, 'user_id' => auth()->id()], 
                 ['reaction' => 0]
             );
         }
@@ -303,7 +308,7 @@ class StoryController extends Controller
             'status' => 'success',
             'code' => 200,
             'message' => 'OK'
-        ], 200);
+        ], 200);      
     }
 
     public function findStory($storyId)
@@ -347,7 +352,7 @@ class StoryController extends Controller
         $reaction = Reaction::where('story_id', $id)
                             ->where('user_id', auth()->id())
                             ->first();
-
+        
         if ($reaction && $reaction->reaction == 1) {
             $reaction->delete();
         } else {
@@ -365,8 +370,8 @@ class StoryController extends Controller
             'message' => 'OK'
         ], 200);
     }*/
-
-    /**
+  
+   /**
      * Dislike a story
      *
      * @param  int  $id
@@ -377,10 +382,10 @@ class StoryController extends Controller
         $reaction = Reaction::where('story_id', $id)
                             ->where('user_id', auth()->id())
                             ->first();
-
+        
         if ($reaction && $reaction->reaction == 0) {
             $reaction->delete();
-
+            
         } else {
             $reaction = Reaction::updateOrCreate([
                 'story_id' => $id,
