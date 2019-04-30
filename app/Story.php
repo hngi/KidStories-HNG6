@@ -45,7 +45,7 @@ class Story extends Model
         return $this->hasMany(Reaction::class);
     }
 
-    public function bookmarked_by()
+    public function bookmarkedBy()
     {
         return $this->belongsToMany(Users::class,'bookmarks');
     }
