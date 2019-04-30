@@ -29,7 +29,7 @@ class StoryController extends Controller
      */
     public function index()
     {
-        $stories = Story::latest()->paginate(10);
+        $stories = Story::latest()->with(['user', 'category', 'comments'])->paginate(10);
 
         return view('admin.stories.index', compact('stories'));
     }
