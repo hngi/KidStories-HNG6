@@ -21,7 +21,8 @@ class StoryResource extends JsonResource
             'user_id' => $this->user_id,
             'image_url' => $this->image_url,
             'image_name' => $this->image_name,
-            'age'       => $this->age,
+            'age_from'       => $this->age_from,
+            'age_to'       => $this->age_to,
             'author' => $this->author,
             'story_duration' => $this->story_duration,
             'is_premium' => $this->is_premium
