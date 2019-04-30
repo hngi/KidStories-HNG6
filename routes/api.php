@@ -43,6 +43,8 @@
 	 */
 	Route::get('/categories', "CategoryController@index");
 
+	Route::get('/categories/{id}', "CategoryController@show");
+
 	Route::get('/categories/{id}/stories', "CategoryController@categoryStories");
 
 	/**

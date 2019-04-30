@@ -24,3 +24,7 @@ Route::get('/story', 'StoriesController@index')->name('reaction');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/categories', 'CategoryController@index')->name('categories.index');
