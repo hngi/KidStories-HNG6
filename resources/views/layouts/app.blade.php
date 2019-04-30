@@ -29,6 +29,9 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Responsive -->
     <link href="{{ asset('css/tresponsive.css') }}" rel="stylesheet">
+
+    @yield('custom_css')
+    
 </head>
 
 <body>
@@ -109,19 +112,18 @@
                                             @else
                                             <li>
                                                 <a href="#">
-                                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                                    Profile
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
                                                 </a>
 
-                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                        {{ __('Logout') }}
-                                                    </a>
-
-                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                    </form>
-                                                </div>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
                                             </li>
                                             @endguest
                                         </ul>
