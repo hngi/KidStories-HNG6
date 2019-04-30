@@ -1,0 +1,74 @@
+.verticalLine {
+  border-left:  solid #D5D5D5;
+  float: right;
+}
+
+
+.searchContainer {
+  display: inline-flex;
+  flex: 1 1 300px;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #D5D5D5;
+box-sizing: border-box;
+border-radius: 20px;
+}
+
+.searchIcon {
+  padding: 0.5rem;
+}
+
+.searchBox {
+  border: 0;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  flex: 1;
+}
+
+
+.icon-right{
+	float: right;
+}
+
+.arr-right .breadcrumb-item+.breadcrumb-item::before {
+ 
+  content: "›";
+ 
+  vertical-align:top;
+ 
+
+ }
+
+@media only screen and (max-width: 1026px) {
+    #line {
+        display: none;
+    }
+}
+
+
+
+
+
+body{
+	font-family: 'Lato', sans-serif;
+}
+
+h1{
+	font-family: Lato;
+font-style: normal;
+font-weight: bold;
+font-size: 28px;
+}
+
+
+#quote{
+font-family: Lato;
+font-style: normal;
+font-weight: bold;
+font-size: 28px;
+line-height: 37px;
+/* identical to box height */
+
+color: #333333;
+}
