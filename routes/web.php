@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('admin.welcome');
 });
 
+Route::get('/story', 'ReactionController@index')->name('reaction');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

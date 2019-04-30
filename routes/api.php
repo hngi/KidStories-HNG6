@@ -1,7 +1,7 @@
 <?php
 	// Route check 1... 2... :-)
 	Route::get('/test', function () {
-		return response()->json(['message' => 'You are set!']);
+	    return response()->json(['message' => 'You are set!']);
 	});
 
 	/**
@@ -13,11 +13,11 @@
 
 	Route::middleware('auth:api')->post('/auth/logout', "AuthController@logout");
 
+
 	Route::middleware('auth:api')->get('/auth/user', "AuthController@details");
 
 	Route::middleware('auth:api')->put('/auth/change-password', "AuthController@changePassword");
 
-	
 	/**
 	 * Routes for users
 	 */
