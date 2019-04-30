@@ -15,12 +15,10 @@ Route::get('/admin', function () {
     return view('admin.welcome');
 });
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/story', 'StoriesController@index')->name('reaction');
+Route::get('/stories', 'StoriesController@index')->name('stories.index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/categories', 'CategoryController@index')->name('categories.index');

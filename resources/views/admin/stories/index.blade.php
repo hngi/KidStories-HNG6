@@ -34,38 +34,23 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">{{ __('Title') }}</th>
-                                    <th scope="col">{{ __('Image Name') }}</th>
-                                    <th scope="col">{{ __('Image Url') }}</th>
-                                    <th scope="col">{{ __('Body') }}</th>
-                                     <th scope="col">{{ __('story duration') }}</th>                                      
-                                    <th scope="col">{{ __('Author') }}</th>
                                     <th scope="col">{{ __('Category') }}</th>
-                                    <th scope="col">{{ __('Age') }}</th>                                   
-                                    <th scope="col">{{ __('user id') }}</th>
-                                    <th scope="col">{{ __('premium') }}</th>
-                                    <th scope="col">{{ __('Date') }}</th>
+                                    <th scope="col">{{ __('Posted By') }}</th>
+                                    <th scope="col">{{ __('Posted On') }}</th>
                                     <th scope="col"></th>
                                 </tr>                         
                             </thead>
                            
                             <tbody>
-                                @foreach ($stories as $stories)
+                                @foreach ($stories as $story)
                                     <tr>
-                                        <td><p>{{ $stories->title }}</p></td>
-                                        <td><p>{{ $stories->image_name }}</p></td>
                                         <td>
-                                            @if ($stories->image_url)
-                                                <a href="{{ $stories->image_url }}" target="_blank">View image</a>                                          
-                                            @endif
+                                            {{ $story->title }} <br>
+                                            <span class="text-muted">By {{ $story->author }}</span>
                                         </td>
-                                        <td><p>{{ $stories->body }}</p></td>
-                                        <td><p>{{ $stories->story_duration }}</p>  </td>
-                                        <td><p>{{ $stories->author }}</p></td>
-                                        <td><p>{{ $stories->category_id }}</p></td>                                        
-                                        <td><p>{{ $stories->age }}</p> </td> 
-                                        <td><p>{{ $stories->user_id}}</p></td>
-                                        <td><p>{{ $stories->is_premium}}</p></td>                                   
-                                       <td><p>{{ $story->created_at->format('d/m/Y @ h:i a') }}</p></td>
+                                        <td>{{ $story->category->name }}</td>
+                                        <td>{{ $story->user->fullname}}</td>
+                                       <td>{{ $story->created_at->format('d/m/Y @ h:i a') }}</td>
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

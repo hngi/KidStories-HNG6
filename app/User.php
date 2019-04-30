@@ -39,6 +39,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //Accessors
+    public function getFullNameAttribute()
+    {
+        return ucwords($this->last_name . ' ' . $this->first_name);
+    }
+    // Accessors end
+
     //Relationship start
 
     /*
