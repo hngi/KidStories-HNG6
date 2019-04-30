@@ -11,16 +11,22 @@
     <title>{{ config('app.name', 'Kids Stories') }}</title>
 
 
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Stylesheets -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
     <link href="{{ asset('css/tstyle.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Responsive -->
     <link href="{{ asset('css/tresponsive.css') }}" rel="stylesheet">
 
@@ -134,9 +140,55 @@
 
         </header>
         <!--End Main Header -->
+
+        <!-- Body -->
         <main>
             @yield('content')
         </main>
+
+        <!-- Footer -->
+        <footer class="footer-wrap">
+            <div class="footer-box">
+                <section>
+                    <h5>Kid Stories</h5>
+                    <a href="#">About Us</a>
+                    <a href="#">Stories</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Advertise with Us</a>
+                </section>
+                <section>
+                    <h5>Quick Links</h5>
+                    <a href="#">Create a Story</a>
+                    <a href="#">Favorite Story</a>
+                    <a href="#">Explore Stories</a>
+                    <a href="#">Authors</a>
+                    <a href="#">Make a donation</a>
+                </section>
+                <section>
+                    <h5>Others</h5>
+                    <a href="#">User FAQs</a>
+                    <a href="#">Legal</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms and Conditions</a>
+                </section>
+                <section>
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
+                    <div class="subscribe">
+                        <input type="email" name="" id="subscribe-email" placeholder="Type email"> 
+                        <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
+                    </div>
+                </section>
+            </div>
+            <hr>
+            <div class="footer-info">
+                <p>© 2019 Kid Stories. All rights reserved</p>
+                <div class="social-icons">
+
+                </div>
+            </div>
+        </footer>
+
     </div>
 
     <script src="{{ asset('js/jquery.js') }}"></script>
