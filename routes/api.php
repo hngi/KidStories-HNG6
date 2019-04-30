@@ -21,6 +21,7 @@
 	/**
 	 * Routes for users
 	 */
+	Route::middleware('auth:api')->get('/users/stories', "UserController@stories");
 	Route::middleware('auth:api')->get('/users/profile', "UserController@showProfile");
 
 	Route::middleware('auth:api')->put('/users/profile', "UserController@updateProfile");
@@ -32,6 +33,7 @@
 	/**
 	 * Routes for bookmarks
 	 */
+    Route::middleware('auth:api')->get('/bookmarks/stories', "BookmarkController@index");
 	Route::middleware('auth:api')->post('/bookmarks/stories/{storyId}', "BookmarkController@add");
 
 	Route::middleware('auth:api')->delete('/bookmarks/stories/{storyId}', "BookmarkController@remove");

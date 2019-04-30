@@ -8,9 +8,10 @@ use Validator;
 use App\Story;
 use App\Category;
 use App\Reaction;
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StoryResource;
 
 class StoryController extends Controller
 {
@@ -24,13 +25,10 @@ class StoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $stories = Story::with([
-                        'user:id,first_name,last_name,image_url', 
-                        'category:id,name',
-                        'reactions:id,story_id,user_id,reaction'
-                    ])->get();
+        $filter = $request->has("filter")?$request->filter:5;
+        $stories =  StoryResource::collection(Story::whereRaw('? between age_from and age_to', [$filter])->get());
 
         return response()->json([
             'status' => 'success',
@@ -116,7 +114,7 @@ class StoryController extends Controller
     {
         $story = Story::where('id', $id)
                     ->with([
-                        'user:id,first_name,last_name,image_url', 
+                        'user:id,first_name,last_name,image_url',
                         'category:id,name',
                         'reactions:id,story_id,user_id,reaction',
                         'comments.user:id,first_name,last_name,image_url'
@@ -224,9 +222,9 @@ class StoryController extends Controller
         $reaction = Reaction::where('story_id', $story->id)
                             ->where('user_id', $user->id)
                             ->first();
-        
+
         DB::beginTransaction();
-        
+
         if ($reaction && $reaction->reaction == 1) {
             $reaction->delete();
             $story->decrement('likes_count', 1);
@@ -238,7 +236,7 @@ class StoryController extends Controller
             $story->decrement('dislikes_count', 1);
 
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()], 
+                ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 0]
             );
 
@@ -246,13 +244,13 @@ class StoryController extends Controller
             $story->increment('likes_count', 1);
 
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()], 
+                ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 1]
             );
         }
 
         DB::commit();
-        
+
         return response()->json([
             'status' => 'success',
             'code' => 200,
@@ -289,7 +287,7 @@ class StoryController extends Controller
             $story->decrement('likes_count', 1);
 
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()], 
+                ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 0]
             );
 
@@ -297,7 +295,7 @@ class StoryController extends Controller
             $story->increment('dislikes_count', 1);
 
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()], 
+                ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 0]
             );
         }
@@ -308,7 +306,7 @@ class StoryController extends Controller
             'status' => 'success',
             'code' => 200,
             'message' => 'OK'
-        ], 200);      
+        ], 200);
     }
 
     public function findStory($storyId)
@@ -352,7 +350,7 @@ class StoryController extends Controller
         $reaction = Reaction::where('story_id', $id)
                             ->where('user_id', auth()->id())
                             ->first();
-        
+
         if ($reaction && $reaction->reaction == 1) {
             $reaction->delete();
         } else {
@@ -370,7 +368,7 @@ class StoryController extends Controller
             'message' => 'OK'
         ], 200);
     }*/
-  
+
    /**
      * Dislike a story
      *
@@ -382,10 +380,10 @@ class StoryController extends Controller
         $reaction = Reaction::where('story_id', $id)
                             ->where('user_id', auth()->id())
                             ->first();
-        
+
         if ($reaction && $reaction->reaction == 0) {
             $reaction->delete();
-            
+
         } else {
             $reaction = Reaction::updateOrCreate([
                 'story_id' => $id,
