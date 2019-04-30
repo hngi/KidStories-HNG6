@@ -11,8 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('admin.welcome');
+});
+
+Route::get('/', function () {
+    return view('home');
 });
 
 Route::get('/story', 'StoriesController@index')->name('reaction');

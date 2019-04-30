@@ -12,6 +12,6 @@ class StoriesController extends Controller
         $story = Story::with('user')
             ->orderBy('created_at', 'desc')
             ->get();
-        return view('story', ['stories' => $story])->with('token', $token);
+        return view('story', ['stories' => $story]);
     }
 }
