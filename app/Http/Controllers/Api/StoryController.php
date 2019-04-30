@@ -7,10 +7,9 @@ use Validator;
 use App\Story;
 use App\Category;
 use App\Reaction;
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
-use App\Reaction;
 
 class StoryController extends Controller
 {
@@ -27,10 +26,10 @@ class StoryController extends Controller
     public function index()
     {
         $stories = Story::with([
-                        'user:id,first_name,last_name,image_url', 
-                        'category:id,name',
-                        'reactions:id,story_id,user_id,reaction'
-                    ])->get();
+            'user:id,first_name,last_name,image_url',
+            'category:id,name',
+            'reactions:id,story_id,user_id,reaction'
+        ])->get();
 
         return response()->json([
             'status' => 'success',
@@ -115,13 +114,13 @@ class StoryController extends Controller
     public function show($id)
     {
         $story = Story::where('id', $id)
-                    ->with([
-                        'user:id,first_name,last_name,image_url', 
-                        'category:id,name',
-                        'reactions:id,story_id,user_id,reaction',
-                        'comments.user:id,first_name,last_name,image_url'
-                    ])
-                    ->firstOrFail();
+            ->with([
+                'user:id,first_name,last_name,image_url',
+                'category:id,name',
+                'reactions:id,story_id,user_id,reaction',
+                'comments.user:id,first_name,last_name,image_url'
+            ])
+            ->firstOrFail();
 
         return response()->json([
             'status' => 'success',
@@ -183,7 +182,7 @@ class StoryController extends Controller
         if ($request->hasfile('photo')) {
             $image = $this->fileUploadService->uploadFile($request->file('photo'));
 
-            if(!is_null($story->image_name)) {
+            if (!is_null($story->image_name)) {
                 $this->fileUploadService->deleteFile($story->image_name);
             }
         }
@@ -208,7 +207,7 @@ class StoryController extends Controller
             'message' => 'OK'
         ], 200);
     }
-    
+
     /**
      * Like a story
      *
@@ -218,9 +217,9 @@ class StoryController extends Controller
     public function like($id)
     {
         $reaction = Reaction::where('story_id', $id)
-                            ->where('user_id', auth()->id())
-                            ->first();
-        
+            ->where('user_id', auth()->id())
+            ->first();
+
         if ($reaction && $reaction->reaction == 1) {
             $reaction->delete();
         } else {
@@ -238,22 +237,21 @@ class StoryController extends Controller
             'message' => 'OK'
         ], 200);
     }
-  
-   /**
+
+    /**
      * Dislike a story
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-  public function dislike($id)
+    public function dislike($id)
     {
         $reaction = Reaction::where('story_id', $id)
-                            ->where('user_id', auth()->id())
-                            ->first();
-        
+            ->where('user_id', auth()->id())
+            ->first();
+
         if ($reaction && $reaction->reaction == 0) {
             $reaction->delete();
-            
         } else {
             $reaction = Reaction::updateOrCreate([
                 'story_id' => $id,
@@ -267,7 +265,7 @@ class StoryController extends Controller
             'code' => 200,
             'message' => 'OK'
         ], 200);
-  }
+    }
 
     /**
      * User can like a story or remove like.
