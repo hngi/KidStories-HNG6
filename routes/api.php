@@ -32,7 +32,7 @@
 	/**
 	 * Routes for bookmarks
 	 */
-    Route::get('/bookmarks/stories', "BookmarkController@index");
+    Route::middleware('auth:api')->get('/bookmarks/stories', "BookmarkController@index");
 	Route::middleware('auth:api')->post('/bookmarks/stories/{storyId}', "BookmarkController@add");
 
 	Route::middleware('auth:api')->delete('/bookmarks/stories/{storyId}', "BookmarkController@remove");
