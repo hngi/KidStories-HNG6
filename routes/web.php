@@ -17,7 +17,7 @@ Route::get('/admin', function () {
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('homepage');
 
 Route::get('/story', 'StoriesController@index')->name('reaction');
 
