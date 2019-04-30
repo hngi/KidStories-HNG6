@@ -10,5 +10,3 @@ npm-debug.log
 yarn-error.log
 fabric8-analytics.log
 package-lock.json
-gitignore
-/FE

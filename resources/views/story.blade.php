@@ -26,6 +26,7 @@
             <span id="dislikes-count-{{ $story->id }}">{{ $story->dislikes_count }}</span>
         </div>
 
+
     </div>
     @endforeach
 </div>
