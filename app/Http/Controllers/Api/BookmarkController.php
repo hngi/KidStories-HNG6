@@ -6,9 +6,22 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Bookmark;
 use Auth;
+use App\Http\Resources\StoryResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class BookmarkController extends Controller
 {
+    public function index (){
+
+         $bookmarks =  \App\User::find(auth()->id())->bookmarks;
+
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK',
+            "data" => StoryResource::collection($bookmarks)
+        ], Response::HTTP_OK);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -78,7 +91,7 @@ class BookmarkController extends Controller
                                 ->first();
 
         $response = is_null($status) ? false : true;
-        
+
         return response()->json([
             'status' => 'success',
             'code' => 200,
@@ -86,5 +99,5 @@ class BookmarkController extends Controller
             "data" => $response
         ], 200);
     }
-    
+
 }

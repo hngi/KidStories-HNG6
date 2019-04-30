@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Story extends Model
 {
     protected $fillable = [
-        'title', 'body', 'category_id', 'age', 'author', 'image_url', 'image_name', 
+        'title', 'body', 'category_id', 'age', 'author', 'image_url', 'image_name',
         'story_duration', 'user_id', 'is_premium'
     ];
 
@@ -43,6 +43,11 @@ class Story extends Model
     public function reactions()
     {
         return $this->hasMany(Reaction::class);
+    }
+
+    public function bookmarked_by()
+    {
+        return $this->belongsToMany(Users::class,'bookmarks');
     }
 
     //Relationship end
