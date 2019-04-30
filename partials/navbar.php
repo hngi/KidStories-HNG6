@@ -1,31 +1,3 @@
-      <!-- 
-
-To use this navbar, you need this 
-
-
-
-      -->
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Kids Stories | Homepage</title>
-<!-- Stylesheets -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/reset.css" rel="stylesheet">
-<link href="css/tstyle.css" rel="stylesheet">
-<!-- Responsive -->
-<link href="css/tresponsive.css" rel="stylesheet"> 
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-
-</head>
-
-<body>
-<!-- end -->
-
-
     <!-- Main Header-->
     <header class="main-header header-style-one">
     	
@@ -53,7 +25,7 @@ To use this navbar, you need this
 
 								<div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
 									<ul class="navigation clearfix">
-										<li class="current"><a href="#">Home</a>
+										<li><a href="index.php">Home</a>
 										</li>
 										<li class=""><a href="#">Browse Stories</a>
 										</li>
@@ -104,16 +76,3 @@ To use this navbar, you need this
 
     </header>
     <!--End Main Header -->
-
-
-
-
-    <!-- And this -->
-    <script src="tjs/jquery.js"></script>
-<script src="tjs/popper.min.js"></script>
-<script src="tjs/bootstrap.min.js"></script>
-<script src="tjs/jquery-ui.js"></script>
-<script src="tjs/script.js"></script>
-
-</body>
-</html>

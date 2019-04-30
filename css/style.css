@@ -1,16 +1,5 @@
 /* Styles for the Create User Pages */
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-body {
-    padding: 0;
-    margin: 0;
-    font-family: 'Lato', sans-serif;
-}
 
 .banner {
     background: url(../images/background/Rectangle.png);
@@ -106,6 +95,14 @@ footer {
     margin-bottom: 2em
 }
 
+.footer-box h5 {
+    color: #ffffff;
+}
+
+.footer-wrap hr {
+    border: 1px solid #ffffff !important;
+}
+
 footer a {
     color: white;
     text-decoration: none;
@@ -129,6 +126,7 @@ footer section {
 .send-icon {
     border: 1px solid white;
     background-color: white;
+    padding: 5px 10px;
 }
 
 #subscribe-email {
