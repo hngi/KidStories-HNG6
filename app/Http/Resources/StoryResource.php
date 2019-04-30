@@ -15,16 +15,18 @@ class StoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'title' => $this->title,
-            'body' => $this->body,
-            'category_id'=> $this->category_id,
-            'user_id' => $this->user_id,
-            'image_url' => $this->image_url,
-            'image_name' => $this->image_name,
-            'age'       => $this->age,
-            'author' => $this->author,
-            'story_duration' => $this->story_duration,
-            'is_premium' => $this->is_premium
+            'title'         => $this->title,
+            'body'          => $this->body,
+            'category_id'   => $this->category_id,
+            'user_id'       => $this->user_id,
+            'image_url'     => $this->image_url,
+            'image_name'    => $this->image_name,
+            'author'        => $this->author,
+            'age_from'      => $this->age_from,
+            'age_to'        => $this->age_to,
+            'author'        => $this->author,
+            'story_duration'=> $this->story_duration,
+            'is_premium'    => $this->is_premium
 
         ];
     }
