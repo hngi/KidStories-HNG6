@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('custom_css')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/categories.css') }}">
+@endsection
+
 @section('content')
     <!-- Header goes here -->
 
@@ -25,12 +29,12 @@
     </span>    
 
     <div class="wrapper">     
-        <div class="item"><a href="#"> <img src="img/Myth.jpg"> <div class="info"> Myths </div> </a></div>
-        <div class="item"><a href="#"> <img src="img/fairytales.JPG"> <div class="info"> Fairytales </div> </a></div>
-        <div class="item"><a href="#"> <img src="img/animals.jpeg"> <div class="info"> Animals </div> </a></div>
-        <div class="item"><a href="#"> <img src="img/fearful2.png"> <div class="info"> Fearful </div> </a></div>
-        <div class="item"><a href="#"> <img src="img/fables.jpeg"> <div class="info"> Fables </div> </a></div>
-        <div class="item"><a href="#"> <img src="img/history.png"> <div class="info"> History </div> </a></div>         
+        <div class="item"><a href="#"> <img src="images/categories/Myth.jpg"> <div class="info"> Myths </div> </a></div>
+        <div class="item"><a href="#"> <img src="images/categories/fairytales.JPG"> <div class="info"> Fairytales </div> </a></div>
+        <div class="item"><a href="#"> <img src="images/categories/animals.jpeg"> <div class="info"> Animals </div> </a></div>
+        <div class="item"><a href="#"> <img src="images/categories/fearful2.png"> <div class="info"> Fearful </div> </a></div>
+        <div class="item"><a href="#"> <img src="images/categories/fables.jpeg"> <div class="info"> Fables </div> </a></div>
+        <div class="item"><a href="#"> <img src="images/categories/history.png"> <div class="info"> History </div> </a></div>         
     </div>
 
     <!-- Poem Categories-->
@@ -39,12 +43,12 @@
         </span>    
     
     <div class="wrapper">     
-        <div class="item"><a href="#"> <img src="img/Myth.jpg"> <div class="info"> Animal Poem </div> </a></div>
-        <div class="item"><a href="#"> <img src="img/fairytales.JPG"> <div class="info"> Adventure </div> </a></div>
-        <div class="item"><a href="#"> <img src="img/animals.jpeg"> <div class="info"> Lullaby </div> </a></div>
-        <div class="item"><a href="#"> <img src="img/fearful2.png"> <div class="info"> Fearful </div> </a></div>
-        <div class="item"><a href="#"> <img src="img/fables.jpeg"> <div class="info"> Fables </div> </a></div>
-        <div class="item"><a href="#"> <img src="img/history.png"> <div class="info"> History </div> </a></div>         
+        <div class="item"><a href="#"> <img src="images/categories/Myth.jpg"> <div class="info"> Animal Poem </div> </a></div>
+        <div class="item"><a href="#"> <img src="images/categories/fairytales.JPG"> <div class="info"> Adventure </div> </a></div>
+        <div class="item"><a href="#"> <img src="images/categories/animals.jpeg"> <div class="info"> Lullaby </div> </a></div>
+        <div class="item"><a href="#"> <img src="images/categories/fearful2.png"> <div class="info"> Fearful </div> </a></div>
+        <div class="item"><a href="#"> <img src="images/categories/fables.jpeg"> <div class="info"> Fables </div> </a></div>
+        <div class="item"><a href="#"> <img src="images/categories/history.png"> <div class="info"> History </div> </a></div>         
     </div>
 
     <!-- Footer goes here -->
