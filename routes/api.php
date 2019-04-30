@@ -21,6 +21,7 @@
 	/**
 	 * Routes for users
 	 */
+	Route::middleware('auth:api')->get('/users/stories', "UserController@stories");
 	Route::middleware('auth:api')->get('/users/profile', "UserController@showProfile");
 
 	Route::middleware('auth:api')->put('/users/profile', "UserController@updateProfile");
