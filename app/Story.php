@@ -51,4 +51,12 @@ class Story extends Model
     }
 
     //Relationship end
+
+    /*
+     * A Story belongs to many tags
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
