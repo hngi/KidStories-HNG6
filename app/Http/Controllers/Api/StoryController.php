@@ -246,7 +246,7 @@ class StoryController extends Controller
 
             $reaction = Reaction::updateOrCreate(
                 ['story_id' => $id, 'user_id' => auth()->id()],
-                ['reaction' => 0]
+                ['reaction' => 1]
             );
 
         } else {
@@ -268,7 +268,7 @@ class StoryController extends Controller
             'code' => 200,
             'message' => 'OK',
             'likes_count'=> $likeCount,
-            'dislikes_count' => $dislikeCount
+            'dislikes_count' => $dislikeCount,
         ], 200);
     }
 
@@ -332,8 +332,8 @@ class StoryController extends Controller
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
-            'likeCount' => $likeCount,
-            'dislikeCount' => $dislikeCount
+            'likes_count' => $likeCount,
+            'dislikes_count' => $dislikeCount
         ], 200);
     }
 
