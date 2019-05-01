@@ -46,7 +46,7 @@ $factory->define(App\Story::class, function (Faker $faker) {
         },
         'image_url'=>$faker->imageUrl(),
         'age_from'=>$faker->numberBetween(0),
-        'age_from'=>$faker->numberBetween(0, 16),
+        'age_to'=>$faker->numberBetween(0, 16),
         'likes_count'=>$faker->randomDigit(),
         'dislikes_count'=>$faker->randomDigit(),
         'author'=>$faker->name,
