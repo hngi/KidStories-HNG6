@@ -1,4 +1,4 @@
-<footer>
+<footer class="footer-wrap">
     <div class="footer-box">
         <section>
             <h5>Kid Stories</h5>
@@ -27,13 +27,13 @@
             <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
             <div class="subscribe">
                 <input type="email" name="" id="subscribe-email" placeholder="Type email"> 
-                <button class="send-icon"><i class="far fa-paper-plane"></i></button>
+                <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
             </div>
         </section>
     </div>
     <hr>
     <div class="footer-info">
-        <p>Kid Stories. All rights reserved</p>
+        <p>© 2019 Kid Stories. All rights reserved</p>
         <div class="social-icons">
             <i class="fab fa-youtube"></i>
             <i class="fab fa-instagram"></i>
@@ -42,3 +42,12 @@
         </div>
     </div>
 </footer>
+
+<!-- end -->
+<script src="tjs/jquery.js"></script>
+<script src="tjs/popper.min.js"></script>
+<script src="tjs/bootstrap.min.js"></script>
+<script src="tjs/jquery-ui.js"></script>
+<script src="tjs/owl.js"></script>
+<script src="tjs/appear.js"></script>
+<script src="tjs/wow.js"></script>
