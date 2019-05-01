@@ -14,6 +14,7 @@ class DbTableSeeder extends Seeder
         'subscription' => 15,
         'payment' => 10,
         'subscribed' => 10,
+        'tags' => 5
     ];
 
     /**
@@ -27,6 +28,7 @@ class DbTableSeeder extends Seeder
         factory('App\Category', $this->count['category'])->create();
         factory('App\Story', $this->count['story'])->create();
         factory('App\Subscription', $this->count['subscription'])->create();
+        factory('App\Tag', $this->count['tags'])->create();
 
         $this->customisedFactory();
     }
@@ -39,6 +41,7 @@ class DbTableSeeder extends Seeder
         $this->comment();
         $this->payment();
         $this->subscribed();
+        $this->story_tag();
     }
 
     protected function story()
@@ -103,6 +106,18 @@ class DbTableSeeder extends Seeder
         factory('App\Subscribed', $this->count['subscribed'])->create([
             'subscription_id' => function () {
                 return rand(1, $this->count['subscription']);
+            }
+        ]);
+    }
+
+    protected function story_tag()
+    {
+        factory('App\StoryTag', $this->count['tags'])->create([
+            'story_id' => function () {
+                return rand(1, $this->count['story']);
+            },
+            'tag_id' => function () {
+                return rand(1, $this->count['tags']);
             }
         ]);
     }

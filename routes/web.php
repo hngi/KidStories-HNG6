@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::get('/story/{id}', 'StoriesController@singlestory')->name('singlestory');
 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -29,3 +30,6 @@ Auth::routes();
 
 Route::get('/favorites', 'BookmarkController@index')->name('bookmark');
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
+Route::get('/categories/{id}', 'CategoryController@show')->name('stories');
+
+Route::middleware('auth')->get('/create-story', 'StoriesController@create')->name('story.create');
