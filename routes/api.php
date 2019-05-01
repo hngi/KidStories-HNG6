@@ -77,3 +77,10 @@
 	 * Routes for payment
 	 */
 	Route::middleware('auth:api')->post('/payments', "PaymentController@store");
+
+	/**
+     * Routes for tags
+     */
+    Route::get('/tags','TagController@index');
+
+    Route::get('/tags/stories/search/{tagName}', 'TagController@storiesByTag');
