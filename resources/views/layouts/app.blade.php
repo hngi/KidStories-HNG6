@@ -31,7 +31,7 @@
     <link href="{{ asset('css/tresponsive.css') }}" rel="stylesheet">
 
     @yield('custom_css')
-    
+
 </head>
 
 <body>
@@ -111,7 +111,7 @@
                                             @endif
                                             @else
                                             <li>
-                                                <a href="#">
+                                            <a href="{{route('admin.profile')}}">
                                                     Profile
                                                 </a>
                                             </li>
@@ -175,7 +175,7 @@
                     <h5>Newsletter</h5>
                     <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
                     <div class="subscribe">
-                        <input type="email" name="" id="subscribe-email" placeholder="Type email"> 
+                        <input type="email" name="" id="subscribe-email" placeholder="Type email">
                         <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
                     </div>
                 </section>
