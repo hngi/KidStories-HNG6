@@ -17,7 +17,7 @@ Route::get('/admin', function () {
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('homepage');
 
 Route::get('/story', 'StoriesController@index')->name('reaction');
 
@@ -27,4 +27,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/categories', 'CategoryController@index')->name('categories.index');
+Route::get('/categories', 'CategoryController@index')->name('list-categories.index');

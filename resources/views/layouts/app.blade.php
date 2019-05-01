@@ -46,7 +46,7 @@
                     <div class="clearfix">
                         <!-- start of Logo -->
                         <div class="pull-left logo-outer">
-                            <div class="logo"><a href="#"><img src="images/logo.png" alt="" title="" width="105px" height="auto"></a></div>
+                            <div class="logo"><a href="{{ route('homepage') }}"><img src="images/logo.png" alt="" title="" width="105px" height="auto"></a></div>
                         </div>
 
                         <div class="pull-right upper-right clearfix">
@@ -68,7 +68,7 @@
                                             </li>
                                             <li class=""><a href="#">Browse Stories</a>
                                             </li>
-                                            <li><a href="#">Categories</a></li>
+                                            <li><a href="{{ route('list-categories.index') }}">Categories</a></li>
                                             <li class=""><a href="#">My Stories</a>
                                             </li>
                                             <li><a href="#">About Us</a></li>
