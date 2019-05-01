@@ -10,8 +10,8 @@
    <div class="container crumb">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb arr-right ">
-          <li class="breadcrumb-item active"><a href="#">Home</a></li>
-          <li class="breadcrumb-item "><a href="#">Stories</a></li>
+          <li class="breadcrumb-item""><a href="/">Home</a></li>
+          <li class="breadcrumb-item active"><a href="#">Stories</a></li>
         </ol>
       </nav>
 
@@ -29,14 +29,14 @@
             <div class="card-body">
               <h5 class="card-title">{{$story->title}}</h5>
               <p class="card-text">By <a href="#">{{$story->author}}</a></p>
-              <hr>
+              <hr style="margin:0 -5px;">
               <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
-              <hr>
+              <hr style="margin:0 -20px;">
               <div class="d-flex justify-content-between align-items-center card-">
                 <div class="btn-group">
 
-                <i class="fas fa-thumbs-up"></i> {{$story->likes_count}}
-                <i class="fas fa-thumbs-down"></i>{{$story->dislikes_count}}
+                <i class="fas fa-thumbs-up" style="margin-right:8px;margin-top:6px;"></i> {{$story->likes_count}}
+                <i class="fas fa-thumbs-down" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i>{{$story->dislikes_count}}
                 </div>
                 <span class="verticalLine">
             <i class="far fa-bookmark" style="margin-left: 8px;"></i>
@@ -58,7 +58,7 @@
 </div>
 <div class="">
   
-    <span class="verticalLine" id="line" style="border-bottom-width:750px; border-bottom-style:solid;"  >
+    <span class="verticalLine" id="line" style="border-bottom-width:500px; border-bottom-style:solid;"  >
       <p></p>
 
 </span>
@@ -72,11 +72,12 @@
       <p>history</p>
       <p>fable</p>
       
-  <div class="searchContainer">
+  <div class="searchContainer" >
   <i class="fa fa-search searchIcon"></i>
-  <input class="searchBox" type="search" name="search" placeholder="Search...">
-  
+  <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">
 </div>
+<hr style="width:10%;">
+<p>Filter By</p>
 <div class="card" style="width: 15rem;">
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Age <i class="fas fa-graduation-cap icon-right"></i></li>
