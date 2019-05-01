@@ -35,6 +35,20 @@ $factory->define(User::class, function (Faker $faker) {
 });
 
 $factory->define(App\Story::class, function (Faker $faker) {
+    $age = [0, 5, 9, 13, 17 ];
+    $minAge = $age[rand(0,4)];
+    $maxAge = 0;
+    if ($minAge <= 4) {
+        $maxAge = 4;
+    }else if ($minAge <= 8) {
+        $maxAge = 8;
+    }else if ($minAge <= 12) {
+        $maxAge = 12;
+    }else if ($minAge <= 16) {
+        $maxAge = 16;
+    }else{
+        $maxAge = 25;
+    }
     return [
         'title'=>$faker->bs,
         'body'=>$faker->paragraph(2),
@@ -45,8 +59,8 @@ $factory->define(App\Story::class, function (Faker $faker) {
             return factory('App\User')->create()->id;
         },
         'image_url'=>$faker->imageUrl(),
-        'age_from'=>$faker->numberBetween(0),
-        'age_to'=>$faker->numberBetween(0, 16),
+        'age_from'=>$minAge,
+        'age_to'=>$maxAge,
         'likes_count'=>$faker->randomDigit(),
         'dislikes_count'=>$faker->randomDigit(),
         'author'=>$faker->name,
