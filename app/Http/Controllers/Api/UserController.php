@@ -136,6 +136,6 @@ class UserController extends Controller
             'code' => 200,
             'message' => 'ok',
             'data' => StoryResource::collection($stories)
-        ], Response.HTTP_OK);
+        ], Response::HTTP_OK);
     }
 }
