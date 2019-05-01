@@ -68,7 +68,7 @@
                                             </li>
                                             <li class=""><a href="#">Browse Stories</a>
                                             </li>
-                                            <li><a href="{{ route('categories.index') }}">Categories</a></li>
+                                            <li><a href="{{ route('list-categories.index') }}">Categories</a></li>
                                             <li class=""><a href="#">My Stories</a>
                                             </li>
                                             <li><a href="#">About Us</a></li>

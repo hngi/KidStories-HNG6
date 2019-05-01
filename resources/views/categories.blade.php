@@ -21,7 +21,7 @@
                 <ul>
                     <li><a href="{{ route('homepage') }}"> Home </a></li>
                     <i class="fa fa-chevron-right"></i>
-                    <li><a class="current" href="{{ route('categories.index') }}"> Categories </a></li>
+                    <li><a class="current" href="{{ route('list-categories.index') }}"> Categories </a></li>
                 </ul>
             </nav>   
 
