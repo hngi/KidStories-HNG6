@@ -147,6 +147,6 @@ $factory->define(App\Tag::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Story_Tag::class, function (Faker $faker) {
+$factory->define(App\StoryTag::class, function (Faker $faker) {
     return [];
 });

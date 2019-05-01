@@ -49,7 +49,7 @@ class TagController extends Controller
         ]);
 
         if($validate->fails()){
-            $code = 401;
+            $code = 417;
             $message = $validate->errors();
             $status = 'failed';
         }else{
@@ -84,7 +84,7 @@ class TagController extends Controller
         ]);
         if($validate->fails()){
             $status = 'failed';
-            $code = 401;
+            $code = 417;
             $message = $validate->errors();
         }else{
             $tag = Tag::findorFail($id);
@@ -120,8 +120,9 @@ class TagController extends Controller
 
     /**
      * Tag a story.
-     * Expects array of tags name with a story id
-     * It returns story with all associated tags
+     * Expects array of tags name(tag_names[]) with a story id
+     *
+     * It returns all tags of the story including the new one
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -136,7 +137,7 @@ class TagController extends Controller
             'story_id'=>'exists:stories,id'
         ]);
         if($validate->fails()){
-            $code = 401;
+            $code = 417;
             $message = $validate->errors();
             $status = 'failed';
         }else{
@@ -153,7 +154,8 @@ class TagController extends Controller
 
             });
             $message = 'story successfully tagged';
-            $data = $story;
+            $data = $story->tags->makeHidden(['created_at','updated_at','pivot']);
+            $data;
 
         }
         return response()->json([
@@ -165,7 +167,7 @@ class TagController extends Controller
     }
 
     /**
-     * unTag a story.
+     * removes a tag from a story.
      * Expects a story id and a tag id
      * It returns story
      *
@@ -174,7 +176,7 @@ class TagController extends Controller
      */
     public function unTagStory(Request $request){
         $status = 'success';
-        $code = 201;
+        $code = 200;
         $message = '';
         $data = '';
         $validate = Validator::make($request->all(),[
@@ -182,7 +184,7 @@ class TagController extends Controller
             'story_id'=>'exists:stories,id'
         ]);
         if($validate->fails()){
-            $code = 401;
+            $code = 417;
             $message = $validate->errors();
             $status = 'failed';
         }else{
@@ -195,7 +197,7 @@ class TagController extends Controller
                 $data = $story;
                 $message = 'story successfully untagged';
             }else{
-                $code = 401;
+                $code = 417;
                 $message = 'The story is not tag to this';
                 $status = 'failed';
             }
@@ -212,7 +214,7 @@ class TagController extends Controller
 
     /**
      * This gets all the stories of a tag
-     * and those related to it .. fun and funny are related
+     * and those similar to it .. fun and funny are related
      * Expects a tag_name
      * It returns story
      *
@@ -220,13 +222,13 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getTagStory(Request $request, $tag_name){
+    public function getTagStories(Request $request, $tagName){
         $status = 'success';
         $code = 200;
         $message = '';
         $data = '';
 
-            $search = "%{$tag_name}%";
+            $search = "%{$tagName}%";
             $tags = Tag::where('name', 'like', $search )
                     ->get();
             $tagsStories = $tags->each(function($tag){
@@ -253,7 +255,7 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getStoryTag(Request $request, $id){
+    public function getStoryTags(Request $request, $id){
         $status = 'success';
         $code = 200;
         $message = 'successfuly retrieved story tags';

@@ -87,5 +87,5 @@
     Route::middleware('auth:api')->put('/tags/{id}','TagController@update');
     Route::middleware('auth:api')->post('/tags/tagStory','TagController@tagStory');
     Route::middleware('auth:api')->post('/tags/unTagStory', 'TagController@unTagStory');
-    Route::middleware('auth:api')->get('/tags/getTagStory/{tag_name}', 'TagController@getTagStory');
-    Route::middleware('auth:api')->get('/tags/getStoryTag/{id}', 'TagController@getStoryTag');
+    Route::middleware('auth:api')->get('/tags/getTagStories/{tagName}', 'TagController@getTagStories');
+    Route::middleware('auth:api')->get('/tags/getStoryTags/{id}', 'TagController@getStoryTags');

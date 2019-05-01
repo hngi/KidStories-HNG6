@@ -112,7 +112,7 @@ class DbTableSeeder extends Seeder
 
     protected function story_tag()
     {
-        factory('App\Story_Tag', $this->count['tags'])->create([
+        factory('App\StoryTag', $this->count['tags'])->create([
             'story_id' => function () {
                 return rand(1, $this->count['story']);
             },
