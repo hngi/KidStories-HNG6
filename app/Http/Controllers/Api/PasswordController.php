@@ -18,14 +18,14 @@ class PasswordController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $request->validate([
-            'email' => ['required', 'string','min:3']
+            'email' => ['required', 'string', 'min:3']
         ]);
 
         $user = User::where('email', $request->email)->first();
 
-        if (! $user) {
+        if (!$user) {
             return response()->json([
                 'status' => 'not found',
                 'code' => 404,
@@ -58,11 +58,11 @@ class PasswordController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        
+    { 
+        //TODO: after updating passwords remove user details from password_reset table
     }
 
-    
+
     /**
      * TODO
      * check if input tken is d valid token assigned
@@ -70,8 +70,36 @@ class PasswordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(Request $request)
     {
+        $request->validate([
+            'email' => ['required', 'string', 'min:3'],
+            'token' => ['required', 'numeric', 'min:6']
+        ]);
+
+        $user = Password::where('email', $request->email)
+            ->where('token', $request->token)
+            ->first();
+
+        if (! $user) {
+            return response()->json([
+                'status' => 'not found',
+                'code' => 401,
+                'message' => 'invalid token',
+            ], 401);  
+        }
+
+        // TODO: check if token has expired
+        // cehck with created_date
+
+        // TODO: authenticate user for 5min to change passwords only
+
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'valid token, authentication expires in 5min',
+        ], 200);
+
 
     }
 }
