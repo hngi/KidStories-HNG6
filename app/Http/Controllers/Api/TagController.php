@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Tag;
 use App\Story;
-use App\Story_Tag;
+use App\StoryTag;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -20,14 +20,14 @@ class TagController extends Controller
     public function index()
     {
         $tags = Tag::all();
-        $tags_story = $tags->each(function($tag){
+        $tagsStories = $tags->each(function($tag){
             $tag->stories;
         });
         return response()->json([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
-            'data' => $tags_story
+            'data' => $tagsStories
         ], 200);
     }
 
@@ -144,10 +144,10 @@ class TagController extends Controller
             $tags = collect($request->get('tag_names'));
             $tags->each(function($item) use ($story){
                 $tag = Tag::firstOrCreate(['name'=>$item]);
-                $count_story_tag = Story_Tag::where('story_id',$story->id)
+                $countStoryTags = StoryTag::where('story_id',$story->id)
                  ->where('tag_id',$tag->id)
                  ->count();
-                 if($count_story_tag<1){
+                 if($countStoryTags<1){
                     $story->tags()->attach($tag->id);
                  }
 
@@ -186,10 +186,10 @@ class TagController extends Controller
             $message = $validate->errors();
             $status = 'failed';
         }else{
-            $count_story_tag = Story_Tag::where('story_id',$request->get('story_id'))
+            $countStoryTags = StoryTag::where('story_id',$request->get('story_id'))
                                 ->where('tag_id',$request->get('tag_id'))
                                 ->count();
-            if($count_story_tag > 0){
+            if($countStoryTags > 0){
                 $story = Story::find($request->get('story_id'));
                 $story->tags()->detach($request->get('tag_id'));
                 $data = $story;
@@ -229,7 +229,7 @@ class TagController extends Controller
             $search = "%{$tag_name}%";
             $tags = Tag::where('name', 'like', $search )
                     ->get();
-            $tags_story = $tags->each(function($tag){
+            $tagsStories = $tags->each(function($tag){
                 $tag->stories;
             });
             $data = $tags;
