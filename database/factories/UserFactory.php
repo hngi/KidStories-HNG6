@@ -140,3 +140,13 @@ $factory->define(App\Subscribed::class, function (Faker $faker) {
        'expired_date'=>$faker->dateTimeBetween('-1 years','+1 years'),
     ];
 });
+
+$factory->define(App\Tag::class, function (Faker $faker) {
+    return [
+        'name'=>$faker->word
+    ];
+});
+
+$factory->define(App\StoryTag::class, function (Faker $faker) {
+    return [];
+});
