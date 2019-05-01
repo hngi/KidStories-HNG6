@@ -6,14 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    //
-    protected $guarded = [];
+    protected $fillable = ['name'];
 
-    /*
-    * A Tag has many stories
-    */
-   public function stories()
-   {
-       return $this->belongsToMany(Story::class);
-   }
 }
