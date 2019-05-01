@@ -1,30 +1,19 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background:  #ffffff;
-}
-
+/* Global */
 body, input, button {
     font-family: 'Lato', san-serif;
 }
 
-img {
-    max-width: 100%;
-    height: 300px;
-    border-radius: 5px;
-    position: absolute;
-    z-index: 2;
-}
 
-.container {
+.container1 {
     width: 80%;
     margin: auto;
     overflow: hidden;
 }
+
+.content {
+    padding-bottom: 50px;
+}
+/* Global ends */
 
 /* Top Container */
 .top-container {
@@ -35,10 +24,14 @@ img {
         'showcase showcase';    
 }
 
+.top-container h1 {
+    color: #ffffff !important;
+}
+
 /* Showcase */
 .showcase {
     grid-area: showcase;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/showcase.jpg');
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/categories/showcase.jpg');
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -83,6 +76,7 @@ h1.span {
     font-size: 30px;
     font-weight: normal;
 }
+/* Top-container and Showcase ends */
 
 /* Picture Container */
 .wrapper {
@@ -115,6 +109,14 @@ h1.span {
     background: #abb8be;
 }
 
+img.category {
+    min-width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 2;
+}
+
 div.info {
     width: 100%;
     height: 60px;
@@ -131,4 +133,25 @@ div.info {
 
 div.info:hover {
     background: rgba(168, 117, 255, 0.6);
+}
+/* Picture Container ends */
+
+/* Media Queries for responsiveness */
+@media(max-width: 768px) {
+    .min-nav ul {
+        padding-left: 30px;     
+    }
+}
+
+@media(max-width: 430px) {
+    .min-nav ul {
+        padding-left: 0;     
+    }
+}
+
+@media(max-width: 320px) {
+    .wrapper {
+       width: 20%;
+       padding-right: 300px;   
+    }
 }
