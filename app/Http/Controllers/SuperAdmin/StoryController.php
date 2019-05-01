@@ -7,6 +7,7 @@ use App\Story;
 use Illuminate\Http\Request;
 use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class StoryController extends Controller
 {
@@ -29,7 +30,9 @@ class StoryController extends Controller
      */
     public function index()
     {
-        $stories = Story::latest()->with(['user', 'category', 'comments'])->paginate(10);
+
+        $stories = Story::latest()->paginate(25);
+
 
         return view('admin.stories.index', compact('stories'));
     }
@@ -53,54 +56,65 @@ class StoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'body' => 'required|string',
+            'author' => 'required|string|max:255',
+            'story_duration' => 'required|string|max:255',                
+            'is_premium' => 'required|string|max:255',            
+            'age' => 'required|string|max:255',
+            'category_id' => 'required|string|max:255',            
             'photo'=>'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB
+            'created_at' => 'required',            
+            'user_id' => 'required',
+            
+           
+            
         ]);
 
-        $exists = Stories::where('name', 'LIKE', "%{$request->name}")->first();
+        $exists = Story::where('title', 'LIKE', "%{$request->title}")->first();
 
         if ($exists) {
-            return redirect()->back()->withError(__("Stories '{$request->name}' already exists."));
+            return redirect()->back()->withError(__("Story '{$request->title}' already exists."));
         }
-
+// 
         DB::beginTransaction();
 
         // Upload image if included in the request
         if($request->hasFile('photo')) {
             $image = $this->fileUploadService->uploadFile($request->file('photo'));
         }
-
-        Stories::create([
-            'title'=> $request-> title,
-            'body' => $request-> body,
-            'category_id' => $request-> category,
+// 
+        Story::create([
+             'title'=> $request-> title,
+            'body' => $request-> body,            
             'age' => $request-> age,
             'author' => $request-> author,      
-            'story_duration' => $request-> duration,
-            'user_id' => $request-> user,
-            'is_premium' => $request-> premium,
-            'name' => $request->name,
-            "image_url" => $image['secure_url'] ?? null,
+            'story_duration' => $request-> story_duration,            
+            'is_premium' => $request-> is_premium,
+            'category_id' => $request-> category_id,             
+            "image_url" => $image['secure_url']?? null,
             "image_name" => $image['public_id'] ?? null,
-            "created_at"=> $request-> created_at
+            'created_at' =>  $request-> created_at,            
+            'user_id' =>  $request-> user_id
+   
         ]);
 
         DB::commit();
 
-        return redirect()->back()->withStatus(__('Stories successfully created.'));
+        return redirect()->back()->withStatus(__('Story successfully created.'));
     }
 
     /**
-     * View a single resource
+     * View a single resource'user_id' => auth()->id(),
      *
      * @param  int  $id
      * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        $stories = Stories::find($id);
+        $story = Story::find($id);
         
-        return view('admin.stories.edit', compact('stories'));
+        return view('admin.stories.edit', compact('story'));
     }
 
     /**
@@ -113,18 +127,27 @@ class StoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'photo'=>'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB
+            'title' => 'required|string|max:255',
+            'body' => 'required|string',
+            'author' => 'required|string|max:255',
+            'story_duration' => 'required|string|max:255',                
+            'is_premium' => 'required|string|max:255',            
+            'age' => 'required|string|max:255',
+            'category_id' => 'required|string|max:255',            
+            'photo'=>'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB            
+            'updated_at' => 'required',
+            'user_id' => 'required',            
+            
         ]);
 
-        $stories = Stories::findOrFail($id);
+        $stories = Story::findOrFail($id);
 
-        $exists = Stories::where('name', 'LIKE', "%{$request->name}")
+        $exists = Story::where('title', 'LIKE', "%{$request->title}")
                             ->where('id', '!=', $stories->id)
                             ->first();
 
         if ($exists) {
-            return redirect()->back()->withError(__("Stories '{$request->name}' already exists."));
+            return redirect()->back()->withError(__("Stories '{$request->title}' already exists."));
         }
 
         DB::beginTransaction();
@@ -139,9 +162,17 @@ class StoryController extends Controller
         }
 
         $stories->update([
-            'name' => $request->name,
-            "image_url" => $image['secure_url'] ?? $stories->image_url,
-            "image_name" => $image['public_id'] ?? $stories->image_name
+            'title'=> $request-> title,
+            'body' => $request-> body,            
+            'age' => $request-> age,
+            'author' => $request-> author,      
+            'story_duration' => $request-> story_duration,            
+            'is_premium' => $request-> is_premium,
+            'category_id' => $request-> category_id,             
+            "image_url" => $image['secure_url']?? null,
+            "image_name" => $image['public_id'] ?? null,           
+            'updated_at' =>  $request-> updated_at,
+            'user_id' =>  $request-> user_id   
         ]);
 
         DB::commit();
@@ -158,7 +189,7 @@ class StoryController extends Controller
      */
     public function destroy($id)
     {
-        $stories = Stories::find($id);
+        $stories = Story::find($id);
 
         $stories->delete();
 

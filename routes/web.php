@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::get('/story', 'StoriesController@index')->name('reaction');
 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -30,3 +31,7 @@ Auth::routes();
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
 
 Route::get('/bookmarks', 'BookmarkController@index')->name('bookmark');
+
+Route::middleware('auth')->get('/create-story', 'StoriesController@create')->name('story.create');
+
+Route::middleware('auth')->post('/create-story', 'StoriesController@store')->name('story.create');
