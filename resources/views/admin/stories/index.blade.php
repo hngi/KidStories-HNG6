@@ -34,38 +34,43 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">{{ __('Title') }}</th>
-                                    <th scope="col">{{ __('Image Name') }}</th>
-                                    <th scope="col">{{ __('Image Url') }}</th>
                                     <th scope="col">{{ __('Body') }}</th>
-                                     <th scope="col">{{ __('story duration') }}</th>                                      
-                                    <th scope="col">{{ __('Author') }}</th>
-                                    <th scope="col">{{ __('Category') }}</th>
-                                    <th scope="col">{{ __('Age') }}</th>                                   
+                                    <th scope="col">{{ __('Category') }}</th>                                                                      
                                     <th scope="col">{{ __('user id') }}</th>
-                                    <th scope="col">{{ __('premium') }}</th>
-                                    <th scope="col">{{ __('Date') }}</th>
+                                    <th scope="col">{{ __('Image Url') }}</th>
+                                    <th scope="col">{{ __('Image Name') }}</th>
+                                    <th scope="col">{{ __('Age') }}</th>
+                                    <th scope="col">{{ __('Author') }}</th>
+                                    <th scope="col">{{ __('story duration') }}</th>
+                                    <th scope="col">{{ __('Subscription') }}</th>
+                                    <th scope="col">{{ __('Created at') }}</th>
+                                    <th scope="col">{{ __('Modified at') }}</th>
+                                    
                                     <th scope="col"></th>
+                          
                                 </tr>                         
                             </thead>
                            
                             <tbody>
-                                @foreach ($stories as $stories)
+                                @foreach ($stories as $story)
                                     <tr>
-                                        <td><p>{{ $stories->title }}</p></td>
-                                        <td><p>{{ $stories->image_name }}</p></td>
-                                        <td>
-                                            @if ($stories->image_url)
-                                                <a href="{{ $stories->image_url }}" target="_blank">View image</a>                                          
+                                        <td><p>{{ $story->title}}</p></td>
+                                        <td>{{ $story->body }}</td>
+                                         <td>{{ $story->category_id }}</td>
+                                         <td>{{ Auth::guard('admin')->user()->name}}</td>
+                                         <td>
+                                            @if ($story->image_url)
+                                                <a href="{{ $story->image_url }}" target="_blank">View image</a>                                          
                                             @endif
-                                        </td>
-                                        <td><p>{{ $stories->body }}</p></td>
-                                        <td><p>{{ $stories->story_duration }}</p>  </td>
-                                        <td><p>{{ $stories->author }}</p></td>
-                                        <td><p>{{ $stories->category_id }}</p></td>                                        
-                                        <td><p>{{ $stories->age }}</p> </td> 
-                                        <td><p>{{ $stories->user_id}}</p></td>
-                                        <td><p>{{ $stories->is_premium}}</p></td>                                   
-                                       <td><p>{{ $story->created_at->format('d/m/Y @ h:i a') }}</p></td>
+                                        </td> 
+                                        <td><p>{{ $story->image_name}}</p></td>
+                                        <td>{{ $story->age }}</td>
+                                        <td>{{ $story->author }}</td>
+                                        <td>{{ $story->story_duration }}</td>
+                                        <td>{{ $story->is_premium}}</p></td> 
+                                        <td>{{ $story->created_at }}</td>
+                                        <td>{{ $story->updated_at }}</td>
+        
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
