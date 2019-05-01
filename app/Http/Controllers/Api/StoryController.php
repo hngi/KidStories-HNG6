@@ -112,14 +112,7 @@ class StoryController extends Controller
      */
     public function show($id)
     {
-        $story = Story::where('id', $id)
-                    ->with([
-                        'user:id,first_name,last_name,image_url',
-                        'category:id,name',
-                        'reactions:id,story_id,user_id,reaction',
-                        'comments.user:id,first_name,last_name,image_url'
-                    ])
-                    ->firstOrFail();
+        $story = new StoryResource(Story::find($id));
 
         return response()->json([
             'status' => 'success',
