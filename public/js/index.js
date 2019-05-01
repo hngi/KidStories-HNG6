@@ -4,20 +4,13 @@ var react = async function(event) {
   //console.log(text)
   var storyId = event.target.dataset.storyId;
   var token = $('.hidden').html;
-  console.log(token);
-  if (text === "Like") {
-      console.log(1)
-      const action = await axios.post('/api/v1/stories/' + storyId + '/reactions/like', {
-          action: text,
-          header: {
 
-          }
-      });
+  if (text === "Like") {
+      const action = await axios.post('/api/v1/stories/' + storyId + '/reactions/like');
       console.log(action)
   } else {
-      const action = await axios.post('/api/v1/stories/' + storyId + '/reactions/dislike', {
-          action: text
-      });
+      const action = await axios.post('/api/v1/stories/' + storyId + '/reactions/dislike');
+      console.log(action)
   }
 
 };
