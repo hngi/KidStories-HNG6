@@ -5,10 +5,10 @@ var updateReactionStats = function (storyId, likeCount, dislikeCount) {
 
 var react = async function(event) {
   event.preventDefault();
-  var text = event.target.textContent;
+  var text = event.target.id;
   var storyId = event.target.dataset.storyId;
   let action = '';
-  if (text === "Like") {
+  if (text === "fav-like") {
       action = await axios.post('/api/v1/stories/' + storyId + '/reactions/like');
   } else {
       action = await axios.post('/api/v1/stories/' + storyId + '/reactions/dislike');

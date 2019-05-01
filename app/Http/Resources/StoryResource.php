@@ -23,13 +23,13 @@ class StoryResource extends JsonResource
             'image_url'     => $this->image_url,
             'image_name'    => $this->image_name,
             'author'        => $this->author,
-            'age'           => $this->age_from . '-'.$this->age_to,
+            'age'           => $this->age_from . '-' . $this->age_to,
             'author'        => $this->author,
-            'story_duration'=> $this->story_duration,
+            'story_duration' => $this->story_duration,
             'is_premium'    => $this->is_premium,
             'likes_count'   => $this->likes_count,
-            'dislikes_count'=> $this->dislikes_count
-            
+            'dislikes_count' => $this->dislikes_count
+
         ];
     }
 }

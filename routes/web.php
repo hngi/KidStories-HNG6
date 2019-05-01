@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('home');
 })->name('homepage');
 
+Route::get('/story/{id}', 'StoriesController@singlestory')->name('singlestory');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
