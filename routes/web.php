@@ -11,12 +11,22 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('admin.welcome');
 });
 
-Route::get('/story', 'ReactionController@index')->name('reaction');
+Route::get('/', function () {
+    return view('home');
+})->name('homepage');
+
+Route::get('/story', 'StoriesController@index')->name('reaction');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/categories', 'CategoryController@index')->name('categories.index');
+
+Route::get('/bookmarks', 'BookmarkController@index')->name('bookmark');

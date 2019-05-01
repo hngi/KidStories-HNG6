@@ -137,7 +137,7 @@ class CategoryController extends Controller
 
         DB::commit();
 
-        return redirect()->route('categories.index')->withStatus(__('Category successfully updated.'));
+        return redirect()->route('admin.categories.index')->withStatus(__('Category successfully updated.'));
     }
 
     /**

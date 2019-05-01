@@ -8,6 +8,8 @@ use Validator;
 use Illuminate\Http\Request;
 use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use App\Http\Resources\StoryResource;
 
 class UserController extends Controller
 {
@@ -124,5 +126,16 @@ class UserController extends Controller
             'code' => 200,
             'message' => 'created',
         ], 200);
+    }
+
+    public function stories(){
+        $stories = User::find(auth()->id())->stories;
+
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'ok',
+            'data' => StoryResource::collection($stories)
+        ], Response::HTTP_OK);
     }
 }

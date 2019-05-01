@@ -30,7 +30,9 @@ class StoryController extends Controller
      */
     public function index()
     {
+
         $stories = Story::latest()->paginate(25);
+
 
         return view('admin.stories.index', compact('stories'));
     }

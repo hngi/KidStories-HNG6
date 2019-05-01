@@ -2,7 +2,7 @@
     "openapi": "3.0.1",
     "info": {
       "title": "Kid Story APP Api Documentation",
-      "description": "Kid Story App  api documentation. <br/> By: TEAM DRAGONLEGEND <br/> Backend API Repository:https://github.com/hnginternship5/kidstories <br/> Backend URL: https://api-marketplace.herokuapp.com ",
+      "description": "Kid Story App  api documentation. <br/> By: TEAM DRAGONLEGEND <br/> Backend API Repository:https://github.com/hnginternship5/kidstories <br/> Backend URL: https://api-kidstories.herokuapp.com ",
       "termsOfService": "https://api-kidstories.herokuapp.com",
       "contact": {
         "email": "interns@hng.tech"
@@ -15,7 +15,7 @@
     },
     "servers": [
       {
-        "url": "http://localhost:8000/api/v1"
+        "url": "https://api-kidstories.herokuapp.com/api/v1"
       }
     ],
     "tags": [
@@ -68,10 +68,32 @@
               "required": true
             },
             "responses": {
-              "200": {
-                "description": "created",
-                "content": {}
-              }
+                "200":{
+                    "description":"user created",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "properties":{
+                                    "status":{
+                                        "type":"string",
+                                        "example":"success"
+                                    },
+                                    "code":{
+                                        "type":"integer",
+                                        "example":200
+                                    },
+                                    "message":{
+                                        "type":"string",
+                                        "example":"ok"
+                                    },
+                                    "data":{
+                                        "$ref":"#/components/schemas/UserDataResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             
           }
@@ -95,10 +117,36 @@
               "required": true
             },
             "responses": {
-              "400": {
-                "description": "Invalid username/password supplied",
-                "content": {}
-              }
+                "200":{
+                    "description":"user login",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "properties":{
+                                    "status":{
+                                        "type":"string",
+                                        "example":"success"
+                                    },
+                                    "code":{
+                                        "type":"integer",
+                                        "example":200
+                                    },
+                                    "message":{
+                                        "type":"string",
+                                        "example":"ok"
+                                    },
+                                    "data":{
+                                        "$ref":"#/components/schemas/UserDataResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Invalid username/password supplied",
+                    "content": {}
+                }
             }
           }
         },
@@ -112,7 +160,13 @@
             "responses": {
               "200": {
                 "description": "successfully logout",
-                "content": {}
+                "content": {
+                    "application/json":{
+                        "schema":{
+                            "$ref":"#/components/schemas/Status"
+                        }
+                    }
+                }
               }
             }
           }
@@ -130,7 +184,7 @@
                 "content": {
                   "application/json": {
                     "schema": {
-                      "$ref": "#/components/schemas/User"
+                      "$ref":"#/components/schemas/UserDataResponse"
                     }
                   }
                 }
@@ -166,14 +220,20 @@
               "required": true
             },
             "responses": {
-              "400": {
-                "description": "Invalid user supplied",
-                "content": {}
-              },
-              "404": {
-                "description": "User not found",
-                "content": {}
-              }
+                "200": {
+                    "description": "successfully changed",
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Status"
+                            }
+                        }
+                    }
+                  },
+                "400": {
+                    "description": "Invalid user supplied",
+                    "content": {}
+                }
             },
             "security":[
               {
@@ -190,69 +250,83 @@
             "summary": "Get all users ",
             "description": "Returns all users",
             "responses": {
-              "200": {
-                "description": "successful operation",
-                "content": {}
-              },
-              "404": {
-                "description": "Users not found",
-                "content": {}
-              }
+                "200":{
+                    "description":"user created",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"array",
+                                "items":{
+                                    "$ref":"#/components/schemas/UserDataResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Users not found",
+                    "content": {}
+                }
             }
           }
         },
-        "/users/{id}": {
+        "/users/profile": {
             "get": {
               "tags": [
                 "user"
               ],
-              "summary": "Get a user by ID",
+              "summary": "Get a user profile",
               "description": "Returns a single user",
-              "parameters": [
-                {
-                  "name": "id",
-                  "in": "path",
-                  "description": "ID of user to get",
-                  "required": true,
-                  "schema": {
-                    "type": "integer"
-                  }
-                }
-              ],
               "responses": {
                 "200": {
                   "description": "successful operation",
                   "content": {
                     "application/json": {
                       "schema": {
-                        "$ref": "#/components/schemas/User"
+                        "properties":{
+                            "status":{
+                                "type":"string",
+                                "example":"success"
+                            },
+                            "code":{
+                                "type":"integer",
+                                "example":200
+                            },
+                            "message":{
+                                "type":"string",
+                                "example":"ok"
+                            },
+                            "data":{
+                                "$ref":"#/components/schemas/User"
+                            }
+                        }
                       }
                     }
                   }
                 },
                 "404": {
                   "description": "User not found",
-                  "content": {}
+                  "content": {
+                      "application/json":{
+                          "schema":{
+                             "$ref":"#/components/schemas/404"
+                          }
+                      }
+                  }
                 }
-              }
+              },
+              "security":[
+                    {
+                      "bearerAuth":[]
+                    }
+               ]
             },
             "put": {
               "tags": [
                 "user"
               ],
-              "summary": "Update a user",
+              "summary": "Update a user profile",
               "description": "This can only be done by an authorised user.",
-              "parameters": [
-                {
-                  "name": "id",
-                  "in": "path",
-                  "description": "User ID that need to be updated",
-                  "required": true,
-                  "schema": {
-                    "type": "integer"
-                  }
-                }
-              ],
               "requestBody": {
                 "description": "Updated user object",
                 "content": {
@@ -265,35 +339,51 @@
                 "required": true
               },
               "responses": {
-                "400": {
-                  "description": "Invalid user supplied",
-                  "content": {}
+                "200": {
+                    "description": "successful operation",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "properties":{
+                              "status":{
+                                  "type":"string",
+                                  "example":"success"
+                              },
+                              "code":{
+                                  "type":"integer",
+                                  "example":200
+                              },
+                              "message":{
+                                  "type":"string",
+                                  "example":"ok"
+                              },
+                              "data":{
+                                  "$ref":"#/components/schemas/User"
+                              }
+                          }
+                        }
+                      }
+                    }
                 },
-                "404": {
-                  "description": "User not found",
-                  "content": {}
+                "400": {
+                "description": "Invalid user supplied",
+                "content": {}
                 }
-              }
+              },
+              "security":[
+                    {
+                      "bearerAuth":[]
+                    }
+               ]
             }
         },
-        "/users/{id}/profile-image": {
+        "/users/profile/update-image": {
             "put": {
               "tags": [
                 "user"
               ],
-              "summary": "Update a user",
+              "summary": "Update a user profile image",
               "description": "This can only be done by an authorised user.",
-              "parameters": [
-                {
-                  "name": "id",
-                  "in": "path",
-                  "description": "User ID that need to be updated",
-                  "required": true,
-                  "schema": {
-                    "type": "integer"
-                  }
-                }
-              ],
               "requestBody": {
                 "description": "Updated user object",
                 "content": {
@@ -306,15 +396,26 @@
                 "required": true
               },
               "responses": {
+                "200": {
+                  "description": "successfully updated",
+                  "content": {
+                      "application/json":{
+                          "schema":{
+                              "$ref":"#/components/schemas/Status"
+                          }
+                      }
+                  }
+                },
                 "400": {
                   "description": "Invalid user supplied",
                   "content": {}
-                },
-                "404": {
-                  "description": "User not found",
-                  "content": {}
                 }
-              }
+              },
+              "security":[
+                    {
+                      "bearerAuth":[]
+                    }
+              ]
             }
         },
         "/bookmarks/stories/{storyId}": {
@@ -339,8 +440,23 @@
                   "200": {
                     "description": "created",
                     "content": {}
+                  },
+                  "404": {
+                    "description": "Story not found",
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                               "$ref":"#/components/schemas/404"
+                            }
+                        }
+                    }
                   }
-                }
+                },
+                "security":[
+                    {
+                      "bearerAuth":[]
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -367,8 +483,55 @@
                     "description": "Bookmark not found",
                     "content": {}
                   }
-                }
+                },
+                "security":[
+                    {
+                      "bearerAuth":[]
+                    }
+                ]
             }
+        },
+        "/bookmarks/stories/{storyId}/status":{
+            "get": {
+                "tags": [
+                  "bookmark"
+                ],
+                "summary": "Get a bookmark status of a story",
+                "description": "Returns a status bookmark of a story",
+                "parameters": [
+                  {
+                    "name": "storyId",
+                    "in": "path",
+                    "description": "storyId of bookmar",
+                    "required": true,
+                    "schema": {
+                      "type": "integer"
+                    }
+                  }
+                ],
+                "responses": {
+                  "200": {
+                    "description": "successful operation",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Status"
+                        }
+                      }
+                    }
+                  },
+                  "404": {
+                      "description": "Story not found",
+                      "content": {
+                          "application/json":{
+                              "schema":{
+                                 "$ref":"#/components/schemas/404"
+                              }
+                          }
+                      }
+                  }
+                }
+              }
         },
         "/categories": {
             "get": {
@@ -419,8 +582,14 @@
                   }
                 },
                 "404": {
-                  "description": "Ccategory not found",
-                  "content": {}
+                    "description": "Category not found",
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                               "$ref":"#/components/schemas/404"
+                            }
+                        }
+                    }
                 }
               }
             }
@@ -455,8 +624,14 @@
                   }
                 },
                 "404": {
-                  "description": "Ccategory not found",
-                  "content": {}
+                    "description": "Category not found",
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                               "$ref":"#/components/schemas/404"
+                            }
+                        }
+                    }
                 }
               }
             }
@@ -481,11 +656,248 @@
                 ],
                 "summary": "Create a story",
                 "description": "This is an endpoint to create a story",
+                "requestBody": {
+                    "content": {
+                      "multipart/form-data": {
+                        "schema": {
+                            "$ref": "#/components/schemas/StoryDataCreate"
+                        }
+                      }
+                    }
+                },
                 "responses": {
                   "200": {
                     "description": "created",
-                    "content": {}
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/StoryCreateResponse"
+                            }
+                        }
+                    }
                   }
+                },
+                "security":[
+                    {
+                      "bearerAuth":[]
+                    }
+                ]
+            }
+        },
+        "/stories/{id}":{
+            "get":{
+                "tags":[
+                   "story"
+                ],
+                "summary":"Get a story by ID",
+                "description":"This is an endpoint to get a story",
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of story to get",
+                        "required":true,
+                        "schema":{
+                            "type":"integer"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/StoryGetResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Story not found",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                   "$ref":"#/components/schemas/404"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "story"
+                ],
+                "summary":"Update a story by ID",
+                "description":"An endpoint for story update",
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"ID of story to update",
+                        "required":true,
+                        "schema":{
+                            "type":"integer"
+                        }
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "multipart/form-data":{
+                            "schema":{
+                                "$ref":"#/components/schemas/StoryDataCreate"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "status":{
+                                        "type":"string",
+                                        "example":"success"
+                                    },
+                                    "code":{
+                                        "type":"integer",
+                                        "example":200
+                                    },
+                                    "message":{
+                                        "type":"string",
+                                        "example":"ok"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Story not found",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                   "$ref":"#/components/schemas/404"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security":[
+                    {
+                      "bearerAuth":[]
+                    }
+                ]
+            }
+        },
+        "/stories/{storyId}/reactions/like":{
+            "post":{
+                "tags":[
+                    "story"
+                ],
+                "summary":"Like a story by ID",
+                "description":"An endpoint to like story",
+                "parameters":[
+                    {
+                        "name":"storyId",
+                        "in":"path",
+                        "description":"ID of story to like",
+                        "required":true,
+                        "schema":{
+                            "type":"integer"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "status":{
+                                        "type":"string",
+                                        "example":"success"
+                                    },
+                                    "code":{
+                                        "type":"integer",
+                                        "example":200
+                                    },
+                                    "message":{
+                                        "type":"string",
+                                        "example":"ok"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Story not found",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                   "$ref":"#/components/schemas/404"
+                                }
+                            }
+                        }
+                      }
+                },
+                "security":[
+                    {
+                      "bearerAuth":[]
+                    }
+                ]
+            }
+        },
+        "/stories/{storyId}/reactions/dislike":{
+            "post":{
+                "tags":[
+                    "story"
+                ],
+                "summary":"dislike a story by ID",
+                "description":"An endpoint to dislike story",
+                "parameters":[
+                    {
+                        "name":"storyId",
+                        "in":"path",
+                        "description":"ID of story to dislike",
+                        "required":true,
+                        "schema":{
+                            "type":"integer"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "status":{
+                                        "type":"string",
+                                        "example":"success"
+                                    },
+                                    "code":{
+                                        "type":"integer",
+                                        "example":200
+                                    },
+                                    "message":{
+                                        "type":"string",
+                                        "example":"ok"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Story not found",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                   "$ref":"#/components/schemas/404"
+                                }
+                            }
+                        }
+                    }
                 },
                 "security":[
                     {
@@ -636,14 +1048,14 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                    "message": {
-                                        "type": "string",
-                                        "example": "No query results for model"
-                                    },
-                                    "error": {
-                                        "type": "string",
-                                        "example": "Resource not found"
-                                    }
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Resource not found"
+                                        }
                                     }
                                 }
                             }
@@ -688,6 +1100,38 @@
               "role": {
                 "type": "string"
               }
+            }
+          },
+          "UserDataResponse":{
+            "type":"object",
+            "properties":{
+                "id": {
+                    "type": "integer"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "is_admin": {
+                    "type": "boolean"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "postal_code": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                }
             }
           },
           "UserLogin": {
@@ -796,6 +1240,132 @@
               "body": {
                 "type": "string"
               }
+            }
+          },
+          "StoryDataCreate": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              },
+              "category_id": {
+                "type": "integer"
+              },
+              "age": {
+                "type": "integer"
+              },
+              "author": {
+                "type": "string"
+              },
+              "story_duration": {
+                "type": "string"
+              },
+              "photo":{
+                  "type":"string",
+                  "description":"Photo",
+                  "format":"binary"
+              }
+            }
+          },
+          "StoryCreateResponse":{
+            "type":"object",
+            "properties":{
+                "status":{
+                    "type":"string",
+                    "example":"success"
+                },
+                "code":{
+                    "type":"integer",
+                    "example":200
+                },
+                "message":{
+                    "type":"string",
+                    "example":"ok"
+                },
+                "data":{
+                   "$ref":"#/components/schemas/StoryResponseData" 
+                }
+            }
+          },
+          "StoryGetResponse":{
+            "type":"object",
+            "properties":{
+                "status":{
+                    "type":"string",
+                    "example":"success"
+                },
+                "data":{
+                   "$ref":"#/components/schemas/StoryResponseData" 
+                }
+            }
+          },
+          "StoryResponseData": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              },
+              "category_id": {
+                "type": "integer"
+              },
+              "user_id": {
+                "type": "integer"
+              },
+              "age": {
+                "type": "integer"
+              },
+              "author": {
+                "type": "string"
+              },
+              "story_duration": {
+                "type": "string"
+              },
+              "image_url":{
+                  "type":"string"
+              },
+              "image_name":{
+                  "type":"string"
+              }
+            }
+          },
+          "Status":{
+            "type":"object",
+            "properties":{
+                "status":{
+                    "type":"string",
+                    "example":"success"
+                },
+                "code":{
+                    "type":"integer",
+                    "example":200
+                },
+                "message":{
+                    "type":"string",
+                    "example":"ok"
+                }
+            }
+          },
+          "404":{
+            "type":"object",
+            "properties":{
+                "error":{
+                    "type":"string",
+                    "example":"Resource not found"
+                },
+                "message":{
+                    "type":"string",
+                    "example":"Not found"
+                },
+                "code":{
+                    "type":"integer",
+                    "example":404
+                }
             }
           }
         },

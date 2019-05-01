@@ -113,7 +113,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('categories.index') }}">
+                    <a class="nav-link" href="{{ route('admin.categories.index') }}">
                         <i class="ni ni-ungroup text-blue"></i> {{ __('Manage Categories') }}
                     </a>
                 </li>
