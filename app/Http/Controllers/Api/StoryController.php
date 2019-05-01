@@ -212,6 +212,9 @@ class StoryController extends Controller
 
         $story = $this->findStory($id);
 
+        $likeCount = $story['likes_count'];
+        $dislikeCount = $story['dislikes_count'];
+
         $reaction = Reaction::where('story_id', $story->id)
                             ->where('user_id', $user->id)
                             ->first();
@@ -222,19 +225,28 @@ class StoryController extends Controller
             $reaction->delete();
             $story->decrement('likes_count', 1);
 
+            $likeCount = $story['likes_count'];
+            $dislikeCount = $story['dislikes_count'];
+
         } else if ($reaction && $reaction->reaction == 0) {
 
             $story->increment('likes_count', 1);
 
             $story->decrement('dislikes_count', 1);
 
+            $likeCount = $story['likes_count'];
+            $dislikeCount = $story['dislikes_count'];
+
             $reaction = Reaction::updateOrCreate(
                 ['story_id' => $id, 'user_id' => auth()->id()],
-                ['reaction' => 0]
+                ['reaction' => 1]
             );
 
         } else {
             $story->increment('likes_count', 1);
+
+            $likeCount = $story['likes_count'];
+            $dislikeCount = $story['dislikes_count'];
 
             $reaction = Reaction::updateOrCreate(
                 ['story_id' => $id, 'user_id' => auth()->id()],
@@ -247,7 +259,9 @@ class StoryController extends Controller
         return response()->json([
             'status' => 'success',
             'code' => 200,
-            'message' => 'OK'
+            'message' => 'OK',
+            'likes_count'=> $likeCount,
+            'dislikes_count' => $dislikeCount,
         ], 200);
     }
 
@@ -263,6 +277,9 @@ class StoryController extends Controller
 
         $story = $this->findStory($id);
 
+        $likeCount = $story['likes_count'];
+        $dislikeCount = $story['dislikes_count'];
+
         $reaction = Reaction::where('story_id', $story->id)
                             ->where('user_id', $user->id)
                             ->first();
@@ -272,12 +289,18 @@ class StoryController extends Controller
         if ($reaction && $reaction->reaction == 0) {
             $reaction->delete();
             $story->decrement('dislikes_count', 1);
+            
+            $likeCount = $story['likes_count'];
+            $dislikeCount = $story['dislikes_count'];
 
         } else if ($reaction && $reaction->reaction == 1) {
 
             $story->increment('dislikes_count', 1);
 
             $story->decrement('likes_count', 1);
+
+            $likeCount = $story['likes_count'];
+            $dislikeCount = $story['dislikes_count'];
 
             $reaction = Reaction::updateOrCreate(
                 ['story_id' => $id, 'user_id' => auth()->id()],
@@ -286,6 +309,9 @@ class StoryController extends Controller
 
         } else {
             $story->increment('dislikes_count', 1);
+            
+            $likeCount = $story['likes_count'];
+            $dislikeCount = $story['dislikes_count'];
 
             $reaction = Reaction::updateOrCreate(
                 ['story_id' => $id, 'user_id' => auth()->id()],
@@ -298,7 +324,9 @@ class StoryController extends Controller
         return response()->json([
             'status' => 'success',
             'code' => 200,
-            'message' => 'OK'
+            'message' => 'OK',
+            'likes_count' => $likeCount,
+            'dislikes_count' => $dislikeCount
         ], 200);
     }
 

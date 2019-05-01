@@ -11,3 +11,4 @@ yarn-error.log
 fabric8-analytics.log
 package-lock.json
 .rnd
+/fe

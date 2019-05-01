@@ -26,8 +26,10 @@ class StoryResource extends JsonResource
             'age'           => $this->age_from . '-'.$this->age_to,
             'author'        => $this->author,
             'story_duration'=> $this->story_duration,
-            'is_premium'    => $this->is_premium
-
+            'is_premium'    => $this->is_premium,
+            'likes_count'   => $this->likes_count,
+            'dislikes_count'=> $this->dislikes_count
+            
         ];
     }
 }

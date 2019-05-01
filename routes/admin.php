@@ -38,7 +38,7 @@ $this->post('/password/reset', 'Auth\AdminResetPasswordController@reset');*/
  * Category routes for superadmin operations
  *
  */
-Route::resource('/categories', 'CategoryController');
+Route::resource('/categories', 'CategoryController', ['as' => 'admin']);
 
 /**
  * User routes for superadmin operations
