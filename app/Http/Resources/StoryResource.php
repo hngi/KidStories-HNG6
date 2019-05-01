@@ -15,6 +15,7 @@ class StoryResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'            => $this->id,
             'title'         => $this->title,
             'body'          => $this->body,
             'category_id'   => $this->category_id,
@@ -25,8 +26,10 @@ class StoryResource extends JsonResource
             'age'           => $this->age_from . '-'.$this->age_to,
             'author'        => $this->author,
             'story_duration'=> $this->story_duration,
-            'is_premium'    => $this->is_premium
-
+            'is_premium'    => $this->is_premium,
+            'likes_count'   => $this->likes_count,
+            'dislikes_count'=> $this->dislikes_count
+            
         ];
     }
 }

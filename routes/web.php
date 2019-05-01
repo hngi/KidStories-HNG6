@@ -28,3 +28,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
+Route::get('/bookmarks', 'BookmarkController@index')->name('bookmark');
