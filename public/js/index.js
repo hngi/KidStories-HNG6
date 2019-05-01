@@ -1,23 +1,18 @@
+var updateReactionStats = function (storyId, likeCount, dislikeCount) {
+      document.querySelector('#likes-count-' + storyId).innerHTML = likeCount;
+      document.querySelector('#dislikes-count-' + storyId).innerHTML = dislikeCount;
+};
+
 var react = async function(event) {
   event.preventDefault();
   var text = event.target.textContent;
-  //console.log(text)
   var storyId = event.target.dataset.storyId;
-  var token = $('.hidden').html;
-  console.log(token);
+  let action = '';
   if (text === "Like") {
-      console.log(1)
-      const action = await axios.post('/api/v1/stories/' + storyId + '/reactions/like', {
-          action: text,
-          header: {
-
-          }
-      });
-      console.log(action)
+      action = await axios.post('/api/v1/stories/' + storyId + '/reactions/like');
   } else {
-      const action = await axios.post('/api/v1/stories/' + storyId + '/reactions/dislike', {
-          action: text
-      });
+      action = await axios.post('/api/v1/stories/' + storyId + '/reactions/dislike');
   }
 
+  updateReactionStats(storyId, action.data.likes_count, action.data.dislikes_count);
 };
