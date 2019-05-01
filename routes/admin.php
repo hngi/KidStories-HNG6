@@ -14,9 +14,14 @@ Route::get('/register', 'Auth\AdminRegisterController@showRegistrationForm')->na
 
 Route::post('/register', 'Auth\AdminRegisterController@register')->name('admin.post.register');
 
+
 Route::group( ['middleware' => ['admin']], function() {
-	Route::get('/dashboard', 'AdminDashboardController@index')->name('admin.dashboard');
-	
+    Route::get('/dashboard', 'AdminDashboardController@index')->name('admin.dashboard');
+    Route::put('/change-password', 'AdminDashboardController@changePassword')->name('admin.password.change');
+    Route::get('/profile', 'AdminDashboardController@profile')->name('admin.profile');
+
+
+
 });
 
 
@@ -33,7 +38,7 @@ $this->post('/password/reset', 'Auth\AdminResetPasswordController@reset');*/
  * Category routes for superadmin operations
  *
  */
-Route::resource('/categories', 'CategoryController');
+Route::resource('/categories', 'CategoryController', ['as' => 'admin']);
 
 /**
  * User routes for superadmin operations

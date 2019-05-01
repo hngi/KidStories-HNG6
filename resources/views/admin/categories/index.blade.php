@@ -13,7 +13,7 @@
                                 <h3 class="mb-0">{{ __('Categories') }}</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('categories.create') }}" class="btn btn-sm btn-primary">{{ __('Add category') }}</a>
+                                <a href="{{ route('admin.categories.create') }}" class="btn btn-sm btn-primary">{{ __('Add category') }}</a>
                             </div>
                         </div>
                     </div>
@@ -58,11 +58,11 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                     
-                                                    <form action="{{ route('categories.destroy', $category->id) }}" method="post">
+                                                    <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post">
                                                         @csrf
                                                         @method('delete')
                                                         
-                                                        <a class="dropdown-item" href="{{ route('categories.edit', $category->id) }}">{{ __('Edit') }}</a>
+                                                        <a class="dropdown-item" href="{{ route('admin.categories.edit', $category->id) }}">{{ __('Edit') }}</a>
                                                         <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to delete?") }}') ? this.parentElement.submit() : ''">
                                                             {{ __('Delete') }}
                                                         </button>

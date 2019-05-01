@@ -31,7 +31,7 @@
     <link href="{{ asset('css/tresponsive.css') }}" rel="stylesheet">
 
     @yield('custom_css')
-    
+
 </head>
 
 <body>
@@ -68,7 +68,7 @@
                                             </li>
                                             <li class=""><a href="#">Browse Stories</a>
                                             </li>
-                                            <li><a href="{{ route('list-categories.index') }}">Categories</a></li>
+                                            <li><a href="{{ route('categories.index') }}">Categories</a></li>
                                             <li class=""><a href="#">My Stories</a>
                                             </li>
                                             <li><a href="#">About Us</a></li>
@@ -111,7 +111,7 @@
                                             @endif
                                             @else
                                             <li>
-                                                <a href="#">
+                                            <a href="{{route('admin.profile')}}">
                                                     Profile
                                                 </a>
                                             </li>
@@ -180,7 +180,7 @@
                     <h5>Newsletter</h5>
                     <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
                     <div class="subscribe">
-                        <input type="email" name="" id="subscribe-email" placeholder="Type email"> 
+                        <input type="email" name="" id="subscribe-email" placeholder="Type email">
                         <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
                     </div>
                 </section>
