@@ -19,8 +19,6 @@ Route::get('/', function () {
     return view('home');
 })->name('homepage');
 
-Route::get('/story', 'StoriesController@index')->name('reaction');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -28,4 +26,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/categories', 'CategoryController@index')->name('list-categories.index');
-Route::get('/bookmarks', 'BookmarkController@index')->name('bookmark');
+Route::get('/favorites', 'BookmarkController@index')->name('bookmark');

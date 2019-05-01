@@ -4,15 +4,15 @@
 <div class="favourites">
         <!-- Header with BG Image -->
         <div class="favourites_header d-flex justify-content-center align-items-center">
-            <h1 class="text-white">Favourites Stories</h1>
+            <h1 class="text-white">Favorites</h1>
         </div>
         <div class="container mt-3">
             <!-- Breadcrumb -->
             <div class="links">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Favorites</li>
                     </ol>
                 </nav>
             </div>
@@ -23,7 +23,7 @@
                 <div class="row">
                     @foreach($bookmarks as $bookmark)
                     <div class="col-md-3">
-                        <div class="card story_card mt-4">
+                        <div class="card favorite_story_card mt-4">
                             <img src="{{ $bookmark->image_url }}" class="card-img-top" alt="{{$bookmark->image_name}}">
                             <div class="card-body">
                                 <h5 class="card-title">{{$bookmark->title}}</h5>
@@ -33,7 +33,7 @@
                             </div>
                             <div class="card-footer d-flex justify-content-between">
                                 <div class="reactions">
-                                    <button onclick="react(event);"><i class="fa fa-thumbs-up mr-2 liked" data-story-id="{{ $bookmark->id }}"></i></button><small class="mr-3" id="likes-count-{{ $bookmark->id }}">{{$bookmark->likes_count}}</small>
+                                    <i class="fa fa-thumbs-up mr-2 liked" onclick="react(event);" data-story-id="{{ $bookmark->id }}"></i></button><small class="mr-3" id="likes-count-{{ $bookmark->id }}">{{$bookmark->likes_count}}</small>
                                     <i class="fa fa-thumbs-down mr-2" onclick="react(event);" data-story-id="{{ $bookmark->id }}"></i><small id="dislikes-count-{{ $bookmark->id }}">{{$bookmark->dislikes_count}}</small>
                                 </div>
                                 <div class="bookmark">

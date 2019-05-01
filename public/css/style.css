@@ -12,6 +12,43 @@
     justify-content: center;
 }
 
+.favourites {
+    margin-top: 100px
+}
+
+.favourites_header {
+    background-image: url(https://res.cloudinary.com/ephaig/image/upload/v1556708884/Rectangle.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 300px;
+}
+
+.favorite_story_card .card-title {
+    color: #333333;
+}
+
+.favorite_story_card .card-text:first-of-type {
+    color: #4F4F4F;
+}
+
+.favorite_story_card .card-text:nth-of-type(2) {
+    color: #666666;
+}
+
+.favorite_story_card .author {
+    color: #718CFB;
+}
+
+.favorite_story_card .reactions i {
+    color: #A6A6A6;
+}
+
+.favorite_story_card .reactions i.liked,
+.favorite_story_card .reactions i.dislike {
+    color: #718CFB;
+}
+
 .add-story {
     margin: 5em 10em;
 }
