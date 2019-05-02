@@ -6,6 +6,7 @@ use Auth;
 use DB;
 use App\User;
 use App\Story;
+use App\Comment;
 use Validator;
 use App\Category;
 use App\Reaction;
@@ -125,6 +126,9 @@ class StoryController extends Controller
     public function show($id)
     {
         $story = new StoryResource(Story::find($id));
+        // fecth all comment d story has
+        $comment = Comment::where('story_id', $id)->get();
+
 
         if ($story->is_premium) {
             if (request()->user('api')) {
@@ -133,7 +137,8 @@ class StoryController extends Controller
                         'status' => 'success',
                         "code" => Response::HTTP_OK,
                         'message' => 'premium story',
-                        'data' => $story
+                        'data' => $story,
+                        'comments' => $comment,
                     ], Response::HTTP_OK);
                 }else {
                     return response()->json([
@@ -155,7 +160,8 @@ class StoryController extends Controller
             'status' => 'success',
             "code" => Response::HTTP_OK,
             "message" => "OK",
-            'data' => $story
+            'data' => $story,
+            'comments' => $comment,
         ], 200);
     }
 
