@@ -210,7 +210,7 @@ class StoryController extends Controller
         if ($request->hasfile('photo')) {
             $image = $this->fileUploadService->uploadFile($request->file('photo'));
 
-            if(!is_null($story->image_name)) {
+            if (!is_null($story->image_name)) {
                 $this->fileUploadService->deleteFile($story->image_name);
             }
         }
@@ -252,8 +252,8 @@ class StoryController extends Controller
         $dislikeCount = $story['dislikes_count'];
 
         $reaction = Reaction::where('story_id', $story->id)
-                            ->where('user_id', $user->id)
-                            ->first();
+            ->where('user_id', $user->id)
+            ->first();
 
         DB::beginTransaction();
 
@@ -263,7 +263,6 @@ class StoryController extends Controller
 
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
-
         } else if ($reaction && $reaction->reaction == 0) {
 
             $story->increment('likes_count', 1);
@@ -277,7 +276,6 @@ class StoryController extends Controller
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 1]
             );
-
         } else {
             $story->increment('likes_count', 1);
 
@@ -296,8 +294,8 @@ class StoryController extends Controller
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
-            'likes_count'=> $likeCount,
-            'dislikes_count' => $dislikeCount,
+            'likes_count' => $likeCount,
+            'dislikes_count' => $dislikeCount
         ], 200);
     }
 
@@ -317,8 +315,8 @@ class StoryController extends Controller
         $dislikeCount = $story['dislikes_count'];
 
         $reaction = Reaction::where('story_id', $story->id)
-                            ->where('user_id', $user->id)
-                            ->first();
+            ->where('user_id', $user->id)
+            ->first();
 
         DB::beginTransaction();
 
@@ -328,7 +326,6 @@ class StoryController extends Controller
 
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
-
         } else if ($reaction && $reaction->reaction == 1) {
 
             $story->increment('dislikes_count', 1);
@@ -342,7 +339,6 @@ class StoryController extends Controller
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 0]
             );
-
         } else {
             $story->increment('dislikes_count', 1);
 
@@ -426,7 +422,7 @@ class StoryController extends Controller
         ], 200);
     }*/
 
-   /**
+    /**
      * Dislike a story
      *
      * @param  int  $id

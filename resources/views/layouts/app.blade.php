@@ -64,7 +64,7 @@
 
                                     <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
                                         <ul class="navigation clearfix">
-                                            <li class="current"><a href="#">Home</a>
+                                            <li class="current"><a href="/">Home</a>
                                             </li>
                                             <li class=""><a href="#">Browse Stories</a>
                                             </li>
@@ -111,12 +111,12 @@
                                             @endif
                                             @else
                                             <li>
-                                            <a href="{{route('admin.profile')}}">
+                                                <a href="{{route('admin.profile')}}">
                                                     Profile
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/bookmarks">
+                                                <a href="/favorites">
                                                     My Favorites
                                                 </a>
                                             </li>

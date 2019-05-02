@@ -20,6 +20,7 @@ Route::get('/', function () {
 })->name('homepage');
 
 Route::get('/story', 'StoriesController@index')->name('reaction');
+Route::get('/story/{id}', 'StoriesController@singlestory')->name('singlestory');
 
 
 Auth::routes();
