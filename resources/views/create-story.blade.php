@@ -2,7 +2,6 @@
 
 @section('custom_css')
 
-<link rel="stylesheet" type="text/css" href="css/favourites.css">
 @endsection
 
 @section('content')
@@ -10,10 +9,6 @@
 
 
     <div class="page-wrapper">
-            <!-- Header with BG Image -->
-            <div class="favourites_header d-flex justify-content-center align-items-center">
-                <h1 class="text-white">Add New Story</h1>
-            </div>
 
         <div class="auto-container">
 
