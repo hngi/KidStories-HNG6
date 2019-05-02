@@ -1,7 +1,7 @@
 /* Styles for Favourite page */
 @import url("https://fonts.googleapis.com/css?family=Lato");
 
-.favourites_header {
+.favourites .favourites_header {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url(https://res.cloudinary.com/mrphemi/image/upload/v1555435595/tablet-1075790_1280.jpg);
     background-size: cover;
@@ -9,6 +9,16 @@
     background-position: center;
     height: 50vh;
     margin-top: 50px;
+}
+
+.favourites .breadcrumb {
+    background-color: #fff !important;
+}
+
+.favourites .breadcrumb-item + .breadcrumb-item::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f105" !important;
 }
 
 .story_card .card-title {
