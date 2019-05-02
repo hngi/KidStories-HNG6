@@ -66,13 +66,13 @@
 
    <div class="col-md-2" id="category-drop">
       <h4>POPULAR CATEGORIES</h4>
-      <p>myths</p>
-      <p>fairytale</p>
-      <p>animal</p>
-      <p>history</p>
-      <p>fable</p>
+      <a href="/categories/1">Fantasy</a><br>
+      <a href="/categories/4">Jokes</a><br>
+      <a href="/categories/2">Bedtime Stories</a><br>
+      <a href="/categories/3">Morning Stories</a>
       
-  <div class="searchContainer" >
+      
+  {{--  <div class="searchContainer" >
   <i class="fa fa-search searchIcon"></i>
   <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">
 </div>
@@ -84,7 +84,7 @@
     <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li>
     <li class="list-group-item">Most Recent <i class="fas fa-tint icon-right"></i></li>
   </ul>
-</div>
+</div>  --}}
 
     </div>
   </div>
@@ -92,7 +92,7 @@
 
 
   
-<div class="container"> 
+<div class="container" style="margin-top:100px;"> 
 <div class=" mb-3" style="max-width:auto;">
   <div class="row no-gutters">
     <div class="col-md-4">
