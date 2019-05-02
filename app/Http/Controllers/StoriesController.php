@@ -14,6 +14,7 @@ use App\Services\FileUploadService;
 use App\Http\Resources\StoryResource;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class StoriesController extends Controller
 {
     public function __construct(FileUploadService $fileUploadService)
@@ -52,7 +53,7 @@ class StoriesController extends Controller
 
         return view('story', ['story' => $story]);
     }
-
+    
     public function create()
     {
         $categories = Category::all();
@@ -127,5 +128,13 @@ class StoriesController extends Controller
         $story->load('tags');
         
         return view('singlestory');
+
+        return redirect('/story/'.$story->id);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'code' => 200,
+        //     'message' => 'OK',
+        //     'data' => $story,
+        // ], 200);
     }
 }

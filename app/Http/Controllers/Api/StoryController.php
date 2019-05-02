@@ -27,24 +27,20 @@ class StoryController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = $request->has("filter") ? $request->filter : 5;
-        $stories =  StoryResource::collection(Story::whereRaw('? between age_from and age_to', [$filter])->get());
-        // foreach ($stories as $key => $value) {
-        //     # code...
-        // }
-        $user = $this->user();
-        $storyId = [];
-        for ($i = 0; $i < $stories->count(); $i++) {
-            $storyId = $stories[$i]->id;
-        }
-        return $user;
+        $filter = $request->has("age") ? explode('-', $request->age) : [1, 5];
 
-        // return response()->json([
-        //     'status' => 'success',
-        //     'code' => 200,
-        //     'message' => 'OK',
-        //     'data' => $stories
-        // ], 200);
+        $stories =  StoryResource::collection(Story::where(function ($q) use ($filter){
+                        foreach ($filter as $fil) {
+                            $q->orWhereRaw('? between age_from and age_to ', [$fil]);
+                        }
+                    })->get());
+
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK',
+            'data' => $stories
+        ], 200);
     }
 
     /**

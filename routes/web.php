@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('home');
 })->name('homepage');
 
+Route::get('/story', 'StoriesController@index')->name('reaction');
 Route::get('/story/{id}', 'StoriesController@singlestory')->name('singlestory');
 
 
