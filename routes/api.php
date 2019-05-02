@@ -52,7 +52,7 @@
 	/**
 	 * Routes for stories
 	 */
-	Route::middleware('auth:api')->post('/stories', "StoryController@store");
+	Route::middleware('auth:api')->post('/stories', "StoryController@index");
 
 	Route::get('/stories', "StoryController@index");
 
