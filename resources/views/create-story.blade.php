@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('custom_css')
+
 <link rel="stylesheet" type="text/css" href="css/favourites.css">
 @endsection
 
@@ -19,30 +20,27 @@
             <section class="add-story">
                 <form action="/create-story" method="post" enctype="multipart/form-data">
                 {{ csrf_field()}}
+
                     <div class="top-form">
-                        <div class="form-group col-md-6 title-input">
+                        <div class="form-input title-input">
                             <label for="title">Title</label>
-                            <input type="text" name="title" id="title">
+                            <input type="text" name="title" id="title" required>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="photo">Cover Image</label>
-                            <input type="file" name="photo" id="photo">
+                        <div class="form-input">
+                            <label for="cover">Cover Image</label>
+                            <input type="file" name="photo" id="cover">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-input">
                             <label for="age">Age</label>
-                            <input type="text" name="age" id="age">
+                            <input type="text" name="age" id="age" required placeholder="eg 1-4">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-input">
                             <label for="author">Author</label>
-                            <input type="text" name="author" id="author">
+                            <input type="text" name="author" id="author" required>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="story_duration">Story Duration</label>
-                            <input type="text" name="story_duration" id="story_duration">
-                        </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-input">
                             <label for="category">Category</label>
-                            <select name="category_id" id="category" class="form-control form-control-lg">
+                            <select name="category_id" id="category" class="form-control form-control-lg" required>
                                 <option value=""></option>
                                 @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -50,13 +48,12 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label for="content">Body</label>
-                        <textarea placeholder="And the fish happened to grow wings..." name="body" id="body" cols="50" rows="10"></textarea>
+                    <div class="form-input">
+                        <label for="content">Content</label>
+                        <textarea placeholder="And the fish happened to grow wings..." name="body" id="content" cols="50" rows="10" required></textarea>
                     </div>
-                    <div class="buttons col-md-12">
-                        <button class="btn discard">Discard</button>
-                        <button class="btn save">Save</button>
+                    <div class="buttons">
+                        <button class="btn save">Post</button>
                     </div>
                 </form>
             </section>
