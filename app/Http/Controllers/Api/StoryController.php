@@ -33,6 +33,7 @@ class StoryController extends Controller
         //     # code...
         // }
         $user = $this->user();
+        $storyId = [];
         for ($i = 0; $i < $stories->count(); $i++) {
             $storyId = $stories[$i]->id;
         }

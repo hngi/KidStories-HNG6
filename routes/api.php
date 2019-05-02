@@ -18,6 +18,9 @@
 
 	Route::middleware('auth:api')->put('/auth/change-password', "AuthController@changePassword");
 
+	Route::post('/password-reset', "PasswordController@store");
+	Route::put('/password-reset', "PasswordController@update");
+
 	/**
 	 * Routes for users
 	 */
@@ -55,8 +58,9 @@
 	Route::middleware('auth:api')->post('/stories', "StoryController@index");
 
 	Route::get('/stories', "StoryController@index");
-
 	Route::get('/stories/{id}', "StoryController@show");
+
+	// Route::get('/stories/{id}', "StoryController@show");
 
 	Route::middleware('auth:api')->post('/stories/{id}', "StoryController@update");
 

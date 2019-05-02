@@ -34,6 +34,10 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
+$factory->state(User::class, 'default', [
+    'email' => 'api@email.com',
+]);
+
 $factory->define(App\Story::class, function (Faker $faker) {
     $age = [0, 5, 9, 13, 17 ];
     $minAge = $age[rand(0,4)];
@@ -64,7 +68,7 @@ $factory->define(App\Story::class, function (Faker $faker) {
         'likes_count'=>$faker->randomDigit(),
         'dislikes_count'=>$faker->randomDigit(),
         'author'=>$faker->name,
-        'story_duration'=>$faker->time,
+        // 'story_duration'=>$faker->time,
         'is_premium'=>$faker->boolean
     ];
 });
@@ -148,5 +152,12 @@ $factory->define(App\Tag::class, function (Faker $faker) {
 });
 
 $factory->define(App\StoryTag::class, function (Faker $faker) {
-    return [];
+    return [
+        'story_id'=>function(){
+            return factory('App\Story')->create()->id;
+        },
+        'tag_id'=>function(){
+            return factory('App\Tag')->create()->id;
+        }
+    ];
 });

@@ -14,8 +14,11 @@ class DbTableSeeder extends Seeder
         'subscription' => 15,
         'payment' => 10,
         'subscribed' => 10,
-        'tags' => 5
+        'tags' => 16,
+        'story_tag'=>3 //story_tag per story
     ];
+
+    protected $stories = null;
 
     /**
      * Run the database seeds.
@@ -23,14 +26,15 @@ class DbTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   
+        factory('App\User')->states('default')->create();//eamil = api@email.com
         factory('App\User', $this->count['user'])->create();
         factory('App\Category', $this->count['category'])->create();
         factory('App\Story', $this->count['story'])->create();
         factory('App\Subscription', $this->count['subscription'])->create();
         factory('App\Tag', $this->count['tags'])->create();
 
-        $this->customisedFactory();
+        // $this->customisedFactory();
     }
 
     protected function customisedFactory()
@@ -41,12 +45,13 @@ class DbTableSeeder extends Seeder
         $this->comment();
         $this->payment();
         $this->subscribed();
-        $this->story_tag();
+        //$this->story_tag();
+        $this->storyTag();
     }
 
     protected function story()
     {
-        factory('App\Story', $this->count['story'])->create([
+        $this->stories = factory('App\Story', $this->count['story'])->create([
             'category_id' => function () {
                 return rand(1, $this->count['category']);
             },
@@ -120,5 +125,17 @@ class DbTableSeeder extends Seeder
                 return rand(1, $this->count['tags']);
             }
         ]);
+    }
+
+    protected function storyTag()
+    {   
+        $this->stories->each(function($story){
+            factory('App\StoryTag',$this->count['story_tag'])->create([
+                'story_id'=>$story->id,
+                'tag_id'=>function(){
+                    return rand(1,$this->count['tags']);
+                }
+            ]);
+        });
     }
 }

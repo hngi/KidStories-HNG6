@@ -21,8 +21,8 @@
       <div class="row">
         <div class="col-md-9">
       <div class="row">
-      @if (count($category->stories) > 0)
-           @foreach ($category->stories as $story)
+      @if (count($stories) > 0)
+           @foreach ($stories as $story)
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
             <img src="https://i.imgur.com/7OBNw1t.jpg" class="card-img-top" alt="...">
