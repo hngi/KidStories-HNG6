@@ -12,9 +12,13 @@ use Illuminate\Http\Request;
 use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StoryResource;
+use App\User;
+use App\Traits\UserTrait;
+use Symfony\Component\HttpFoundation\Response;
 
 class StoryController extends Controller
 {
+    use UserTrait;
     public function __construct(FileUploadService $fileUploadService)
     {
         $this->fileUploadService = $fileUploadService;
@@ -81,13 +85,14 @@ class StoryController extends Controller
         if ($request->hasfile('photo')) {
             $image = $this->fileUploadService->uploadFile($request->file('photo'));
         }
-
+        $age = explode('-',$request->age);
         $story = Story::create([
             'title' => $request->title,
             'body' => $request->body,
             'category_id' => $request->category_id,
             'user_id' => auth()->id(),
-            'age' => $request->age,
+            'age_from' => $age[0] ,
+            'age_to' => $age[1] ,
             'author' => $request->author,
             'story_duration' => $request->story_duration,
             "image_url" => $image['secure_url'] ?? null,
@@ -113,6 +118,33 @@ class StoryController extends Controller
     public function show($id)
     {
         $story = new StoryResource(Story::find($id));
+
+        if($story->is_premium){
+           if(request()->user('api')){
+              if( $this->userIsPremuim()){
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'premium story',
+                    'data' => $story
+                ], Response::HTTP_OK);
+              }else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Premium story',
+                    'data' => null
+                ], Response::HTTP_FORBIDDEN);
+              }
+
+           }
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No authorization',
+                'data' => null
+            ], Response::HTTP_UNAUTHORIZED);
+
+        }
+
+
 
         return response()->json([
             'status' => 'success',
@@ -289,7 +321,7 @@ class StoryController extends Controller
         if ($reaction && $reaction->reaction == 0) {
             $reaction->delete();
             $story->decrement('dislikes_count', 1);
-            
+
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
 
@@ -309,7 +341,7 @@ class StoryController extends Controller
 
         } else {
             $story->increment('dislikes_count', 1);
-            
+
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
 
