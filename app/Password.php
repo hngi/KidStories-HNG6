@@ -19,7 +19,7 @@ class Password extends Model
      * @var array
      */
     protected $fillable = [
-        'email', 'token',
+        'email', 'token', 'created_at',
     ];
 
     public $timestamps = false;
