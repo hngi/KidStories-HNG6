@@ -29,15 +29,19 @@ class StoryController extends Controller
     public function index(Request $request)
     {
         $stories = Story::query();
+
         $stories = $stories->when($request->has('age'), function ($q) use ($request) {
             $age = explode('-', $request->age);
+
             return $q->where(function ($q) use ($age){
                 foreach ($age as $data) {
                     $q->orWhereRaw('? between age_from and age_to ', [$data]);
                 }
             });
         });
+      
         $stories = $stories->get();
+
         return response()->json([
             'status' => 'success',
             'code' => 200,
@@ -114,6 +118,7 @@ class StoryController extends Controller
         $story = Story::where('id', $id)
                         ->with(['comments.user:id,first_name,last_name,image_url'])
                         ->firstOrFail();
+      
         if ($story->is_premium) {
             if (request()->user('api')) {
                 if ($this->userIsPremuim()) {
