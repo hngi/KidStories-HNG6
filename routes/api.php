@@ -55,8 +55,9 @@
 	Route::middleware('auth:api')->post('/stories', "StoryController@store");
 
 	Route::get('/stories', "StoryController@index");
-
 	Route::get('/stories/{id}', "StoryController@show");
+
+	// Route::get('/stories/{id}', "StoryController@show");
 
 	Route::middleware('auth:api')->post('/stories/{id}', "StoryController@update");
 
