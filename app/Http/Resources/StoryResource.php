@@ -23,22 +23,21 @@ class StoryResource extends JsonResource
             'image_url'     => $this->image_url,
             'image_name'    => $this->image_name,
             'author'        => $this->author,
-            'age'           => $this->age_from . '-'.$this->age_to,
+            'age'           => $this->age,
             'author'        => $this->author,
             'story_duration'=> $this->readingTime($this->body) ,
             'is_premium'    => $this->is_premium,
             'likes_count'   => $this->likes_count,
             'dislikes_count'=> $this->dislikes_count
-
         ];
     }
 
     public function readingTime($text) {
         $wordsPerMinute = 200;
-        $noOfWords =  count(explode(' ',$text));
-        $minutes = $noOfWords/$wordsPerMinute;
+        $numberOfWords =  count(explode(' ', $text));
+        $minutes = $numberOfWords / $wordsPerMinute;
         $readTime = ceil($minutes);
 
-        return  $minutes>1?"$readTime minutes read":"$readTime minute read";
+        return  $minutes > 1 ? "$readTime minutes read" : "$readTime minute read";
       }
 }
