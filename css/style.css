@@ -13,7 +13,7 @@
 }
 
 .add-story {
-    margin: 5em 10em;
+    margin: 12em 10em;
 }
 
 form {
@@ -22,6 +22,7 @@ form {
 }
 
 label {
+    color: #333333;
     margin-bottom: 10px
 }
 
@@ -42,6 +43,7 @@ textarea {
 
 .top-form > .form-input {
     width: 40%;
+    margin-bottom: 20px
 }
 
 div.form-input > * {
@@ -66,7 +68,7 @@ input[type="text"] {
 }
 
 .btn {
-    padding: 10px 40px;
+    padding: 10px 60px;
     border-radius: 5px;
     border: 1px solid #718CFB;
 }
@@ -119,6 +121,17 @@ footer section {
     width: 20%
 }
 
+.footer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.social-icons > i {
+    font-size: 16px;
+    margin-left: 15px
+}
+
 .subscribe {
     display: flex;
 }
@@ -137,7 +150,7 @@ footer section {
 
 @media screen and (max-width: 800px) {
     .add-story {
-        margin: 5em 2em;
+        margin: 12em 2em;
     }
 
     footer section {
@@ -149,10 +162,6 @@ footer section {
 @media screen and (max-width: 550px) {
     .top-form > .form-input {
         width: 100%
-    }
-
-    .title-input {
-        margin-bottom: 20px;
     }
 
     footer section {
