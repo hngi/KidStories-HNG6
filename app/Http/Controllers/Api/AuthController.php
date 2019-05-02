@@ -107,7 +107,7 @@ class AuthController extends Controller
             'data' => $response
         ], 201);
     }
-  
+
 	/**
      * Returns the details of a logged in user
      *

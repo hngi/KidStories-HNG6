@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscribed extends Model
 {
+     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'expired_date',
+    ];
     /**
      * fillable properties for subscribed
      */
@@ -28,7 +36,7 @@ class Subscribed extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'subscribeds');
     }
     //Relationship end
 }

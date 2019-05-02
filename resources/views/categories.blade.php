@@ -39,7 +39,7 @@
             </div>
 
             <!-- Poem Categories-->
-            <span >
+            {{-- <span >
                     <h1 class="container1 span"> Poems </h1>
             </span>    
             
@@ -50,8 +50,36 @@
                 <div class="item"><a href="#"> <img class="category" src="images/categories/fearful2.png"> <div class="info"> Fearful </div> </a></div>
                 <div class="item"><a href="#"> <img class="category" src="images/categories/fables.jpeg"> <div class="info"> Fables </div> </a></div>
                 <div class="item"><a href="#"> <img class="category" src="images/categories/history.png"> <div class="info"> History </div> </a></div>         
-            </div>    
+            </div>  --}}   
     </div>
+
+    <!-- App Section -->
+    <section class="main-banner">
+        <div class="auto-container">
+            <div class="row clearfix">
+
+                <!--Image Column-->
+                <div class=" col-lg-4 col-md-12 col-sm-12">
+                    <img src="images/resources/gp23.png" alt="" />
+                </div>
+
+                
+                <!--Content Column-->
+                <div class="content-column col-lg-8 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <h4>Get up close with your child</h4>
+                        <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
+                        </div>
+                    <div class="buttons-box">
+                <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/apple.png" alt="" /></a>
+                <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/playstore.png" alt="" /></a>
+            </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section> 
 
     <!-- Footer goes here -->
     <!--Scroll to top-->
