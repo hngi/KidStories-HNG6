@@ -163,7 +163,7 @@
                 </section>
                 <section>
                     <h5>Quick Links</h5>
-                    <a href="#">Create a Story</a>
+                    <a href="/create-story">Create a Story</a>
                     <a href="#">Favorite Story</a>
                     <a href="#">Explore Stories</a>
                     <a href="#">Authors</a>

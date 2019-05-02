@@ -19,6 +19,9 @@ Route::get('/', function () {
     return view('home');
 })->name('homepage');
 
+Route::get('/story', 'StoriesController@index')->name('reaction');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -27,3 +30,5 @@ Auth::routes();
 
 Route::get('/favorites', 'BookmarkController@index')->name('bookmark');
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
+Route::get('/categories/{id}', 'CategoryController@show')->name('stories');
+Route::middleware('auth')->get('/create-story', 'StoriesController@create')->name('story.create');
