@@ -10,10 +10,8 @@
         <?php include 'partials/navbar.php'; ?>
     <!--End Main Navigation -->
         <!-- Header with BG Image -->
-        <div class="favourites_header d-flex justify-content-center align-items-center">
-            <h1 class="text-white">Add New Story</h1>
-        </div>
-
+        font-size: 20px;
+    margin-left: 15px
     <div class="auto-container">
 
         <section class="add-story">
@@ -27,14 +25,29 @@
                         <label for="cover">Cover Image</label>
                         <input type="file" name="" id="cover">
                     </div>
+                    <div class="form-input">
+                        <label for="cover">Age Range</label>
+                        <input type="number" name="" id="cover">
+                    </div>
+                    <div class="form-input">
+                        <label for="cover">Arthur</label>
+                        <input type="text" name="" id="cover">
+                    </div>
+                    <div class="form-input">
+                        <label for="cover">Story Duration</label>
+                        <input type="number" name="" id="cover">
+                    </div>
+                    <div class="form-input">
+                        <label for="cover">Category</label>
+                        <input type="text" name="" id="cover">
+                    </div>
                 </div>
                 <div class="form-input">
                     <label for="content">Content</label>
                     <textarea placeholder="And the fish happened to grow wings..." name="" id="content" cols="50" rows="10"></textarea>
                </div>
                <div class="buttons">
-                   <button class="btn discard">Discard</button>
-                   <button class="btn save">Save</button>
+                   <button class="btn save">Post</button>
                </div>
             </form>
         </section>

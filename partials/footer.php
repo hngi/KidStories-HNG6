@@ -35,7 +35,10 @@
     <div class="footer-info">
         <p>© 2019 Kid Stories. All rights reserved</p>
         <div class="social-icons">
-
+            <i class="fab fa-youtube"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
         </div>
     </div>
 </footer>
