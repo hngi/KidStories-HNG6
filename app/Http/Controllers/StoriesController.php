@@ -11,6 +11,8 @@ use Validator;
 use App\Category;
 use DB;
 use App\Services\FileUploadService;
+use App\Http\Resources\StoryResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class StoriesController extends Controller
 {
@@ -32,15 +34,15 @@ class StoriesController extends Controller
     {
         $story = Story::where('id', $id)
             ->first();
-        $user = Auth::user();
+        //$user = Auth::user();
         $mytime = Carbon::now();
         $timeNow = $mytime->toDateTimeString();
         $subcribed = '';
-        if ($user) {
-            $subcribed = Subscribed::where('user_id', $user->id);
-        }
+        // if ($user) {
+        //     $subcribed = Subscribed::where('user_id', $user->id);
+        // }
 
-        return [$subcribed, $story, $user];
+        // return [$subcribed, $story, $user];
         // if (!$user) {
         //     return \redirect('home');
         // }
@@ -48,7 +50,7 @@ class StoriesController extends Controller
         //     return \redirect('home');
         // }
 
-        // return view('story', ['story' => $story]);
+        return view('story', ['story' => $story]);
     }
 
     public function create()
@@ -66,7 +68,6 @@ class StoriesController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'age' => 'required',
             'author' => 'required',
-            'story_duration' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -95,26 +96,36 @@ class StoriesController extends Controller
             $image = $this->fileUploadService->uploadFile($request->file('photo'));
         }
 
+        $age = explode('-', $request->age);
+
         $story = Story::create([
             'title' => $request->title,
             'body' => $request->body,
             'category_id' => $request->category_id,
             'user_id' => auth()->id(),
-            'age_from' => $request->age,
+            'age_from' => $age[0] ,
+            'age_to' => $age[1] ,
+            // 'is_premium' => $request->is_premium,
+            'is_premium' => false,
             'author' => $request->author,
-            'story_duration' => $request->story_duration,
             "image_url" => $image['secure_url'] ?? null,
             "image_name" => $image['public_id'] ?? null
         ]);
 
         DB::commit();
+        // /show-story/{story}
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK',
+            'data' => new StoryResource($story),
+        ], 200);
+    }
 
-        return redirect('/story/' . $story->id);
-        // return response()->json([
-        //     'status' => 'success',
-        //     'code' => 200,
-        //     'message' => 'OK',
-        //     'data' => $story,
-        // ], 200);
+    public function show(Story $story)
+    {   
+        $story->load('tags');
+        
+        return view('singlestory');
     }
 }
