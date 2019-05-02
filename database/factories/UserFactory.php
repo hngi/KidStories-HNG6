@@ -68,7 +68,7 @@ $factory->define(App\Story::class, function (Faker $faker) {
         'likes_count'=>$faker->randomDigit(),
         'dislikes_count'=>$faker->randomDigit(),
         'author'=>$faker->name,
-        'story_duration'=>$faker->time,
+        // 'story_duration'=>$faker->time,
         'is_premium'=>$faker->boolean
     ];
 });
