@@ -92,4 +92,11 @@ class StoriesController extends Controller
         //     'data' => $story,
         // ], 200);
     }
+
+    public function show(Story $story)
+    {   
+        $story->load('tags');
+        
+        return view('singlestory');
+    }
 }

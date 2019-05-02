@@ -13,7 +13,7 @@ class CreateStoryTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('story_tags', function (Blueprint $table) {
+        Schema::create('story_tag', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('story_id');
             $table->unsignedBigInteger('tag_id');

@@ -152,5 +152,12 @@ $factory->define(App\Tag::class, function (Faker $faker) {
 });
 
 $factory->define(App\StoryTag::class, function (Faker $faker) {
-    return [];
+    return [
+        'story_id'=>function(){
+            return factory('App\Story')->create()->id;
+        },
+        'tag_id'=>function(){
+            return factory('App\Tag')->create()->id;
+        }
+    ];
 });
