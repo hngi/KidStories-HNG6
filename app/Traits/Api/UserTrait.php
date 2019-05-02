@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Traits;
+namespace App\Traits\Api;
 
 use Carbon\Carbon;
+
 trait UserTrait
 {
     /**
