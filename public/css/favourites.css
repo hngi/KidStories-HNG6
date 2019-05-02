@@ -1,0 +1,42 @@
+/* Styles for Favourite page */
+
+@import url("https://fonts.googleapis.com/css?family=Lato");
+.favourites_header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://res.cloudinary.com/mrphemi/image/upload/v1555435595/tablet-1075790_1280.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 50vh;
+    margin-top: 50px;
+}
+
+.story_card .card-title {
+    color: #333333;
+}
+
+.story_card .card-text:first-of-type {
+    color: #4f4f4f;
+}
+
+.story_card .card-text:nth-of-type(2) {
+    color: #666666;
+}
+
+.story_card .author {
+    color: #718cfb;
+}
+
+.story_card a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.story_card .reactions i {
+    color: #a6a6a6;
+}
+
+.story_card .reactions .liked i,
+.story_card .reactions .disliked i,
+.story_card .bookmarked i {
+    color: #718cfb;
+}
