@@ -27,7 +27,7 @@
             <div class="card mb-4 shadow-sm">
             <img src="https://i.imgur.com/7OBNw1t.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">{{$story->title}}</h5>
+              <h5 class="card-title"><a href="/stories/{{$story->id}}"></a>{{$story->title}}</h5>
               <p class="card-text">By <a href="#">{{$story->author}}</a></p>
               <hr style="margin:0 -5px;">
               <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
