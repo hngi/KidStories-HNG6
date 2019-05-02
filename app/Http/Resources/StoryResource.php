@@ -25,19 +25,11 @@ class StoryResource extends JsonResource
             'author'        => $this->author,
             'age'           => $this->age,
             'author'        => $this->author,
-            'story_duration'=> $this->readingTime($this->body) ,
+            'story_duration'=> $this->readingTime ,
             'is_premium'    => $this->is_premium,
             'likes_count'   => $this->likes_count,
-            'dislikes_count'=> $this->dislikes_count
+            'dislikes_count'=> $this->dislikes_count,
         ];
     }
 
-    public function readingTime($text) {
-        $wordsPerMinute = 200;
-        $numberOfWords =  count(explode(' ', $text));
-        $minutes = $numberOfWords / $wordsPerMinute;
-        $readTime = ceil($minutes);
-
-        return  $minutes > 1 ? "$readTime minutes read" : "$readTime minute read";
-      }
 }

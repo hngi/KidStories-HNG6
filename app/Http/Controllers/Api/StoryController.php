@@ -33,19 +33,25 @@ class StoryController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = $request->has("age") ? explode('-', $request->age) : [1, 5];
+        $stories = Story::query();
 
-        $stories =  StoryResource::collection(Story::where(function ($q) use ($filter){
-                        foreach ($filter as $fil) {
-                            $q->orWhereRaw('? between age_from and age_to ', [$fil]);
-                        }
-                    })->get());
+        $stories = $stories->when($request->has('age'), function ($q) use ($request) {
+            $age = explode('-', $request->age);
+
+            return $q->where(function ($q) use ($age){
+                foreach ($age as $data) {
+                    $q->orWhereRaw('? between age_from and age_to ', [$data]);
+                }
+            });
+        });
+
+        $stories = $stories->get();
 
         return response()->json([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
-            'data' => $stories
+            'data' => StoryResource::collection($stories)
         ], 200);
     }
 
@@ -125,10 +131,9 @@ class StoryController extends Controller
      */
     public function show($id)
     {
-        $story = new StoryResource(Story::find($id));
-        // fecth all comment d story has
-        $comment = Comment::where('story_id', $id)->get();
-
+        $story = Story::where('id', $id)
+                        ->with(['comments.user:id,first_name,last_name,image_url'])
+                        ->firstOrFail();
 
         if ($story->is_premium) {
             if (request()->user('api')) {
@@ -138,7 +143,7 @@ class StoryController extends Controller
                         "code" => Response::HTTP_OK,
                         'message' => 'premium story',
                         'data' => $story,
-                        'comments' => $comment,
+                        
                     ], Response::HTTP_OK);
                 }else {
                     return response()->json([
@@ -161,7 +166,6 @@ class StoryController extends Controller
             "code" => Response::HTTP_OK,
             "message" => "OK",
             'data' => $story,
-            'comments' => $comment,
         ], 200);
     }
 
