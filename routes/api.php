@@ -18,8 +18,8 @@
 
 	Route::middleware('auth:api')->put('/auth/change-password', "AuthController@changePassword");
 
-	Route::post('/password-reset/1', "PasswordController@store");
-	Route::post('/password-reset/2', "PasswordController@update");
+	Route::post('/password-reset', "PasswordController@store");
+	Route::put('/password-reset', "PasswordController@update");
 
 	/**
 	 * Routes for users
