@@ -82,11 +82,6 @@
 	/**
      * Routes for tags
      */
-    Route::middleware('auth:api')->get('/tags','TagController@index');
-    Route::middleware('auth:api')->post('/tags','TagController@store');
-    Route::middleware('auth:api')->delete('/tags/{id}', 'TagController@destroy');
-    Route::middleware('auth:api')->put('/tags/{id}','TagController@update');
-    Route::middleware('auth:api')->post('/tags/tagStory','TagController@tagStory');
-    Route::middleware('auth:api')->post('/tags/unTagStory', 'TagController@unTagStory');
-    Route::middleware('auth:api')->get('/tags/getTagStories/{tagName}', 'TagController@getTagStories');
-    Route::middleware('auth:api')->get('/tags/getStoryTags/{id}', 'TagController@getStoryTags');
+    Route::get('/tags','TagController@index');
+
+    Route::get('/tags/stories/search/{tagName}', 'TagController@storiesByTag');

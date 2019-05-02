@@ -18,4 +18,18 @@ class CategoryController extends Controller
 
         return view('categories', compact('categories'));
     }
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+        $category = Category::find($id);
+        return view('storieslisting', compact('category'));
+
+    }
 }
