@@ -22,7 +22,8 @@ class DbTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   
+        factory('App\User')->states('default')->create();//eamil = api@email.com
         factory('App\User', $this->count['user'])->create();
         factory('App\Category', $this->count['category'])->create();
         factory('App\Story', $this->count['story'])->create();

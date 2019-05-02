@@ -34,8 +34,13 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
+$factory->state(User::class, 'default', [
+    'email' => 'api@email.com',
+]);
+
 $factory->define(App\Story::class, function (Faker $faker) {
-    $ages = ['2-4','5-7','8-10'];
+    $firstAge = rand(1,7);
+    $secondAge = rand(1,7);
     return [
         'title'=>$faker->bs,
         'body'=>$faker->paragraph(2),
@@ -46,7 +51,8 @@ $factory->define(App\Story::class, function (Faker $faker) {
             return factory('App\User')->create()->id;
         },
         'image_url'=>$faker->imageUrl(),
-        'age'=>$ages[rand(0,2)],
+        'age_from'=>$firstAge > $secondAge ? $secondAge : $firstAge,
+        'age_to'=>$firstAge > $secondAge ? $firstAge : $secondAge,
         'author'=>$faker->name,
         'story_duration'=>$faker->time,
         'is_premium'=>$faker->boolean
