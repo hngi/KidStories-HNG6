@@ -114,13 +114,14 @@ class StoriesController extends Controller
         ]);
 
         DB::commit();
-        // /show-story/{story}
-        return response()->json([
-            'status' => 'success',
-            'code' => 200,
-            'message' => 'OK',
-            'data' => new StoryResource($story),
-        ], 200);
+        return redirect()->route('singlestory', ['id' => $story->id]);
+        // // /show-story/{story}
+        // return response()->json([
+        //     'status' => 'success',
+        //     'code' => 200,
+        //     'message' => 'OK',
+        //     'data' => new StoryResource($story),
+        // ], 200);
     }
 
     // public function show(Story $story)
