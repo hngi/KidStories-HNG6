@@ -123,18 +123,27 @@ class StoriesController extends Controller
         ], 200);
     }
 
+    // public function show(Story $story)
+    // {   
+    //     $story->load('tags');
+        
+    //     return view('singlestory');
+
+    //     return redirect('/story/'.$story->id);
+    //     // return response()->json([
+    //     //     'status' => 'success',
+    //     //     'code' => 200,
+    //     //     'message' => 'OK',
+    //     //     'data' => $story,
+    //     // ], 200);
+    // }
+
     public function show(Story $story)
     {   
         $story->load('tags');
         
-        return view('singlestory');
-
-        return redirect('/story/'.$story->id);
-        // return response()->json([
-        //     'status' => 'success',
-        //     'code' => 200,
-        //     'message' => 'OK',
-        //     'data' => $story,
-        // ], 200);
+        $similarStories = $story->similar()->get();
+        
+        return view('singlestory',compact('story','similarStories'));
     }
 }

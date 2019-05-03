@@ -11,6 +11,7 @@ class Story extends Model
         'image_url', 'image_name', 'user_id', 'is_premium'
     ];
 
+    protected $appends = ['like','dislike'];
     //Accessors
     public function getAgeAttribute()
     {
@@ -74,5 +75,20 @@ class Story extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function getLikesAttribute()
+    {
+        return $this->reactions()->where('reaction',1)->count();
+    }
+
+    public function getDislikesAttribute()
+    {
+        return $this->reactions()->where('reaction',0)->count();
+    }
+
+    public function scopeSimilar($query)
+    {
+        return $query->where('category_id',$this->category_id)->take(5);
     }
 }
