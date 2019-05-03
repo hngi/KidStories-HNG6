@@ -32,16 +32,15 @@ class StoryController extends Controller
      */
     public function index(Request $request)
     {
-        $is_premium=$request->input('is_premium');
+        $is_premium=$request->input('premium');
         $filter = $request->has("age") ? explode('-', $request->age) : [1, 5];
 
-        if($is_premium===true){
-            $stories =  StoryResource::collection(Story::where(function ($q) use ($filter){
-                foreach ($filter as $fil) {
-                    $q->orWhereRaw('? between age_from and age_to ', [$fil]);
-                }
-                $q->where('is_premium', 1);
-            })->get());
+        if($is_premium==1){
+            error_log($is_premium);
+            $stories = Story::with('user')
+            ->where('is_premium', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
             return response()->json([
                 'status' => 'success',
                 'code' => 200,
