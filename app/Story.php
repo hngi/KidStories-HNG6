@@ -16,6 +16,15 @@ class Story extends Model
     {
         return ucwords($this->age_from . '-' . $this->age_to);
     }
+
+    public function getreadingTimeAttribute($text) {
+        $wordsPerMinute = 200;
+        $numberOfWords =  count(explode(' ', $this->body));
+        $minutes = $numberOfWords / $wordsPerMinute;
+        $readTime = ceil($minutes);
+
+        return  $minutes > 1 ? "$readTime minutes read" : "$readTime minute read";
+    }
     // Accessors end
 
     //Relationship start

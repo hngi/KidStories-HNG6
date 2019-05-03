@@ -22,8 +22,8 @@ class CreateStoriesTable extends Migration
             $table->string('image_url')->nullable();
             $table->string('image_name')->nullable();
             $table->string('author');
-            $table->integer("age_from")->default(1)
-            $table->integer("age_to")->default(5)
+            $table->integer("age_from")->default(1);
+            $table->integer("age_to")->default(5);
             $table->integer('likes_count')->default(0);
             $table->integer('dislikes_count')->default(0);
             $table->boolean('is_premium')->default(false);
