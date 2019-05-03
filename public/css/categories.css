@@ -68,7 +68,7 @@ nav a, .min-nav ul i  {
     display: block;
     text-decoration: none;
     padding-top: 0.6rem;
-    padding-left: 50px;
+    padding-left: 25px;
 }
 
 .current {
@@ -139,6 +139,10 @@ div.info {
 div.info:hover {
     background: rgba(168, 117, 255, 0.6);
 }
+
+.theme-btn.second {
+    margin-left: 20px;
+}
 /* Picture Container ends */
 
 /* App section */
@@ -188,11 +192,19 @@ div.info:hover {
     .min-nav ul {
         padding-left: 0px;     
     }
+
+    .theme-btn.second {
+        margin-left: 0px;
+    }
 }
 
 @media(max-width: 396px) {
     a.slideInLeft {
     padding-bottom: 20px;
+    }
+
+    .theme-btn.second {
+        margin-left: 0px;
     }
 }
 
