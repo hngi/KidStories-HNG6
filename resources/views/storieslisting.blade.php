@@ -35,12 +35,12 @@
               <div class="d-flex justify-content-between align-items-center card-">
                 <div class="btn-group">
 
-                <i class="fas fa-thumbs-up" style="margin-right:8px;margin-top:6px;"></i> {{$story->likes_count}}
-                <i class="fas fa-thumbs-down" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i>{{$story->dislikes_count}}
+                <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                <i class="fas fa-thumbs-down fav-icon" id="fav-dislike" onclick="react(event);" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
                 </div>
                 <span class="verticalLine">
-            <i class="far fa-bookmark" style="margin-left: 8px;"></i>
-          </span>
+                  <i class="far fa-bookmark" style="margin-left: 8px;"></i>
+                </span>
 
               </div>
             </div>

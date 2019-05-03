@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use Auth;
 use DB;
 use App\User;
@@ -16,16 +14,13 @@ use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StoryResource;
 use Symfony\Component\HttpFoundation\Response;
-
 class StoryController extends Controller
 {
     use UserTrait;
-
     public function __construct(FileUploadService $fileUploadService)
     {
         $this->fileUploadService = $fileUploadService;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -44,7 +39,7 @@ class StoryController extends Controller
                 }
             });
         });
-
+      
         $stories = $stories->get();
 
         return response()->json([
@@ -54,7 +49,6 @@ class StoryController extends Controller
             'data' => StoryResource::collection($stories)
         ], 200);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -71,7 +65,6 @@ class StoryController extends Controller
             'age' => 'required',
             'author' => 'required',
         ]);
-
         if ($validator->fails()) {
             return response()->json([
                 'error' => [
@@ -81,9 +74,7 @@ class StoryController extends Controller
                 ]
             ], 422);
         }
-
         $category = Category::find($request->category_id);
-
         if (!$category) {
             return response()->json([
                 'error' => 'Resource not found',
@@ -91,15 +82,11 @@ class StoryController extends Controller
                 'code' => 404
             ], 404);
         }
-
         DB::beginTransaction();
-
         if ($request->hasfile('photo')) {
             $image = $this->fileUploadService->uploadFile($request->file('photo'));
         }
-
         $age = explode('-', $request->age);
-
         $story = Story::create([
             'title' => $request->title,
             'body' => $request->body,
@@ -112,9 +99,7 @@ class StoryController extends Controller
             "image_url" => $image['secure_url'] ?? null,
             "image_name" => $image['public_id'] ?? null
         ]);
-
         DB::commit();
-
         return response()->json([
             'status' => 'success',
             'code' => 200,
@@ -122,7 +107,6 @@ class StoryController extends Controller
             'data' => new StoryResource($story),
         ], 200);
     }
-
     /**
      * Display the specified resource.
      *
@@ -134,7 +118,7 @@ class StoryController extends Controller
         $story = Story::where('id', $id)
                         ->with(['comments.user:id,first_name,last_name,image_url'])
                         ->firstOrFail();
-
+      
         if ($story->is_premium) {
             if (request()->user('api')) {
                 if ($this->userIsPremuim()) {
@@ -153,14 +137,12 @@ class StoryController extends Controller
                     ], Response::HTTP_FORBIDDEN);
                 }
             }
-
             return response()->json([
                 'error' => 'Unauthorized',
                 'code' => Response::HTTP_UNAUTHORIZED,
                 'message' => 'You are not authorized'
             ], Response::HTTP_UNAUTHORIZED);
         }
-
         return response()->json([
             'status' => 'success',
             "code" => Response::HTTP_OK,
@@ -168,7 +150,6 @@ class StoryController extends Controller
             'data' => $story,
         ], 200);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -186,7 +167,6 @@ class StoryController extends Controller
             'age' => 'required',
             'author' => 'required',
         ]);
-
         if ($validator->fails()) {
             return response()->json([
                 'error' => [
@@ -196,9 +176,7 @@ class StoryController extends Controller
                 ]
             ], 422);
         }
-
         $category = Category::find($request->category_id);
-
         if (!$category) {
             return response()->json([
                 'error' => 'Category not found',
@@ -206,9 +184,7 @@ class StoryController extends Controller
                 'code' => 404
             ], 404);
         }
-
         $story = Story::where('id', $id)->where('user_id', auth()->id())->first();
-
         if (!$story) {
             return response()->json([
                 'error' => 'Story not found',
@@ -216,17 +192,13 @@ class StoryController extends Controller
                 'code' => 404
             ], 404);
         }
-
         DB::beginTransaction();
-
         if ($request->hasfile('photo')) {
             $image = $this->fileUploadService->uploadFile($request->file('photo'));
-
             if(!is_null($story->image_name)) {
                 $this->fileUploadService->deleteFile($story->image_name);
             }
         }
-
         $story->update([
             'title' => $request->title,
             'body' => $request->body,
@@ -237,16 +209,13 @@ class StoryController extends Controller
             "image_url" => $image['secure_url'] ?? $story->image_url,
             "image_name" => $image['public_id'] ?? $story->image_name
         ]);
-
         DB::commit();
-
         return response()->json([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK'
         ], 200);
     }
-
     /**
      * User can like a story or remove like.
      *
@@ -256,62 +225,52 @@ class StoryController extends Controller
     public function like($id)
     {
         $user = $this->user();
-
         $story = $this->findStory($id);
-
         $likeCount = $story['likes_count'];
         $dislikeCount = $story['dislikes_count'];
-
         $reaction = Reaction::where('story_id', $story->id)
                             ->where('user_id', $user->id)
                             ->first();
-
         DB::beginTransaction();
-
         if ($reaction && $reaction->reaction == 1) {
             $reaction->delete();
             $story->decrement('likes_count', 1);
-
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
 
+            $action = 'Removed like';
         } else if ($reaction && $reaction->reaction == 0) {
-
             $story->increment('likes_count', 1);
-
             $story->decrement('dislikes_count', 1);
-
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
-
             $reaction = Reaction::updateOrCreate(
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 1]
             );
 
+            $action = 'Changed to like';
         } else {
             $story->increment('likes_count', 1);
-
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
-
             $reaction = Reaction::updateOrCreate(
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 1]
             );
+
+            $action = 'Added like';
         }
-
         DB::commit();
-
         return response()->json([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
             'likes_count'=> $likeCount,
             'dislikes_count' => $dislikeCount,
+            'action' => $action
         ], 200);
     }
-
     /**
      * User can dislike a story or remove dislike.
      *
@@ -321,62 +280,52 @@ class StoryController extends Controller
     public function dislike($id)
     {
         $user = $this->user();
-
         $story = $this->findStory($id);
-
         $likeCount = $story['likes_count'];
         $dislikeCount = $story['dislikes_count'];
-
         $reaction = Reaction::where('story_id', $story->id)
                             ->where('user_id', $user->id)
                             ->first();
-
         DB::beginTransaction();
-
         if ($reaction && $reaction->reaction == 0) {
             $reaction->delete();
             $story->decrement('dislikes_count', 1);
-
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
 
+            $action = 'Removed dislike';
         } else if ($reaction && $reaction->reaction == 1) {
-
             $story->increment('dislikes_count', 1);
-
             $story->decrement('likes_count', 1);
-
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
-
             $reaction = Reaction::updateOrCreate(
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 0]
             );
 
+            $action = 'Changed to dislike';
         } else {
             $story->increment('dislikes_count', 1);
-
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
-
             $reaction = Reaction::updateOrCreate(
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 0]
             );
+
+            $action = 'Added dislike';
         }
-
         DB::commit();
-
         return response()->json([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
             'likes_count' => $likeCount,
-            'dislikes_count' => $dislikeCount
+            'dislikes_count' => $dislikeCount,
+            'action' => $action
         ], 200);
     }
-
     public function findStory($storyId)
     {
         $story = Story::find($storyId);
@@ -391,7 +340,6 @@ class StoryController extends Controller
             return $story;
         }
     }
-
     public function user()
     {
         $user = Auth::user();
@@ -406,7 +354,6 @@ class StoryController extends Controller
             return $user;
         }
     }
-
     /**
      * Like a story
      *
@@ -418,7 +365,6 @@ class StoryController extends Controller
         $reaction = Reaction::where('story_id', $id)
                             ->where('user_id', auth()->id())
                             ->first();
-
         if ($reaction && $reaction->reaction == 1) {
             $reaction->delete();
         } else {
@@ -429,14 +375,12 @@ class StoryController extends Controller
                 'reaction' => 1
             ]);
         }
-
         return response()->json([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK'
         ], 200);
     }*/
-
    /**
      * Dislike a story
      *
@@ -448,10 +392,8 @@ class StoryController extends Controller
         $reaction = Reaction::where('story_id', $id)
                             ->where('user_id', auth()->id())
                             ->first();
-
         if ($reaction && $reaction->reaction == 0) {
             $reaction->delete();
-
         } else {
             $reaction = Reaction::updateOrCreate([
                 'story_id' => $id,
