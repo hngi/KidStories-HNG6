@@ -16,15 +16,7 @@ class BookmarkController extends Controller
         }
         $bookmarks =  \App\User::find(auth()->id())->bookmarks;
         $data = StoryResource::collection($bookmarks);
-        
-        return view('bookmark', ['bookmarks' => $data]);
-    }
 
-    public function user()
-    {
-        $user = Auth::user();
-        if (!$user) {
-            return \redirect('home');
-        }
+        return view('bookmark', ['bookmarks' => $data]);
     }
 }
