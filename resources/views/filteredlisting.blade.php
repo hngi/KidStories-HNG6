@@ -25,7 +25,11 @@
            @foreach ($stories as $story)
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-            <img src={{$story->image_url}} class="card-img-top" alt="...">
+             @if($story->image_url )
+                  <img src="{{ $story->image_url }}" />
+              @else
+                  <img src="https://i.imgur.com/7OBNw1t.jpg" />
+              @endif
             <div class="card-body">
               <h5 class="card-title"><a href="/show-story/{{$story->id}}">{{$story->title}}</a></h5>
               <p class="card-text">By <a href="#">{{$story->author}}</a></p>
@@ -55,7 +59,7 @@
         </div>
       @endforeach
       @else
-          <p> Oops There are no Stories in this category</p>
+          <p style="margin:20px 50px;"> Oops There are no Stories in this category</p>
       @endif
      
             
@@ -77,9 +81,9 @@
       <a href="/categories/4">Jokes</a><br>
       <a href="/categories/2">Bedtime Stories</a><br>
       <a href="/categories/3">Morning Stories</a>
-      
-      
-  <div class="searchContainer" style="margin-top:50px;">
+            
+  <hr style="width:10%;">      
+  <div class="searchContainer">
   <i class="fa fa-search searchIcon"></i>
   <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">
 </div>
