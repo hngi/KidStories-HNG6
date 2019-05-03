@@ -14,7 +14,7 @@ trait UserTrait
     public function userIsPremuim()
     {
         $user = \App\User::find(request()->user('api')->id);
-        $expires = $user->subscriptions->first()->expired_date;
+        $expires = $user->subscriptions->first()->expired_date ?? '';
         $now = Carbon::now();
         $active = $expires > $now;
         return $active;
