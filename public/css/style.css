@@ -52,6 +52,14 @@
     color: #718CFB;
 }
 
+.fav-red {
+    color: #8B0000;
+}
+
+.fav-green {
+    color: #55AE3A
+}
+
 .sp-container {
     max-width: 980px;
     margin: 0 auto;

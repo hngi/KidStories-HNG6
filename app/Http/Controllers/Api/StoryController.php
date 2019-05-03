@@ -237,6 +237,8 @@ class StoryController extends Controller
             $story->decrement('likes_count', 1);
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
+
+            $action = 'Removed like';
         } else if ($reaction && $reaction->reaction == 0) {
             $story->increment('likes_count', 1);
             $story->decrement('dislikes_count', 1);
@@ -246,6 +248,8 @@ class StoryController extends Controller
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 1]
             );
+
+            $action = 'Changed to like';
         } else {
             $story->increment('likes_count', 1);
             $likeCount = $story['likes_count'];
@@ -254,6 +258,8 @@ class StoryController extends Controller
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 1]
             );
+
+            $action = 'Added like';
         }
         DB::commit();
         return response()->json([
@@ -262,6 +268,7 @@ class StoryController extends Controller
             'message' => 'OK',
             'likes_count'=> $likeCount,
             'dislikes_count' => $dislikeCount,
+            'action' => $action
         ], 200);
     }
     /**
@@ -285,6 +292,8 @@ class StoryController extends Controller
             $story->decrement('dislikes_count', 1);
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
+
+            $action = 'Removed dislike';
         } else if ($reaction && $reaction->reaction == 1) {
             $story->increment('dislikes_count', 1);
             $story->decrement('likes_count', 1);
@@ -294,6 +303,8 @@ class StoryController extends Controller
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 0]
             );
+
+            $action = 'Changed to dislike';
         } else {
             $story->increment('dislikes_count', 1);
             $likeCount = $story['likes_count'];
@@ -302,6 +313,8 @@ class StoryController extends Controller
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 0]
             );
+
+            $action = 'Added dislike';
         }
         DB::commit();
         return response()->json([
@@ -309,7 +322,8 @@ class StoryController extends Controller
             'code' => 200,
             'message' => 'OK',
             'likes_count' => $likeCount,
-            'dislikes_count' => $dislikeCount
+            'dislikes_count' => $dislikeCount,
+            'action' => $action
         ], 200);
     }
     public function findStory($storyId)
