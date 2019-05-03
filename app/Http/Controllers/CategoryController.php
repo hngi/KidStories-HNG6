@@ -38,13 +38,13 @@ class CategoryController extends Controller
      */
     public function filter($id)
     {
-        $stories = Story::orderBy('id','desc')->where('category_id',1)->get();
+        $stories = Story::orderBy('id','desc')->where('category_id',$id)->get();
         $category = Category::find($id);
         return view('filteredlisting', compact('category','stories'));
     }
     public function filterByAge($id)
     {
-        $stories = Story::orderBy('age_from','desc')->where('category_id',1)->get();
+        $stories = Story::orderBy('age_from','desc')->where('category_id',$id)->get();
         $category = Category::find($id);
         return view('filteredlisting', compact('category','stories'));
     }

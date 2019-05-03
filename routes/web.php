@@ -30,8 +30,8 @@ Auth::routes();
 
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
 Route::get('/categories/{id}', 'CategoryController@show')->name('stories');
-Route::get('/categories/{id}/stories/filter/recent', 'CategoryController@filter')->name('stories');
-Route::get('/categories/{id}/stories/filter/age', 'CategoryController@filterByAge')->name('stories');
+Route::get('/categories/{id}/stories/sort/recent', 'CategoryController@filter')->name('stories.filter');
+Route::get('/categories/{id}/stories/sort/age', 'CategoryController@filterByAge')->name('stories.filter');
 
 Route::get('/bookmarks', 'BookmarkController@index')->name('bookmark');
 
