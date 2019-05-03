@@ -107,7 +107,6 @@ class StoryController extends Controller
             'user_id' => auth()->id(),
             'age_from' => $age[0] ,
             'age_to' => $age[1] ,
-            'is_premium' => $request->is_premium,
             'author' => $request->author,
             "image_url" => $image['secure_url'] ?? null,
             "image_name" => $image['public_id'] ?? null
