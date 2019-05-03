@@ -25,9 +25,9 @@
            @foreach ($stories as $story)
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-            <img src="https://i.imgur.com/7OBNw1t.jpg" class="card-img-top" alt="...">
+            <img src={{$story->image_url}} class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title"><a href="/story/{{$story->id}}">{{$story->title}}</a></h5>
+              <h5 class="card-title"><a href="/show-story/{{$story->id}}">{{$story->title}}</a></h5>
               <p class="card-text">By <a href="#">{{$story->author}}</a></p>
               <hr style="margin:0 -5px;">
               <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
@@ -79,7 +79,7 @@
       <a href="/categories/3">Morning Stories</a>
       
       
-  <div class="searchContainer" >
+  <div class="searchContainer" style="margin-top:50px;">
   <i class="fa fa-search searchIcon"></i>
   <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">
 </div>
@@ -87,9 +87,9 @@
 <p>Sort By</p>
 <div class="card" style="width: 15rem;">
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/filter/age">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
+    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/age" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
     {{--  <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li>  --}}
-    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/filter/recent">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
+    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/recent" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
   </ul>
 </div>
 
