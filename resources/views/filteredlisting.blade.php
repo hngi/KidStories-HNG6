@@ -21,11 +21,11 @@
       <div class="row">
         <div class="col-md-9">
       <div class="row">
-      @if (count($category->stories) > 0)
-           @foreach ($category->stories as $story)
+      @if (count($stories) > 0)
+           @foreach ($stories as $story)
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-              @if($story->image_url )
+             @if($story->image_url )
                   <img src="{{ $story->image_url }}" />
               @else
                   <img src="https://i.imgur.com/7OBNw1t.jpg" />
@@ -38,20 +38,20 @@
               <hr style="margin:0 -20px;">
               <div class="d-flex justify-content-between align-items-center card-">
                 <div class="btn-group">
-                  @if ($story->reaction == 'dislike')
-                      <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
-                      <i class="fas fa-thumbs-down fav-icon fav-red" id="fav-dislike" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
-                      @elseif ($story->reaction == 'like')
-                      <i class="fas fa-thumbs-up fav-icon fav-green" style="margin-right:8px;margin-top:6px;" id="fav-like" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
-                      <i class="fas fa-thumbs-down fav-icon " id="fav-dislike" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
-                      @else
-                      <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
-                      <i class="fas fa-thumbs-down fav-icon" id="fav-dislike" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
-                  @endif
+                @if ($story->reaction == 'dislike')
+                <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                <i class="fas fa-thumbs-down fav-icon fav-red" id="fav-dislike" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                @elseif ($story->reaction == 'like')
+                <i class="fas fa-thumbs-up fav-icon fav-green" style="margin-right:8px;margin-top:6px;" id="fav-like" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                <i class="fas fa-thumbs-down fav-icon " id="fav-dislike" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                @else
+                <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                <i class="fas fa-thumbs-down fav-icon" id="fav-dislike" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                @endif
                 </div>
                 <span class="verticalLine">
-                  <i class="far fa-bookmark" style="margin-left: 8px;"></i>
-                </span>
+            <i class="far fa-bookmark" style="margin-left: 8px;"></i>
+          </span>
 
               </div>
             </div>
@@ -81,12 +81,12 @@
       <a href="/categories/4">Jokes</a><br>
       <a href="/categories/2">Bedtime Stories</a><br>
       <a href="/categories/3">Morning Stories</a>
-      
+            
   <hr style="width:10%;">      
   <div class="searchContainer">
-    <i class="fa fa-search searchIcon"></i>
-    <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">
-  </div>
+  <i class="fa fa-search searchIcon"></i>
+  <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">
+</div>
 <hr style="width:10%;">
 <p>Sort By</p>
 <div class="card" style="width: 15rem;">
