@@ -97,6 +97,8 @@ class StoriesController extends Controller
     {   
         $story->load('tags');
         
-        return view('singlestory');
+        $similarStories = $story->similar()->get();
+        
+        return view('singlestory',compact('story','similarStories'));
     }
 }
