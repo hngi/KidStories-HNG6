@@ -25,9 +25,9 @@
            @foreach ($category->stories as $story)
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-            <img src="https://i.imgur.com/7OBNw1t.jpg" class="card-img-top" alt="...">
+            <img src="{{$story->image_url}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title"><a href="/story/{{$story->id}}">{{$story->title}}</a></h5>
+              <h5 class="card-title"><a href="/show-story/{{$story->id}}">{{$story->title}}</a></h5>
               <p class="card-text">By <a href="#">{{$story->author}}</a></p>
               <hr style="margin:0 -5px;">
               <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
@@ -35,12 +35,12 @@
               <div class="d-flex justify-content-between align-items-center card-">
                 <div class="btn-group">
 
-                <i class="fas fa-thumbs-up" style="margin-right:8px;margin-top:6px;"></i> {{$story->likes_count}}
-                <i class="fas fa-thumbs-down" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i>{{$story->dislikes_count}}
+                <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                <i class="fas fa-thumbs-down fav-icon" id="fav-dislike" onclick="react(event);" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
                 </div>
                 <span class="verticalLine">
-            <i class="far fa-bookmark" style="margin-left: 8px;"></i>
-          </span>
+                  <i class="far fa-bookmark" style="margin-left: 8px;"></i>
+                </span>
 
               </div>
             </div>
@@ -72,7 +72,7 @@
       <a href="/categories/3">Morning Stories</a>
       
       
-  <div class="searchContainer" >
+  <div class="searchContainer" style="margin-top:50px;">
   <i class="fa fa-search searchIcon"></i>
   <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">
 </div>
@@ -80,9 +80,9 @@
 <p>Sort By</p>
 <div class="card" style="width: 15rem;">
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/filter/age">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
+    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/age" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
     {{--  <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li>  --}}
-    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/filter/recent">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
+    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/recent" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
   </ul>
 </div>
 
