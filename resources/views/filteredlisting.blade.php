@@ -50,7 +50,7 @@
                @endif
                 </div>
                 <span class="verticalLine">
-            <i class="far fa-bookmark" style="margin-left: 8px;"></i>
+            <i class="far fa-bookmark fav-icon" style="margin-left: 8px;"></i>
           </span>
 
               </div>

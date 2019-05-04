@@ -1,7 +1,5 @@
 /* Global */
-body, input, button {
-    font-family: 'Lato', san-serif;
-}
+
 
 .container1 {
     width: 80%;
@@ -43,7 +41,7 @@ body, input, button {
     min-height: 400px;
     text-align: center;
     font-size: 30px;
-    padding-top: 150px;
+    padding-top: 200px;
     color: #ffff;
 }
 
@@ -68,7 +66,7 @@ nav a, .min-nav ul i  {
     display: block;
     text-decoration: none;
     padding-top: 0.6rem;
-    padding-left: 50px;
+    padding-left: 25px;
 }
 
 .current {
@@ -131,6 +129,7 @@ div.info {
     margin-top: 240px;
     padding-top: 15px;
     position: absolute;
+    text-transform: capitalize;
     z-index: 3;
     -webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 2s;
     transition: width 2s, height 2s, background-color 2s, transform 2s;
@@ -138,6 +137,10 @@ div.info {
 
 div.info:hover {
     background: rgba(168, 117, 255, 0.6);
+}
+
+.theme-btn.second {
+    margin-left: 20px;
 }
 /* Picture Container ends */
 
@@ -188,11 +191,19 @@ div.info:hover {
     .min-nav ul {
         padding-left: 0px;     
     }
+
+    .theme-btn.second {
+        margin-left: 0px;
+    }
 }
 
 @media(max-width: 396px) {
     a.slideInLeft {
     padding-bottom: 20px;
+    }
+
+    .theme-btn.second {
+        margin-left: 0px;
     }
 }
 

@@ -125,9 +125,5 @@
    When document is loaded, do
    ========================================================================== */
 
-	$(window).on('load', function() {
-		handlePreloader();
-		enableMasonry();
-	});
 
 })(window.jQuery);
