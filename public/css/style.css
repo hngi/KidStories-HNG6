@@ -69,13 +69,29 @@
     color: #55AE3A
 }
 
+
 .sp-container {
     max-width: 980px;
     margin: 0 auto;
     padding: 20px;
 }
 
+<<<<<<< HEAD
 #sp-story {}
+=======
+.premium-badge-holder {
+    position: relative;
+    display: inline-block;
+}
+
+.premium-badge {
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+>>>>>>> f80c25aeff6d9e4eb7efb15592a55c40e1091940
 
 .sp-story {
     position: relative;

@@ -32,21 +32,34 @@ class StoriesController extends Controller
         return view('stories', ['stories' => $stories]);
     }
 
-    public function singlestory($id)
+    public function singlestory(Request $request, $id)
     {
         $story = Story::where('id', $id)
             ->first();
-        //$user = Auth::user();
+        $user = $request->user('api');
         $mytime = Carbon::now();
         $timeNow = $mytime->toDateTimeString();
-        $subcribed = '';
-        // if ($user) {
-        //     $subcribed = Subscribed::where('user_id', $user->id);
-        // }
+
+        if ($user && $story && $story->is_premium == 1) {
+            $subcribed = Subscribed::where('user_id', $user->id)->get();
+            
+            for ($i=0; $i < $subcribed->count(); $i++) {
+                $expire = strtotime($subcribed[$i]->expired_date);
+                $timeNow = strtotime($timeNow);
+                if ($timeNow <= $expire ) {
+                    return view('singlestory', ['story' => $story]);
+                }
+            }
+            return \redirect('home');
+            
+        } elseif (!$user && $story && $story->is_premium == 1) {
+            return \redirect('home');
+        }
+        
 
         // return [$subcribed, $story, $user];
         // if (!$user) {
-        //     return \redirect('home');
+        //     
         // }
         // if ($user["is_premium"] == 0 && $story["is_premium"] == 1) {
         //     return \redirect('home');
@@ -140,9 +153,47 @@ class StoriesController extends Controller
     //     // ], 200);
     // }
 
-    public function show(Story $story)
+    public function show(Request $request, Story $story)
     {   
         $story->load('tags');
+
+        $user = $request->user();
+        $mytime = Carbon::now();
+        $timeNow = $mytime->toDateTimeString();
+        $storyId = $story->id;
+
+        if ($user) {
+            $reaction = Reaction::where('story_id', $storyId)
+            ->where('user_id', $user->id)
+            ->first();
+            if ($reaction && $reaction->reaction == 0) {
+                $story['reaction'] = 'dislike';
+            } elseif ($reaction && $reaction->reaction == 1) {
+                $story['reaction'] = 'like';
+            } else {
+                $story['reaction'] = 'nil';
+            }   
+        }else {
+            $story['reaction'] = 'nil';
+        }    
+
+        if ($user && $story && $story->is_premium == 1) {
+            $subcribed = Subscribed::where('user_id', $user->id)->get();
+            
+            for ($i=0; $i < $subcribed->count(); $i++) {
+                $expire = strtotime($subcribed[$i]->expired_date);
+                $timeNow = strtotime($timeNow);
+                if ($timeNow <= $expire ) {
+                    $similarStories = $story->similar()->get();
+        
+                    return view('singlestory',compact('story','similarStories'));
+                }
+            }
+            return \redirect('home');
+            
+        } elseif (!$user && $story && $story->is_premium == 1) {
+            return \redirect('home');
+        }
         
         $similarStories = $story->similar()->get();
         

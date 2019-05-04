@@ -31,12 +31,17 @@
       @if (count($category->stories) > 0)
            @foreach ($category->stories as $story)
           <div class="col-md-6 col-lg-4 col-sm-6">
-            <div class="card mb-4 shadow-sm">
+            
+            <div class="card mb-4 shadow-sm  premium-badge-holder">
+              @if($story->is_premium)
+              <span class="badge badge-primary premium-badge">PREMIUM</span>
+              @endif
               @if($story->image_url )
                   <img src="{{ $story->image_url }}" />
               @else
                   <img src="https://i.imgur.com/7OBNw1t.jpg" />
               @endif
+              
             <div class="card-body">
               <h5 class="card-title"><a href="/show-story/{{$story->id}}">{{$story->title}}</a></h5>
               <p class="card-text">By <a href="#">{{$story->author}}</a></p>

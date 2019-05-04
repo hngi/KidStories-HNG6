@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Api;
+
 use Auth;
 use DB;
 use App\User;
@@ -13,7 +15,9 @@ use App\Traits\Api\UserTrait;
 use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StoryResource;
+use App\Http\Resources\SingleStoryResource;
 use Symfony\Component\HttpFoundation\Response;
+
 class StoryController extends Controller
 {
     use UserTrait;
@@ -134,6 +138,8 @@ class StoryController extends Controller
         }else {
             $story['reaction'] = 'none';
         }
+
+        // dd($story->comments->first()->user);
       
         if ($story->is_premium) {
             if ($user) {
@@ -142,7 +148,7 @@ class StoryController extends Controller
                         'status' => 'success',
                         "code" => Response::HTTP_OK,
                         'message' => 'premium story',
-                        'data' => $story,
+                        'data' => new SingleStoryResource($story),
                         
                     ], Response::HTTP_OK);
                 }else {
@@ -163,7 +169,7 @@ class StoryController extends Controller
             'status' => 'success',
             "code" => Response::HTTP_OK,
             "message" => "OK",
-            'data' => $story
+            'data' => new SingleStoryResource($story)
         ], 200);
     }
     /**
