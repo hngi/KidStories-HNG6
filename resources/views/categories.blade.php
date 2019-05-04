@@ -60,7 +60,7 @@
                         </div>
                         <div class="buttons-box">
                             <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/apple.png" alt="" /></a>
-                            <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/playstore.png" alt="" /></a>
+                            <a href="#" class="theme-btn second wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/playstore.png" alt="" /></a>
                         </div>
                     </div>
                 </div>

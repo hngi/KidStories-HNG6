@@ -20,8 +20,9 @@
   border-radius: 5px;
   overflow: hidden;
   border: 1px solid #D5D5D5;
-box-sizing: border-box;
-border-radius: 20px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  width: 100%;
 }
 .crumb{
   margin-top: 80px;
