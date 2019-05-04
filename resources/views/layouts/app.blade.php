@@ -210,6 +210,7 @@
     <script src="{{ asset('js/paroller.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/index.js') }}"></script>
+    @yield('js')
 </body>
 
 </html>
