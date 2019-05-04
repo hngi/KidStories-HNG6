@@ -115,28 +115,38 @@ class StoriesController extends Controller
         ]);
 
         DB::commit();
-        // /show-story/{story}
-        return response()->json([
-            'status' => 'success',
-            'code' => 200,
-            'message' => 'OK',
-            'data' => new StoryResource($story),
-        ], 200);
+        return redirect()->route('singlestory', ['id' => $story->id]);
+        // // /show-story/{story}
+        // return response()->json([
+        //     'status' => 'success',
+        //     'code' => 200,
+        //     'message' => 'OK',
+        //     'data' => new StoryResource($story),
+        // ], 200);
     }
+
+    // public function show(Story $story)
+    // {   
+    //     $story->load('tags');
+        
+    //     return view('singlestory');
+
+    //     return redirect('/story/'.$story->id);
+    //     // return response()->json([
+    //     //     'status' => 'success',
+    //     //     'code' => 200,
+    //     //     'message' => 'OK',
+    //     //     'data' => $story,
+    //     // ], 200);
+    // }
 
     public function show(Story $story)
     {   
         $story->load('tags');
         
-        return view('singlestory');
-
-        return redirect('/story/'.$story->id);
-        // return response()->json([
-        //     'status' => 'success',
-        //     'code' => 200,
-        //     'message' => 'OK',
-        //     'data' => $story,
-        // ], 200);
+        $similarStories = $story->similar()->get();
+        
+        return view('singlestory',compact('story','similarStories'));
     }
     
     public function search(Request $request)

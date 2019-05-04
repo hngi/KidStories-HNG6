@@ -9,7 +9,7 @@ class DbTableSeeder extends Seeder
         'story' => 20,
         'category' => 10,
         'bookmark' => 15,
-        'reaction' => 20,
+        'reaction' => 200,
         'comment' => 20,
         'subscription' => 15,
         'payment' => 10,
@@ -30,11 +30,10 @@ class DbTableSeeder extends Seeder
         factory('App\User')->states('default')->create();//eamil = api@email.com
         factory('App\User', $this->count['user'])->create();
         factory('App\Category', $this->count['category'])->create();
-        factory('App\Story', $this->count['story'])->create();
         factory('App\Subscription', $this->count['subscription'])->create();
         factory('App\Tag', $this->count['tags'])->create();
 
-        // $this->customisedFactory();
+        $this->customisedFactory();
     }
 
     protected function customisedFactory()

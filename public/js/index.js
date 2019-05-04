@@ -24,7 +24,6 @@ var react = async function(event) {
   var text = event.target.id;
   var storyId = event.target.dataset.storyId;
   let action = '';
-  console.log(text)
   if (text === "fav-like-"+storyId) {
       action = await axios.post('/api/v1/stories/' + storyId + '/reactions/like');
   } else {

@@ -22,6 +22,8 @@ Route::get('/', function () {
 Route::get('/story', 'StoriesController@index')->name('reaction');
 Route::get('/story/{id}', 'StoriesController@singlestory')->name('singlestory');
 
+Route::middleware('auth')->get('/create-story', 'StoriesController@create')->name('story.create');
+
 
 Auth::routes();
 

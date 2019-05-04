@@ -37,7 +37,7 @@ font-family: 'Poppins', sans-serif;*/
  ***/
 
 body {
-	font-size:15px;
+	font-size:13px;
 	color:#777777;
 	line-height:1.8em;
 	font-weight:400;
@@ -52,7 +52,7 @@ body {
 a{
 	text-decoration:none;
 	cursor:pointer;
-	color:#A875FF;
+	color:#718cfb;
 }
 
 .no-padding{

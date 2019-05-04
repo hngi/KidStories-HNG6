@@ -7,7 +7,10 @@
 @endsection
 
 @section('content')
-   <div class="container crumb">
+  <div class="col-md-12">
+    <div class="auto-container">
+   <div class=" crumb">
+
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb arr-right ">
           <li class="breadcrumb-item"><a href="{{ route('homepage') }}">Home</a></li>
@@ -15,9 +18,13 @@
         </ol>
       </nav>
 
-    <h1>{{$category->name}} Category Story Listing</h1>
+    <h3>{{$category->name}} Category Listing</h3>
   </div>
-   <div class="container">
+  <!-- end -->
+</div>
+</div>
+
+   <div class="auto-container">
       <div class="row">
         <div class="col-md-9">
       <div class="row">
@@ -50,7 +57,7 @@
                @endif
                 </div>
                 <span class="verticalLine">
-                  <i class="far fa-bookmark" style="margin-left: 8px;"></i>
+                <a href="#">  <i class="far fa-bookmark" style="margin-left: 8px;"></i> </a>
                 </span>
 
               </div>
@@ -76,7 +83,7 @@
 </div>
 
    <div class="col-md-2" id="category-drop">
-      <h4>POPULAR CATEGORIES</h4>
+      <h6>POPULAR CATEGORIES</h6>
       <a href="/categories/1">Fantasy</a><br>
       <a href="/categories/4">Jokes</a><br>
       <a href="/categories/2">Bedtime Stories</a><br>
@@ -106,29 +113,34 @@
 
 
   
-<div class="container" style="margin-top:100px;"> 
-<div class=" mb-3" style="max-width:auto;">
-  <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="https://i.imgur.com/pN55hZ9.png" class="card-img" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title" id='quote' style="float: center;">Get Up Close With Your Child</h5>
-        <p class="card-text" style="">Read free bedtime stories, fairy tales, poems and short stories for kids</p>
-      
-        <div class="col-xs-12">
-          <a href="#"><img src="https://www.neoncrm.com/wp-content/uploads/2017/06/appstore.png" width="200px" height="80px"></a>
-        <a href="#"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="200px" height="100px"></a>
+<!-- App Section -->
+    <section class="main-banner">
+        <div class="container2">
+            <div class="row c">
+
+                <!--Image Column-->
+                <div class="col-lg-4 col-md-12 col-sm-12 ">
+                    <img src="../images/resources/bottom.jpg" alt=""  />
+                </div>
+
+                
+                <!--Content Column-->
+                <div class="content-column col-lg-8 col-md-12 col-sm-12">
+                    <div class="applink">
+                        <h4>Get up close with your child</h4>
+                        <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
+                        </div>
+                        <div class="buttons-box">
+                            <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../images/icons/apple.png" alt="" /></a>
+                            <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../images/icons/playstore.png" alt="" /></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-
-
-        
-      </div>
-    </div>
-  </div>
-</div>
-</div>
+    </section>  
+<!-- End App Section -->
 
 
     <!-- Footer goes here -->
