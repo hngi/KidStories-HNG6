@@ -129,6 +129,8 @@ class StoryController extends Controller
             } else {
                 $story['reaction'] = 'none';
             }
+        }else {
+            $story['reaction'] = 'none';
         }
       
         if ($story->is_premium) {
