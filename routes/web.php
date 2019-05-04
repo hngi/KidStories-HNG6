@@ -20,7 +20,6 @@ Route::get('/', function () {
 })->name('homepage');
 
 Route::get('/story', 'StoriesController@index')->name('reaction');
-Route::get('/story/{id}', 'StoriesController@singlestory')->name('singlestory');
 
 Route::middleware('auth')->get('/create-story', 'StoriesController@create')->name('story.create');
 
@@ -39,4 +38,4 @@ Route::get('/categories/{id}/stories/sort/age', 'CategoryController@filterByAge'
 
 Route::middleware('auth')->post('/create-story', 'StoriesController@store')->name('story.create');
 
-Route::middleware('guest')->get('/show-story/{story}', 'StoriesController@show')->name('story.show');
+Route::get('/show-story/{story}', 'StoriesController@show')->name('story.show');
