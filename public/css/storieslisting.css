@@ -1,9 +1,15 @@
 .verticalLine {
-  border-left:  solid #D5D5D5;
-  
+  border-left: 1px solid #D5D5D5;
+  float: right;  
 }
-*{
-  font-family: Lato;
+.bg-breadcrumb {
+  background: #e9ecef;
+}
+.breadcrumb-item a {
+  color: #333;
+}
+.crumb .breadcrumb {
+  border-radius: 0 !important;
 }
 
 .searchContainer {
@@ -19,7 +25,8 @@
   width: 100%;
 }
 .crumb{
-  margin-top: 120px;
+  margin-top: 80px;
+  margin-bottom: 20px;
 }
 
 .searchIcon {
@@ -32,6 +39,14 @@
   flex: 1;
 }
 
+.story-card h5 {
+  text-transform: capitalize;
+  line-height: 1.2em;
+}
+
+.story-card a {
+  line-height: 1.2em;
+}
 
 .icon-right{
 	float: right;
@@ -61,22 +76,12 @@
 
 }
 
-
-
-
-
-
-
-body{
-	font-family: 'Lato', sans-serif;
+.crumb h3 {
+  text-transform: capitalize;
 }
 
-h1{
-	font-family: Lato;
-font-style: normal;
-font-weight: bold;
-font-size: 28px;
-}
+
+
 
 
 #quote{
@@ -88,40 +93,5 @@ line-height: 37px;
 /* identical to box height */
 
 color: #333333;
-}
-
-
-.jumbotron {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  margin-bottom: 0;
-  background-color: #fff;
-}
-@media (min-width: 768px) {
-  .jumbotron {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-}
-
-.jumbotron p:last-child {
-  margin-bottom: 0;
-}
-
-.jumbotron-heading {
-  font-weight: 300;
-}
-
-.jumbotron .container {
-  max-width: 40rem;
-}
-
-footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-footer p {
-  margin-bottom: .25rem;
 }
 

@@ -1,4 +1,3 @@
-/* Alfena - HTML Template */
 
 @media only screen and (max-width: 6000px){
 	
@@ -40,6 +39,12 @@
 		padding:30px 0px 0px;
 	}
 	
+	.services-section .sec-title {
+
+    margin-bottom: 10px;
+
+	}
+
 	.banner-section-two{
 		padding-top:90px;
 	}
@@ -101,6 +106,7 @@
 	.main-header{
 		position:relative;
 		top:0px;
+		height: auto;
 	}
 	
 	.main-menu .navigation > li > a{
@@ -164,9 +170,7 @@
 		margin-top:-100px;
 	}
 	
-	.services-section{
-		padding-top:110px;
-	}
+
 	
 }
 
@@ -242,7 +246,11 @@
 	}
 	
 	.banner-section-three{
-		padding-top:140px;
+		padding-top:-10px;
+	}
+
+	.banner-section-three h3 {
+		font-size: 23px;
 	}
 	
 	.sticky-header,
@@ -502,8 +510,7 @@
 		float:none !important;
 		margin:0px !important;
 		width:100% !important;
-		background:#A875FF;
-		border:1px solid #ffffff;
+		background:#333;
 		border-top:none;
 	}
 	
@@ -569,7 +576,7 @@
 	.main-menu .navbar-collapse > .navigation > li,
 	.main-menu .navbar-collapse > .navigation > li > ul > li,
 	.main-menu .navbar-collapse > .navigation > li > ul > li > ul > li{
-		border-top:1px solid rgba(255,255,255,1) !important;
+		border-top:1px solid rgba(255,255,255,0.1) !important;
 		opacity:1 !important;
 		top:0px !important;
 		left:0px !important;
@@ -586,7 +593,7 @@
 		padding:10px 10px !important;
 		line-height:22px;
 		color:#ffffff;
-		background:#A875FF;
+		background:#333;
 		text-align:left;
 		min-height:0px;
 	}
@@ -736,8 +743,8 @@
 		padding: 0px;
 		text-align: center;
 		border-radius: 0px;
-		background: #A875FF;
-		border: 1px solid #A875FF;
+		background: #333;
+		border: 1px solid #333;
 	}
 	
 	.main-menu .navbar-header .navbar-toggler .icon-bar{
@@ -877,5 +884,28 @@
 		border:none;
 		padding-bottom:10px;
 	}
+
+
+
+.main-banner {
+    padding-top: 0px;
+}
+
+.services-section {
+    padding: 70px 0px 10px;
+}
+.offset-xs-0 {
+	margin-left: 0 !important;
+}
+
+.faq-section {
+    padding: 15px 0px 10px;
+}
+.footer-wrap {
+	margin-top: 30px;
+}
+
+
+
 
 }
