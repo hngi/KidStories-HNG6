@@ -126,7 +126,7 @@
         <!-- Sec Title -->
         <div class="sec-title centered">
             <h3>Why use Kids Stories?</h3>
-            <div class="text col-md-6 col-sm-12 offset-3 m-t-50">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!</p>
+            <div class="text col-md-6 col-sm-12 offset-3 offset-xs-0 m-t-50">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!</p>
             </div>
 
             <div class="row clearfix">
