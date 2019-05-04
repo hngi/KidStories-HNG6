@@ -5,7 +5,7 @@
 <div class="form-back-drop"></div>
 
 <!--Main Banner-->
-<section class="banner-section-three">
+<section class="banner-section-three bg-fwhite">
     <div class="auto-container">
         <div class="row clearfix">
 
@@ -319,33 +319,32 @@
 
 
 <!-- App Section -->
-<section class="main-banner">
+    <section class="main-banner">
+        <div class="container2">
+            <div class="row c">
 
-    <div class="auto-container">
-        <div class="row clearfix">
+                <!--Image Column-->
+                <div class="col-lg-4 col-md-12 col-sm-12 ">
+                    <img src="images/resources/bottom.jpg" alt=""  />
+                </div>
 
-            <!--Image Column-->
-            <div class=" col-lg-4 col-md-12 col-sm-12">
-                <img src="images/resources/gp23.png" alt="" />
-            </div>
-
-
-            <!--Content Column-->
-            <div class="content-column col-lg-8 col-md-12 col-sm-12">
-                <div class="inner-column">
-                    <h4>Get up close with your child</h4>
-                    <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
-                    </div>
-                    <div class="buttons-box">
-                        <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/apple.png" alt="" /></a>
-                        <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/playstore.png" alt="" /></a>
+                
+                <!--Content Column-->
+                <div class="content-column col-lg-8 col-md-12 col-sm-12">
+                    <div class="applink">
+                        <h4>Get up close with your child</h4>
+                        <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
+                        </div>
+                        <div class="buttons-box">
+                            <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/apple.png" alt="" /></a>
+                            <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/playstore.png" alt="" /></a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-</section>
+    </section>  
 <!-- End App Section -->
 
 
