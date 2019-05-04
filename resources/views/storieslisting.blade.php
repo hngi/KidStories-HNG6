@@ -23,7 +23,7 @@
       <div class="row">
       @if (count($category->stories) > 0)
            @foreach ($category->stories as $story)
-          <div class="col-md-4">
+          <div class="col-md-6 col-lg-4 col-sm-6">
             <div class="card mb-4 shadow-sm">
               @if($story->image_url )
                   <img src="{{ $story->image_url }}" />
@@ -85,11 +85,14 @@
   <hr style="width:10%;">      
   <div class="searchContainer">
     <i class="fa fa-search searchIcon"></i>
-    <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">
+    {!!Form::open(['route'=>['stories.search'],'method'=>'GET'])!!}
+      <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">  
+    {{ Form::close() }}
+    {{--  --}}
   </div>
 <hr style="width:10%;">
 <p>Sort By</p>
-<div class="card" style="width: 15rem;">
+<div class="card" style="min-width: 15rem;">
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/age" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
     {{--  <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li>  --}}
@@ -114,7 +117,7 @@
         <h5 class="card-title" id='quote' style="float: center;">Get Up Close With Your Child</h5>
         <p class="card-text" style="">Read free bedtime stories, fairy tales, poems and short stories for kids</p>
       
-        <div>
+        <div class="col-xs-12">
           <a href="#"><img src="https://www.neoncrm.com/wp-content/uploads/2017/06/appstore.png" width="200px" height="80px"></a>
         <a href="#"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="200px" height="100px"></a>
         </div>

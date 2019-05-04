@@ -193,7 +193,6 @@
                 </div>
             </div>
         </footer>
-
     </div>
 
     <script src="{{ asset('js/jquery.js') }}"></script>
@@ -206,6 +205,7 @@
     <script src="{{ asset('js/paroller.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/index.js') }}"></script>
+    @yield('js')
 </body>
 
 </html>
