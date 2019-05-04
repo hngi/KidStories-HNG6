@@ -28,20 +28,67 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
         $category = Category::find($id);
+        $user = $request->user();
+        
+
+        for ($i=0; $i < $category->stories->count(); $i++) {
+            $storyId = $category->stories[$i]->id;
+            if ($user) {
+                $test = 0;
+                $reaction = Reaction::where('story_id', $storyId)
+                ->where('user_id', $user->id)
+                ->first();
+                if ($reaction && $reaction->reaction == 0) {
+                    $category->stories[$i]['reaction'] = 'dislike';
+                } elseif ($reaction && $reaction->reaction == 1) {
+                    $category->stories[$i]['reaction'] = 'like';
+                } else {
+                    $category->stories[$i]['reaction'] = 'nil';
+                }   
+            }else {
+                $test = 1;
+                $category->stories[$i]['reaction'] = 'nil';
+            }    
+                      
+        }
         return view('storieslisting', compact('category'));
 
     }
     /**
      * 
      */
-    public function filter($id)
+    public function filter(Request $request, $id)
     {
         $stories = Story::orderBy('id','desc')->where('category_id',$id)->get();
-        $category = Category::find($id);
+        $category = Category::find($id);$user = $request->user();
+        
+        $user = $request->user();
+        
+
+        for ($i=0; $i < $stories->count(); $i++) {
+            $storyId = $stories[$i]->id;
+            if ($user) {
+                $test = 0;
+                $reaction = Reaction::where('story_id', $storyId)
+                ->where('user_id', $user->id)
+                ->first();
+                if ($reaction && $reaction->reaction == 0) {
+                    $stories[$i]['reaction'] = 'dislike';
+                } elseif ($reaction && $reaction->reaction == 1) {
+                    $stories[$i]['reaction'] = 'like';
+                } else {
+                    $stories[$i]['reaction'] = 'nil';
+                }   
+            }else {
+                $test = 1;
+                $stories[$i]['reaction'] = 'nil';
+            }    
+                      
+        }
         return view('filteredlisting', compact('category','stories'));
     }
     public function filterByAge(Request $request, $id)

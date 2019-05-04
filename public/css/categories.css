@@ -1,7 +1,5 @@
 /* Global */
-body, input, button {
-    font-family: 'Lato', san-serif;
-}
+
 
 .container1 {
     width: 80%;
@@ -43,7 +41,7 @@ body, input, button {
     min-height: 400px;
     text-align: center;
     font-size: 30px;
-    padding-top: 150px;
+    padding-top: 200px;
     color: #ffff;
 }
 
@@ -131,6 +129,7 @@ div.info {
     margin-top: 240px;
     padding-top: 15px;
     position: absolute;
+    text-transform: capitalize;
     z-index: 3;
     -webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 2s;
     transition: width 2s, height 2s, background-color 2s, transform 2s;
