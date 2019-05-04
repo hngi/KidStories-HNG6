@@ -25,25 +25,29 @@
            @foreach ($stories as $story)
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-            <img src="https://i.imgur.com/7OBNw1t.jpg" class="card-img-top" alt="...">
+             @if($story->image_url )
+                  <img src="{{ $story->image_url }}" />
+              @else
+                  <img src="https://i.imgur.com/7OBNw1t.jpg" />
+              @endif
             <div class="card-body">
-              <h5 class="card-title"><a href="/story/{{$story->id}}">{{$story->title}}</a></h5>
+              <h5 class="card-title"><a href="/show-story/{{$story->id}}">{{$story->title}}</a></h5>
               <p class="card-text">By <a href="#">{{$story->author}}</a></p>
               <hr style="margin:0 -5px;">
               <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
               <hr style="margin:0 -20px;">
               <div class="d-flex justify-content-between align-items-center card-">
                 <div class="btn-group">
-                @if ($story->reaction == 'dislike')
-                <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
-                <i class="fas fa-thumbs-down fav-icon fav-red" id="fav-dislike" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
-                @elseif ($story->reaction == 'like')
-                <i class="fas fa-thumbs-up fav-icon fav-green" style="margin-right:8px;margin-top:6px;" id="fav-like" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
-                <i class="fas fa-thumbs-down fav-icon " id="fav-dislike" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
-                @else
-                <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
-                <i class="fas fa-thumbs-down fav-icon" id="fav-dislike" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
-                @endif
+               @if ($story->reaction === 'dislike')
+               <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" name="fav-like" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+               <i class="fas fa-thumbs-down fav-icon fav-red" id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+               @elseif ($story->reaction == 'like')
+               <i class="fas fa-thumbs-up fav-icon fav-green" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+               <i class="fas fa-thumbs-down fav-icon " id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+               @else
+               <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+               <i class="fas fa-thumbs-down fav-icon" id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+               @endif
                 </div>
                 <span class="verticalLine">
             <i class="far fa-bookmark" style="margin-left: 8px;"></i>
@@ -55,7 +59,7 @@
         </div>
       @endforeach
       @else
-          <p> Oops There are no Stories in this category</p>
+          <p style="margin:20px 50px;"> Oops There are no Stories in this category</p>
       @endif
      
             
@@ -77,9 +81,9 @@
       <a href="/categories/4">Jokes</a><br>
       <a href="/categories/2">Bedtime Stories</a><br>
       <a href="/categories/3">Morning Stories</a>
-      
-      
-  <div class="searchContainer" >
+            
+  <hr style="width:10%;">      
+  <div class="searchContainer">
   <i class="fa fa-search searchIcon"></i>
   <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">
 </div>
@@ -87,9 +91,9 @@
 <p>Sort By</p>
 <div class="card" style="width: 15rem;">
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/filter/age">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
+    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/age" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
     {{--  <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li>  --}}
-    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/filter/recent">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
+    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/recent" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
   </ul>
 </div>
 
