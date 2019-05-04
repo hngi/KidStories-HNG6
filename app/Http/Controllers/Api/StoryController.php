@@ -139,10 +139,6 @@ class StoryController extends Controller
      */
     public function show(Request $request, $id)
     {
-<<<<<<< HEAD
-        $story = new StoryResource(Story::find($id));
-
-=======
         $story = Story::where('id', $id)
                         ->with(['comments.user:id,first_name,last_name,image_url'])
                         ->firstOrFail();
@@ -163,8 +159,7 @@ class StoryController extends Controller
         }else {
             $story['reaction'] = 'none';
         }
-      
->>>>>>> 4d652c4920d52e3d3d1e211aa99ac5fbf9879685
+
         if ($story->is_premium) {
             if ($user) {
                 if ($this->userIsPremuim()) {
