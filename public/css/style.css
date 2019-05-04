@@ -4,11 +4,12 @@
     color: #fff;
     float: left;
     margin-left: 16px;
-
 }
-.social-icons > a > i {
+
+.social-icons>a>i {
     font-size: 16px;
 }
+
 .banner {
     background: url(../images/background/Rectangle.png);
     background-position: center;
@@ -74,8 +75,6 @@
     padding: 20px;
 }
 
-
-
 #sp-story {}
 
 .sp-story {
@@ -88,7 +87,6 @@
 
 .sp-story-subheader {
     font-size: 18px;
-
 }
 
 .sp-story-cont {
@@ -204,7 +202,6 @@ textarea {
     width: 100%;
 }
 
-
 textarea {
     height: 30em;
     font-family: Lato;
@@ -213,6 +210,7 @@ textarea {
 
 .top-form>.form-input {
     width: 40%;
+    margin-top: 20px;
 }
 
 div.form-input>* {
@@ -223,6 +221,7 @@ div.form-input>* {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    margin-top: 50px;
     flex-wrap: wrap;
 }
 
@@ -310,7 +309,6 @@ footer section {
     .add-story {
         margin: 5em 2em;
     }
-
     footer section {
         width: 50%;
         margin-bottom: 20px
@@ -321,15 +319,12 @@ footer section {
     .top-form>.form-input {
         width: 100%
     }
-
     .favourites_header {
         height: 200px;
     }
-
     .title-input {
         margin-bottom: 20px;
     }
-
     footer section {
         width: 100%;
         margin-bottom: 20px
