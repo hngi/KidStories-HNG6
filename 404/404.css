@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+.not_found {
+	margin: 20% auto;
+}
+
+.not_found img {
+	width: 35%;
+}
+
+.not_found h1 {
+	font-size: 60px;
+}
+
+.not_found p {
+	font-size: 30px;
+	line-height: 50px;
+}
+
+.not_found h1,
+.not_found p {
+	color: #718cfb;
+}
+
+.not_found_btn {
+	border: 1px solid #718cfb;
+	border-radius: 5px;
+	color: #718cfb;
+	padding: 5px 50px;
+}
+
+@media screen and (min-width: 768px) {
+	.not_found {
+		margin: 10% auto;
+	}
+	.not_found h1 {
+		font-size: 100px;
+	}
+	.not_found p {
+		font-size: 40px;
+		line-height: 60px;
+	}
+}
