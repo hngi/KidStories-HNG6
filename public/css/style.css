@@ -6,9 +6,11 @@
     margin-left: 16px;
 
 }
-.social-icons > a > i {
+
+.social-icons>a>i {
     font-size: 16px;
 }
+
 .banner {
     background: url(../images/background/Rectangle.png);
     background-position: center;
@@ -68,15 +70,25 @@
     color: #55AE3A
 }
 
+
 .sp-container {
     max-width: 980px;
     margin: 0 auto;
     padding: 20px;
 }
 
+.premium-badge-holder {
+    position: relative;
+    display: inline-block;
+}
 
-
-#sp-story {}
+.premium-badge {
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
 
 .sp-story {
     position: relative;
