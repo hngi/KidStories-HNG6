@@ -4,7 +4,6 @@
     color: #fff;
     float: left;
     margin-left: 16px;
-
 }
 
 .social-icons>a>i {
@@ -70,12 +69,13 @@
     color: #55AE3A
 }
 
-
 .sp-container {
     max-width: 980px;
     margin: 0 auto;
     padding: 20px;
 }
+
+#sp-story {}
 
 .premium-badge-holder {
     position: relative;
@@ -100,7 +100,6 @@
 
 .sp-story-subheader {
     font-size: 18px;
-
 }
 
 .sp-story-cont {
@@ -216,7 +215,6 @@ textarea {
     width: 100%;
 }
 
-
 textarea {
     height: 30em;
     font-family: Lato;
@@ -225,6 +223,7 @@ textarea {
 
 .top-form>.form-input {
     width: 40%;
+    margin-top: 20px;
 }
 
 div.form-input>* {
@@ -235,6 +234,7 @@ div.form-input>* {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    margin-top: 50px;
     flex-wrap: wrap;
 }
 
@@ -322,7 +322,6 @@ footer section {
     .add-story {
         margin: 5em 2em;
     }
-
     footer section {
         width: 50%;
         margin-bottom: 20px
@@ -333,15 +332,12 @@ footer section {
     .top-form>.form-input {
         width: 100%
     }
-
     .favourites_header {
         height: 200px;
     }
-
     .title-input {
         margin-bottom: 20px;
     }
-
     footer section {
         width: 100%;
         margin-bottom: 20px
