@@ -25,7 +25,7 @@
 
         <!-- Story Categories -->
         <span >
-            <h1 class="container1 span"> All Story Categories </h1>
+            <h1 class="container1 span"> All Categories </h1>
         </span>    
 
         <div class="wrapper">     

@@ -1,6 +1,14 @@
 /* Styles for the Create User Pages */
 
+.social-icons a {
+    color: #fff;
+    float: left;
+    margin-left: 16px;
 
+}
+.social-icons > a > i {
+    font-size: 16px;
+}
 .banner {
     background: url(../images/background/Rectangle.png);
     background-position: center;

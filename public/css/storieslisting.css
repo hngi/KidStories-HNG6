@@ -1,8 +1,16 @@
 .verticalLine {
-  border-left:  solid #D5D5D5;
+  border-left:1px  solid #D5D5D5;
   
 }
-
+.bg-breadcrumb {
+  background: #e9ecef;
+}
+.breadcrumb-item a {
+  color: #333;
+}
+.crumb .breadcrumb {
+  border-radius: 0 !important;
+}
 
 .searchContainer {
   display: inline-flex;
@@ -16,7 +24,8 @@ box-sizing: border-box;
 border-radius: 20px;
 }
 .crumb{
-  margin-top: 120px;
+  margin-top: 80px;
+  margin-bottom: 20px;
 }
 
 .searchIcon {
@@ -29,6 +38,14 @@ border-radius: 20px;
   flex: 1;
 }
 
+.story-card h5 {
+  text-transform: capitalize;
+  line-height: 1.2em;
+}
+
+.story-card a {
+  line-height: 1.2em;
+}
 
 .icon-right{
 	float: right;
@@ -58,22 +75,12 @@ border-radius: 20px;
 
 }
 
-
-
-
-
-
-
-body{
-	font-family: 'Lato', sans-serif;
+.crumb h3 {
+  text-transform: capitalize;
 }
 
-h1{
-	font-family: Lato;
-font-style: normal;
-font-weight: bold;
-font-size: 28px;
-}
+
+
 
 
 #quote{
