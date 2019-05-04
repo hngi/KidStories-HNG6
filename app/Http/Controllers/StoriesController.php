@@ -31,6 +31,13 @@ class StoriesController extends Controller
         return view('stories', ['stories' => $stories]);
     }
 
+    public function browsestories()
+    {
+    	$stories = Story::all();
+
+        return view('stories',['stories' => $stories]);
+    }
+
     public function singlestory($id)
     {
         $story = Story::where('id', $id)
@@ -53,7 +60,7 @@ class StoriesController extends Controller
 
         return view('story', ['story' => $story]);
     }
-    
+
     public function create()
     {
         $categories = Category::all();
@@ -125,9 +132,9 @@ class StoriesController extends Controller
     }
 
     // public function show(Story $story)
-    // {   
+    // {
     //     $story->load('tags');
-        
+
     //     return view('singlestory');
 
     //     return redirect('/story/'.$story->id);
@@ -140,11 +147,11 @@ class StoriesController extends Controller
     // }
 
     public function show(Story $story)
-    {   
+    {
         $story->load('tags');
-        
+
         $similarStories = $story->similar()->get();
-        
+
         return view('singlestory',compact('story','similarStories'));
     }
 }
