@@ -1,64 +1,96 @@
 @extends('layouts.app')
 
+@section('custom_css')
+<link href="{{ asset('css/storieslisting.css') }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+@endsection
+
 @section('content')
-<div class="sp-container">
-
-
-    <!-- Story section begins here -->
-    <section id="sp-story">
-        <div class="sp-story">
-
-            <h1 class="sp-story-title">Title</h1>
-            <h2 class="sp-story-subheader">What is Lorem Ipsum?</h2>
-            <p class="sp-story-cont">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's
-                De Finibus Bonorum et Malorum for use in a type specimen book.
-            </p>
-            <img class="sp-story-imgx" src="https://res.cloudinary.com/solape/image/upload/v1556534093/Myth.svg">
-            <p class="sp-story-cont">Body</p>
-            <div class="sp-story-footer">
-
-
-                <div class="sp-tag-container">
-                    <ul class="sp-tags">
-                        <li class="sp-tag"><a href="">History</a></li>
-                        <li class="sp-tag"><a href="">History</a></li>
-                        <li class="sp-tag"><a href="">History</a></li>
-                        <li class="sp-tag"><a href="">History</a></li>
-                        <li class="sp-tag"><a href="">History</a></li>
-                    </ul>
-                </div>
-
-                <div class="sp-interactions">
-                    <ul class="sp-int-btns">
-                        <li class="sp-int-btn"><small class="mr-3" id="likes-count-id">count</small><i class="fa fa-thumbs-up mr-2 liked fav-icon" id="fav-like" onclick="react(event);" data-story-id="id"></i></li>
-                        <li class="sp-int-btn"><small id="dislikes-count-id">count</small><i class="fa fa-thumbs-down mr-2 fav-icon" id="fav-dislike" onclick="react(event);" data-story-id="id"></i></li>
-                        <li class="sp-int-btn"><i class="fa fa-bookmark-o"></i></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- story section ends here -->
-
-    <hr>
-    <!-- Section stories you may like starts here -->
-    <section id="sp-related">
-        <div class="sp-related">
-            <h2 class="sp-rs-header">Stories You Might Like</h2>
-            <div class="sp-rs">
-                <img class="sp-rsx-img" src="https://res.cloudinary.com/solape/image/upload/v1556534093/Myth.svg">
-                <!-- <img src="img.jpg" class="sp-rsx-img"> -->
-                <div class="sp-rs-cont">
-                    <h2 class="sp-rs-title">The Legend Of The Dragon That Fell From The Sky</h2>
-                    <p class="sp-rs-body">Lorem Ipsum is dummy text which has no meaning however looks very similar to real text. A quick and simplified answer is that Lorem Ipsum refers to text that the DTP (Desktop Publishing) industry use as replacement text when the
-                        real text is not available. ... Lorem Ipsum is dummy text which has no meaning however looks very similar to real text.</p>
-                </div>
-            </div>
-
-
-        </div>
-    </section>
-    <!-- Section stories you may like ends here -->
-
+<div class="p-0 col-md-12">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb arr-right ">
+            <li class="breadcrumb-item"><a href="{{ route('homepage') }}">Home</a></li>
+            <li class="breadcrumb-item active"><a href="#">Stories</a></li>
+        </ol>
+    </nav>
 </div>
+
+<div class="auto-container browse-adjust-padding">
+    <div class="d-flex flex-row flex-wrap col-md-12  p-0">
+        @if ($stories && count($stories) > 0)
+            @foreach ($stories as $story)
+            <div class="col-md-3  p-3">
+                <div class="card story-card  h-100 mb-4">
+                    @if($story->image_url )
+                    <img src="{{ $story->image_url }}" />
+                    @else
+                    <img src="/images/placeholder.png" />
+                    @endif
+                    <div class="card-body story-card-body">
+                        <h5 class="card-title"><a href="/show-story/{{$story->id}}">{{$story->title}}</a></h5>
+                        <p class="card-text">By <a href="#">{{$story->author}}</a></p>
+                        <hr style="margin:0 -5px;">
+                        <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <hr class="mb-0">
+                        <div class="d-flex justify-content-between align-items-center card-">
+                            <div class="btn-group pl-3 pt-2 pb-2">
+                                @if ($story->reaction == 'dislike')
+                                <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                                <i class="fas fa-thumbs-down fav-icon fav-red" id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                                @elseif ($story->reaction == 'like')
+                                <i class="fas fa-thumbs-up fav-icon fav-green" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                                <i class="fas fa-thumbs-down fav-icon " id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                                @else
+                                <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                                <i class="fas fa-thumbs-down fav-icon" id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                                @endif
+                            </div>
+                            <span class="verticalLine p-2 pr-3">
+                                <a href="#"> <i class="far fa-bookmark" style="margin-left: 8px;"></i> </a>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        @else
+        <p class="empty-response"> Oops There are no Stories</p>
+        @endif
+    </div>
+</div>
+<!-- App Section -->
+<section class="main-banner">
+    <div class="container2">
+        <div class="row c">
+
+            <!--Image Column-->
+            <div class="col-lg-4 col-md-12 col-sm-12 ">
+                <img src="../images/resources/bottom.jpg" alt="" />
+            </div>
+
+
+            <!--Content Column-->
+            <div class="content-column col-lg-8 col-md-12 col-sm-12">
+                <div class="applink">
+                    <h4>Get up close with your child</h4>
+                    <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
+                    </div>
+                    <div class="buttons-box">
+                        <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../images/icons/apple.png" alt="" /></a>
+                        <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../images/icons/playstore.png" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End App Section -->
+<!-- Footer goes here -->
+<!--Scroll to top-->
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="icon fa fa-angle-double-up"></span></div>
 @endsection

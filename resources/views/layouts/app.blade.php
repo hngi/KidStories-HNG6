@@ -66,10 +66,9 @@
                                         <ul class="navigation clearfix">
                                             <li class=""><a href="/">Home</a>
                                             </li>
-                                            <li class=""><a href="{{ route('stories.browsestories') }}">Browse Stories</a>
-                                            </li>
+                                            <li class=""><a href="{{ route('stories.browsestories') }}">Browse Stories</a></li>
                                             <li><a href="{{ route('categories.index') }}">Categories</a></li>
-                                            <li class=""><a href="#">My Stories</a>
+                                            <li class=""><a  href="{{ route('stories.mystories') }}">My Stories</a>
                                             </li>
                                             <li><a href="#">About Us</a></li>
                                         </ul>

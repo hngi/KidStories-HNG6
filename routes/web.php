@@ -20,7 +20,8 @@ Route::get('/', function () {
 })->name('homepage');
 
 Route::get('/story', 'StoriesController@index')->name('reaction');
-Route::get('/browse', 'StoriesController@browsestories')->name('stories.browsestories');
+Route::get('/browsestories', 'StoriesController@browsestories')->name('stories.browsestories');
+Route::middleware('auth')->get('/mystories', 'StoriesController@mystories')->name('stories.mystories');
 Route::get('/story/{id}', 'StoriesController@singlestory')->name('singlestory');
 
 Route::middleware('auth')->get('/create-story', 'StoriesController@create')->name('story.create');

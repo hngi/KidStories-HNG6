@@ -33,9 +33,19 @@ class StoriesController extends Controller
 
     public function browsestories()
     {
-    	$stories = Story::all();
+        $stories = Story::all();
 
-        return view('stories',['stories' => $stories]);
+        return view('stories', ['stories' => $stories]);
+    }
+
+    public function mystories()
+    {
+
+        $stories = Story::where('user_id', auth()->id());
+        if ($stories) {
+            $stories = [];
+        }
+        return view('stories', ['stories' => $stories]);
     }
 
     public function singlestory($id)
@@ -111,8 +121,8 @@ class StoriesController extends Controller
             'body' => $request->body,
             'category_id' => $request->category_id,
             'user_id' => auth()->id(),
-            'age_from' => $age[0] ,
-            'age_to' => $age[1] ,
+            'age_from' => $age[0],
+            'age_to' => $age[1],
             // 'is_premium' => $request->is_premium,
             'is_premium' => false,
             'author' => $request->author,
@@ -152,6 +162,6 @@ class StoriesController extends Controller
 
         $similarStories = $story->similar()->get();
 
-        return view('singlestory',compact('story','similarStories'));
+        return view('singlestory', compact('story', 'similarStories'));
     }
 }

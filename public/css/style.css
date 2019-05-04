@@ -1,10 +1,22 @@
 /* Styles for the Create User Pages */
-
+h3 {
+    color: #333333;
+    font-size: 20px;
+    line-height: 132%;
+    letter-spacing: 0.03em;
+    font-weight: bold;
+}
+h6 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 12px; /* identical to box height */
+    color: #8a8a8a;
+}
 .social-icons a {
     color: #fff;
     float: left;
     margin-left: 16px;
-
 }
 .social-icons > a > i {
     font-size: 16px;
@@ -20,7 +32,8 @@
     justify-content: center;
 }
 
-.favourites {}
+.favourites {
+}
 
 .favourites_header {
     background-image: url(https://res.cloudinary.com/ephaig/image/upload/v1556708884/Rectangle.png);
@@ -35,7 +48,7 @@
 }
 
 .favorite_story_card .card-text:first-of-type {
-    color: #4F4F4F;
+    color: #4f4f4f;
 }
 
 .favorite_story_card .card-text:nth-of-type(2) {
@@ -43,11 +56,11 @@
 }
 
 .favorite_story_card .author {
-    color: #718CFB;
+    color: #718cfb;
 }
 
 .favorite_story_card .reactions i {
-    color: #A6A6A6;
+    color: #a6a6a6;
     cursor: pointer;
 }
 
@@ -57,15 +70,15 @@
 
 .favorite_story_card .reactions i.liked,
 .favorite_story_card .reactions i.dislike {
-    color: #718CFB;
+    color: #718cfb;
 }
 
 .fav-red {
-    color: #8B0000;
+    color: #8b0000;
 }
 
 .fav-green {
-    color: #55AE3A
+    color: #55ae3a;
 }
 
 .sp-container {
@@ -74,9 +87,8 @@
     padding: 20px;
 }
 
-
-
-#sp-story {}
+#sp-story {
+}
 
 .sp-story {
     position: relative;
@@ -88,7 +100,6 @@
 
 .sp-story-subheader {
     font-size: 18px;
-
 }
 
 .sp-story-cont {
@@ -112,7 +123,8 @@
     margin: 5px 0;
 }
 
-.sp-tag-container {}
+.sp-tag-container {
+}
 
 .sp-tags {
     display: flex;
@@ -151,9 +163,11 @@
     color: blue;
 }
 
-#sp-related {}
+#sp-related {
+}
 
-.sp-related {}
+.sp-related {
+}
 
 .sp-rs-header {
     font-size: 18px;
@@ -171,7 +185,8 @@
     margin-right: 15px;
 }
 
-.sp-rs-cont {}
+.sp-rs-cont {
+}
 
 .sp-rs-title {
     font-size: 16px;
@@ -188,22 +203,21 @@
 
 form {
     display: flex;
-    flex-direction: column
+    flex-direction: column;
 }
 
 label {
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
 
 input,
 textarea {
     /* width: 50%; */
-    border: 1px solid #DADAED;
+    border: 1px solid #dadaed;
     padding: 7px;
     border-radius: 4px;
     width: 100%;
 }
-
 
 textarea {
     height: 30em;
@@ -211,12 +225,12 @@ textarea {
     font-size: 14px;
 }
 
-.top-form>.form-input {
+.top-form > .form-input {
     width: 40%;
 }
 
-div.form-input>* {
-    display: block
+div.form-input > * {
+    display: block;
 }
 
 .top-form {
@@ -239,22 +253,22 @@ input[type="text"] {
 .btn {
     padding: 10px 40px;
     border-radius: 5px;
-    border: 1px solid #718CFB;
+    border: 1px solid #718cfb;
 }
 
 .discard {
-    color: #718CFB;
+    color: #718cfb;
     background: white;
-    margin-right: 10px
+    margin-right: 10px;
 }
 
 .save {
     color: white;
-    background: #718CFB;
+    background: #718cfb;
 }
 
 footer {
-    background-color: #718CFB;
+    background-color: #718cfb;
     color: white;
     padding: 2em;
 }
@@ -263,7 +277,7 @@ footer {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-bottom: 2em
+    margin-bottom: 2em;
 }
 
 .footer-box h5 {
@@ -287,7 +301,7 @@ footer p {
 }
 
 footer section {
-    width: 20%
+    width: 20%;
 }
 
 .subscribe {
@@ -303,9 +317,8 @@ footer section {
 #subscribe-email {
     border: 1px solid white;
     border-radius: 0;
-    background-color: #718CFB;
+    background-color: #718cfb;
 }
-
 @media screen and (max-width: 800px) {
     .add-story {
         margin: 5em 2em;
@@ -313,13 +326,13 @@ footer section {
 
     footer section {
         width: 50%;
-        margin-bottom: 20px
+        margin-bottom: 20px;
     }
 }
 
 @media screen and (max-width: 550px) {
-    .top-form>.form-input {
-        width: 100%
+    .top-form > .form-input {
+        width: 100%;
     }
 
     .favourites_header {
@@ -332,6 +345,6 @@ footer section {
 
     footer section {
         width: 100%;
-        margin-bottom: 20px
+        margin-bottom: 20px;
     }
 }
