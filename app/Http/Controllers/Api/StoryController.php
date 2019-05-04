@@ -112,14 +112,27 @@ class StoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $story = Story::where('id', $id)
                         ->with(['comments.user:id,first_name,last_name,image_url'])
                         ->firstOrFail();
+
+        $user = $request->user('api');
+
+        if ($user) {
+            $reaction = Reaction::where('user_id', $user->id)->where('story_id', $id)->first();
+            if ($reaction && $reaction->reaction == 0) {
+                $story['reaction'] = "disliked";
+            } else if ($reaction && $reaction->reaction == 1) {
+                $story['reaction'] = "liked";
+            } else {
+                $story['reaction'] = 'none';
+            }
+        }
       
         if ($story->is_premium) {
-            if (request()->user('api')) {
+            if ($user) {
                 if ($this->userIsPremuim()) {
                     return response()->json([
                         'status' => 'success',
@@ -146,7 +159,7 @@ class StoryController extends Controller
             'status' => 'success',
             "code" => Response::HTTP_OK,
             "message" => "OK",
-            'data' => $story,
+            'data' => $story
         ], 200);
     }
     /**
