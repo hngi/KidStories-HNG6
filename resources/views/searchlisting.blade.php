@@ -15,7 +15,7 @@
         </ol>
       </nav>
 
-    <h1>{{$category->name}} Category Story Listing</h1>
+    <h1>Search Results</h1>
   </div>
    <div class="container">
       <div class="row">
@@ -50,7 +50,7 @@
                @endif
                 </div>
                 <span class="verticalLine">
-            <i class="far fa-bookmark fav-icon" style="margin-left: 8px;"></i>
+            <i class="far fa-bookmark" style="margin-left: 8px;"></i>
           </span>
 
               </div>
@@ -58,8 +58,9 @@
           </div>
         </div>
       @endforeach
+        {{$stories->links()}} 
       @else
-          <p style="margin:20px 50px;"> Oops There are no Stories in this category</p>
+          <p style="margin:20px 50px;"> No Results for {{$search}}</p>
       @endif
      
             
@@ -84,18 +85,19 @@
             
   <hr style="width:10%;">      
   <div class="searchContainer">
-      {!!Form::open(['route'=>['stories.search'],'method'=>'GET'])!!}
-        <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">  
-      {{ Form::close() }}
+  <i class="fa fa-search searchIcon"></i>
+    {!!Form::open(['route'=>['stories.search'],'method'=>'GET'])!!}
+      <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">  
+    {{ Form::close() }}
     {{--  --}}
 </div>
 <hr style="width:10%;">
 <p>Sort By</p>
 <div class="card" style="min-width: 15rem;">
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/age" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
+    {{--  <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/age" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>  --}}
     {{--  <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li>  --}}
-    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/recent" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
+    {{--  <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/recent" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li>  --}}
   </ul>
 </div>
 
@@ -118,7 +120,7 @@
       
         <div class="col-xs-12">
           <a href="#"><img src="https://www.neoncrm.com/wp-content/uploads/2017/06/appstore.png" width="200px" height="80px"></a>
-        <a href="#"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="200px" height="100px"></a>
+        <a href="#"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="200px" height="90px"></a>
         </div>
 
 
@@ -134,4 +136,8 @@
     <!--Scroll to top-->
     <div class="scroll-to-top scroll-to-target" data-target="html"><span class="icon fa fa-angle-double-up"></span></div>
 @endsection
-
+@section('js')
+    <script>
+            
+    </script>
+@endsection

@@ -25,7 +25,10 @@
             @if (count($category->stories) > 0)
             @foreach ($category->stories as $story)
             <div class="col-md-3  p-0">
-                <div class="card story-card  mb-4">
+                <div class="card story-card  mb-4 premium-badge-holder">
+                    @if($story->is_premium)
+                    <span class="badge badge-primary premium-badge">PREMIUM</span>
+                    @endif
                     @if($story->image_url )
                     <img src="{{ $story->image_url }}" />
                     @else
@@ -67,7 +70,7 @@
         <div class="d-flex flex-row col-md-3">
             <input class="vertical-rule" />
             <div class="col-md-12" id="category-drop">
-                <h6>POPULAR CATEGORIES</h6>
+                <h6 >POPULAR CATEGORIES</h6><br>
                 <a href="/categories/1">Fantasy</a><br>
                 <a href="/categories/4">Jokes</a><br>
                 <a href="/categories/2">Bedtime Stories</a><br>
@@ -76,7 +79,10 @@
                 <hr style="width:10%;">
                 <div class="searchContainer">
                     <i class="fa fa-search searchIcon"></i>
+                    {!!Form::open(['route'=>['stories.search'],'method'=>'GET'])!!}
                     <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">
+                    {{ Form::close() }}
+                    {{-- --}}
                 </div>
                 <hr style="width:10%;">
                 <p>Sort By</p>

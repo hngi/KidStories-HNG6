@@ -58,7 +58,7 @@
             </div>
             @endforeach
         @else
-        <p class="empty-response"> Oops There are no Stories</p>
+        <p class="empty-response"> {{$message}}</p>
         @endif
     </div>
 </div>

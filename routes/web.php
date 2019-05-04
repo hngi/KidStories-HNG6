@@ -38,7 +38,8 @@ Route::get('/categories', 'CategoryController@index')->name('categories.index');
 Route::get('/categories/{id}', 'CategoryController@show')->name('stories');
 Route::get('/categories/{id}/stories/sort/recent', 'CategoryController@filter')->name('stories.filter');
 Route::get('/categories/{id}/stories/sort/age', 'CategoryController@filterByAge')->name('stories.filter');
+Route::get('/categories/stories/search/', 'StoriesController@search')->name('stories.search');
 
 Route::middleware('auth')->post('/create-story', 'StoriesController@store')->name('story.create');
 
-Route::middleware('guest')->get('/show-story/{story}', 'StoriesController@show')->name('story.show');
+Route::get('/show-story/{story}', 'StoriesController@show')->name('story.show');

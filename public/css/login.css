@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+.login {
+	box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.25);
+	max-width: 800px;
+	margin: 10% auto 5%;
+}
+
+.illustration {
+	padding: 20px 30px;
+	background: linear-gradient(218.04deg, #39a1f7 29.19%, #718cfb 81.17%);
+}
+
+.illustration p {
+	font-size: 18px;
+	line-height: 1.2em;
+}
+
+.illustration .lines {
+	width: 70px;
+	height: 60px;
+}
+
+.illustration .book {
+	width: 250px;
+	height: 260px;
+}
+
+.login_form .logo {
+	width: 40%;
+}
+
+.login_form input[type="email"],
+.login_form input[type="password"] {
+	width: 95%;
+	border: none;
+	border-bottom: 1px solid #a9aebe;
+	font-size: 14px;
+	outline: none;
+	font-family: "Lato", sans-serif;
+}
+
+.login_form a {
+	color: #39a1f7;
+}
+
+.login_form p,
+.login_form a {
+	font-size: 14px;
+}
+
+.login_form .login_btn {
+	background: linear-gradient(184.82deg, #39a1f7 -53.71%, #a875ff 192.78%);
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	border: none;
+	width: 60%;
+	padding: 5px 0 5px;
+	font-size: 14px;
+	cursor: pointer;
+}
