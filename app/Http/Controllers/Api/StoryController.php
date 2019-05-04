@@ -121,7 +121,9 @@ class StoryController extends Controller
         $user = $request->user('api');
 
         if ($user) {
-            $reaction = Reaction::where('user_id', $user->id)->where('story_id', $id)->first();
+            $reaction = Reaction::where('user_id', $user->id)
+                ->where('story_id', $id)
+                ->first();
             if ($reaction && $reaction->reaction == 0) {
                 $story['reaction'] = "disliked";
             } else if ($reaction && $reaction->reaction == 1) {
