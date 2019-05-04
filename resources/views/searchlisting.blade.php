@@ -7,10 +7,7 @@
 @endsection
 
 @section('content')
-  <div class="col-md-12">
-    <div class="auto-container">
-   <div class=" crumb">
-
+   <div class="container crumb">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb arr-right ">
           <li class="breadcrumb-item"><a href="{{ route('homepage') }}">Home</a></li>
@@ -18,21 +15,17 @@
         </ol>
       </nav>
 
-    <h3>{{$category->name}} Category Listing</h3>
+    <h1>Search Results</h1>
   </div>
-  <!-- end -->
-</div>
-</div>
-
-   <div class="auto-container">
+   <div class="container">
       <div class="row">
         <div class="col-md-9">
       <div class="row">
-      @if (count($category->stories) > 0)
-           @foreach ($category->stories as $story)
+      @if (count($stories) > 0)
+           @foreach ($stories as $story)
           <div class="col-md-6 col-lg-4 col-sm-6">
             <div class="card mb-4 shadow-sm">
-              @if($story->image_url )
+             @if($story->image_url )
                   <img src="{{ $story->image_url }}" />
               @else
                   <img src="https://i.imgur.com/7OBNw1t.jpg" />
@@ -45,8 +38,8 @@
               <hr style="margin:0 -20px;">
               <div class="d-flex justify-content-between align-items-center card-">
                 <div class="btn-group">
-                  @if ($story->reaction == 'dislike')
-               <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+               @if ($story->reaction === 'dislike')
+               <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" name="fav-like" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
                <i class="fas fa-thumbs-down fav-icon fav-red" id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;" ></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
                @elseif ($story->reaction == 'like')
                <i class="fas fa-thumbs-up fav-icon fav-green" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
@@ -57,16 +50,17 @@
                @endif
                 </div>
                 <span class="verticalLine">
-                <a href="#">  <i class="far fa-bookmark" style="margin-left: 8px;"></i> </a>
-                </span>
+            <i class="far fa-bookmark" style="margin-left: 8px;"></i>
+          </span>
 
               </div>
             </div>
           </div>
         </div>
       @endforeach
+        {{$stories->links()}} 
       @else
-          <p style="margin:20px 50px;"> Oops There are no Stories in this category</p>
+          <p style="margin:20px 50px;"> No Results for {{$search}}</p>
       @endif
      
             
@@ -83,27 +77,27 @@
 </div>
 
    <div class="col-md-2" id="category-drop">
-      <h6>POPULAR CATEGORIES</h6>
+      <h4>POPULAR CATEGORIES</h4>
       <a href="/categories/1">Fantasy</a><br>
       <a href="/categories/4">Jokes</a><br>
       <a href="/categories/2">Bedtime Stories</a><br>
       <a href="/categories/3">Morning Stories</a>
-      
+            
   <hr style="width:10%;">      
   <div class="searchContainer">
-    <i class="fa fa-search searchIcon"></i>
+  <i class="fa fa-search searchIcon"></i>
     {!!Form::open(['route'=>['stories.search'],'method'=>'GET'])!!}
       <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">  
     {{ Form::close() }}
     {{--  --}}
-  </div>
+</div>
 <hr style="width:10%;">
 <p>Sort By</p>
 <div class="card" style="min-width: 15rem;">
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/age" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
+    {{--  <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/age" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>  --}}
     {{--  <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li>  --}}
-    <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/recent" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
+    {{--  <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/recent" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li>  --}}
   </ul>
 </div>
 
@@ -113,38 +107,37 @@
 
 
   
-<!-- App Section -->
-    <section class="main-banner">
-        <div class="container2">
-            <div class="row c">
-
-                <!--Image Column-->
-                <div class="col-lg-4 col-md-12 col-sm-12 ">
-                    <img src="../images/resources/bottom.jpg" alt=""  />
-                </div>
-
-                
-                <!--Content Column-->
-                <div class="content-column col-lg-8 col-md-12 col-sm-12">
-                    <div class="applink">
-                        <h4>Get up close with your child</h4>
-                        <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
-                        </div>
-                        <div class="buttons-box">
-                            <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../images/icons/apple.png" alt="" /></a>
-                            <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../images/icons/playstore.png" alt="" /></a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+<div class="container" style="margin-top:100px;"> 
+<div class=" mb-3" style="max-width:auto;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="https://i.imgur.com/pN55hZ9.png" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title" id='quote' style="float: center;">Get Up Close With Your Child</h5>
+        <p class="card-text" style="">Read free bedtime stories, fairy tales, poems and short stories for kids</p>
+      
+        <div class="col-xs-12">
+          <a href="#"><img src="https://www.neoncrm.com/wp-content/uploads/2017/06/appstore.png" width="200px" height="80px"></a>
+        <a href="#"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="200px" height="90px"></a>
         </div>
-    </section>  
-<!-- End App Section -->
+
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 
     <!-- Footer goes here -->
     <!--Scroll to top-->
     <div class="scroll-to-top scroll-to-target" data-target="html"><span class="icon fa fa-angle-double-up"></span></div>
 @endsection
-
+@section('js')
+    <script>
+            
+    </script>
+@endsection

@@ -18,7 +18,6 @@
 	background:#718cfb;
 	padding:12px 30px 12px;
 	border:2px solid #718cfb;
-	box-shadow:0px 10px 10px rgba(0,0,0,0.20);
 }
 
 .btn-style-two .icon{
@@ -68,11 +67,11 @@ img{
 	bottom:15px;
 	right:15px;
 	width:50px;
-	height:70px;
+	height:50px;
 	color:#ffffff;
 	font-size:24px;
 	text-transform:uppercase;
-	line-height:65px;
+	line-height:45px;
 	text-align:center;
 	z-index:99999;
 	cursor:pointer;
@@ -88,8 +87,8 @@ img{
 
 .scroll-to-top:hover{
 	color:#ffffff;
-	background:#ff4c72;
-	border-color:#ff4c72;
+	background:#718CFB;
+	border-color:#718CFB;
 }
 
 /*** 
@@ -100,6 +99,9 @@ img{
 
 ***/
 
+.bg-fwhite {
+	background: #F4F6F9 !important;
+}
 .main-header{
 	position:fixed;
 	left:0px;
@@ -113,11 +115,12 @@ img{
 	-ms-transition:all 500ms ease;
 	-o-transition:all 500ms ease;
 	background: #718CFB;
+	height: 80px;
 }
 
 .main-header.fixed-header{
 	top:0px;
-	background:#39A1F7;
+	background:#718CFB;
 	border-bottom:1px solid rgba(0,0,0,0.10);
 }
 
@@ -162,7 +165,7 @@ img{
 }
 
 .fixed-header .language .dropdown-menu{
-	margin-top:41px;
+	margin-top:25px;
 }
 
 .main-header .language > a{
@@ -384,7 +387,7 @@ img{
 	font-weight:400;
 	opacity:1;
 	text-transform:capitalize;
-	padding:35px 0px 35px 0px;
+	padding:25px 0px 15px 0px;
 	transition:all 500ms ease;
 	-moz-transition:all 500ms ease;
 	-webkit-transition:all 500ms ease;
@@ -668,7 +671,7 @@ img{
 	position:relative;
 	float:left;
 	margin-left:24px;
-	margin-top:34px;
+	margin-top:22px;
 }
 
 .main-header .outer-box .nav-btn{
@@ -787,7 +790,7 @@ img{
 }
 
 .main-header .search-box-outer .dropdown-menu{
-	top:62px !important;
+	top:50px !important;
 	padding:0px;
 	width:280px;
 	right:0px;
@@ -798,7 +801,7 @@ img{
 }
 
 .main-header .search-panel .form-container{
-	padding:25px 20px;	
+
 }
 
 .main-header .search-panel .form-group{
@@ -1312,7 +1315,7 @@ img{
 	text-align:center;
 	border-radius:8px;
 	overflow:hidden;
-	padding:30px 20px 45px;
+	padding:30px 20px 15px;
 }
 
 .services-block .inner-box:before{
@@ -1480,7 +1483,7 @@ img{
 
 .faq-section{
 	position:relative;
-	padding:135px 0px 110px;
+	padding:0px 0px 10px;
 }
 
 .faq-section .sec-title{
@@ -1576,7 +1579,7 @@ img{
 
 .banner-section-three{
 	position:relative;
-	padding-top:100px;
+	padding-top:80px;
 	z-index:1;
 }
 
