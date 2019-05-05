@@ -121,14 +121,14 @@ class StoryController extends Controller
                 ->where('story_id', $id)
                 ->first();
             if ($reaction && $reaction->reaction == 0) {
-                $story['reaction'] = "disliked";
+                $action = "disliked";
             } else if ($reaction && $reaction->reaction == 1) {
-                $story['reaction'] = "liked";
+                $action = "liked";
             } else {
-                $story['reaction'] = 'none';
+                $action = 'none';
             }
         }else {
-            $story['reaction'] = 'none';
+            $action = 'none';
         }
         // dd($story->comments->first()->user);
 
@@ -140,7 +140,7 @@ class StoryController extends Controller
                         "code" => Response::HTTP_OK,
                         'message' => 'premium story',
                         'data' => new SingleStoryResource($story),
-
+                        'reaction' => $action
                     ], Response::HTTP_OK);
                 }else {
                     return response()->json([
@@ -160,7 +160,8 @@ class StoryController extends Controller
             'status' => 'success',
             "code" => Response::HTTP_OK,
             "message" => "OK",
-            'data' => new SingleStoryResource($story)
+            'data' => new SingleStoryResource($story),
+            'reaction' => $action
         ], 200);
     }
     /**
