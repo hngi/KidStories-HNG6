@@ -17,6 +17,9 @@
 </div>
 
 <div class="auto-container adjust-padding">
+    <div class="mb-5">
+        <h3>My Stories</h3>
+    </div>
     <div class="col-md-12 d-flex flex-row p-0 ">
         <div class="col-md-9 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
@@ -65,7 +68,12 @@
                             </div>
                         </div>
                     @empty
-                        <p style="font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;">Oops! No stories found.</p>
+                        <p style="font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;">
+                            Oops! You don't have any story yet.
+                            <a href="{{ route('story.create') }}" class="btn btn-block" style="margin-top: 10px;">
+                                Create New Story
+                            </a>
+                        </p>
                     @endforelse
                 </div>
 

@@ -14,7 +14,7 @@
                 <div class="inner-column wow slideInLeft">
                     <h3>Get personalized bedtime stories<br> tailored just for your child</h3>
                     <div class="text">Read free bedtime stories, fairy tales, poems and short <br> stories for kids</div>
-                    <a href="{{ route('stories.browsestories') }}" class="theme-btn btn-style-two">Start Reading <span class="icon flaticon-next-3"></span></a>
+                    <a href="{{ route('stories.index') }}" class="theme-btn btn-style-two">Start Reading <span class="icon flaticon-next-3"></span></a>
                 </div>
             </div>
             <!--Image Column-->
