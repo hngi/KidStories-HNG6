@@ -50,4 +50,4 @@ Route::resource('/users', 'UserController');
  * Stories routes for superadmin operations
  *
  */
-Route::resource('/stories', 'StoryController');
+Route::resource('/stories', 'StoryController',['as'=>'admin']);
