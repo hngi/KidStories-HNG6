@@ -23,6 +23,7 @@ var react = async function(event) {
   event.preventDefault();
   var text = event.target.id;
   var storyId = event.target.dataset.storyId;
+  var favId = event.target.dataset.favId;
   let action = '';
   if (text === "fav-like-"+storyId) {
       action = await axios.post('/api/v1/stories/' + storyId + '/reactions/like');
@@ -36,16 +37,21 @@ var bookmark = async function(event){
   event.preventDefault();
   var storyId = event.target.dataset.storyId;
   let action = '';
- 
+  var favId = event.target.dataset.favId;
+  
   action = await axios.post('/api/v1/bookmarks/stories/' + storyId);
-  updateBookmarkIcon(storyId, action.data.message);
+  updateBookmarkIcon(storyId, action.data.message, favId);
 }
 
-var updateBookmarkIcon = function (storyId, message) {
+var updateBookmarkIcon = function (storyId, message, favId) {
 
   if (message == "Created") {
     document.querySelector('#bookmark-' + storyId).className += " bookmark-blue";
   } else if (message == "Removed") {
     document.querySelector('#bookmark-' + storyId).classList.remove('bookmark-blue');
+  }
+
+  if (favId) {
+    document.querySelector('#bookmark-div-' + storyId).remove();
   }
 };
