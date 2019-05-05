@@ -96,7 +96,7 @@ class Story extends Model
 
     public function scopeSimilar($query)
     {
-        return $query->where('category_id',$this->category_id)->take(3);
+        return $query->where('category_id',$this->category_id)->take(4);
     }
 
 
