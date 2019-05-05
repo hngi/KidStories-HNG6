@@ -153,7 +153,7 @@
     <div class="footer-box">
         <section>
             <h5>Kid Stories</h5>
-            <a href="{{ route('logout') }}">About Us</a>
+            <a href="{{ route('about') }}">About Us</a>
             <a href="{{ route('subscribe') }}">Subscriptions</a>
             <a href="#">Contact Us</a>
             <a href="#">Advertise with Us</a>

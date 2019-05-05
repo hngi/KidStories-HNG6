@@ -1,4 +1,6 @@
 /* Styles for the Create User Pages */
+
+
 /*h3 {
     color: #333333;
     font-size: 20px;
@@ -13,19 +15,17 @@ h6 {
     font-size: 10px;
     line-height: 12px;
     /* identical to box height */
-    color: #8a8a8a;
-}*/
 
+color: #8a8a8a;
 
-.social-iconsb a {
+}
+*/ .social-iconsb a {
     float: left;
     margin-left: 16px;
 }
-
-.social-iconsb > a > i {
+.social-iconsb>a>i {
     font-size: 16px;
 }
-
 .banner {
     background-position: center;
     background-size: cover;
@@ -35,9 +35,7 @@ h6 {
     align-items: center;
     justify-content: center;
 }
-
 .favourites {}
-
 .favourites_header {
     background-image: url(https://res.cloudinary.com/ephaig/image/upload/v1556708884/Rectangle.png);
     background-size: cover;
@@ -45,62 +43,48 @@ h6 {
     background-position: center;
     height: 300px;
 }
-
 .favorite_story_card .card-title {
     color: #333333;
 }
-
 .favorite_story_card .card-text:first-of-type {
     color: #4f4f4f;
 }
-
 .favorite_story_card .card-text:nth-of-type(2) {
     color: #666666;
 }
-
 .favorite_story_card .author {
     color: #718cfb;
 }
-
 .favorite_story_card .reactions i {
     color: #a6a6a6;
     cursor: pointer;
 }
-
 .fav-icon {
     cursor: pointer;
 }
-
 .favorite_story_card .reactions i.liked,
 .favorite_story_card .reactions i.dislike {
     color: #718cfb;
 }
-
 .fav-red {
     color: #8b0000 !important;
 }
-
 .fav-green {
     color: #55ae3a !important;
 }
-
 .bookmark-blue {
     color: #0000FF !important
 }
-
 .sp-container {
     max-width: 980px;
     margin: 0 auto;
     padding: 20px;
 }
-
 #sp-story {}
-
 .premium-badge-holder {
     position: relative;
     display: inline-block;
 }
-
 .premium-badge {
     position: absolute;
     right: 0px;
@@ -109,27 +93,21 @@ h6 {
     font-size: 13px;
     padding: 5px 10px;
 }
-
 #category-drop h6 {
     font-size: 16px;
 }
-
 .sp-story {
     position: relative;
 }
-
 .sp-story-title {
     font-size: 22px;
 }
-
 .sp-story-subheader {
     font-size: 18px;
 }
-
 .sp-story-cont {
     font-size: 14px;
 }
-
 .sp-story-imgx {
     width: 700px;
     height: 300px;
@@ -139,20 +117,16 @@ h6 {
     transform: translateX(-50%);
     margin: 10px 0;
 }
-
 .sp-story-footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin: 5px 0;
 }
-
 .sp-tag-container {}
-
 .sp-tags {
     display: flex;
 }
-
 .sp-tag {
     margin: 5px;
     padding: 5px 10px;
@@ -163,153 +137,124 @@ h6 {
     background: white;
     list-style: none;
 }
-
 .sp-tag:hover {
     background-color: blueviolet;
     color: white;
 }
-
 .sp-interactions {
     margin-right: 20px;
 }
-
 .sp-int-btns {
     display: flex;
 }
-
 .sp-int-btn {
     list-style: none;
     margin: 5px;
 }
-
 .sp-active {
     color: blue;
 }
-
 #sp-related {}
-
 .sp-related {}
-
 .sp-rs-header {
     font-size: 18px;
     margin: 10px 0 0 0;
 }
-
 .sp-rs {
     display: flex;
     justify-content: center;
 }
-
 .sp-rsx-img {
     width: 200px;
     height: 150px;
     margin-right: 15px;
 }
-
 .sp-rs-cont {}
-
 .sp-rs-title {
     font-size: 16px;
     font-weight: bold;
 }
-
 .sp-rs-body {
     font-size: 14px;
 }
-
 .add-story {
     margin: 5em 10em;
 }
-
 form {
     display: flex;
     flex-direction: column;
 }
-
 label {
     margin-bottom: 10px;
 }
-
 input,
 textarea {
     /* width: 50%; */
+    
     border: 1px solid #dadaed;
     padding: 7px;
     border-radius: 4px;
     width: 100%;
 }
-
 textarea {
     height: 30em;
     font-family: Lato;
     font-size: 14px;
 }
-
 .top-form>.form-input {
     width: 40%;
     margin-top: 20px;
 }
-
 div.form-input>* {
     display: block;
 }
-
 .top-form {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
+    
     flex-wrap: wrap;
 }
-
 input[type="text"] {
     padding: 10px 7px;
 }
-
 .buttons {
     margin-top: 2em;
     display: flex;
     justify-content: flex-end;
 }
-
 .btn {
     padding: 10px 40px;
     border-radius: 5px;
     border: 1px solid #718cfb;
 }
-
 .discard {
     color: #718cfb;
     background: white;
     margin-right: 10px;
 }
-
 .save {
     color: white;
     background: #718cfb;
 }
-
 footer {
     background-color: #718cfb;
     color: white;
     padding: 2em;
 }
-
 .footer-box {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 2em;
 }
-
 .footer-box h5 {
     color: #ffffff;
 }
-
 .footer-wrap hr {
     border: 1px solid #ffffff !important;
 }
-
 footer a {
     color: white;
     text-decoration: none;
@@ -317,55 +262,48 @@ footer a {
     font-size: 14px;
     margin: 10px 0;
 }
-
 footer p {
     font-size: 14px;
 }
-
 footer section {
     width: 20%;
 }
-
 .subscribe {
     display: flex;
 }
-
 .send-icon {
     border: 1px solid white;
     background-color: white;
     padding: 5px 10px;
 }
-
 #subscribe-email {
     border: 1px solid white;
     border-radius: 0;
     background-color: #718cfb;
 }
-
 @media screen and (max-width: 800px) {
     .add-story {
         margin: 5em 2em;
     }
-
+    
     footer section {
         width: 50%;
         margin-bottom: 20px;
     }
 }
-
 @media screen and (max-width: 550px) {
     .top-form>.form-input {
         width: 100%;
     }
-
+    
     .favourites_header {
         height: 200px;
     }
-
+    
     .title-input {
         margin-bottom: 20px;
     }
-
+    
     footer section {
         width: 100%;
         margin-bottom: 20px;
