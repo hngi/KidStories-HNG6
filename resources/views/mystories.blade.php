@@ -18,15 +18,15 @@
 
 <div class="auto-container adjust-padding">
     <div class="mb-5">
-        <h3>{{ $stories->first()->category->name }} Category Listing</h3>
+        <h3>My Stories</h3>
     </div>
-    <div class="col-md-12 d-flex cold p-0 ">
-        <div class="col-md-7 col-lg-9 col-sm-6 p-0">
+    <div class="col-md-12 d-flex flex-row p-0 ">
+        <div class="col-md-9 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
                 <div class="d-flex flex-row flex-wrap">
                     @forelse ($stories as $story)
-                    <div class="col-lg-4 col-xs-12">
-                    <div class="card col-lg-12 col-md-10 p-0 story-card mb-4 premium-badge-holder">
+                    <div class="col-lg-4 ">
+                    <div class="card col-lg-12 p-0 story-card mb-4 premium-badge-holder">
                                 @if($story->is_premium)
                                     <span class="badge badge-primary premium-badge">PREMIUM</span>
                                 @endif
@@ -68,7 +68,12 @@
                             </div>
                         </div>
                     @empty
-                        <p style="font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;">Oops! No stories found.</p>
+                        <p style="font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;">
+                            Oops! You don't have any story yet.
+                            <a href="{{ route('story.create') }}" class="btn btn-block" style="margin-top: 10px;">
+                                Create New Story
+                            </a>
+                        </p>
                     @endforelse
                 </div>
 
@@ -77,7 +82,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-lg-3 col-sm-6">
+        <div class="col-md-3">
             <div class="d-flex flex-row col-md-12  ">
                 <div class="col-md-12" id="category-drop">
                     <h6>POPULAR CATEGORIES</h6><br>
@@ -88,7 +93,7 @@
                     <hr style="width:10%;">
                     <div class="searchContainer">
                         <i class="fa fa-search searchIcon"></i>
-                        <form action="{{ route('categories.stories', $currentCategory) }}">
+                        <form action="{{ route('stories.index') }}">
                             <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search..." value="{{ request()->query('search') }}">
                         </form>
                     </div>

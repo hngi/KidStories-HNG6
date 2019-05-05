@@ -65,7 +65,7 @@
                                         <ul class="navigation clearfix">
                                             <li class=""><a href="/">Home</a>
                                             </li>
-                                            <li class=""><a href="{{ route('stories.browsestories') }}">Browse Stories</a></li>
+                                            <li class=""><a href="{{ route('stories.index') }}">Browse Stories</a></li>
                                             <li><a href="{{ route('categories.index') }}">Categories</a></li>
                                             <li class=""><a  href="{{ route('stories.mystories') }}">My Stories</a>
                                             </li>
@@ -84,10 +84,9 @@
                                             <ul class="dropdown-menu pull-right search-panel" aria-labelledby="dropdownMenu3">
                                                 <li class="panel-outer">
                                                     <div class="form-container">
-                                                 {!!Form::open(['route'=>['stories.search'],'method'=>'GET'])!!}
-                                                 <input class="searchBox" type="search" name="search" placeholder="Search...">
-                                                  {{ Form::close() }}
-                                                    {{-- --}}
+                                                        <form action="{{ route('stories.index') }}" method="GET">
+                                                            <input class="searchBox" type="search" name="search" placeholder="Search...">
+                                                        </form>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -107,7 +106,7 @@
                                             @endif
                                             @else
                                             <li>
-                                                <a href="{{route('admin.profile')}}">
+                                                <a href="#">
                                                     Profile
                                                 </a>
                                             </li>
@@ -153,7 +152,7 @@
     <div class="footer-box">
         <section>
             <h5>Kid Stories</h5>
-            <a href="{{ route('logout') }}">About Us</a>
+            <a href="{{ route('about') }}">About Us</a>
             <a href="{{ route('subscribe') }}">Subscriptions</a>
             <a href="#">Contact Us</a>
             <a href="#">Advertise with Us</a>
@@ -162,7 +161,7 @@
             <h5>Quick Links</h5>
             <a href="/create-story">Create a Story</a>
             <a href="#">Favorite Story</a>
-            <a href="{{ route('stories.browsestories') }}">Explore Stories</a>
+            <a href="{{ route('stories.index') }}">Explore Stories</a>
             <a href="#">Make a donation</a>
         </section>
         <section>
