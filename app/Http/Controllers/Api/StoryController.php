@@ -7,6 +7,7 @@ use App\Story;
 use App\Comment;
 use Validator;
 use App\Category;
+use App\Bookmark;
 use App\Reaction;
 use Illuminate\Http\Request;
 use App\Traits\Api\UserTrait;
@@ -120,6 +121,9 @@ class StoryController extends Controller
             $reaction = Reaction::where('user_id', $user->id)
                 ->where('story_id', $id)
                 ->first();
+            $bookmark = Bookmark::where('user_id', $user->id)
+                ->where('story_id', $id)
+                ->first();
             if ($reaction && $reaction->reaction == 0) {
                 $action = "disliked";
             } else if ($reaction && $reaction->reaction == 1) {
@@ -127,8 +131,14 @@ class StoryController extends Controller
             } else {
                 $action = 'none';
             }
+            if ($bookmark) {
+                $favorite = true;
+            } else {
+                $favorite = false;
+            }
         }else {
             $action = 'none';
+            $favorite = false;
         }
         // dd($story->comments->first()->user);
 
@@ -140,7 +150,8 @@ class StoryController extends Controller
                         "code" => Response::HTTP_OK,
                         'message' => 'premium story',
                         'data' => new SingleStoryResource($story),
-                        'reaction' => $action
+                        'reaction' => $action,
+                        'bookmark' => $favorite
                     ], Response::HTTP_OK);
                 }else {
                     return response()->json([
@@ -161,7 +172,8 @@ class StoryController extends Controller
             "code" => Response::HTTP_OK,
             "message" => "OK",
             'data' => new SingleStoryResource($story),
-            'reaction' => $action
+            'reaction' => $action,
+            'bookmark' => $favorite
         ], 200);
     }
     /**
