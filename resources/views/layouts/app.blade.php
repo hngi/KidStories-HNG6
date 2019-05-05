@@ -84,12 +84,10 @@
                                             <ul class="dropdown-menu pull-right search-panel" aria-labelledby="dropdownMenu3">
                                                 <li class="panel-outer">
                                                     <div class="form-container">
-                                                        <form method="post" action="#">
-                                                            <div class="form-group">
-                                                                <input type="search" name="field-name" value="" placeholder="Search Here" required>
-                                                                <button type="submit" class="search-btn"><span class="fa fa-search"></span></button>
-                                                            </div>
-                                                        </form>
+                                                 {!!Form::open(['route'=>['stories.search'],'method'=>'GET'])!!}
+                                                 <input class="searchBox" type="search" name="search" placeholder="Search...">
+                                                  {{ Form::close() }}
+                                                    {{-- --}}
                                                     </div>
                                                 </li>
                                             </ul>
@@ -186,7 +184,7 @@
     <hr>
     <div class="footer-info">
         <p class="col-md-10 pull-left">© 2019 Kid Stories. All rights reserved</p>
-        <div class="social-icons col-md-2 pull-right">
+        <div class="social-iconsb col-md-2 pull-right">
 <!--           <a href="#">  <i class="fa fa-youtube"></i> </a>
  -->          <a href="https://instagram.com/mykidstories">  <i class="fa fa-instagram"></i> </a>
           <a href="https://facebook.com/mykidstories">  <i class="fa fa-facebook"></i> </a>
