@@ -39,7 +39,6 @@ class CategoryController extends Controller
         for ($i=0; $i < $category->stories->count(); $i++) {
             $storyId = $category->stories[$i]->id;
             if ($user) {
-                $test = 0;
                 $reaction = Reaction::where('story_id', $storyId)
                 ->where('user_id', $user->id)
                 ->first();
@@ -51,7 +50,6 @@ class CategoryController extends Controller
                     $category->stories[$i]['reaction'] = 'nil';
                 }
             }else {
-                $test = 1;
                 $category->stories[$i]['reaction'] = 'nil';
             }
 
