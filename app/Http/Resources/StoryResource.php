@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Bookmark;
+use App\Reaction;
 
 class StoryResource extends JsonResource
 {
@@ -28,7 +30,42 @@ class StoryResource extends JsonResource
             'is_premium'    => $this->is_premium,
             'likes_count'   => $this->likes_count,
             'dislikes_count'=> $this->dislikes_count,
+            'reaction'      => $this->getReaction($request, $this->id),
+            'bookmark'      => $this->getBookmarkStatus($request, $this->id)
         ];
+    }
+
+    public function getReaction($request, $storyId)
+    {
+        $user = $request->user('api');
+        if ($user) {
+            $reaction = Reaction::where('story_id', $storyId)
+                    ->where('user_id', $user->id)
+                    ->first();
+            if ($reaction) {
+                return $reaction->reaction; 
+            }        
+                   
+        }
+            return 'nil';
+        
+        
+    }
+
+    public function getBookmarkStatus($request, $storyId)
+    {
+        $user = $request->user('api');
+        if ($user) {
+            $bookmark = Bookmark::where('story_id', $storyId)
+                    ->where('user_id', $user->id)
+                    ->first();
+            if ($bookmark) {
+                return true;
+            }
+                            
+        }
+            return false;
+        
     }
 
 }
