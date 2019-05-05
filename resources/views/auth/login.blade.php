@@ -1,21 +1,40 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+@section('custom_css')
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css" >
+@endsection
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+@section('content')
+        <div class="login_wrapper container">
+            <div class="login">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="illustration text-white text-center d-flex flex-column">
+                            <div class="d-flex justify-content-between">
+                                <p class="text-left">
+                                    Kid stories offer a wide range <br />
+                                    of stories
+                                </p>
+                                <img
+                                    class="lines align-self-center"
+                                    src="images/resources/lines.png"
+                                    alt="lines"
+                                />
+                            </div>
+                            <img class="book d-block align-self-center mb-2" src="images/resources/book.png" alt="Boy and girl with books"
+                            />
+                            <img class="lines d-block" src="images/resources/lines.png" alt="lines" />
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <form class="login_form text-center py-3 pr-4"  method="POST" action="{{ route('login') }}">
                         @csrf
 
+                            <h5 class="font-weight-bold mt-1">Log in to your account</h5>
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <div class="col-md-12">
+                                <input id="email" placeholder="Email Address" type="email" class="d-block mt-4 mx-auto pr-2 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -24,12 +43,10 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <div class="col-md-12">
+                                <input id="password" placeholder="Password" type="password" class="d-block mt-4 mx-auto pr-2 @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -39,35 +56,28 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="text-right d-block mt-2 pr-2" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+
+                        <div class="form-group row mb-0">
+                            <div class="col-lg-12">
+                                <button type="submit" class="login_btn d-inline-block text-white mt-5">
+                                    {{ __('Login') }}
+                                </button>
+
+
                             </div>
                         </div>
-                    </form>
+
+                            <p class="mt-4">
+                                Need an account? <a href="{{ route('register') }}">Create an account</a>
+                            </p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 @endsection
