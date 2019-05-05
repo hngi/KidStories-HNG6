@@ -236,12 +236,15 @@ class StoryController extends Controller
      * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function like($id)
+    public function like(Request $request, $id)
     {
-        $user = $this->user();
+        $user = $request->user('api');
         $story = $this->findStory($id);
         $likeCount = $story['likes_count'];
         $dislikeCount = $story['dislikes_count'];
+        if (!$user) {
+            return null;
+        }
         $reaction = Reaction::where('story_id', $story->id)
                             ->where('user_id', $user->id)
                             ->first();
@@ -258,7 +261,7 @@ class StoryController extends Controller
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['story_id' => $id, 'user_id' => $user->id],
                 ['reaction' => 1]
             );
             $action = 'Changed to like';
@@ -267,7 +270,7 @@ class StoryController extends Controller
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['story_id' => $id, 'user_id' => $user->id],
                 ['reaction' => 1]
             );
             $action = 'Added like';
@@ -288,12 +291,15 @@ class StoryController extends Controller
      * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function dislike($id)
+    public function dislike(Request $request, $id)
     {
-        $user = $this->user();
+        $user = $request->user('api');
         $story = $this->findStory($id);
         $likeCount = $story['likes_count'];
         $dislikeCount = $story['dislikes_count'];
+        if (!$user) {
+            return null;
+        }
         $reaction = Reaction::where('story_id', $story->id)
                             ->where('user_id', $user->id)
                             ->first();
@@ -310,7 +316,7 @@ class StoryController extends Controller
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['story_id' => $id, 'user_id' => $user->id],
                 ['reaction' => 0]
             );
             $action = 'Changed to dislike';
@@ -319,7 +325,7 @@ class StoryController extends Controller
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
             $reaction = Reaction::updateOrCreate(
-                ['story_id' => $id, 'user_id' => auth()->id()],
+                ['story_id' => $id, 'user_id' => $user->id],
                 ['reaction' => 0]
             );
             $action = 'Added dislike';
