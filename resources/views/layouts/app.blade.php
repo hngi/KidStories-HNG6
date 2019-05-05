@@ -10,7 +10,7 @@
 
     <title>{{ config('app.name', 'Kids Stories') }}</title>
 
-<!-- 
+<!--
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
@@ -66,10 +66,9 @@
                                         <ul class="navigation clearfix">
                                             <li class=""><a href="/">Home</a>
                                             </li>
-                                            <li class=""><a href="#">Browse Stories</a>
-                                            </li>
+                                            <li class=""><a href="{{ route('stories.browsestories') }}">Browse Stories</a></li>
                                             <li><a href="{{ route('categories.index') }}">Categories</a></li>
-                                            <li class=""><a href="#">My Stories</a>
+                                            <li class=""><a  href="{{ route('stories.mystories') }}">My Stories</a>
                                             </li>
                                             <li><a href="#">About Us</a></li>
                                         </ul>
@@ -163,7 +162,7 @@
         </section>
         <section>
             <h5>Quick Links</h5>
-            <a href="#">Create a Story</a>
+            <a href="/create-story">Create a Story</a>
             <a href="#">Favorite Story</a>
             <a href="#">Explore Stories</a>
             <a href="#">Authors</a>
@@ -180,7 +179,7 @@
             <h5>Newsletter</h5>
             <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
             <div class="subscribe">
-                <input type="email" name="" id="subscribe-email" placeholder="Type email"> 
+                <input type="email" name="" id="subscribe-email" placeholder="Type email">
                 <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
             </div>
         </section>

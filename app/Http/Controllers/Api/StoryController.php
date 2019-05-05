@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use Auth;
 use DB;
 use App\User;
@@ -17,7 +15,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\StoryResource;
 use App\Http\Resources\SingleStoryResource;
 use Symfony\Component\HttpFoundation\Response;
-
 class StoryController extends Controller
 {
     use UserTrait;
@@ -33,19 +30,16 @@ class StoryController extends Controller
     public function index(Request $request)
     {
         $stories = Story::query();
-
         $stories = $stories->when($request->has('age'), function ($q) use ($request) {
             $age = explode('-', $request->age);
-
             return $q->where(function ($q) use ($age){
                 foreach ($age as $data) {
                     $q->orWhereRaw('? between age_from and age_to ', [$data]);
                 }
             });
         });
-      
-        $stories = $stories->get();
 
+        $stories = $stories->get();
         return response()->json([
             'status' => 'success',
             'code' => 200,
@@ -121,9 +115,7 @@ class StoryController extends Controller
         $story = Story::where('id', $id)
                         ->with(['comments.user:id,first_name,last_name,image_url'])
                         ->firstOrFail();
-
         $user = $request->user('api');
-
         if ($user) {
             $reaction = Reaction::where('user_id', $user->id)
                 ->where('story_id', $id)
@@ -138,9 +130,8 @@ class StoryController extends Controller
         }else {
             $story['reaction'] = 'none';
         }
-
         // dd($story->comments->first()->user);
-      
+
         if ($story->is_premium) {
             if ($user) {
                 if ($this->userIsPremuim()) {
@@ -149,7 +140,7 @@ class StoryController extends Controller
                         "code" => Response::HTTP_OK,
                         'message' => 'premium story',
                         'data' => new SingleStoryResource($story),
-                        
+
                     ], Response::HTTP_OK);
                 }else {
                     return response()->json([
@@ -259,7 +250,6 @@ class StoryController extends Controller
             $story->decrement('likes_count', 1);
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
-
             $action = 'Removed like';
         } else if ($reaction && $reaction->reaction == 0) {
             $story->increment('likes_count', 1);
@@ -270,7 +260,6 @@ class StoryController extends Controller
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 1]
             );
-
             $action = 'Changed to like';
         } else {
             $story->increment('likes_count', 1);
@@ -280,7 +269,6 @@ class StoryController extends Controller
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 1]
             );
-
             $action = 'Added like';
         }
         DB::commit();
@@ -314,7 +302,6 @@ class StoryController extends Controller
             $story->decrement('dislikes_count', 1);
             $likeCount = $story['likes_count'];
             $dislikeCount = $story['dislikes_count'];
-
             $action = 'Removed dislike';
         } else if ($reaction && $reaction->reaction == 1) {
             $story->increment('dislikes_count', 1);
@@ -325,7 +312,6 @@ class StoryController extends Controller
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 0]
             );
-
             $action = 'Changed to dislike';
         } else {
             $story->increment('dislikes_count', 1);
@@ -335,7 +321,6 @@ class StoryController extends Controller
                 ['story_id' => $id, 'user_id' => auth()->id()],
                 ['reaction' => 0]
             );
-
             $action = 'Added dislike';
         }
         DB::commit();

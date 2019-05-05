@@ -13,14 +13,14 @@ font-family: 'Poppins', sans-serif;*/
 @import url('jquery-ui.css');
 @import url('custom-animate.css');
 
-/*** 
+/***
 
 ====================================================================
 	Reset
 ====================================================================
 
  ***/
- 
+
 * {
 	margin:0px;
 	padding:0px;
@@ -28,7 +28,7 @@ font-family: 'Poppins', sans-serif;*/
 	outline:none;
 }
 
-/*** 
+/***
 
 ====================================================================
 	Global Settings
@@ -84,7 +84,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 input,button,select{
-	
+
 }
 
 textarea{
@@ -93,7 +93,7 @@ textarea{
 
 p,.text{
 	position:relative;
-	line-height:1.8em;	
+	line-height:1.8em;
 }
 
 .bold {
@@ -125,13 +125,12 @@ p,.text{
 }
 
 .strike-through{
-	text-decoration:line-through;	
+	text-decoration:line-through;
 }
 
 .auto-container{
 	position:static;
-	max-width:1200px;
-	padding:0px 15px;
+	padding:0px 3rem;
 	margin:0 auto;
 }
 
@@ -147,7 +146,7 @@ p,.text{
 ul,li{
 	list-style:none;
 	padding:0px;
-	margin:0px;	
+	margin:0px;
 }
 
 .theme-btn{

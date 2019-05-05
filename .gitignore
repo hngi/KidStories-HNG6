@@ -12,3 +12,4 @@ fabric8-analytics.log
 package-lock.json
 .rnd
 /fe
+docker-compose.yml

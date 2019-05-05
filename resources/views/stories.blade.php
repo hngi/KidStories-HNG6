@@ -16,10 +16,7 @@
     </nav>
 </div>
 
-<div class="auto-container adjust-padding">
-    <div class="mb-3">
-        <h1>Search Results</h1>
-    </div>
+<div class="auto-container browse-adjust-padding">
     <div class="col-md-12 d-flex flex-row p-0 ">
         <div class="col-md-9 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
@@ -64,7 +61,7 @@
                 </div>
                 {{$stories->links()}}
                 @else
-                <p class="empty-response"> No Results for {{$search}}</p>
+                <p class="empty-response">{{$message}}</p>
                 @endif
             </div>
         </div>
