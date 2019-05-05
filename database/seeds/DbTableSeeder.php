@@ -46,6 +46,7 @@ class DbTableSeeder extends Seeder
         $this->subscribed();
         //$this->story_tag();
         $this->storyTag();
+        $this->admin();
     }
 
     protected function story()
@@ -136,5 +137,12 @@ class DbTableSeeder extends Seeder
                 }
             ]);
         });
+    }
+
+    protected function admin()
+    {
+        factory('App\Admin')->create([
+            'email' => 'admin@email.com'
+        ]);
     }
 }

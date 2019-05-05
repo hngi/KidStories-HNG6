@@ -13,7 +13,7 @@
                                 <h3 class="mb-0">{{ __('Stories') }}</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('stories.create') }}" class="btn btn-sm btn-primary">{{ __('Add story') }}</a>
+                                <a href="{{ route('admin.stories.create') }}" class="btn btn-sm btn-primary">{{ __('Add story') }}</a>
                             </div>
                         </div>
                     </div>
@@ -34,46 +34,29 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">{{ __('Title') }}</th>
-
-                                    <th scope="col">{{ __('Body') }}</th>
                                     <th scope="col">{{ __('Category') }}</th>                                                                      
-                                    <th scope="col">{{ __('Posted By') }}</th>
-                                    <th scope="col">{{ __('Image Url') }}</th>
-                                    <th scope="col">{{ __('Image Name') }}</th>
                                     <th scope="col">{{ __('Age') }}</th>
                                     <th scope="col">{{ __('Author') }}</th>
-                                    <th scope="col">{{ __('story duration') }}</th>
                                     <th scope="col">{{ __('Subscription') }}</th>
                                     <th scope="col">{{ __('Posted On') }}</th>
-                                    <th scope="col">{{ __('Modified at') }}</th>
                                      <th scope="col"></th>
                           
                                 </tr>                         
                             </thead>
-                           
                             <tbody>
                                 @foreach ($stories as $story)
                                     <tr>
-
-                                        <td><p>{{ $story->title}}</p></td>
-                                        <td>{{ $story->body }}</td>
-                                         <td>{{ $story->category_id }}</td>
-                                         <td>{{ Auth::guard('admin')->user()->name}}</td>
-                                         <td>
-                                            @if ($story->image_url)
-                                                <a href="{{ $story->image_url }}" target="_blank">View image</a>                                          
-                                            @endif
-                                        </td> 
-                                        <td><p>{{ $story->image_name}}</p></td>
+                                        <td>{{ $story->title}}</td>
+                                         <td>{{ $story->category->name }}</td>
                                         <td>{{ $story->age }}</td>
                                         <td>{{ $story->author }}</td>
-                                        <td>{{ $story->story_duration }}</td>
-                                        <td>{{ $story->is_premium}}</p></td> 
-                                        <td>{{ $story->created_at }}</td>
-                                        <td>{{ $story->updated_at }}</td>
+                                        <td>{{ $story->subscription}}</p></td> 
+                                        <td>
+                                            <abbr title="{{ $story->created_at->format('d-M-Y') . ' @ ' . $story->created_at->format('H:ia') }}">
+                                                {{ $story->created_at->diffForHumans() }}
+                                            </abbr>
+                                        </td>
         
-
-
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,11 +64,12 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                     
-                                                    <form action="{{ route('stories.destroy', $story->id) }}" method="post">
+                                                    <form action="{{ route('admin.stories.destroy', $story->id) }}" method="post">
                                                         @csrf
                                                         @method('delete')
                                                         
-                                                        <a class="dropdown-item" href="{{ route('stories.edit', $story->id) }}">{{ __('Edit') }}</a>
+                                                        <a class="dropdown-item" href="{{ route('admin.stories.show', $story->id) }}">{{ __('Detail') }}</a>
+                                                        <a class="dropdown-item" href="{{ route('admin.stories.edit', $story->id) }}">{{ __('Edit') }}</a>
                                                         <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to delete?") }}') ? this.parentElement.submit() : ''">
                                                             {{ __('Delete') }}
                                                         </button>
@@ -99,14 +83,13 @@
                         </table>
                     </div>
                     <div class="card-footer py-4">
-                        <nav class="d-flex justify-content-end" aria-label="...">
-                             
+                        <nav class="d-flex justify-content-center" aria-label="...">
+                                {{$stories->render()}} 
                         </nav>
                     </div>
                 </div>
             </div>
         </div>
-            
         @include('admin.layouts.footers.auth')
     </div>
 @endsection

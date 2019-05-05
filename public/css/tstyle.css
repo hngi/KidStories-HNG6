@@ -1504,9 +1504,9 @@ img{
 
 .faq-section .owl-nav .owl-prev{
 	position:absolute;
-	left:-80px;
+	left:-40px;
 	color:#d0d0d0;
-	font-size:50px;
+	font-size:40px;
 	font-weight:400;
 	transition:all 500ms ease;
 	-moz-transition:all 500ms ease;
@@ -1517,9 +1517,9 @@ img{
 
 .faq-section .owl-nav .owl-next{
 	position:absolute;
-	right:-80px;
+	right:-40px;
 	color:#d0d0d0;
-	font-size:50px;
+	font-size:40px;
 	font-weight:400;
 	transition:all 500ms ease;
 	-moz-transition:all 500ms ease;
