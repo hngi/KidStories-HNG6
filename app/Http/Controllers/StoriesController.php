@@ -241,34 +241,4 @@ class StoriesController extends Controller
 
         return view('singlestory', compact('story', 'similarStories'));
     }
-
-    public function search(Request $request)
-    {
-        $search = $request->get('search');
-        $stories = Story::where('title', 'LIKE', "%$search%")->orWhere('author', 'LIKE', "%$search%")->paginate(3);
-
-        $user = $request->user();
-
-
-        for ($i = 0; $i < $stories->count(); $i++) {
-            $storyId = $stories[$i]->id;
-            if ($user) {
-                $test = 0;
-                $reaction = Reaction::where('story_id', $storyId)
-                    ->where('user_id', $user->id)
-                    ->first();
-                if ($reaction && $reaction->reaction == 0) {
-                    $stories[$i]['reaction'] = 'dislike';
-                } elseif ($reaction && $reaction->reaction == 1) {
-                    $stories[$i]['reaction'] = 'like';
-                } else {
-                    $stories[$i]['reaction'] = 'nil';
-                }
-            } else {
-                $test = 1;
-                $stories[$i]['reaction'] = 'nil';
-            }
-        }
-        return view('searchlisting', ['stories' => $stories, 'search' => $search]);
-    }
 }
