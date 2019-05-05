@@ -34,7 +34,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/favorites', 'BookmarkController@index')->name('bookmark');
+
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
+Route::get('/categories/{id}/stories', 'CategoryController@stories')->name('categories.stories');
+
+
 Route::get('/categories/{id}', 'CategoryController@show')->name('stories');
 Route::get('/categories/{id}/stories/sort/recent', 'CategoryController@filter')->name('stories.recent');
 Route::get('/categories/{id}/stories/sort/age', 'CategoryController@filterByAge')->name('stories.age');

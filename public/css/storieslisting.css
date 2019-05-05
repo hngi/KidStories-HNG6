@@ -134,6 +134,12 @@ footer p {
 .adjust-padding {
     padding: 2rem 0 0 5rem;
 }
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+}
 .card-title a {
     font-style: normal;
     font-weight: bold;
@@ -142,8 +148,6 @@ footer p {
     color: #333333 !important;
     mix-blend-mode: normal;
     opacity: 0.9;
-    white-space: nowrap;
-    overflow: hidden;
 }
 .vertical-rule {
     min-height: 90%;
