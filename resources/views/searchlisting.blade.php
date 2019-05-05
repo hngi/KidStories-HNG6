@@ -26,7 +26,8 @@
                 @if ($stories && count($stories) > 0)
                 <div class="d-flex flex-row flex-wrap">
                     @foreach ($stories as $story)
-                    <div class=" col-md-3 p-0 mr-5 card story-card  mb-4 premium-badge-holder">
+                    <div class="col-lg-4 ">
+                    <div class="card story-card mb-4 premium-badge-holder">
                         @if($story->is_premium)
                         <span class="badge badge-primary premium-badge">PREMIUM</span>
                         @endif
@@ -60,6 +61,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                     @endforeach
                 </div>
                 {{$stories->links()}}
@@ -70,7 +72,6 @@
         </div>
         <div class="col-md-3">
             <div class="d-flex flex-row col-md-12  ">
-                <input class="vertical-rule" />
                 <div class="col-md-12" id="category-drop">
                     <h6>POPULAR CATEGORIES</h6><br>
                     <a href="/categories/1">Fantasy</a><br>
@@ -108,7 +109,7 @@
 
             <!--Image Column-->
             <div class="col-lg-4 col-md-12 col-sm-12 ">
-                <img src="../images/resources/bottom.jpg" alt="" />
+                <img src="../../images/resources/bottom.jpg" alt="" />
             </div>
 
 
@@ -119,8 +120,8 @@
                     <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
                     </div>
                     <div class="buttons-box">
-                        <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../images/icons/apple.png" alt="" /></a>
-                        <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../images/icons/playstore.png" alt="" /></a>
+                        <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../../images/icons/apple.png" alt="" /></a>
+                        <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../../images/icons/playstore.png" alt="" /></a>
                     </div>
                 </div>
             </div>
