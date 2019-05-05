@@ -18,15 +18,15 @@
 
 <div class="auto-container adjust-padding">
     <div class="mb-3">
-        <h3>{{$category->name}} Category Listing</h3>
+        <h3>{{-- {{$category->name}} --}} Category Listing</h3>
     </div>
     <div class="col-md-12 d-flex flex-row p-0 ">
         <div class="col-md-9 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
-                @if (count($category->stories) > 0)
+                {{-- @if (count($category->stories) > 0) --}}
 
                 <div class="d-flex flex-row flex-wrap">
-                    @foreach ($category->stories as $story)
+                    @foreach ($stories as $story)
                     <div class=" col-md-3 p-0 mr-5 card story-card  mb-4 premium-badge-holder">
                         @if($story->is_premium)
                         <span class="badge badge-primary premium-badge">PREMIUM</span>
@@ -63,10 +63,10 @@
                     </div>
                     @endforeach
                 </div>
-                {{-- {{$stories->links()}} --}}
-                @else
+                
+                {{-- @else
                 <p class="empty-response">Oops There are no Stories in this category</p>
-                @endif
+                @endif --}}
             </div>
         </div>
         <div class="col-md-3">
@@ -91,9 +91,9 @@
                     <p>Sort By</p>
                     <div class="card" style="width: 15rem;">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/age" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
+                            {{-- <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/age" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li> --}}
                             {{-- <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li>  --}}
-                            <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/recent" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
+                            {{-- <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/recent" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li> --}}
                         </ul>
                     </div>
 

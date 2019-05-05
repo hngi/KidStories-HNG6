@@ -58,6 +58,45 @@ class CategoryController extends Controller
         return view('storieslisting', compact('category'));
 
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function stories(Request $request, $id)
+    {
+        $stories = Story::where('category_id', $id)->get();
+        
+        /*$category = Category::find($id);
+        $user = $request->user();
+
+        for ($i=0; $i < $category->stories->count(); $i++) {
+            $storyId = $category->stories[$i]->id;
+            if ($user) {
+                $test = 0;
+                $reaction = Reaction::where('story_id', $storyId)
+                ->where('user_id', $user->id)
+                ->first();
+                if ($reaction && $reaction->reaction == 0) {
+                    $category->stories[$i]['reaction'] = 'dislike';
+                } elseif ($reaction && $reaction->reaction == 1) {
+                    $category->stories[$i]['reaction'] = 'like';
+                } else {
+                    $category->stories[$i]['reaction'] = 'nil';
+                }
+            }else {
+                $test = 1;
+                $category->stories[$i]['reaction'] = 'nil';
+            }
+
+        }*/
+
+        return view('categories_stories', compact('stories'));
+
+    }
+
     /**
      *
      */
