@@ -33,18 +33,18 @@ class StoriesController extends Controller
     }
     public function browsestories()
     {
-        $stories = Story::all();
+        $stories = Story::paginate(12);
 
-        return view('stories', ['stories' => $stories, 'message'=> "Oops! There are no stores"]);
+        return view('stories', ['stories' => $stories, 'message' => "Oops! There are no stores"]);
     }
 
     public function mystories()
     {
-        $stories = Story::where('user_id', auth()->id());
+        $stories = Story::where('user_id', auth()->id())->paginate(12);
         if (gettype($stories) != 'array') {
             $stories = [];
         }
-        return view('stories', ['stories' => $stories, 'message'=> "You have not created any story"]);
+        return view('stories', ['stories' => $stories, 'message' => "You have not created any story"]);
     }
     public function singlestory(Request $request, $id)
     {
@@ -239,6 +239,6 @@ class StoriesController extends Controller
                 $stories[$i]['reaction'] = 'nil';
             }
         }
-        return view('searchlisting')->with('stories', $stories)->with('search', $search);
+        return view('searchlisting', ['stories' => $stories, 'search' => $search]);
     }
 }

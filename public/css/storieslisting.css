@@ -144,7 +144,7 @@ footer p {
     opacity: 0.9;
 }
 .vertical-rule {
-    height: 90%;
+    min-height: 90%;
     border-width: 0 0 0 1px;
     border-radius: 0px;
     border-color: #d5d5d5;

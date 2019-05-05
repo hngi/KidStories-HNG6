@@ -57,6 +57,7 @@
                 </div>
             </div>
             @endforeach
+            {{$stories->links()}}
         @else
         <p class="empty-response"> {{$message}}</p>
         @endif
