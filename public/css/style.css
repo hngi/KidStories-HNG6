@@ -16,6 +16,7 @@ h6 {
     color: #8a8a8a;
 }
 
+
 .social-icons a {
     color: #fff;
     float: left;
@@ -106,7 +107,12 @@ h6 {
     right: 0px;
     text-align: center;
     color: white;
-    font-size: 20px;
+    font-size: 13px;
+    padding: 5px 10px;
+}
+
+#category-drop h6 {
+    font-size: 16px;
 }
 
 .sp-story {

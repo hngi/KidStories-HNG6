@@ -21,9 +21,10 @@
         <div class="col-md-9 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
                 @if ($stories && count($stories) > 0)
-                <div class="d-flex flex-row flex-wrap justify-content-between">
+                <div class="d-flex row flex-wrap justify-content-between">
                     @foreach ($stories as $story)
-                    <div class=" col-md-3 p-0 mr-5 card story-card  mb-4 premium-badge-holder">
+                    <div class="col-lg-4 ">
+                    <div class="card story-card mb-4 premium-badge-holder">
                         @if($story->is_premium)
                         <span class="badge badge-primary premium-badge">PREMIUM</span>
                         @endif
@@ -61,6 +62,8 @@
                             </div>
                         </div>
                     </div>
+
+                </div>
                     @endforeach
                 </div>
                 {{$stories->links()}}
@@ -71,7 +74,7 @@
         </div>
         <div class="col-md-3">
             <div class="d-flex flex-row col-md-12  ">
-                <input class="vertical-rule" />
+                
                 <div class="col-md-12" id="category-drop">
                     <h6>POPULAR CATEGORIES</h6><br>
                     <a href="/categories/1">Fantasy</a><br>

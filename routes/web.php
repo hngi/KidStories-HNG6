@@ -19,6 +19,12 @@ Route::get('/', function () {
     return view('home');
 })->name('homepage');
 
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+
 Route::get('/story', 'StoriesController@index')->name('reaction');
 Route::get('/browsestories', 'StoriesController@browsestories')->name('stories.browsestories');
 Route::middleware('auth')->get('/mystories', 'StoriesController@mystories')->name('stories.mystories');
