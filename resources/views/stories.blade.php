@@ -29,7 +29,7 @@
                         <span class="badge badge-primary premium-badge">PREMIUM</span>
                         @endif
                         @if($story->image_url )
-                        <img src="https://res.cloudinary.com/betterminds/image/upload/v1556869502/15ccbf17e40b56_1556869502.png.png" />
+                        <img src="{{$story->image_url}}" />
                         @else
                         <img src="/images/placeholder.png" />
                         @endif
