@@ -63,7 +63,6 @@
                     </div>
                     @endforeach
                 </div>
-                {{$stories->links()}}
                 @else
                 <p class="empty-response">Oops There are no Stories in this category</p>
                 @endif
