@@ -46,12 +46,16 @@
                             <tbody>
                                 @foreach ($stories as $story)
                                     <tr>
-                                        <td><p>{{ $story->title}}</p></td>
+                                        <td>{{ $story->title}}</td>
                                          <td>{{ $story->category->name }}</td>
                                         <td>{{ $story->age }}</td>
                                         <td>{{ $story->author }}</td>
                                         <td>{{ $story->subscription}}</p></td> 
-                                        <td>{{ $story->created_at->diffForHumans() }}</td>
+                                        <td>
+                                            <abbr title="{{ $story->created_at->format('d-M-Y') . ' @ ' . $story->created_at->format('H:ia') }}">
+                                                {{ $story->created_at->diffForHumans() }}
+                                            </abbr>
+                                        </td>
         
                                         <td class="text-right">
                                             <div class="dropdown">

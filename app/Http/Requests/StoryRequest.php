@@ -39,8 +39,7 @@ class StoryRequest extends FormRequest
             Rule::unique('stories')
                 ->ignore($this->route('story')->id)
         ]:'required|string|unique:stories|max:255';
-
-        //'title' => 'required|string|unique:stories|max:255':
+        
         return $rules;
     }
 }
