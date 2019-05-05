@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Story;
+use DB;
 use Auth;
-use App\Subscribed;
-use App\Bookmark;
-use Carbon\Carbon;
 use Validator;
+use App\Story;
+use App\Bookmark;
 use App\Category;
 use App\Reaction;
-use DB;
+use Carbon\Carbon;
+use App\Subscribed;
+use Illuminate\Http\Request;
 use App\Services\FileUploadService;
 use App\Http\Resources\StoryResource;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,20 +24,35 @@ class StoriesController extends Controller
         $this->fileUploadService = $fileUploadService;
     }
 
-    public function index()
+    /**
+     * Show all stories
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
     {
-        $stories = Story::with('user')
-            ->where('is_premium', false)
-            ->orderBy('created_at', 'desc')
-            ->get();
-        return view('stories', ['stories' => $stories]);
-    }
-    public function browsestories(Request $request)
-    {
-        $stories = Story::paginate(12);
+        if ($request->query('search')) {
+            $search = $request->query('search');
 
+            $stories = Story::where('title', 'LIKE', "%$search%")
+                            ->orWhere('author', 'LIKE', "%$search%");
+        } else {
+            $stories = Story::query();
+        }
+
+        if ($request->query('sort') == 'latest') {
+            $stories = $stories->latest()->paginate(21);
+        } else if ($request->query('sort') == 'age') {
+            $stories = $stories->orderBy("age_from")->paginate(21);
+        } else {
+            $stories = $stories->paginate(21);
+        }
+
+        $categories = Category::limit(4)->get();
+        
         $user = $request->user();
-        for ($i=0; $i < $stories->count(); $i++) { 
+
+        for ($i=0; $i < $stories->count(); $i++) {
             $storyId = $stories[$i]->id;
             if ($user) {
                 $reaction = Reaction::where('story_id', $storyId)
@@ -62,20 +77,77 @@ class StoriesController extends Controller
                 $stories[$i]['reaction'] = 'nil';
                 $stories[$i]['favorite'] = false;
             }
-        }
-       
 
-        return view('stories', ['stories' => $stories, 'message' => "Oops! There are no stores"]);
+        }
+
+        return view('stories', compact('stories', 'categories'));
     }
 
-    public function mystories()
+    /**
+     * Show all stories belonging to a logged in user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function mystories(Request $request)
     {
-        $stories = Story::where('user_id', auth()->id())->paginate(12);
-        if (gettype($stories) != 'array') {
-            $stories = [];
+        if ($request->query('search')) {
+            $search = $request->query('search');
+
+            $stories = Story::where('user_id', auth()->id())->paginate(21)
+                            ->where('title', 'LIKE', "%$search%")
+                            ->orWhere('author', 'LIKE', "%$search%");
+        } else {
+            $stories = Story::where('user_id', auth()->id());
         }
-        return view('stories', ['stories' => $stories, 'message' => "You have not created any story"]);
+
+        if ($request->query('sort') == 'latest') {
+            $stories = $stories->latest()->paginate(21);
+        } else if ($request->query('sort') == 'age') {
+            $stories = $stories->orderBy("age_from")->paginate(21);
+        } else {
+            $stories = $stories->paginate(21);
+        }
+
+        $categories = Category::limit(4)->get();
+        
+        $user = $request->user();
+
+        for ($i=0; $i < $stories->count(); $i++) {
+            $storyId = $stories[$i]->id;
+            if ($user) {
+                $reaction = Reaction::where('story_id', $storyId)
+                    ->where('user_id', $user->id)
+                    ->first();
+                $bookmark = Bookmark::where('user_id', $user->id)
+                    ->where('story_id', $storyId)
+                    ->first();    
+                if ($reaction && $reaction->reaction == 0) {
+                    $stories[$i]['reaction'] = 'dislike';
+                } elseif ($reaction && $reaction->reaction == 1) {
+                    $stories[$i]['reaction'] = 'like';
+                } else {
+                    $stories[$i]['reaction'] = 'nil';
+                }
+                if ($bookmark) {
+                    $stories[$i]['favorite'] = true;
+                } else {
+                    $stories[$i]['favorite'] = false;
+                }
+            } else {
+                $stories[$i]['reaction'] = 'nil';
+                $stories[$i]['favorite'] = false;
+            }
+
+        }
+
+        return view('mystories', compact('stories', 'categories'));
     }
+
+    /**
+     * Show single story
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function singlestory(Request $request, $id)
     {
         $story = Story::where('id', $id)
@@ -98,15 +170,6 @@ class StoriesController extends Controller
         } elseif (!$user && $story && $story->is_premium == 1) {
             return \redirect('home');
         }
-
-
-        // return [$subcribed, $story, $user];
-        // if (!$user) {
-        //
-        // }
-        // if ($user["is_premium"] == 0 && $story["is_premium"] == 1) {
-        //     return \redirect('home');
-        // }
 
         return view('story', ['story' => $story]);
     }
@@ -172,29 +235,7 @@ class StoriesController extends Controller
 
         DB::commit();
         return redirect()->route('singlestory', ['id' => $story->id]);
-        // // /show-story/{story}
-        // return response()->json([
-        //     'status' => 'success',
-        //     'code' => 200,
-        //     'message' => 'OK',
-        //     'data' => new StoryResource($story),
-        // ], 200);
     }
-
-    // public function show(Story $story)
-    // {
-    //     $story->load('tags');
-
-    //     return view('singlestory');
-
-    //     return redirect('/story/'.$story->id);
-    //     // return response()->json([
-    //     //     'status' => 'success',
-    //     //     'code' => 200,
-    //     //     'message' => 'OK',
-    //     //     'data' => $story,
-    //     // ], 200);
-    // }
 
     public function show(Request $request, Story $story)
     {
@@ -205,33 +246,4 @@ class StoriesController extends Controller
         return view('singlestory', compact('story', 'similarStories'));
     }
 
-    public function search(Request $request)
-    {
-        $search = $request->get('search');
-        $stories = Story::where('title', 'LIKE', "%$search%")->orWhere('author', 'LIKE', "%$search%")->paginate(3);
-
-        $user = $request->user();
-
-
-        for ($i = 0; $i < $stories->count(); $i++) {
-            $storyId = $stories[$i]->id;
-            if ($user) {
-                $test = 0;
-                $reaction = Reaction::where('story_id', $storyId)
-                    ->where('user_id', $user->id)
-                    ->first();
-                if ($reaction && $reaction->reaction == 0) {
-                    $stories[$i]['reaction'] = 'dislike';
-                } elseif ($reaction && $reaction->reaction == 1) {
-                    $stories[$i]['reaction'] = 'like';
-                } else {
-                    $stories[$i]['reaction'] = 'nil';
-                }
-            } else {
-                $test = 1;
-                $stories[$i]['reaction'] = 'nil';
-            }
-        }
-        return view('searchlisting', ['stories' => $stories, 'search' => $search]);
-    }
 }

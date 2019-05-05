@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Category;
 use App\Story;
 use App\Reaction;
+use App\Category;
 use App\Bookmark;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class CategoryController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
