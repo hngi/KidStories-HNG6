@@ -37,10 +37,11 @@ class BookmarkController extends Controller
                                 ->first();
 
          if ($bookmark != null) {
+             $bookmark->delete();
             return response()->json([
                 'status' => 'success',
                 'code' => 200,
-                'message' => 'OK',
+                'message' => 'Removed',
                 "data" => true
             ], 200);
          }

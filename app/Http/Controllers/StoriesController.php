@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Story;
 use Auth;
 use App\Subscribed;
+use App\Bookmark;
 use Carbon\Carbon;
 use Validator;
 use App\Category;
@@ -42,6 +43,9 @@ class StoriesController extends Controller
                 $reaction = Reaction::where('story_id', $storyId)
                     ->where('user_id', $user->id)
                     ->first();
+                $bookmark = Bookmark::where('user_id', $user->id)
+                    ->where('story_id', $storyId)
+                    ->first();    
                 if ($reaction && $reaction->reaction == 0) {
                     $stories[$i]['reaction'] = 'dislike';
                 } elseif ($reaction && $reaction->reaction == 1) {
@@ -49,8 +53,14 @@ class StoriesController extends Controller
                 } else {
                     $stories[$i]['reaction'] = 'nil';
                 }
+                if ($bookmark) {
+                    $stories[$i]['favorite'] = true;
+                } else {
+                    $stories[$i]['favorite'] = false;
+                }
             } else {
                 $stories[$i]['reaction'] = 'nil';
+                $stories[$i]['favorite'] = false;
             }
         }
        
