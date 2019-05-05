@@ -42,10 +42,8 @@ class StoryResource extends JsonResource
             $reaction = Reaction::where('story_id', $storyId)
                     ->where('user_id', $user->id)
                     ->first();
-            if ($reaction && $reaction->reaction == 0) {
-                return "disliked"; 
-            } elseif ($reaction && $reaction->reaction == 1) {
-                return "liked";
+            if ($reaction) {
+                return $reaction->reaction; 
             }        
                    
         }
