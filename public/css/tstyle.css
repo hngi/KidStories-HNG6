@@ -671,7 +671,7 @@ img{
 	position:relative;
 	float:left;
 	margin-left:24px;
-	margin-top:15px;
+	margin-top:22px;
 }
 
 .main-header .outer-box .nav-btn{
@@ -1578,7 +1578,7 @@ img{
 
 .banner-section-three{
 	position:relative;
-	padding-top:80px;
+	/* padding-top:80px; */
 	z-index:1;
 }
 

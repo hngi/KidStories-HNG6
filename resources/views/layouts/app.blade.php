@@ -9,13 +9,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Kids Stories') }}</title>
-
-<!--
     <script src="{{ asset('js/app.js') }}"></script>
+
+    
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.js') }}"></script> -->
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -31,7 +31,6 @@
     <link href="{{ asset('css/tresponsive.css') }}" rel="stylesheet">
 
     @yield('custom_css')
-
 </head>
 
 <body>
@@ -198,7 +197,7 @@
 </footer>
 
     </div>
-
+    
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>

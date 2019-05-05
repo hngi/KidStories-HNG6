@@ -32,7 +32,7 @@
             @foreach ($categories as $category)
 
                 <div class="item">
-                    <a href="{{ route('stories', $category->id) }}"> 
+                    <a href="{{ route('categories.stories', $category->id) }}"> 
                         <img class="category" src="{{ $category->image_url }}"> 
                         <div class="info"> {{ $category->name }} </div> 
                     </a>
