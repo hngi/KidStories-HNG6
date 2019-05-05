@@ -6,6 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class SingleStoryResource extends JsonResource
 {
+    
     /**
      * Transform the resource into an array.
      *
@@ -28,9 +29,7 @@ class SingleStoryResource extends JsonResource
             'is_premium'    => $this->is_premium,
             'likes_count'   => $this->likes_count,
             'dislikes_count'=> $this->dislikes_count,
-            'comments' => [
-                'comments' => $this->comments
-            ]
+            'comments' => $this->comments
         ];
     }
 

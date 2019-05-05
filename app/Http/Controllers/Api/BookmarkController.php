@@ -11,8 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BookmarkController extends Controller
 {
+    /**
+     * Fetch bookmarked stories belonging to the logged in user
+     *
+     * @param  int  $storyId
+     * @return \Illuminate\Http\Response
+     */
     public function index (){
-
          $bookmarks =  \App\User::find(auth()->id())->bookmarks;
 
         return response()->json([
@@ -22,6 +27,7 @@ class BookmarkController extends Controller
             "data" => StoryResource::collection($bookmarks)
         ], Response::HTTP_OK);
     }
+
     /**
      * Store a newly created resource in storage.
      *
