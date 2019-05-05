@@ -31,3 +31,24 @@ var react = async function(event) {
   }
   updateReactionStats(storyId, action.data.likes_count, action.data.dislikes_count, action.data.action);
 };
+
+var bookmark = async function(event){
+  event.preventDefault();
+  var text = event.target.id;
+  var storyId = event.target.dataset.storyId;
+  let action = '';
+  //console.log(event)
+ 
+  action = await axios.post('/api/v1/bookmarks/stories/' + storyId);
+  console.log(action.data.message);
+  updateBookmarkIcon(storyId, action.data.message);
+}
+
+var updateBookmarkIcon = function (storyId, message) {
+
+  if (message == "Created") {
+    document.querySelector('#bookmark-' + storyId).className += " bookmark-blue";
+  } else if (message == "Removed") {
+    document.querySelector('#bookmark-' + storyId).classList.remove('bookmark-blue');
+  }
+};
