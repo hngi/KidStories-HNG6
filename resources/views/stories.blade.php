@@ -11,7 +11,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb arr-right ">
             <li class="breadcrumb-item"><a href="{{ route('homepage') }}">Home</a></li>
-            <li class="breadcrumb-item active"><a href="#">Stories</a></li>
+            <li class="breadcrumb-item titlecase active"><a href="#">Stories</a></li>
         </ol>
     </nav>
 </div>
@@ -24,12 +24,12 @@
                 <div class="d-flex row flex-wrap justify-content-between">
                     @foreach ($stories as $story)
                     <div class="col-lg-4 ">
-                    <div class="card story-card mb-4 premium-badge-holder">
+                    <div class="card col-lg-12 p-0 story-card mb-4 premium-badge-holder">
                         @if($story->is_premium)
                         <span class="badge badge-primary premium-badge">PREMIUM</span>
                         @endif
                         @if($story->image_url )
-                        <img src="{{ $story->image_url }}" />
+                        <img src="{{$story->image_url}}" />
                         @else
                         <img src="/images/placeholder.png" />
                         @endif

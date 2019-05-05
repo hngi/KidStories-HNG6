@@ -1,40 +1,40 @@
 @extends('layouts.app')
 @section('custom_css')
+<link href="{{ asset('css/storieslisting.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/singlestory.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 @endsection
 @section('content')
+
+<div class="p-0 col-md-12">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb arr-right ">
+            <li class="breadcrumb-item"><a href="{{ route('homepage') }}">Home</a></li>
+            <li class="breadcrumb-item titlecase active"><a href="{{route('story.show',$story->id)}}"> {{$story->title}} </a></li>
+        </ol>
+    </nav>
+</div>
+
     <div class="content">
-        <!-- Breadcrumb --> 
-        <nav class="min-nav">
-            <ul>
-                <li><a href="/"> Home </a></li>
-                <i class="fa fa-chevron-right"></i>
-                <li><a class="current" href="{{route('story.show',$story->id)}}"> {{$story->title}} </a></li>
-            </ul>
-        </nav>
 
         <!-- Content begins -->
         <span class="content1 topic">
-            <h1> {{$story->title}} </h1>
-            <h3> By: {{$story->author}} </h3>
+            <h1 class="titlecase"> {{$story->title}} </h1>
+            <h3 class="titlecase"> By: {{$story->author}} </h3>
         </span>
 
         <!-- Story section -->
         <div class="content1">
             <!-- Bookmark story -->
             <div class="subContent">
-                <div class="">
+                <div class="subcontent-icon">
                     <a>
                         <i class="fa fa-bookmark stBookmark"></i>
                     </a>
                 </div> <!-- Bookmark story ends -->
 
                 <!-- Stories -->
-                <img class="stories" src="{{$story->image_url}}" 
-                    style="
-                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                    ">             
+                <img class="stories" src="{{$story->image_url}}" >             
                 <p>{{$story->body}} </p>
             </div>
 
@@ -55,7 +55,7 @@
             <hr>
             <h1> Stories You Might Like </h1>
             <!-- Cards section -->
-            <div class="stories py-5">
+            <div class="stories">
                 <div class="row">
                     @foreach ($similarStories as $similarStory)
                        <div class="col-md-3">

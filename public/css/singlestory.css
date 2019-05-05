@@ -1,28 +1,11 @@
-/* Global */
-body {
-  margin: 0;
-  padding: 0;
-  background: #FFFFFF;
-  width: 100%;
-  font-family: 'Lato', 'sans-serif';
-  box-sizing: border-box;
-}
-
-h1 {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 28px;
-  padding-top: 10px;  
-}
-
-.content {
-  margin-top: 99.7px;
-}
-
 .container1 {
   width: 80%;
   margin: auto;
   overflow: hidden;
+}
+
+.titlecase {
+  text-transform: capitalize;
 }
 
 .content1 {
@@ -30,31 +13,15 @@ h1 {
   margin: auto;
   overflow: hidden;
 }
-/* Global ends */
-
-/* Breadcrumb */
-.min-nav {
-  background: #FAFAFA;
-  min-height: 40px;
+.content1 .topic {
+  padding-top: 60px;
+  padding-bottom: 20px;
 }
 
-.min-nav ul {
-  display: flex;
-  list-style: none;
+.subcontent-icon i {
+  color: #718cfb;
+  font-size: 26px;
 }
-
-nav a, .min-nav ul i  {
-  color: #333333;
-  display: block;
-  text-decoration: none;
-  padding-top: 0.6rem;
-  padding-left: 50px;
-}
-
-.current {
-  color: #718CFB;
-}
-/* Breadcrumb ends */
 
 /* Content and story section */
 .topic > h1 {
@@ -63,7 +30,6 @@ nav a, .min-nav ul i  {
   font-weight: bold;
   font-size: 28px;
   /* letter-spacing: -0.8px; */
-  padding-top: 40px;  
 }
 
 .topic > h3 {
@@ -71,6 +37,7 @@ nav a, .min-nav ul i  {
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
+  line-height: 0;
 }
 
 .stBookmark {
@@ -80,11 +47,11 @@ nav a, .min-nav ul i  {
 img.stories {
   width: 50%;
   height: 400px;
-  padding-left: 80px;
+  object-fit: contain;
 }
 
 .subContent {
-  padding: 0 0px 0 390px;
+  padding: 0px 0px 0 390px;
 }
 
 div.subContent > p {
@@ -141,6 +108,8 @@ img.cards {
 
 .story_card .card-title {
   color: #333333;
+  text-transform: capitalize;
+  margin-bottom: 0;
 }
 
 .story_card .card-text:first-of-type {

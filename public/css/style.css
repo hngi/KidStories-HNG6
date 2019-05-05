@@ -1,5 +1,5 @@
 /* Styles for the Create User Pages */
-h3 {
+/*h3 {
     color: #333333;
     font-size: 20px;
     line-height: 132%;
@@ -14,16 +14,15 @@ h6 {
     line-height: 12px;
     /* identical to box height */
     color: #8a8a8a;
-}
+}*/
 
 
-.social-icons a {
-    color: #fff;
+.social-iconsb a {
     float: left;
     margin-left: 16px;
 }
 
-.social-icons>a>i {
+.social-iconsb > a > i {
     font-size: 16px;
 }
 
