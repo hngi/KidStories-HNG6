@@ -74,26 +74,26 @@
                 <input class="vertical-rule" />
                 <div class="col-md-12" id="category-drop">
                     <h6>POPULAR CATEGORIES</h6><br>
-                    <a href="/categories/1">Fantasy</a><br>
-                    <a href="/categories/4">Jokes</a><br>
-                    <a href="/categories/2">Bedtime Stories</a><br>
-                    <a href="/categories/3">Morning Stories</a>
+                    @foreach ($categories as $category)
+                        <a href="{{ route('categories.stories', $category->id) }}">{{ $category->name }}</a><br>
+                    @endforeach
 
                     <hr style="width:10%;">
                     <div class="searchContainer">
                         <i class="fa fa-search searchIcon"></i>
-                        {!!Form::open(['route'=>['stories.search'],'method'=>'GET'])!!}
-                        <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search...">
-                        {{ Form::close() }}
-                        {{-- --}}
+                        <form action="{{ route('categories.stories', $currentCategory) }}">
+                            <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search..." value="{{ request()->query('search') }}">
+                        </form>
                     </div>
                     <hr style="width:10%;">
                     <p>Sort By</p>
                     <div class="card" style="width: 15rem;">
                         <ul class="list-group list-group-flush">
-                            {{-- <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/age" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li> --}}
+                            <li class="list-group-item"><a href="" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
                             {{-- <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li>  --}}
-                            {{-- <li class="list-group-item"><a href="/categories/{{$category->id}}/stories/sort/recent" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li> --}}
+                            <li class="list-group-item"><a href="{{ url()->current(). '?search=' . request()->query('search') . '&sort=latest' }}" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
+
+
                         </ul>
                     </div>
 
@@ -110,7 +110,7 @@
 
             <!--Image Column-->
             <div class="col-lg-4 col-md-12 col-sm-12 ">
-                <img src="../images/resources/bottom.jpg" alt="" />
+                <img src="{{ asset('images/resources/bottom.jpg') }}" alt="" />
             </div>
 
 
@@ -121,8 +121,8 @@
                     <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
                     </div>
                     <div class="buttons-box">
-                        <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../images/icons/apple.png" alt="" /></a>
-                        <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="../images/icons/playstore.png" alt="" /></a>
+                        <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/apple.png') }}" alt="" /></a>
+                        <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/playstore.png') }}" alt="" /></a>
                     </div>
                 </div>
             </div>

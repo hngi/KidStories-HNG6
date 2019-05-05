@@ -63,10 +63,7 @@
                     </div>
                     @endforeach
                 </div>
-<<<<<<< HEAD
-                {{-- {{$stories->links()}} --}}
-=======
->>>>>>> 403713b550b0d52aa6c1b8447a55b48c5cc4d589
+                
                 @else
                 <p class="empty-response">Oops There are no Stories in this category</p>
                 @endif

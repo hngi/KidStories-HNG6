@@ -67,7 +67,39 @@ class CategoryController extends Controller
      */
     public function stories(Request $request, $id)
     {
-        $stories = Story::where('category_id', $id)->get();
+        if ($request->query('search')) {
+            $search = $request->query('search');
+
+            $stories = Story::where('category_id', $id)
+                            ->where('title', 'LIKE', "%$search%")
+                            ->orWhere('author', 'LIKE', "%$search%");
+        } else {
+            $stories = Story::where('category_id', $id);
+        }
+
+        $stories = ($request->query('sort') == 'latest') 
+                        ? $stories->latest()->get() 
+                        : $stories->get();
+
+        //Retrieve current query strings:
+        $currentQueries = $request->query();
+
+        //Declare new queries you want to append to string:
+        $newQueries = [$request->query('search'), $request->query('sort')];
+
+        //Merge together current and new query strings:
+        $allQueries = array_merge($currentQueries, $newQueries);
+
+        //Generate the URL with all the queries:
+        $request->fullUrlWithQuery($allQueries);
+
+        // dd($request->fullUrlWithQuery($allQueries));
+        // dd($allQueries);
+
+        $categories = Category::limit(4)->get();
+
+        $currentCategory = $id;
+
         
         $user = $request->user();
 
@@ -90,7 +122,7 @@ class CategoryController extends Controller
 
         }
 
-        return view('categories_stories', compact('stories'));
+        return view('categories_stories', compact('stories', 'categories', 'currentCategory'));
 
     }
 
