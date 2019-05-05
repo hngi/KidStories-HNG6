@@ -21,7 +21,7 @@ class CategoryController extends Controller
 
         return view('categories', compact('categories'));
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -33,7 +33,7 @@ class CategoryController extends Controller
         //
         $category = Category::find($id);
         $user = $request->user();
-        
+
 
         for ($i=0; $i < $category->stories->count(); $i++) {
             $storyId = $category->stories[$i]->id;
@@ -48,26 +48,26 @@ class CategoryController extends Controller
                     $category->stories[$i]['reaction'] = 'like';
                 } else {
                     $category->stories[$i]['reaction'] = 'nil';
-                }   
+                }
             }else {
                 $test = 1;
                 $category->stories[$i]['reaction'] = 'nil';
-            }    
-                      
+            }
+
         }
         return view('storieslisting', compact('category'));
 
     }
     /**
-     * 
+     *
      */
     public function filter(Request $request, $id)
     {
         $stories = Story::orderBy('id','desc')->where('category_id',$id)->get();
         $category = Category::find($id);$user = $request->user();
-        
+
         $user = $request->user();
-        
+
 
         for ($i=0; $i < $stories->count(); $i++) {
             $storyId = $stories[$i]->id;
@@ -82,21 +82,21 @@ class CategoryController extends Controller
                     $stories[$i]['reaction'] = 'like';
                 } else {
                     $stories[$i]['reaction'] = 'nil';
-                }   
+                }
             }else {
                 $test = 1;
                 $stories[$i]['reaction'] = 'nil';
-            }    
-                      
+            }
+
         }
-        return view('filteredlisting', compact('category','stories'));
+        return view('storieslisting', compact('category','stories'));
     }
     public function filterByAge(Request $request, $id)
     {
         $stories = Story::orderBy('age_from','desc')->where('category_id', $id)->get();
         $category = Category::find($id);
         $user = $request->user();
-        
+
 
         for ($i=0; $i < $stories->count(); $i++) {
             $storyId = $stories[$i]->id;
@@ -111,15 +111,15 @@ class CategoryController extends Controller
                     $stories[$i]['reaction'] = 'like';
                 } else {
                     $stories[$i]['reaction'] = 'nil';
-                }   
+                }
             }else {
                 $test = 1;
                 $stories[$i]['reaction'] = 'nil';
-            }    
-                      
+            }
+
         }
 
-        return view('filteredlisting', compact('category','stories'));
+        return view('storieslisting', compact('category','stories'));
     }
 }
 

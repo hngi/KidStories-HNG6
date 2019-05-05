@@ -20,6 +20,9 @@ Route::get('/', function () {
 })->name('homepage');
 
 Route::get('/story', 'StoriesController@index')->name('reaction');
+Route::get('/browsestories', 'StoriesController@browsestories')->name('stories.browsestories');
+Route::middleware('auth')->get('/mystories', 'StoriesController@mystories')->name('stories.mystories');
+Route::get('/story/{id}', 'StoriesController@singlestory')->name('singlestory');
 
 Route::middleware('auth')->get('/create-story', 'StoriesController@create')->name('story.create');
 
@@ -33,8 +36,8 @@ Auth::routes();
 Route::get('/favorites', 'BookmarkController@index')->name('bookmark');
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
 Route::get('/categories/{id}', 'CategoryController@show')->name('stories');
-Route::get('/categories/{id}/stories/sort/recent', 'CategoryController@filter')->name('stories.filter');
-Route::get('/categories/{id}/stories/sort/age', 'CategoryController@filterByAge')->name('stories.filter');
+Route::get('/categories/{id}/stories/sort/recent', 'CategoryController@filter')->name('stories.recent');
+Route::get('/categories/{id}/stories/sort/age', 'CategoryController@filterByAge')->name('stories.age');
 Route::get('/categories/stories/search/', 'StoriesController@search')->name('stories.search');
 
 Route::middleware('auth')->post('/create-story', 'StoriesController@store')->name('story.create');
