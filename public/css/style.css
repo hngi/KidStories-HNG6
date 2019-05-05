@@ -6,13 +6,17 @@ h3 {
     letter-spacing: 0.03em;
     font-weight: bold;
 }
+
 h6 {
     font-style: normal;
     font-weight: bold;
     font-size: 10px;
-    line-height: 12px; /* identical to box height */
+    line-height: 12px;
+    /* identical to box height */
     color: #8a8a8a;
 }
+
+
 .social-icons a {
     color: #fff;
     float: left;
@@ -33,8 +37,7 @@ h6 {
     justify-content: center;
 }
 
-.favourites {
-}
+.favourites {}
 
 .favourites_header {
     background-image: url(https://res.cloudinary.com/ephaig/image/upload/v1556708884/Rectangle.png);
@@ -75,11 +78,15 @@ h6 {
 }
 
 .fav-red {
-    color: #8b0000;
+    color: #8b0000 !important;
 }
 
 .fav-green {
-    color: #55ae3a;
+    color: #55ae3a !important;
+}
+
+.bookmark-blue {
+    color: #0000FF !important
 }
 
 .sp-container {
@@ -100,7 +107,12 @@ h6 {
     right: 0px;
     text-align: center;
     color: white;
-    font-size: 20px;
+    font-size: 13px;
+    padding: 5px 10px;
+}
+
+#category-drop h6 {
+    font-size: 16px;
 }
 
 .sp-story {
@@ -136,8 +148,7 @@ h6 {
     margin: 5px 0;
 }
 
-.sp-tag-container {
-}
+.sp-tag-container {}
 
 .sp-tags {
     display: flex;
@@ -176,11 +187,9 @@ h6 {
     color: blue;
 }
 
-#sp-related {
-}
+#sp-related {}
 
-.sp-related {
-}
+.sp-related {}
 
 .sp-rs-header {
     font-size: 18px;
@@ -198,8 +207,7 @@ h6 {
     margin-right: 15px;
 }
 
-.sp-rs-cont {
-}
+.sp-rs-cont {}
 
 .sp-rs-title {
     font-size: 16px;
@@ -238,12 +246,12 @@ textarea {
     font-size: 14px;
 }
 
-.top-form > .form-input {
+.top-form>.form-input {
     width: 40%;
     margin-top: 20px;
 }
 
-div.form-input > * {
+div.form-input>* {
     display: block;
 }
 
@@ -334,10 +342,12 @@ footer section {
     border-radius: 0;
     background-color: #718cfb;
 }
+
 @media screen and (max-width: 800px) {
     .add-story {
         margin: 5em 2em;
     }
+
     footer section {
         width: 50%;
         margin-bottom: 20px;
@@ -345,15 +355,18 @@ footer section {
 }
 
 @media screen and (max-width: 550px) {
-    .top-form > .form-input {
+    .top-form>.form-input {
         width: 100%;
     }
+
     .favourites_header {
         height: 200px;
     }
+
     .title-input {
         margin-bottom: 20px;
     }
+
     footer section {
         width: 100%;
         margin-bottom: 20px;

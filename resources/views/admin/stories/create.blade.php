@@ -23,6 +23,25 @@
                             @csrf
                             <h6 class="heading-small text-muted mb-4">{{ __('Story information') }}</h6>
                             <div class="pl-lg-4">
+                                <div class="form-group {{ $errors->has('category_id') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-title">{{ __('Category') }} </label>
+                                    <select name="category_id" 
+                                        class="form-control form-control-alternative">
+                                        <option value="">Select category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{$category->id}}"
+                                                 {{$category->id == old('category_id')?'selected':''}}>
+                                                {{$category->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('category_id'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('category_id') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
                                 <div class="form-group {{ $errors->has('title') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Title') }} *</label>
                                     <input  type="text" name="title" 
@@ -46,10 +65,7 @@
                                 </div>                   
                                 <div class="form-group {{ $errors->has('body') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Content') }} *</label>
-                                    <textarea style="height:200px" type="text" 
-                                         class="form-control form-control-alternative" name="body" required>
-                                         {{old('body')}}
-                                    </textarea>
+                                    <textarea style="height:200px" type="text" class="form-control form-control-alternative" name="body" required>{{old('body')}}</textarea>
                                     @if ($errors->has('body'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('body') }}</strong>
@@ -60,7 +76,7 @@
                                     <label class="form-control-label" for="input-title">{{ __('Age') }} *</label>
                                     <input  type="text" name="age"
                                         class="form-control form-control-alternative"  required 
-                                        value="{{old('age')}}">
+                                        value="{{old('age')}}" placeholder="Example: 1-3">
                                     @if ($errors->has('age'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('age') }}</strong>
@@ -78,34 +94,22 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="form-group {{ $errors->has('category_id') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-title">{{ __('Category') }} </label>
-                                    <select name="category_id" 
-                                        class="form-control form-control-alternative">
-                                        @foreach ($categories as $category)
-                                            <option value="{{$category->id}}"
-                                                 {{$category->id == old('category_id')?'selected':''}}>
-                                                {{$category->name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('category_id'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('category_id') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
+
                                 <div class="form-group {{ $errors->has('is_premium') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-is_premium">{{ __('Subscription') }}</label><br>                                    
-                                        <input type="radio" name="is_premium" value="1" 
-                                             {{old('is_premium')==1?'checked':''}}> Premium<br>
-                                        <input type="radio" name="is_premium" value="0"
-                                            {{old('is_premium')==='0'?'checked':''}}> Regular<br>                                    
-                                    @if ($errors->has('is_premium'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('is_premium') }}</strong>
-                                        </span>
-                                    @endif
+                                        <label class="form-control-label" for="input-is_premium">{{ __('Subscription') }}</label><br> 
+                                        <label>                                   
+                                            <input type="radio" name="is_premium" value="1" {{old('is_premium')==1?'checked':''}}> Premium
+                                        </label> <br>
+                                        <label>
+                                            <input type="radio" name="is_premium" value="0"
+                                            {{old('is_premium')==='0'?'checked':''}}> Regular<br>
+                                        </label>   
+
+                                        @if ($errors->has('is_premium'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('is_premium') }}</strong>
+                                            </span>
+                                        @endif
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>

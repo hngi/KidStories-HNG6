@@ -76,7 +76,7 @@ class StoryController extends Controller
             'body' => $request->body,            
             'age_from' => $age[0],
             'age_to' => $age[1],
-            'author' => $request->author,      
+            'author' => $request->author ?? 'Unknown',      
             'is_premium' => $request->is_premium,
             'category_id' => $request->category_id,             
             "image_url" => $image['secure_url']?? null,
