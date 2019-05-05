@@ -31,9 +31,29 @@ class StoriesController extends Controller
             ->get();
         return view('stories', ['stories' => $stories]);
     }
-    public function browsestories()
+    public function browsestories(Request $request)
     {
         $stories = Story::paginate(12);
+
+        $user = $request->user();
+        for ($i=0; $i < $stories->count(); $i++) { 
+            $storyId = $stories[$i]->id;
+            if ($user) {
+                $reaction = Reaction::where('story_id', $storyId)
+                    ->where('user_id', $user->id)
+                    ->first();
+                if ($reaction && $reaction->reaction == 0) {
+                    $stories[$i]['reaction'] = 'dislike';
+                } elseif ($reaction && $reaction->reaction == 1) {
+                    $stories[$i]['reaction'] = 'like';
+                } else {
+                    $stories[$i]['reaction'] = 'nil';
+                }
+            } else {
+                $stories[$i]['reaction'] = 'nil';
+            }
+        }
+       
 
         return view('stories', ['stories' => $stories, 'message' => "Oops! There are no stores"]);
     }
