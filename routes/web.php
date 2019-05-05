@@ -24,6 +24,10 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/subscribe', function () {
+    return view('subscribe');
+})->name('subscribe');
+
 
 Route::get('/story', 'StoriesController@index')->name('reaction');
 Route::get('/browsestories', 'StoriesController@browsestories')->name('stories.browsestories');
