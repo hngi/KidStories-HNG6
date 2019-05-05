@@ -1,18 +1,4 @@
-/* Styles for the Create User Pages */
-h3 {
-    color: #333333;
-    font-size: 20px;
-    line-height: 132%;
-    letter-spacing: 0.03em;
-    font-weight: bold;
-}
-h6 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 10px;
-    line-height: 12px; /* identical to box height */
-    color: #8a8a8a;
-}
+
 .social-icons a {
     color: #fff;
     float: left;
@@ -100,7 +86,12 @@ h6 {
     right: 0px;
     text-align: center;
     color: white;
-    font-size: 20px;
+    font-size: 13px;
+    padding: 5px 10px;
+}
+
+#category-drop h6 {
+    font-size: 16px;
 }
 
 .sp-story {
