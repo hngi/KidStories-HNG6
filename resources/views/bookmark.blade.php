@@ -45,7 +45,7 @@
                                 @endif
                             </div>
                             <div class="bookmark">
-                                <a> <i class="fa fa-bookmark fav-icon bookmark-blue" style="margin-left: 8px" onclick="bookmark(event);" id="bookmark-{{ $bookmark->id }}" data-story-id="{{ $bookmark->id }}"></i> </a>
+                                <a> <i class="fa fa-bookmark fav-icon bookmark-blue" style="margin-left: 8px" onclick="bookmark(event);" id="bookmark-{{ $bookmark->id }}" data-story-id="{{ $bookmark->id }}" data-fav-id = "{{ $bookmark->id }}"></i> </a>
                             </div>
                         </div>
                     </div>
