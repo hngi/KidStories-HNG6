@@ -1,0 +1,182 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    width: 100%;
+    font-family: 'Lato', 'sans-serif';
+    box-sizing: border-box;
+}
+
+
+.banner {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+
+h1 {
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  letter-spacing: -0.8px;
+  padding: 5px 69px
+}
+
+
+.sections {
+  padding: 5px 60px;
+  text-align: justify;
+  max-width: 1110px;
+  margin: 0 auto;
+}
+
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 0px;
+  line-height: 144%;
+}
+
+
+p {
+  font-family: Lato;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 144%;
+  letter-spacing: 0.03cm;
+}
+
+
+.image {
+  margin:  60px  auto;
+  max-width: 424px;
+  height: auto;
+}
+
+
+.tags {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+button {
+  font-size: 14px;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  width: 100px;
+  background: rgba(224, 224, 224, 0.7);
+  border: none;
+  cursor: pointer;
+}
+
+
+.fa {
+  float: right;
+  padding: 10px;
+  margin: 10px;
+  color: #B2B2B2;
+  font-size: 14px;
+}
+
+
+hr {
+  width: 100%;
+  border: 1px solid #A4A4A4;
+  margin: 60px 0px;
+}
+
+
+#stories {
+  padding: 5px 60px;
+  max-width: 1110px;
+  margin: 0 auto;
+}
+
+
+.img {
+  width: 195px;
+  height: 141px;
+  margin-right: 30px;
+  margin-top: 0;
+  left: 9.38%;
+  bottom: 34.16%;
+
+}
+
+
+.stories-p {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  text-align: justify;
+
+}
+
+
+.h20 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 20px 69px;
+  text-align: justify;
+
+  margin-left: 85px;
+}
+
+
+.stories-p h2 {
+  margin-bottom: 10px;
+}
+
+.stories-p p {
+  font-family: Lato;
+  font-size: 12px;
+  line-height: normal;
+  margin: auto;
+}
+
+.stories-p span {
+  color: #4A59F7;
+  float: right;
+  font-size: 16px;
+}
+
+.stories-p span a {
+    text-decoration: none;
+}
+
+
+@media (min-width: 600px)  {
+    h1 {
+    font-size: 40px;
+    }
+
+    h2 {
+    font-size: 20px;
+    }
+    button, .fa, p {
+    font-size: 16px;
+    }
+
+    .h20 {
+    font-size: 24px;
+    }
+
+    .stories-p p {
+    font-size: 16px;
+    }
+
+    .stories-p h2 {
+    font-size: 24px;
+    }
+}
