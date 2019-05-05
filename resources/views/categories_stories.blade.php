@@ -17,8 +17,8 @@
 </div>
 
 <div class="auto-container adjust-padding">
-    <div class="mb-3">
-        <h3>{{-- {{$category->name}} --}} Category Listing</h3>
+    <div class="mb-5">
+        <h3>{{ $stories->first()->category->name }} Category Listing</h3>
     </div>
     <div class="col-md-12 d-flex flex-row p-0 ">
         <div class="col-md-9 p-0">
