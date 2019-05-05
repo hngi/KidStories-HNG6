@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+.upgrade {
+	padding: 10% 0;
+	color: #000;
+}
+
+.upgrade h2,
+.upgrade h3 {
+	color: #4a59f7;
+	font-family: "Lato", Nunito, sans-serif;
+}
+
+.upgrade h2 {
+	font-size: 40px;
+}
+
+.upgrade h3 {
+	font-size: 25px;
+	text-transform: uppercase;
+}
+
+.upgrade .plans {
+	max-width: 800px;
+}
+
+.annual p small {
+	margin-left: 5px;
+	color: #4a59f7;
+}
+
+.upgrade .payment_card {
+	padding: 50px 20px;
+	box-shadow: 5px 7px 11px 7px rgba(0, 0, 0, 0.15);
+	transition: transform 0.3s ease-in;
+	cursor: pointer;
+}
+
+.upgrade .payment_card:hover {
+	transform: scale(1.05, 1.05);
+}
+
+.benefits .benefit {
+	margin: 10px 0;
+}
+
+.benefits .benefit::before {
+	font-family: "Font Awesome 5 Free";
+	content: "\f00c" !important;
+	font-weight: bold;
+	margin-right: 5px;
+	color: #718cfb;
+}
+
+.proceed {
+	background: linear-gradient(187.27deg, #39a1f7 -53.71%, #a875ff 192.78%);
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	padding: 10px 20px;
+}
