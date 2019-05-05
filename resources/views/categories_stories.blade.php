@@ -27,7 +27,8 @@
 
                 <div class="d-flex flex-row flex-wrap">
                     @foreach ($stories as $story)
-                    <div class=" col-md-3 p-0 mr-5 card story-card  mb-4 premium-badge-holder">
+                    <div class="col-lg-4 ">
+                    <div class="card story-card mb-4 premium-badge-holder">
                         @if($story->is_premium)
                         <span class="badge badge-primary premium-badge">PREMIUM</span>
                         @endif
@@ -56,11 +57,16 @@
                                     @endif
                                 </div>
                                 <span class="verticalLine">
-                                    <a href="#"> <i class="far fa-bookmark" style="margin-left: 8px;"></i> </a>
+                                @if ($story->favorite == true)
+                                    <a> <i class="far fa-bookmark bookmark-blue" style="margin-left: 8px" onclick="bookmark(event);" id="bookmark-{{ $story->id }}" data-story-id="{{ $story->id }}"></i> </a>
+                                    @else
+                                    <a> <i class="far fa-bookmark" style="margin-left: 8px" onclick="bookmark(event);" id="bookmark-{{ $story->id }}" data-story-id="{{ $story->id }}"></i> </a>
+                                    @endif
                                 </span>
                             </div>
                         </div>
                     </div>
+                </div>
                     @endforeach
                 </div>
                 
@@ -71,7 +77,6 @@
         </div>
         <div class="col-md-3">
             <div class="d-flex flex-row col-md-12  ">
-                <input class="vertical-rule" />
                 <div class="col-md-12" id="category-drop">
                     <h6>POPULAR CATEGORIES</h6><br>
                     @foreach ($categories as $category)

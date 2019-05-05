@@ -149,6 +149,7 @@
             @yield('content')
         </main>
 
+
         <!-- Footer -->
 <footer class="footer-wrap">
     <div class="footer-box">

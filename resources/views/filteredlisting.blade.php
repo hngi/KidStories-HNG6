@@ -50,8 +50,12 @@
                @endif
                 </div>
                 <span class="verticalLine">
-            <i class="far fa-bookmark fav-icon" style="margin-left: 8px;"></i>
-          </span>
+                  @if ($story->favorite == true)
+                  <a> <i class="far fa-bookmark bookmark-blue" style="margin-left: 8px" onclick="bookmark(event);" id="bookmark-{{ $story->id }}" data-story-id="{{ $story->id }}"></i> </a>
+                  @else
+                  <a> <i class="far fa-bookmark" style="margin-left: 8px" onclick="bookmark(event);" id="bookmark-{{ $story->id }}" data-story-id="{{ $story->id }}"></i> </a>
+                  @endif
+                </span>
 
               </div>
             </div>
