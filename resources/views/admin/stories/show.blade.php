@@ -12,7 +12,7 @@
                                 <h3 class="mb-0">{{ __('Manage Stories') }}</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('stories.index') }}" class="btn btn-sm btn-primary">{{ __('Back to list') }}</a>
+                                <a href="{{ route('admin.stories.index') }}" class="btn btn-sm btn-primary">{{ __('Back to list') }}</a>
                             </div>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                             <div class="pl-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-title">{{ __('Title') }} </label>
-                                    <input style="width:500px;" type="text" value="{{$story->title}}" 
+                                    <input  type="text" value="{{$story->title}}" 
                                         class="form-control form-control-alternative" disabled>
                                 </div>         
                                 <div class="form-group">
@@ -40,39 +40,39 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-title">{{ __('Created By') }} </label>
-                                    <input style="width:500px;" type="text" 
+                                    <input  type="text" 
                                         value="{{$story->user->fullName}}"
                                         class="form-control form-control-alternative" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-title">{{ __('Created On') }} </label>
-                                    <input style="width:500px;" type="text" 
+                                    <input  type="text" 
                                         value="{{$story->created_at->toDayDateTimeString()}}"
                                         class="form-control form-control-alternative" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-title">{{ __('Age') }} </label>
-                                    <input style="width:500px;" type="text" value="{{$story->age}}"
+                                    <input  type="text" value="{{$story->age}}"
                                         class="form-control form-control-alternative" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-title">{{ __('Author') }} </label>
-                                    <input style="width:500px;" type="text" value="{{$story->author}}"
+                                    <input  type="text" value="{{$story->author}}"
                                         class="form-control form-control-alternative" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-title">{{ __('Category') }} </label>
-                                    <input style="width:500px;" type="text" value="{{$story->category->name}}"
+                                    <input  type="text" value="{{$story->category->name}}"
                                         class="form-control form-control-alternative" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-title">{{ __('Reading Time') }} </label>
-                                    <input style="width:500px;" type="text" value="{{$story->readingTime}}"
+                                    <input  type="text" value="{{$story->readingTime}}"
                                         class="form-control form-control-alternative" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-title">{{ __('Subscription') }} </label>
-                                    <input style="width:500px;" type="text" value="{{$story->subscription}}"
+                                    <input  type="text" value="{{$story->subscription}}"
                                         class="form-control form-control-alternative" disabled>
                                 </div>
                             </div>
