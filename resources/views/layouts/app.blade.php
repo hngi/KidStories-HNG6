@@ -11,11 +11,11 @@
     <title>{{ config('app.name', 'Kids Stories') }}</title>
     <script src="{{ asset('js/app.js') }}"></script>
 
-    
+<!--     
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.js') }}"></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -69,7 +69,7 @@
                                             <li><a href="{{ route('categories.index') }}">Categories</a></li>
                                             <li class=""><a  href="{{ route('stories.mystories') }}">My Stories</a>
                                             </li>
-                                            <li><a href="#">About Us</a></li>
+                                            <li><a href="{{ route('about') }}">About Us</a></li>
                                         </ul>
                                     </div>
 
@@ -149,13 +149,14 @@
             @yield('content')
         </main>
 
+
         <!-- Footer -->
 <footer class="footer-wrap">
     <div class="footer-box">
         <section>
             <h5>Kid Stories</h5>
-            <a href="#">About Us</a>
-            <a href="#">Stories</a>
+            <a href="{{ route('logout') }}">About Us</a>
+            <a href="{{ route('stories.browsestories') }}">Stories</a>
             <a href="#">Contact Us</a>
             <a href="#">Advertise with Us</a>
         </section>
@@ -163,8 +164,7 @@
             <h5>Quick Links</h5>
             <a href="/create-story">Create a Story</a>
             <a href="#">Favorite Story</a>
-            <a href="#">Explore Stories</a>
-            <a href="#">Authors</a>
+            <a href="{{ route('stories.browsestories') }}">Explore Stories</a>
             <a href="#">Make a donation</a>
         </section>
         <section>
@@ -187,10 +187,10 @@
     <div class="footer-info">
         <p class="col-md-10 pull-left">© 2019 Kid Stories. All rights reserved</p>
         <div class="social-icons col-md-2 pull-right">
-          <a href="#">  <i class="fa fa-youtube"></i> </a>
-          <a href="#">  <i class="fa fa-instagram"></i> </a>
-          <a href="#">  <i class="fa fa-facebook"></i> </a>
-          <a href="#">  <i class="fa fa-twitter"></i> </a>
+<!--           <a href="#">  <i class="fa fa-youtube"></i> </a>
+ -->          <a href="https://instagram.com/mykidstories">  <i class="fa fa-instagram"></i> </a>
+          <a href="https://facebook.com/mykidstories">  <i class="fa fa-facebook"></i> </a>
+          <a href="https://twitter.com/mykidstories">  <i class="fa fa-twitter"></i> </a>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -198,10 +198,6 @@
 
     </div>
     
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/owl.js') }}"></script>
     <script src="{{ asset('js/appear.js') }}"></script>
     <script src="{{ asset('js/wow.js') }}"></script>
