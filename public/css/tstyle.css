@@ -3,7 +3,16 @@
 }
 
 .social-icons a {
-	color: #718CFB;
+	color: #718CFB !important;
+	font-size: 16px;
+}
+.social-iconsb a {
+    float: left;
+    margin-left: 16px;
+}
+
+.social-iconsb > a > i {
+    font-size: 16px;
 }
 
 /*Btn Style*/
@@ -1654,7 +1663,7 @@ img{
 .authors-box  .author-box .author-inner{
 	position:relative;
 	padding-left:70px;
-	padding-top:8px;
+	padding-top:16px;
 }
 
 .authors-box  .author-box .author-inner .image{
