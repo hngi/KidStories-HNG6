@@ -34,13 +34,10 @@ var react = async function(event) {
 
 var bookmark = async function(event){
   event.preventDefault();
-  var text = event.target.id;
   var storyId = event.target.dataset.storyId;
   let action = '';
-  //console.log(event)
  
   action = await axios.post('/api/v1/bookmarks/stories/' + storyId);
-  console.log(action.data.message);
   updateBookmarkIcon(storyId, action.data.message);
 }
 

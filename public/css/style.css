@@ -78,15 +78,15 @@ h6 {
 }
 
 .fav-red {
-    color: #8b0000;
+    color: #8b0000 !important;
 }
 
 .fav-green {
-    color: #55ae3a;
+    color: #55ae3a !important;
 }
 
 .bookmark-blue {
-    color: #0000FF
+    color: #0000FF !important
 }
 
 .sp-container {
