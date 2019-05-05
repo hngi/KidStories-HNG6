@@ -94,7 +94,16 @@
                                         </div>
                                     </div>
                                     <!--Language-->
-                                    <div class="language dropdown"><a class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><span class="icon circle-icons fa fa-user"></span> Account <span class="icon fa fa-caret-down"></span> </a>
+                                    <div class="language dropdown"><a class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><span class="icon circle-icons fa fa-user"></span>
+                                     @if(Auth::check())
+                                     {{ Auth::user()->first_name }}  {{ Auth::user()->last_name}}
+                                     @else
+
+                                     Account
+
+                                     @endif
+
+                                     <span class="icon fa fa-caret-down"></span> </a>
                                         <ul class="dropdown-menu style-one" aria-labelledby="dropdownMenu2">
                                             @guest
                                             <li>
