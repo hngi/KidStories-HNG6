@@ -19,9 +19,9 @@
 <div class="auto-container browse-adjust-padding">
     <div class="col-md-12 d-flex flex-row p-0 ">
         <div class="col-md-9 p-0">
-            <div class="d-flex flex-column col-md-12  p-0">
+            <div class="d-flex flex-column col-md-12  p-0 mt-5">
                 @if ($stories && count($stories) > 0)
-                <div class="d-flex flex-row flex-wrap">
+                <div class="d-flex flex-row flex-wrap justify-content-between">
                     @foreach ($stories as $story)
                     <div class=" col-md-3 p-0 mr-5 card story-card  mb-4 premium-badge-holder">
                         @if($story->is_premium)
