@@ -25,8 +25,8 @@
             <div class="d-flex flex-column col-md-12  p-0">
                 <div class="d-flex flex-row flex-wrap">
                     @forelse ($stories as $story)
-                        <div class="col-lg-4 ">
-                            <div class="card story-card mb-4 premium-badge-holder">
+                    <div class="col-lg-4 ">
+                    <div class="card col-lg-12 p-0 story-card mb-4 premium-badge-holder">
                                 @if($story->is_premium)
                                     <span class="badge badge-primary premium-badge">PREMIUM</span>
                                 @endif
