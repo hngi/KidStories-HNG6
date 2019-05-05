@@ -16,10 +16,10 @@
     </nav>
 </div>
 
-<div class="auto-container browse-adjust-padding">
+<div class="auto-container browse-adjust-padding mt-5">
     <div class="col-md-12 d-flex flex-row p-0 ">
         <div class="col-md-9 p-0">
-            <div class="d-flex flex-column col-md-12  p-0 mt-5">
+            <div class="d-flex flex-column col-md-12  p-0">
                 @if ($stories && count($stories) > 0)
                 <div class="d-flex flex-row flex-wrap justify-content-between">
                     @foreach ($stories as $story)
