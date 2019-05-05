@@ -1,98 +1,66 @@
-.topic > h1 {
-  text-align: center;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 28px;
-  /* letter-spacing: -0.8px; */
-  padding-top: 40px; 
-  text-transform: capitalize; 
-}
-
 .container1 {
   width: 80%;
   margin: auto;
   overflow: hidden;
 }
 
-/* Banner of Showcase */
-.top-container {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-areas:
-      'showcase showcase'
-      'showcase showcase';    
+.titlecase {
+  text-transform: capitalize;
 }
-
-.top-container h1 {
-  color: #ffffff !important;
-}
-
-.banner {
-  grid-area: showcase;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/showcase.png');
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  min-height: 400px;
-  text-align: center;
-  font-size: 30px;
-  padding-top: 150px;
-  color: #ffff;
-}
-
-/* Showcase or Banner */
-.top-container {
-    display: grid;
-    grid-gap: 20px;
-    grid-template-areas:
-        'showcase showcase'
-        'showcase showcase';    
-}
-
-.top-container h1 {
-  color: #ffffff !important;
-}
-
-.showcase {
-  grid-area: showcase;
-  /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../singlecss/img/showcase.png');  */
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/background/Rectangle.png'); 
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  min-height: 400px;
-  text-align: center;
-  font-size: 30px;
-  padding-top: 150px;
-  color: #ffff;
-}
-/* Showcase or Banner ends */
 
 .content1 {
-  width: 77%;
+  width: 80%;
   margin: auto;
   overflow: hidden;
 }
-
-.grid-container {
-  display: grid;
-  grid-gap: 10px;
+.content1 .topic {
+  padding-top: 60px;
+  padding-bottom: 20px;
 }
 
-img.dragon {
-  margin-top: 10px;
-  margin-bottom: 5px;
-  margin-right: 20px
+.subcontent-icon i {
+  color: #718cfb;
+  font-size: 26px;
 }
 
-img.dragon2 {
-  margin-top: 10px;
-  margin-left: 20px;
+/* Content and story section */
+.topic > h1 {
+  text-align: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  /* letter-spacing: -0.8px; */
 }
 
-div.item2 {
+.topic > h3 {
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 0;
+}
+
+.stBookmark {
   float: right;
-  overflow: auto;
+}
+
+img.stories {
+  width: 50%;
+  height: 400px;
+  object-fit: contain;
+}
+
+.subContent {
+  padding: 0px 0px 0 390px;
+}
+
+div.subContent > p {
+  text-align: center;
+  padding-right: 300px;
+}
+
+div.subContent > p.pLast {
+  font-weight: bold;
 }
 
 .end {
@@ -103,6 +71,7 @@ div.item2 {
   padding-top: 40px;   
 }
 
+/* Tags */
 div.tags {
   padding-bottom: 30px;
 }
@@ -118,11 +87,12 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-i.likes {
+i.thumbs {
   float: right;
   padding-left: 18px;
   cursor: pointer;
 }
+/* Tags ends */
 
 hr {
   border-width: 3px;
@@ -130,38 +100,130 @@ hr {
   background: black;
 }
 
-section#story {
-  margin-top: 20px;
-  margin-bottom: 60px;
-}
-img.stories {
-  margin-top: 10px;
-  margin-right: 20px;
-
+/* Story Cards */
+img.cards {
+  min-width: 100%;
+  height: 200px;
 }
 
+.story_card .card-title {
+  color: #333333;
+  text-transform: capitalize;
+  margin-bottom: 0;
+}
 
-@media (min-width: 600px)  {
-  h1 {
-  font-size: 40px;
+.story_card .card-text:first-of-type {
+  color: #4F4F4F;
+}
+
+.story_card .card-text:nth-of-type(2) {
+  color: #666666;
+}
+
+.story_card .author {
+  color: #718CFB;
+}
+
+.story_card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.story_card .reactions i {
+  color: #A6A6A6;
+}
+
+.story_card .reactions .liked i,
+.story_card .reactions .disliked i,
+.story_card .bookmarked i {
+  color: #718cfb;
+}
+/*Story Cards ends */
+
+/* App section */
+a.slideInLeft {
+  margin-right: 15px;
+}
+/* App Section ends */
+
+/* Media querries for resposiveness */
+@media(min-width: 2560px) {
+  div.subContent {
+    padding: 0 390px 0 390px;
   }
 
-  h2 {
-  font-size: 20px;
-  }
-  button, .fa, p {
-  font-size: 16px;
-  }
-
-  .h20 {
-  font-size: 24px;
+  img.stories {
+    width: 500px;
+    margin: 0px 0px 0px 200px;
+    padding-left: 200px;
   }
 
-  .stories-p p {
-  font-size: 16px;
-  }
-
-  .stories-p h2 {
-  font-size: 24px;
+  div.subContent > p {
+    padding-right: 100px;
   }
 }
+
+@media(max-width: 1140px) {
+  .content {
+    margin-top: 0;
+  }
+}
+
+@media(max-width: 1200px) {
+  img.stories {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media(max-width: 1024px) {
+  div.subContent {
+    padding: 0 200px 0 200px;
+  }
+
+  img.stories {
+    width: 320px;
+  }
+
+  div.subContent > p {
+    padding: 0;
+  }
+}
+
+@media(max-width: 768px) {
+  div.subContent {
+    margin: 0;
+    padding: 0;
+  }
+
+  img.stories {
+    margin-left: 150px;
+    padding: 0;
+  }
+}
+
+@media(max-width: 525px) {
+  .content {
+    width: 100%;
+  }
+
+  div.subContent {
+    margin: 0;
+    padding: 0;
+  }
+
+  img.stories {
+    width: 320px;
+    height: 400px;
+    margin: 0;
+    padding-left: 60px;
+  }
+}
+
+@media(max-width: 396px) {
+  a.slideInLeft {
+  padding-bottom: 20px;
+  }
+}
+
+

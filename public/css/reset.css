@@ -157,3 +157,7 @@ ul,li{
 	-ms-transition:all 0.3s ease;
 	-o-transition:all 0.3s ease;
 }
+
+.titlecase {
+	text-transform: capitalize;
+}
