@@ -22,11 +22,11 @@
     </div>
     <div class="col-md-12 d-flex flex-row p-0 ">
         <div class="col-md-9 p-0">
-            <div class="d-flex flex-row flex-wrap col-md-12  p-0">
+            <div class="d-flex flex-column col-md-12  p-0">
                 @if ($stories && count($stories) > 0)
-                @foreach ($stories as $story)
-                <div class="col-md-3 pl-0">
-                    <div class="card story-card  mb-4 premium-badge-holder">
+                <div class="d-flex flex-row flex-wrap">
+                    @foreach ($stories as $story)
+                    <div class=" col-md-3 p-0 mr-5 card story-card  mb-4 premium-badge-holder">
                         @if($story->is_premium)
                         <span class="badge badge-primary premium-badge">PREMIUM</span>
                         @endif
@@ -60,8 +60,8 @@
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
                 {{$stories->links()}}
                 @else
                 <p class="empty-response"> No Results for {{$search}}</p>

@@ -142,6 +142,8 @@ footer p {
     color: #333333 !important;
     mix-blend-mode: normal;
     opacity: 0.9;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .vertical-rule {
     min-height: 90%;
