@@ -119,7 +119,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('stories.index') }}">
+                    <a class="nav-link" href="{{ route('admin.stories.index') }}">
                         <i class="ni ni-planet text-blue"></i> {{ __('Manage Stories') }}
                     </a>
                 </li>

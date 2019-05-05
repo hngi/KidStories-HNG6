@@ -38,8 +38,13 @@ class Story extends Model
 
         return  $minutes > 1 ? "$readTime minutes read" : "$readTime minute read";
     }
+
+    public function getSubscriptionAttribute(){
+        return $this->is_premium == 1?'Premium':'Regular';
+    }
     // Accessors end
 
+    
     //Relationship start
 
     /*
@@ -91,6 +96,8 @@ class Story extends Model
 
     public function scopeSimilar($query)
     {
-        return $query->where('category_id',$this->category_id)->take(5);
+        return $query->where('category_id',$this->category_id)->take(3);
     }
+
+
 }
