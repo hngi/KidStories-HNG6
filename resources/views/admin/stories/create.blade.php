@@ -60,7 +60,7 @@
                                         <input type="file" name="photo" 
                                             class="file-upload-input with-preview" 
                                             title="Click to add files" 
-                                            maxlength="1" accept="jpg|png|gif" 
+                                            maxlength="1" accept="jpg|jpeg|png|gif" 
                                             onchange="checkFile(this)" id="img">
                                         <span style="color:#000">CLICK OR DRAG IMAGES HERE</span>
                                         <input type="hidden" id="imgCount" value="1"/>

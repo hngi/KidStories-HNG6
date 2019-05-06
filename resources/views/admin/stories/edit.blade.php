@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-body">
                         @include('admin.stories.partials.flash')
-                        <form method="post" action="{{ route('admin.stories.update',$story->id) }}"
+                        <form method="post" action="{{ route('admin.stories.update',$story->slug) }}"
                             autocomplete="off" enctype="multipart/form-data">
                             @csrf  @method('PUT')
                             <h6 class="heading-small text-muted mb-4">{{ __('Story information') }}</h6>
@@ -58,7 +58,7 @@
                                         <input type="file" name="photo" 
                                         class="file-upload-input with-preview" 
                                         title="Click to add files" 
-                                        maxlength="1" accept="jpg|png" 
+                                        maxlength="1" accept="jpg|jpeg|png|gif" 
                                         onchange="checkFile(this)" id="img">
                                         <span style="color:#000">CLICK OR DRAG IMAGES HERE</span>
                                         <input type="hidden" id="imgCount" value="1"/>
