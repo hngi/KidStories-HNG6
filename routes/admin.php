@@ -51,3 +51,6 @@ Route::resource('/user', 'UserController');
  *
  */
 Route::resource('/stories', 'StoryController',['as'=>'admin']);
+
+//route for payment
+Route::get('payment','PaymentController@index')->name('payment.index');
