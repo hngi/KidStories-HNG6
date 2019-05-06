@@ -22,17 +22,36 @@
                             @csrf
                             
                             <h6 class="heading-small text-muted mb-4">{{ __('User information') }}</h6>
+                            @foreach($errors->all() as $error)
+                            {{$error}}
+                            @endforeach
                             <div class="pl-lg-4">
-                                <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
-                                    <input type="text" name="name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
+                                <div class="form-group{{ $errors->has('first_name') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-name">{{ __('First name') }}</label>
+                                    <input type="text" name="first_name" id="input-name" class="form-control form-control-alternative{{ $errors->has('first_name') ? ' is-invalid' : '' }}" placeholder="{{ __('First name') }}" value="{{ old('first_name') }}" required autofocus>
 
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('first_name'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
+                                            <strong>{{ $errors->first('first_name') }}</strong>
                                         </span>
                                     @endif
                                 </div>
+
+
+
+                                 <div class="form-group{{ $errors->has('last_name') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-name">{{ __('Last name') }}</label>
+                                    <input type="text" name="last_name" id="input-name" class="form-control form-control-alternative{{ $errors->has('first_name') ? ' is-invalid' : '' }}" placeholder="{{ __('Last name') }}" value="{{ old('last_name') }}" required autofocus>
+
+                                    @if ($errors->has('last_name'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('last_name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+
+
                                 <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-email">{{ __('Email') }}</label>
                                     <input type="email" name="email" id="input-email" class="form-control form-control-alternative{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email') }}" required>
@@ -57,6 +76,46 @@
                                     <label class="form-control-label" for="input-password-confirmation">{{ __('Confirm Password') }}</label>
                                     <input type="password" name="password_confirmation" id="input-password-confirmation" class="form-control form-control-alternative" placeholder="{{ __('Confirm Password') }}" value="" required>
                                 </div>
+
+
+                                <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-email">{{ __('Phone') }}</label>
+                                    <input type="text" name="phone" id="input-email" class="form-control form-control-alternative{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ __('Phone') }}" value="{{ old('phone') }}" required>
+
+                                    @if ($errors->has('phone'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('phone') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+
+                                  <div class="form-group{{ $errors->has('location') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-email">{{ __('Location') }}</label>
+                                    <input type="text" name="location" id="input-email" class="form-control form-control-alternative{{ $errors->has('location') ? ' is-invalid' : '' }}" placeholder="{{ __('Location') }}" value="{{ old('location') }}" required>
+
+                                    @if ($errors->has('location'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('location') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+
+                                 <div class="form-group{{ $errors->has('postal_code') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-email">{{ __('Postal Code') }}</label>
+                                    <input type="text" name="postal_code" id="input-email" class="form-control form-control-alternative{{ $errors->has('postal_code') ? ' is-invalid' : '' }}" placeholder="{{ __('Postal Code') }}" value="{{ old('postal_code') }}" required>
+
+                                    @if ($errors->has('postal_code'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('postal_code') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+
+
+
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
