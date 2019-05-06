@@ -28,6 +28,7 @@ class CreateStoriesTable extends Migration
             $table->integer('likes_count')->default(0);
             $table->integer('dislikes_count')->default(0);
             $table->boolean('is_premium')->default(false);
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
 
             $table->foreign('category_id')

@@ -70,6 +70,7 @@ $factory->define(App\Story::class, function (Faker $faker) {
         'dislikes_count'=>$faker->randomDigit(),
         'author'=>$faker->name,
         'is_premium'=>$faker->boolean,
+        'is_approved'=>$faker->boolean,
         'slug' => str_slug($title),
     ];
 });
