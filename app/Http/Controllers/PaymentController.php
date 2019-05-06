@@ -54,9 +54,18 @@ class PaymentController extends Controller
     		
     	]);
 
-    	return redirect()->route('home');
+    
 
-    	//updating the payment table might not be neccesary for now. i can retrieve all payment details from paystack directly
+    	//updating the payment table so we can also track users payment
+
+    	Payment::create([
+    		"user_id"=>$user->id,
+    		"transaction_reference"=>$data['reference'],
+    		"amount"=>$data['amount']
+
+    	]);
+
+    	return redirect()->route('home');
 
 
     }
