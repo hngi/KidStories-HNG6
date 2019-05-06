@@ -245,5 +245,4 @@ class StoriesController extends Controller
 
         return view('singlestory', compact('story', 'similarStories'));
     }
-
 }
