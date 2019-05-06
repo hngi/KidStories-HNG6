@@ -160,6 +160,9 @@ footer p {
     display: flex;
     flex-direction: row;
 }
+.mb-5 {
+    margin-left: 1rem;
+}
 .browse-adjust-padding {
     padding: 0 5rem;
 }
@@ -186,9 +189,6 @@ footer p {
         margin-top: 20px;
     }
 
-    .mb-5{
-        margin-left: 1.2rem;
-    }
     .mb-5 h3{
         font-size: 20px;
     }
