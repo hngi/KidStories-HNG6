@@ -20,13 +20,13 @@
     <div class="mb-5">
         <h3>{{ $stories->first()->category->name }} Category Listing</h3>
     </div>
-    <div class="col-md-12 d-flex flex-row p-0 ">
-        <div class="col-md-9 p-0">
+    <div class="col-md-12 d-flex cold p-0 ">
+        <div class="col-md-7 col-lg-9 col-sm-6 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
                 <div class="d-flex flex-row flex-wrap">
                     @forelse ($stories as $story)
-                    <div class="col-lg-4 ">
-                    <div class="card col-lg-12 p-0 story-card mb-4 premium-badge-holder">
+                    <div class="col-lg-4 col-xs-12">
+                    <div class="card col-lg-12 col-md-10 p-0 story-card mb-4 premium-badge-holder">
                                 @if($story->is_premium)
                                     <span class="badge badge-primary premium-badge">PREMIUM</span>
                                 @endif
@@ -42,7 +42,7 @@
                                     <p class="card-text">By <a href="#">{{$story->author}}</a></p>
                                     <hr style="margin:0 -5px;">
                                     <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
-                                    <hr style="margin:0 -20px;">
+                                    <hr style="margin:0 -17px;">
                                     <div class="d-flex justify-content-between align-items-center card-">
                                         <div class="btn-group">
                                             @if ($story->reaction == 'dislike')
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-5 col-lg-3 col-sm-6">
             <div class="d-flex flex-row col-md-12  ">
                 <div class="col-md-12" id="category-drop">
                     <h6>POPULAR CATEGORIES</h6><br>
