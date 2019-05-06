@@ -44,10 +44,13 @@ Route::resource('/categories', 'CategoryController', ['as' => 'admin']);
  * User routes for superadmin operations
  *
  */
-Route::resource('/users', 'UserController');
+Route::resource('/user', 'UserController');
 
 /**
  * Stories routes for superadmin operations
  *
  */
 Route::resource('/stories', 'StoryController',['as'=>'admin']);
+
+//route for payment
+Route::get('payment','PaymentController@index')->name('payment.index');

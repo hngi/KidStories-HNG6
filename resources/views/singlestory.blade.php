@@ -14,9 +14,7 @@
         </ol>
     </nav>
 </div>
-
     <div class="content">
-
         <!-- Content begins -->
         <span class="content1 topic">
             <h1 class="titlecase"> {{$story->title}} </h1>
@@ -28,13 +26,16 @@
             <!-- Bookmark story -->
             <div class="subContent">
                 <div class="subcontent-icon">
-                    <a>
-                        <i class="fa fa-bookmark stBookmark"></i>
-                    </a>
+                    @if ($story->favorite == true)
+                    <a> <i class="far fa-bookmark bookmark-blue stBookmark" onclick="bookmark(event);" id="bookmark-{{ $story->id }}" data-story-id="{{ $story->id }}"></i> </a>
+                    @else
+                    <a> <i class="far fa-bookmark stBookmark" onclick="bookmark(event);" id="bookmark-{{ $story->id }}" data-story-id="{{ $story->id }}"></i> </a>
+                    @endif
+                    
                 </div> <!-- Bookmark story ends -->
 
                 <!-- Stories -->
-                <img class="stories" src="{{$story->image_url}}" >             
+                <img class="stories" src="{{$story->image_url ?? '/images/placeholder.png'}}" >             
                 <p>{{$story->body}} </p>
             </div>
 
@@ -44,11 +45,23 @@
             <!-- Tags -->
             <div class="tags">
                 <div>
-                    @foreach ($story->tags as $tag)
-                        <button class="" type="submit" id="submit"> {{$tag->name}} </button>
-                     @endforeach
-                    <i class="fa fa-thumbs-down thumbs"><span> {{$story->likes}} </span></i>
-                    <i class="fa fa-thumbs-up thumbs"><span> {{$story->dislikes}} </span></i>
+                    <div style="float:left;">
+                        @foreach ($story->tags as $tag)
+                            <button class="" type="submit" id="submit"> {{$tag->name}} </button>
+                        @endforeach
+                     </div>
+                     <div style="float:right;">
+                        @if ($story->reaction == 'dislike')
+                        <i class="fa fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                        <i class="fa fa-thumbs-down fav-icon fav-red" id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                        @elseif ($story->reaction == 'like')
+                        <i class="fa fa-thumbs-up fav-icon fav-green" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                        <i class="fa fa-thumbs-down fav-icon " id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                        @else
+                        <i class="fa fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                        <i class="fa fa-thumbs-down fav-icon" id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                        @endif
+                    </div>
                 </div>
             </div>
             <!-- Tags ends -->
@@ -60,11 +73,16 @@
                     @foreach ($similarStories as $similarStory)
                        <div class="col-md-3">
                             <div class="card story_card mt-4">
-                                <img src="{{$similarStory->image_url}}" 
+                                @if($similarStory->is_premium)
+                                    <span class="badge badge-primary premium-badge">PREMIUM</span>
+                                @endif
+                                <img src="{{$similarStory->image_url ?? '/images/placeholder.png'}}" 
                                     class="card-img-top cards" alt="story image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size:1rem">
-                                        {{str_limit($similarStory->title,22)}}
+                                        <a href="{{route('story.show',$story->slug)}}">
+                                            {{str_limit($similarStory->title,22)}}
+                                        </a>
                                     </h5>
                                     <p class="card-text mb-1">by 
                                         <span class="author">
@@ -114,8 +132,8 @@
                         <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
                         </div>
                         <div class="buttons-box">
-                            <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="/images/icons/apple.png" alt="" /></a>
-                            <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="/images/icons/playstore.png" alt="" /></a>
+                            <!-- <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="/images/icons/apple.png" alt="" /></a> -->
+                            <a href="https://github.com/hnginternship5/kidstories-android/blob/production/Bedtimestory/app/debug/app-debug.apk" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="/images/icons/playstore.png" alt="" /></a>
                         </div>
                     </div>
                 </div>
