@@ -16,9 +16,9 @@ h6 {
     line-height: 12px;
     /* identical to box height */
 
-color: #8a8a8a;
+/* color: #8a8a8a;
 
-}
+} */
 */ .social-iconsb a {
     float: left;
     margin-left: 16px;
@@ -73,7 +73,7 @@ color: #8a8a8a;
     color: #55ae3a !important;
 }
 .bookmark-blue {
-    color: #0000FF !important
+    color: #718cfb !important
 }
 .sp-container {
     max-width: 980px;
