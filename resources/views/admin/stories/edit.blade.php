@@ -36,13 +36,33 @@
                                 </div>         
                                 <div class="form-group {{ $errors->has('photo') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Story Image') }} </label>
-                                    <input  type="file" name="photo" 
-                                        class="form-control form-control-alternative">
-                                    @if ($errors->has('photo'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('photo') }}</strong>
-                                        </span>
-                                    @endif
+                                    <p id="for_ad_image" class="valError text-danger small"></p>
+                                    <div class="file-upload-previews">
+                                        <div class="MultiFile-label">
+                                            <a class="MultiFile-remove" href="#" id="removeAdImg" 
+                                                data-item-id="{{$story->id}}" 
+                                                data-img-name="{{$story->image_url}}">x</a> 
+                                            <span>
+                                                <span class="MultiFile-label" 
+                                                    title="File selected: {{$story->image_url}}.jpg">
+                                                    <span class="MultiFile-title">{{$story->image_url}}</span>
+                                                    <img class="MultiFile-preview" 
+                                                            style="max-height:100px; max-width:100px;" 
+                                                            src="{{asset($story->image_url)}}">
+                                                </span>
+                                            </span>
+                                            <input type="hidden" name="previousImage" value="{{$story->image_url}}" />
+                                        </div>
+                                    </div>
+                                    <div class="file-upload" style="display:none">
+                                        <input type="file" name="photo" 
+                                        class="file-upload-input with-preview" 
+                                        title="Click to add files" 
+                                        maxlength="1" accept="jpg|png" 
+                                        onchange="checkFile(this)" id="img">
+                                        <span style="color:#000">CLICK OR DRAG IMAGES HERE</span>
+                                        <input type="hidden" id="imgCount" value="1"/>
+                                    </div>
                                 </div>                   
                                 <div class="form-group {{ $errors->has('body') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Content') }} *</label>
@@ -122,3 +142,8 @@
         @include('admin.layouts.footers.auth')
     </div>
 @endsection
+@push('js')
+    <link rel="stylesheet" type="text/css" href="{{asset('css/MultiFileUpload.css')}}">
+    <script type="text/javascript" src="{{asset('js/jQuery.MultiFile.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/MultiFileUpload.js')}}"></script>
+@endpush

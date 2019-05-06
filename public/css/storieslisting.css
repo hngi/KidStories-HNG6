@@ -156,6 +156,10 @@ footer p {
     border-radius: 0px;
     border-color: #d5d5d5;
 }
+.cold{
+    display: flex;
+    flex-direction: row;
+}
 .browse-adjust-padding {
     padding: 0 5rem;
 }
@@ -173,5 +177,12 @@ footer p {
 @media (max-width: 550px) {
     .adjust-padding {
         padding: 0px 3rem;
+    }
+    .cold {
+        display: flex;
+        flex-direction: column;
+    }
+    .main-banner{
+        margin-top: 20px;
     }
 }
