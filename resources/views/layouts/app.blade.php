@@ -85,9 +85,14 @@
                                             </li>
                                             <li class=""><a href="{{ route('stories.index') }}">Browse Stories</a></li>
                                             <li><a href="{{ route('categories.index') }}">Categories</a></li>
-                                            <li class=""><a  href="{{ route('stories.mystories') }}">My Stories</a>
-                                            </li>
-                                            <li><a href="{{ route('about') }}">About Us</a></li>
+                                            @auth()
+                                                <li class=""><a  href="{{ route('stories.mystories') }}">My Stories</a></li>
+                                            @endauth
+                                            @guest()
+                                                <li><a href="{{ url('/create-story') }}">Create Story</a></li>
+                                                <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                                                <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                                            @endguest
                                         </ul>
                                     </div>
 
@@ -111,41 +116,28 @@
                                         </div>
                                     </div>
                                     <!--Language-->
-                                    <div class="language dropdown"><a class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#"><span class="icon circle-icons fa fa-user"></span> Account <span class="icon fa fa-caret-down"></span> </a>
-                                        <ul class="dropdown-menu style-one" aria-labelledby="dropdownMenu2">
-                                            @guest
-                                            <li>
-                                                <a href="{{ route('login') }}">{{ __('Login') }}</a>
-                                            </li>
-                                            @if (Route::has('register'))
-                                            <li>
-                                                <a href="{{ route('register') }}">{{ __('Register') }}</a>
-                                            </li>
-                                            @endif
-                                            @else
-                                            <li>
-                                                <a href="#">
-                                                    Profile
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/favorites">
-                                                    My Favorites
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
-                                                </a>
 
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    @csrf
-                                                </form>
-                                            </li>
-                                            @endguest
-                                        </ul>
-                                    </div>
+                                    @auth
+                                        <div class="language dropdown">
+                                            <a class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
+                                                <span class="icon circle-icons fa fa-user"></span> {{ auth()->user()->fullname }} <span class="icon fa fa-caret-down"></span> 
+                                            </a>
+                                            <ul class="dropdown-menu style-one" aria-labelledby="dropdownMenu2">
+                                                <li><a href="#">Profile</a></li>
+                                                <li><a href="/favorites">My Favorites</a></li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                        {{ __('Logout') }}
+                                                    </a>
+
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                </li> 
+                                            </ul>
+                                        </div>
+                                    @endauth
 
                                 </div>
                             </div>
@@ -170,7 +162,7 @@
     <div class="footer-box">
         <section>
             <h5>Kid Stories</h5>
-            <a href="{{ route('logout') }}">About Us</a>
+            <a href="{{ route('about') }}">About Us</a>
             <a href="{{ route('subscribe') }}">Subscriptions</a>
             <a href="#">Contact Us</a>
             <a href="#">Advertise with Us</a>
