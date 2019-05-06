@@ -39,6 +39,7 @@ $factory->state(User::class, 'default', [
 ]);
 
 $factory->define(App\Story::class, function (Faker $faker) {
+    $title = $faker->unique()->sentence;
     $age = [0, 5, 9, 13, 17 ];
     $minAge = $age[rand(0,4)];
     $maxAge = 0;
@@ -54,7 +55,7 @@ $factory->define(App\Story::class, function (Faker $faker) {
         $maxAge = 25;
     }
     return [
-        'title'=>$faker->bs,
+        'title'=>$title,
         'body'=>$faker->paragraph(2),
         'category_id'=>function(){
             return factory('App\Category')->create()->id;
@@ -68,8 +69,9 @@ $factory->define(App\Story::class, function (Faker $faker) {
         'likes_count'=>$faker->randomDigit(),
         'dislikes_count'=>$faker->randomDigit(),
         'author'=>$faker->name,
-        //'story_duration'=>$faker->time,
-        'is_premium'=>$faker->boolean
+        'is_premium'=>$faker->boolean,
+        'is_approved'=>$faker->boolean,
+        'slug' => str_slug($title),
     ];
 });
 
@@ -116,10 +118,24 @@ $factory->define(App\Comment::class, function (Faker $faker) {
 });
 
 $factory->define(App\Subscription::class, function (Faker $faker) {
+   $sub_type=[
+    [
+    "duration"=>30,
+    "title"=>"monthly",
+    "cost"=>100000 //in kobo
+    ],
+    [
+    "duration"=>365,
+    "title"=>"yearly",
+    "cost"=>1000000 //in kobo
+    ]
+   ];
+
+   $curr=$sub_type[rand(0,1)];
     return [
-        'title'=>$faker->bs,
-        'cost'=>$faker->randomNumber(3),
-        'duration'=>$faker->randomNumber(2)
+        'title'=>$curr['title'],
+        'cost'=>$curr['cost'],
+        'duration'=>$curr['duration']
     ];
 });
 
