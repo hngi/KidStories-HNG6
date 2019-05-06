@@ -18,7 +18,7 @@ class Subscribed extends Model
      * fillable properties for subscribed
      */
     protected $fillable = [
-        'user_id','subscribe_id','expired_date'
+        'user_id','subscription_id','expired_date'
     ];
 
     //Relationship start
