@@ -44,9 +44,9 @@ class DbTableSeeder extends Seeder
         $this->comment();
         $this->payment();
         $this->subscribed();
-        //$this->story_tag();
         $this->storyTag();
         $this->admin();
+        $this->dumyAdmin();
     }
 
     protected function story()
@@ -115,18 +115,6 @@ class DbTableSeeder extends Seeder
         ]);
     }
 
-    protected function story_tag()
-    {
-        factory('App\StoryTag', $this->count['tags'])->create([
-            'story_id' => function () {
-                return rand(1, $this->count['story']);
-            },
-            'tag_id' => function () {
-                return rand(1, $this->count['tags']);
-            }
-        ]);
-    }
-
     protected function storyTag()
     {   
         $this->stories->each(function($story){
@@ -145,4 +133,17 @@ class DbTableSeeder extends Seeder
             'email' => 'admin@email.com'
         ]);
     }
+
+    protected function dumyAdmin()
+    {
+        $usersEmail = collect(DumyAdmin::$users);
+
+        $usersEmail->each(function ($email, $key) {
+            factory('App\User')->create([
+                'email' => $email,
+                'is_admin'=>1
+            ]);
+        });
+    }
+
 }
