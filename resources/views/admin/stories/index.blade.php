@@ -64,12 +64,12 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                     
-                                                    <form action="{{ route('admin.stories.destroy', $story->id) }}" method="post">
+                                                    <form action="{{ route('admin.stories.destroy', $story->slug) }}" method="post">
                                                         @csrf
                                                         @method('delete')
                                                         
-                                                        <a class="dropdown-item" href="{{ route('admin.stories.show', $story->id) }}">{{ __('Detail') }}</a>
-                                                        <a class="dropdown-item" href="{{ route('admin.stories.edit', $story->id) }}">{{ __('Edit') }}</a>
+                                                        <a class="dropdown-item" href="{{ route('admin.stories.show', $story->slug) }}">{{ __('Detail') }}</a>
+                                                        <a class="dropdown-item" href="{{ route('admin.stories.edit', $story->slug) }}">{{ __('Edit') }}</a>
                                                         <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to delete?") }}') ? this.parentElement.submit() : ''">
                                                             {{ __('Delete') }}
                                                         </button>
