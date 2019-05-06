@@ -35,9 +35,26 @@
                                 >Offline access to saved stories</span
                             >
                         </div>
-                        <a href="#" class="proceed text-white text-center"
-                            >Start - 7 Days Free Trial</a
+                        <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8">
+
+                            {{--hidden fields to process the payment--}}
+            <input type="hidden" name="email" value="{{ Auth::user()->email}}"> {{-- required --}}
+            <input type="hidden" name="orderID" value="345">
+            <input type="hidden" name="amount" value="100000"> {{-- required in kobo --}}
+          
+            <input type="hidden" name="metadata" value="{{ json_encode($array = ['subscription' => 'monthly',]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
+            <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
+            <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
+            {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
+
+
+
+
+
+                        <button class="proceed text-white text-center"
+                            >Start - 7 Days Free Trial</button
                         >
+                    </form>
                     </div>
                 </div>
                 <!-- Monthly Ends -->
@@ -61,9 +78,26 @@
                                 >Offline access to saved stories</span
                             >
                         </div>
-                        <a href="#" class="proceed text-white text-center"
-                            >Start - 7 Days Free Trial</a
+                         <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8">
+
+                            {{--hidden fields to process the payment--}}
+            <input type="hidden" name="email" value="{{ Auth::user()->email}}"> {{-- required --}}
+            <input type="hidden" name="orderID" value="345">
+            <input type="hidden" name="amount" value="1000000"> {{-- required in kobo --}}
+          
+            <input type="hidden" name="metadata" value="{{ json_encode($array = ['subscription' => 'yearly',]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
+            <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
+            <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
+            {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
+
+
+
+
+
+                        <button class="proceed text-white text-center"
+                            >Start - 7 Days Free Trial</button
                         >
+                    </form>
                     </div>
                 </div>
                 <!-- Yearly ends -->
