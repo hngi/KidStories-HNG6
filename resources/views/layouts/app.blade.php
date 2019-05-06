@@ -164,23 +164,24 @@
             <h5>Kid Stories</h5>
             <a href="{{ route('about') }}">About Us</a>
             <a href="{{ route('subscribe') }}">Subscriptions</a>
-            <a href="#">Contact Us</a>
-            <a href="#">Advertise with Us</a>
+            <!-- <a href="#">Contact Us</a> -->
+            <a href="/create-story">Create a Story</a>
+
         </section>
         <section>
             <h5>Quick Links</h5>
             <a href="/create-story">Create a Story</a>
             <a href="#">Favorite Story</a>
             <a href="{{ route('stories.index') }}">Explore Stories</a>
-            <a href="#">Make a donation</a>
+             <a href="https://paystack.com/pay/kidstoriesapp">Make a donation</a>
         </section>
-        <section>
+<!--         <section>
             <h5>Others</h5>
             <a href="#">User FAQs</a>
             <a href="#">Legal</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms and Conditions</a>
-        </section>
+        </section> -->
         <section>
             <h5>Newsletter</h5>
             <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
