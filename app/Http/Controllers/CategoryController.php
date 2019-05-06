@@ -34,11 +34,11 @@ class CategoryController extends Controller
         if ($request->query('search')) {
             $search = $request->query('search');
 
-            $stories = Story::where('category_id', $id)
+            $stories = Story::where('category_id', $id)->where('is_approved', true)
                             ->where('title', 'LIKE', "%$search%")
                             ->orWhere('author', 'LIKE', "%$search%");
         } else {
-            $stories = Story::where('category_id', $id);
+            $stories = Story::where('category_id', $id)->where('is_approved', true);
         }
 
         if ($request->query('sort') == 'latest') {
