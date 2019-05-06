@@ -14,9 +14,7 @@
         </ol>
     </nav>
 </div>
-
     <div class="content">
-
         <!-- Content begins -->
         <span class="content1 topic">
             <h1 class="titlecase"> {{$story->title}} </h1>
@@ -34,7 +32,7 @@
                 </div> <!-- Bookmark story ends -->
 
                 <!-- Stories -->
-                <img class="stories" src="{{$story->image_url}}" >             
+                <img class="stories" src="{{$story->image_url ?? '/images/placeholder.png'}}" >             
                 <p>{{$story->body}} </p>
             </div>
 
@@ -60,11 +58,16 @@
                     @foreach ($similarStories as $similarStory)
                        <div class="col-md-3">
                             <div class="card story_card mt-4">
-                                <img src="{{$similarStory->image_url}}" 
+                                @if($similarStory->is_premium)
+                                    <span class="badge badge-primary premium-badge">PREMIUM</span>
+                                @endif
+                                <img src="{{$similarStory->image_url ?? '/images/placeholder.png'}}" 
                                     class="card-img-top cards" alt="story image">
                                 <div class="card-body">
                                     <h5 class="card-title" style="font-size:1rem">
-                                        {{str_limit($similarStory->title,22)}}
+                                        <a href="{{route('story.show',$story->slug)}}">
+                                            {{str_limit($similarStory->title,22)}}
+                                        </a>
                                     </h5>
                                     <p class="card-text mb-1">by 
                                         <span class="author">

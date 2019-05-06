@@ -234,7 +234,7 @@ class StoriesController extends Controller
         ]);
 
         DB::commit();
-        return redirect()->route('singlestory', ['id' => $story->id]);
+        return redirect()->route('story.show', ['story' => $story->slug]);
     }
 
     public function show(Request $request, Story $story)

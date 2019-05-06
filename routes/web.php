@@ -39,8 +39,7 @@ Route::get('/favorites', 'BookmarkController@index')->name('bookmark');
 
 // Routes for stories
 Route::get('/stories', 'StoriesController@index')->name('stories.index');
-Route::get('/story/{id}', 'StoriesController@singlestory')->name('singlestory');
-Route::get('/show-story/{story}', 'StoriesController@show')->name('story.show');
+Route::get('/stories/{story}', 'StoriesController@show')->name('story.show');
 
 // Routes for categories
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
