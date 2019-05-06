@@ -29,9 +29,9 @@
                                 @endif
 
                                 @if($story->image_url )
-                                    <img src="{{ $story->image_url }}" />
+                                <a href="{{route('story.show',$story->slug)}}"><img src="{{ $story->image_url }}" /></a>
                                 @else
-                                <img src="/images/placeholder.png" />
+                                <a href="{{route('story.show',$story->slug)}}"><img src="/images/placeholder.png" /></a>
                                 @endif
 
                                 <div class="card-body story-card-body">
