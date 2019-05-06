@@ -39,6 +39,7 @@ $factory->state(User::class, 'default', [
 ]);
 
 $factory->define(App\Story::class, function (Faker $faker) {
+    $title = $faker->unique()->sentence;
     $age = [0, 5, 9, 13, 17 ];
     $minAge = $age[rand(0,4)];
     $maxAge = 0;
@@ -54,7 +55,7 @@ $factory->define(App\Story::class, function (Faker $faker) {
         $maxAge = 25;
     }
     return [
-        'title'=>$faker->bs,
+        'title'=>$title,
         'body'=>$faker->paragraph(2),
         'category_id'=>function(){
             return factory('App\Category')->create()->id;
@@ -68,8 +69,9 @@ $factory->define(App\Story::class, function (Faker $faker) {
         'likes_count'=>$faker->randomDigit(),
         'dislikes_count'=>$faker->randomDigit(),
         'author'=>$faker->name,
-        //'story_duration'=>$faker->time,
-        'is_premium'=>$faker->boolean
+        'is_premium'=>$faker->boolean,
+        'is_approved'=>$faker->boolean,
+        'slug' => str_slug($title),
     ];
 });
 
