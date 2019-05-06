@@ -9,7 +9,7 @@
     <div class="content">
         <!-- Showcase -->
         <section class="top-container">
-            <header class="showcase" style="padding-top: 160px;">
+            <header class="showcase">
                 <h1 class="text-white"> Categories </h1>
             </header>
         </section>
