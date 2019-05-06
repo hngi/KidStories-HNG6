@@ -26,9 +26,12 @@
             <!-- Bookmark story -->
             <div class="subContent">
                 <div class="subcontent-icon">
-                    <a>
-                        <i class="fa fa-bookmark stBookmark"></i>
-                    </a>
+                    @if ($story->favorite == true)
+                    <a> <i class="far fa-bookmark bookmark-blue stBookmark" onclick="bookmark(event);" id="bookmark-{{ $story->id }}" data-story-id="{{ $story->id }}"></i> </a>
+                    @else
+                    <a> <i class="far fa-bookmark stBookmark" onclick="bookmark(event);" id="bookmark-{{ $story->id }}" data-story-id="{{ $story->id }}"></i> </a>
+                    @endif
+                    
                 </div> <!-- Bookmark story ends -->
 
                 <!-- Stories -->
@@ -42,11 +45,23 @@
             <!-- Tags -->
             <div class="tags">
                 <div>
-                    @foreach ($story->tags as $tag)
-                        <button class="" type="submit" id="submit"> {{$tag->name}} </button>
-                     @endforeach
-                    <i class="fa fa-thumbs-down thumbs"><span> {{$story->likes}} </span></i>
-                    <i class="fa fa-thumbs-up thumbs"><span> {{$story->dislikes}} </span></i>
+                    <div style="float:left;">
+                        @foreach ($story->tags as $tag)
+                            <button class="" type="submit" id="submit"> {{$tag->name}} </button>
+                        @endforeach
+                     </div>
+                     <div style="float:right;">
+                        @if ($story->reaction == 'dislike')
+                        <i class="fa fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                        <i class="fa fa-thumbs-down fav-icon fav-red" id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                        @elseif ($story->reaction == 'like')
+                        <i class="fa fa-thumbs-up fav-icon fav-green" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                        <i class="fa fa-thumbs-down fav-icon " id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                        @else
+                        <i class="fa fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}"></i><small class="mr-3" id="likes-count-{{ $story->id }}">{{$story->likes_count}}</small>
+                        <i class="fa fa-thumbs-down fav-icon" id="fav-dislike-{{ $story->id }}" onclick="react(event);" data-story-id="{{ $story->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $story->id }}">{{$story->dislikes_count}}</small>
+                        @endif
+                    </div>
                 </div>
             </div>
             <!-- Tags ends -->
