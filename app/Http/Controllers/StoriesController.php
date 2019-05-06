@@ -243,6 +243,50 @@ class StoriesController extends Controller
 
         $similarStories = $story->similar()->get();
 
+        $user = $request->user();
+        $mytime = Carbon::now();
+        $timeNow = $mytime->toDateTimeString();
+        
+        $storyId = $story->id;
+        if ($user) {
+            $reaction = Reaction::where('story_id', $storyId)
+                ->where('user_id', $user->id)
+                ->first();
+            $bookmark = Bookmark::where('user_id', $user->id)
+                ->where('story_id', $storyId)
+                ->first();    
+            if ($reaction && $reaction->reaction == 0) {
+                $story['reaction'] = 'dislike';
+            } elseif ($reaction && $reaction->reaction == 1) {
+                $story['reaction'] = 'like';
+            } else {
+                $story['reaction'] = 'nil';
+            }
+            if ($bookmark) {
+                $story['favorite'] = true;
+            } else {
+                $story['favorite'] = false;
+            }
+        } else {
+            $story['reaction'] = 'nil';
+            $story['favorite'] = false;
+        }
+
+        if ($user && $story && $story->is_premium == 1) {
+            $subcribed = Subscribed::where('user_id', $user->id)->get();
+
+            for ($i = 0; $i < $subcribed->count(); $i++) {
+                $expire = strtotime($subcribed[$i]->expired_date);
+                $timeNow = strtotime($timeNow);
+                if ($timeNow <= $expire) {
+                    return view('singlestory', compact('story', 'similarStories'));
+                }
+            }
+            return \redirect('home');
+        } elseif (!$user && $story && $story->is_premium == 1) {
+            return \redirect('home');
+        }
+
         return view('singlestory', compact('story', 'similarStories'));
     }
 }
