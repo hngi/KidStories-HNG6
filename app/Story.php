@@ -14,6 +14,19 @@ class Story extends Model
     // FIXME: Please, don't uncomment. Understand what you are about to do first.
     // protected $appends = ['like','dislike'];
 
+     /**
+     * Boot the model.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($story) {
+            $story->slug = $story->title;
+            $story->save();
+        });
+    }
+
     //Accessors
     public function getAgeAttribute()
     {
@@ -96,8 +109,32 @@ class Story extends Model
 
     public function scopeSimilar($query)
     {
-        return $query->where('category_id',$this->category_id)->take(4);
+        return $query->where(
+            'category_id',$this->category_id
+        )->where('id','!=',$this->id)->take(4);
     }
 
+    /**
+     * Get the route key name.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
+    /**
+     * Set the proper slug attribute.
+     *
+     * @param string $value
+     */
+    public function setSlugAttribute($value)
+    {
+        if (static::whereSlug($slug = str_slug($value))->exists()) {
+            $slug = "{$slug}-{$this->id}";
+        }
+
+        $this->attributes['slug'] = $slug;
+    }
 }

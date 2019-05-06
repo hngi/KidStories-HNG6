@@ -178,7 +178,7 @@ footer p {
 }
 @media (max-width: 550px) {
     .adjust-padding {
-        padding: 0px 3rem;
+        padding: 0px 1rem;
     }
     .cold {
         display: flex;
@@ -186,5 +186,12 @@ footer p {
     }
     .main-banner{
         margin-top: 20px;
+    }
+
+    .mb-5{
+        margin-left: 1.2rem;
+    }
+    .mb-5 h3{
+        font-size: 20px;
     }
 }

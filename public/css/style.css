@@ -1,25 +1,3 @@
-/* Styles for the Create User Pages */
-
-
-/*h3 {
-    color: #333333;
-    font-size: 20px;
-    line-height: 132%;
-    letter-spacing: 0.03em;
-    font-weight: bold;
-}
-
-h6 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 10px;
-    line-height: 12px;
-    /* identical to box height 
-
-color: #8a8a8a;
-
-}*/
-
  .social-iconsb a {
     float: left;
     margin-left: 16px;
@@ -74,7 +52,7 @@ color: #8a8a8a;
     color: #55ae3a !important;
 }
 .bookmark-blue {
-    color: #0000FF !important
+    color: #718cfb !important
 }
 .sp-container {
     max-width: 980px;

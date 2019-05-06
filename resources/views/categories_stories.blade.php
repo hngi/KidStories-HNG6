@@ -38,11 +38,11 @@
                                 @endif
 
                                 <div class="card-body story-card-body">
-                                    <h5 class="card-title"><a href="/show-story/{{$story->id}}">{{$story->title}}</a></h5>
+                                    <h5 class="card-title"><a href="{{route('story.show',$story->slug)}}">{{$story->title}}</a></h5>
                                     <p class="card-text">By <a href="#">{{$story->author}}</a></p>
                                     <hr style="margin:0 -5px;">
                                     <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
-                                    <hr style="margin:0 -20px;">
+                                    <hr style="margin:0 -17px;">
                                     <div class="d-flex justify-content-between align-items-center card-">
                                         <div class="btn-group">
                                             @if ($story->reaction == 'dislike')

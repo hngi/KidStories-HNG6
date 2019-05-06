@@ -88,13 +88,15 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control" name="phone" required autocomplete="new-password">
+                                <input id="phone" type="text" class="form-control" name="phone" required autocomplete="new-password" @error('phone') is-invalid @enderror">
 
-                                 @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                   <span class="invalid-feedback" role="alert"  style="display: block;">
+                                        <strong>{{ $errors->first('phone') }}</strong>
                                     </span>
-                                @enderror
+
+
+                                
+                                
 
 
                             </div>
@@ -106,11 +108,9 @@
                             <div class="col-md-6">
                                 <input id="postal_code" type="text" class="form-control" name="postal_code" required autocomplete="new-password">
 
-                                 @error('postal_code')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                  <span class="invalid-feedback" role="alert"  style="display: block;">
+                                        <strong>{{ $errors->first('postal_code') }}</strong>
                                     </span>
-                                @enderror
 
 
                             </div>
@@ -122,11 +122,9 @@
                             <div class="col-md-6">
                                 <input  id="location" type="text" class="form-control" name="location" required autocomplete="new-password">
 
-                                 @error('location')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                 <span class="invalid-feedback" role="alert"  style="display: block;">
+                                        <strong>{{ $errors->first('location') }}</strong>
+                                 </span>
 
 
                             </div>
