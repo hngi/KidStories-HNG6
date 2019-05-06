@@ -29,13 +29,13 @@
                                 @endif
 
                                 @if($story->image_url )
-                                    <img src="{{ $story->image_url }}" />
+                                <a href="{{route('story.show',$story->slug)}}"><img src="{{ $story->image_url }}" /></a>
                                 @else
-                                <img src="/images/placeholder.png" />
+                                <a href="{{route('story.show',$story->slug)}}"><img src="/images/placeholder.png" /></a>
                                 @endif
 
                                 <div class="card-body story-card-body">
-                                    <h5 class="card-title"><a href="{{route('story.show',$story->slug)}}">{{$story->title}}</a></h5>
+                                    <h5 class="card-title"><a href="{{route('story.show',['story'=>$story->slug])}}">{{$story->title}}</a></h5>
                                     <p class="card-text">By <a href="#">{{$story->author}}</a></p>
                                     <hr style="margin:0 -5px;">
                                     <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
@@ -125,8 +125,8 @@
                     <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
                     </div>
                     <div class="buttons-box">
-                        <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/apple.png') }}" alt="" /></a>
-                        <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/playstore.png') }}" alt="" /></a>
+                   <!--      <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/apple.png') }}" alt="" /></a> -->
+                        <a href="https://github.com/hnginternship5/kidstories-android/blob/production/Bedtimestory/app/debug/app-debug.apk" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/playstore.png') }}" alt="" /></a>
                     </div>
                 </div>
             </div>

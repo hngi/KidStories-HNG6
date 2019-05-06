@@ -103,8 +103,8 @@
                     <h4>An Enhanced Sleeping Experience</h4>
                     <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
                     </div>
-                    <a href="#" class="primary-color underline play-btn">
-                        <span class="icon flaticon-play-button-1"></span> watch how it works!
+                    <a href="{{ route('register') }}" class="primary-color underline play-btn">
+                        <span class="icon flaticon-right-arrow"></span> Sign Up Now!
                     </a>
                 </div>
             </div>
@@ -184,16 +184,16 @@
                             <div class="author-box">
                                 <div class="author-inner">
                                     <div class="image">
-                                        <img src="images/resources/author-3.jpg" alt="" />
+                                        <img src="images/profile-icon.svg" alt="" />
                                     </div>
-                                    <div class="author-name">Helena Kamil</div>
+                                    <div class="author-name">Habeeb Shopeju</div>
                                 </div>
                             </div>
                         </div>
                         <div class="pull-right">
                             <!-- Social Nav -->
                             <div class="social-icons">
-                                <a href="#"><span class="fa fa-twitter"></span></a>
+                                <a href="#"><span class="fa fa-comment"></span></a>
                             </div>
                         </div>
 
@@ -201,7 +201,7 @@
 
                     <div class="col-md-12 p-t-70">
                         <div class="text text-left">
-                            <p>Completely synergize resource via premier niche markets. customer service with robust ideas.</p>
+                            <p>This app solves my problem of thinking about bed time stories to tell my siblings. Now i have great stories all in one place. Great initiative.</p>
                         </div>
                     </div><!-- end -->
                 </div>
@@ -218,16 +218,16 @@
                             <div class="author-box">
                                 <div class="author-inner">
                                     <div class="image">
-                                        <img src="images/resources/author-3.jpg" alt="" />
+                                        <img src="images/profile-icon.svg" alt="" />
                                     </div>
-                                    <div class="author-name">Helena Kamil</div>
+                                    <div class="author-name">Iyabo Atoyebi</div>
                                 </div>
                             </div>
                         </div>
                         <div class="pull-right">
                             <!-- Social Nav -->
                             <div class="social-icons">
-                                <a href="#"><span class="fa fa-twitter"></span></a>
+                                <a href="#"><span class="fa fa-comment"></span></a>
                             </div>
                         </div>
 
@@ -235,7 +235,7 @@
 
                     <div class="col-md-12 p-t-70">
                         <div class="text text-left">
-                            <p>Completely synergize resource via premier niche markets. customer service with robust ideas.</p>
+                            <p>Wow! This app is a must for every family. I really love the stories. Thumbs up Kids Stories</p>
                         </div>
                     </div><!-- end -->
                 </div>
@@ -252,16 +252,16 @@
                             <div class="author-box">
                                 <div class="author-inner">
                                     <div class="image">
-                                        <img src="images/resources/author-3.jpg" alt="" />
+                                        <img src="images/profile-icon.svg" alt="" />
                                     </div>
-                                    <div class="author-name">Helena Kamil</div>
+                                    <div class="author-name">Easy Akowe</div>
                                 </div>
                             </div>
                         </div>
                         <div class="pull-right">
                             <!-- Social Nav -->
                             <div class="social-icons">
-                                <a href="#"><span class="fa fa-twitter"></span></a>
+                                <a href="#"><span class="fa fa-comment"></span></a>
                             </div>
                         </div>
 
@@ -269,7 +269,7 @@
 
                     <div class="col-md-12 p-t-70">
                         <div class="text text-left">
-                            <p>Completely synergize resource via premier niche markets. customer service with robust ideas.</p>
+                            <p>This is amazing. I like the uniqueness of this app. I believe you guys can make the app even more enticing by adding lullabies and their respective sounds for parents to learn and sing to their kids. Nice work guys!</p>
                         </div>
                     </div><!-- end -->
                 </div>
@@ -286,16 +286,16 @@
                             <div class="author-box">
                                 <div class="author-inner">
                                     <div class="image">
-                                        <img src="images/resources/author-3.jpg" alt="" />
+                                        <img src="images/profile-icon.svg" alt="" />
                                     </div>
-                                    <div class="author-name">Helena Kamil</div>
+                                    <div class="author-name">Dara Otubu</div>
                                 </div>
                             </div>
                         </div>
                         <div class="pull-right">
                             <!-- Social Nav -->
                             <div class="social-icons">
-                                <a href="#"><span class="fa fa-twitter"></span></a>
+                                <a href="#"><span class="fa fa-comment"></span></a>
                             </div>
                         </div>
 
@@ -303,7 +303,7 @@
 
                     <div class="col-md-12 p-t-70">
                         <div class="text text-left">
-                            <p>Completely synergize resource via premier niche markets. customer service with robust ideas.</p>
+                            <p>whao it an educating and interesting stories in there. my daughter love this app, she cant do without reading it. with this app she is always busy after school. it also teaches morals</p>
                         </div>
                     </div><!-- end -->
                 </div>
@@ -336,8 +336,8 @@
                         <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
                         </div>
                         <div class="buttons-box">
-                            <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/apple.png" alt="" /></a>
-                            <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/playstore.png" alt="" /></a>
+                            <!-- <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/apple.png" alt="" /></a> -->
+                            <a href="https://github.com/hnginternship5/kidstories-android/blob/production/Bedtimestory/app/debug/app-debug.apk" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/playstore.png" alt="" /></a>
                         </div>
                     </div>
                 </div>
