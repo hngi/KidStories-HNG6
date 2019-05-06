@@ -11,7 +11,7 @@ class DbTableSeeder extends Seeder
         'bookmark' => 15,
         'reaction' => 200,
         'comment' => 20,
-        'subscription' => 15,
+        'subscription' => 2,
         'payment' => 10,
         'subscribed' => 10,
         'tags' => 16,

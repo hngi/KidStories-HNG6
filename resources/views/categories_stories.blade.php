@@ -17,9 +17,11 @@
 </div>
 
 <div class="auto-container adjust-padding">
+    @if($stories->first())
     <div class="mb-5">
         <h3>{{ $stories->first()->category->name }} Category Listing</h3>
     </div>
+    @endif
     <div class="col-md-12 d-flex cold p-0 ">
         <div class="col-md-7 col-lg-9 col-sm-6 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
@@ -32,9 +34,9 @@
                                 @endif
 
                                 @if($story->image_url )
-                                    <img src="{{ $story->image_url }}" />
+                                <a href="{{route('story.show',$story->slug)}}"><img src="{{ $story->image_url }}" /></a>
                                 @else
-                                <img src="/images/placeholder.png" />
+                                <a href="{{route('story.show',$story->slug)}}"><img src="/images/placeholder.png" /></a>
                                 @endif
 
                                 <div class="card-body story-card-body">
@@ -128,8 +130,8 @@
                     <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
                     </div>
                     <div class="buttons-box">
-                        <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/apple.png') }}" alt="" /></a>
-                        <a href="#" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/playstore.png') }}" alt="" /></a>
+                        <!-- <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/apple.png') }}" alt="" /></a> -->
+                        <a href="https://github.com/hnginternship5/kidstories-android/blob/production/Bedtimestory/app/debug/app-debug.apk" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/playstore.png') }}" alt="" /></a>
                     </div>
                 </div>
             </div>

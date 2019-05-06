@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     //Relationship start
-
+	protected $fillable=['user_id','transaction_reference','amount'];
     /*
      * A payment belong to a user
      */

@@ -25,7 +25,7 @@ Route::get('/about', function () {
 
 Route::get('/subscribe', function () {
     return view('subscribe');
-})->name('subscribe');
+})->name('subscribe')->middleware('auth');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
@@ -45,3 +45,11 @@ Route::get('/stories/{story}', 'StoriesController@show')->name('story.show');
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
 Route::get('/categories/{id}/stories', 'CategoryController@stories')->name('categories.stories');
 
+
+//routes for payment
+Route::post('/pay', [
+    'uses' => 'PaymentController@redirectToGateway',
+    'as' => 'pay'
+])->middleware('auth');
+
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
