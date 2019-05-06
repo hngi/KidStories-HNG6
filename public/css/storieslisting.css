@@ -187,6 +187,9 @@ footer p {
     }
 
     .mb-5{
-        margin-left: 2rem;
+        margin-left: 1.2rem;
+    }
+    .mb-5 h3{
+        font-size: 20px;
     }
 }
