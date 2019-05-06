@@ -17,9 +17,11 @@
 </div>
 
 <div class="auto-container adjust-padding">
+    @if($stories->first())
     <div class="mb-5">
         <h3>{{ $stories->first()->category->name }} Category Listing</h3>
     </div>
+    @endif
     <div class="col-md-12 d-flex cold p-0 ">
         <div class="col-md-7 col-lg-9 col-sm-6 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
@@ -32,9 +34,9 @@
                                 @endif
 
                                 @if($story->image_url )
-                                    <img src="{{ $story->image_url }}" />
+                                <a href="{{route('story.show',$story->slug)}}"><img src="{{ $story->image_url }}" /></a>
                                 @else
-                                <img src="/images/placeholder.png" />
+                                <a href="{{route('story.show',$story->slug)}}"><img src="/images/placeholder.png" /></a>
                                 @endif
 
                                 <div class="card-body story-card-body">
