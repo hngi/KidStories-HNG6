@@ -130,7 +130,7 @@ class DbTableSeeder extends Seeder
     protected function admin()
     {
         factory('App\Admin')->create([
-            'email' => 'admin@email.com'
+            'email' => 'admin@mail.com'
         ]);
     }
 
