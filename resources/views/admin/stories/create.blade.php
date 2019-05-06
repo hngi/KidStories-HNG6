@@ -41,7 +41,6 @@
                                         </span>
                                     @endif
                                 </div>
-
                                 <div class="form-group {{ $errors->has('title') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Title') }} *</label>
                                     <input  type="text" name="title" 
@@ -55,13 +54,19 @@
                                 </div>         
                                 <div class="form-group {{ $errors->has('photo') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Story Image') }} </label>
-                                    <input  type="file" name="photo" 
-                                        class="form-control form-control-alternative">
-                                    @if ($errors->has('photo'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('photo') }}</strong>
-                                        </span>
-                                    @endif
+                                    <p id="for_ad_image" class="valError text-danger small"></p>
+                                    <div class="file-upload-previews"></div>
+                                    <div class="file-upload">
+                                        <input type="file" name="photo" 
+                                            class="file-upload-input with-preview" 
+                                            title="Click to add files" 
+                                            maxlength="1" accept="jpg|png|gif" 
+                                            onchange="checkFile(this)" id="img">
+                                        <span style="color:#000">CLICK OR DRAG IMAGES HERE</span>
+                                        <input type="hidden" id="imgCount" value="1"/>
+                                        <input type="hidden" id="previousImages" 
+                                                name="previousImages" value="1">
+                                    </div>
                                 </div>                   
                                 <div class="form-group {{ $errors->has('body') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Content') }} *</label>
@@ -123,3 +128,8 @@
         @include('admin.layouts.footers.auth')
     </div>
 @endsection
+@push('js')
+    <link rel="stylesheet" type="text/css" href="{{asset('css/MultiFileUpload.css')}}">
+    <script type="text/javascript" src="{{asset('js/jQuery.MultiFile.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/MultiFileUpload.js')}}"></script>
+@endpush
