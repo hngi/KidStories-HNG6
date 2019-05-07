@@ -782,7 +782,7 @@ img{
 	position:relative;
 	left:3px;
 	display:inline-block;
-	top: 7px;
+	/*top: 7px;*/
 }
 
 .main-header .search-box-btn{
