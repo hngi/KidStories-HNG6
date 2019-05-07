@@ -1,8 +1,6 @@
-/* Global */
-* {
-    box-sizing: border-box;
+.mt-50 {
+    margin-top: 50px;
 }
-
 .form-container {
     max-width: 55%;
     margin-left: auto;

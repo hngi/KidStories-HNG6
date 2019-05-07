@@ -7,11 +7,11 @@
 @section('content')
 
         <!-- Profile and Image section -->
-        <div class="container">
+        <div class="container mt-50">
             <section id="profile">
                 <div id="image">
                     <img src="/images/profile/imgIcon.png" alt="Profile Pic" class="profilePic"> 
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" 
+                   <!--  <a href="#"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" 
                     id="Layer_1" x="0px" y="0px" viewBox="0 0 300 300" style="enable-background:new 0 0 300 300;" 
                     xml:space="preserve" width="512px" height="512px" class=""><g><g><g><path 
                     d="M149.996,0C67.157,0,0.001,67.161,0.001,149.997S67.157,300,149.996,300s150.003-67.163,150.003-150.003    
@@ -21,7 +21,7 @@
                     c0.34-1.517,1.286-2.798,2.578-3.582l-0.137-0.137L192.3,78.941c1.678-1.675,4.404-1.675,6.082,0.005l22.922,22.917    
                     C222.982,103.541,222.982,106.267,221.302,107.945z" data-original="#000000" class="active-path"
                     data-old_color="#00FF87" fill="#A875FF"/>
-                    </g></g></g> </svg>
+                    </g></g></g> </svg> </a> -->
                 </div>
                 <div class="nameContent">   
                     <h3 class="profileName"> Tonny Flake </h3>
@@ -63,8 +63,8 @@
                 </div>
 
                 <div>
-                    <label for="inputStatus"> Membership Status </label>
-                    <input class="form-control" type="text" id="inputStatus" placeholder="Enter Your Membership Status" />
+                    <label for="inputStatus"> Update Profile Image </label>
+                    <input type="file" name="photo" id="cover">
                 </div>
                 
                 <div id="button">
