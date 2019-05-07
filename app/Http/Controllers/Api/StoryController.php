@@ -432,6 +432,18 @@ class StoryController extends Controller
             return $user;
         }
     }
+
+    public function reaction($id)
+    {
+        $like_reaction = Reaction::where('story_id', $id)
+                        ->where('reaction', 1)->get();
+        $likeCount = count($like_reaction);
+        $dislike_reaction = Reaction::where('story_id', $id)
+                    ->where('reaction', 0)->get();
+        $dislikeCount = count($dislike_reaction);
+
+        return [$likeCount, $dislikeCount];
+    }
     /**
      * Like a story
      *
