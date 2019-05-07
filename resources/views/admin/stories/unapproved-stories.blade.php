@@ -10,10 +10,10 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">{{ __('Stories') }}</h3>
+                                <h3 class="mb-0">{{ __('Unapproved Stories') }}</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('admin.stories.create') }}" class="btn btn-sm btn-primary">{{ __('Add story') }}</a>
+                                <a href="{{ route('admin.stories.index') }}" class="btn btn-sm btn-primary">{{ __('All stories') }}</a>
                             </div>
                         </div>
                     </div>
@@ -29,15 +29,8 @@
                         @endif
                     </div>
 
-                    @if($unApprovedStories > 0)
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                you have {{ $unApprovedStories}} stories that have not been approved, check them out <a href="{{ route('admin.unapprovedstories') }}">here</a>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                    @endif
-
+                   
+<p> showing {{$stories->count()}} of {{  $stories->total()}}</p>
 
 
                     <div class="table-responsive">
@@ -84,7 +77,13 @@
                                                         <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to delete?") }}') ? this.parentElement.submit() : ''">
                                                             {{ __('Delete') }}
                                                         </button>
-                                                    </form>                                                        
+                                                    </form>   
+                                                    <form method="post" action="{{ route('admin.approvestory',['id'=>$story->id]) }}">
+                                                        {{csrf_field()}}
+                                                        <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to Approve?") }}') ? this.parentElement.submit() : ''">
+                                                            {{ __('Approve') }}
+                                                        </button>
+                                                    </form>                                                     
                                                 </div>
                                             </div>
                                         </td>
