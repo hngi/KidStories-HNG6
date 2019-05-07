@@ -303,7 +303,7 @@
 
                     <div class="col-md-12 p-t-70">
                         <div class="text text-left">
-                            <p>whao it an educating and interesting stories in there. my daughter love this app, she cant do without reading it. with this app she is always busy after school. it also teaches morals</p>
+                            <p>whao it's an educating and interesting stories in there. my daughter love this app, she cant do without reading it. with this app she is always busy after school. it also teaches morals</p>
                         </div>
                     </div><!-- end -->
                 </div>

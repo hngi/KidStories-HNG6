@@ -11,14 +11,14 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb arr-right ">
             <li class="breadcrumb-item"><a href="{{ route('homepage') }}">Home</a></li>
-            <li class="breadcrumb-item active"><a href="#">Stories</a></li>
+            <li class="breadcrumb-item active"><a href="#">Trending Stories</a></li>
         </ol>
     </nav>
 </div>
 
 <div class="auto-container adjust-padding">
     <div class="mb-5">
-        <h3>My Stories</h3>
+        <h3>Trending Stories</h3>
     </div>
     <div class="col-md-12 d-flex flex-row p-0 ">
         <div class="col-md-9 p-0">
@@ -32,9 +32,9 @@
                                 @endif
 
                                 @if($story->image_url )
-                                    <img src="{{ $story->image_url }}" />
+                                <a href="{{route('story.show',$story->slug)}}"><img src="{{ $story->image_url }}" /></a>
                                 @else
-                                <img src="/images/placeholder.png" />
+                                <a href="{{route('story.show',$story->slug)}}"><img src="/images/placeholder.png" /></a>
                                 @endif
 
                                 <div class="card-body story-card-body">
@@ -68,26 +68,12 @@
                             </div>
                         </div>
                     @empty
-                        <p style="font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;">
-                            Oops! You don't have any story yet.
-                            <a href="{{ route('story.create') }}" class="btn btn-block" style="margin-top: 10px;">
-                                Create New Story
-                            </a>
-                        </p>
+                        
                     @endforelse
                 </div>
 
-                <div style="margin-top: 40px;">
-                    {{ $stories->appends($_GET)->links() }}
-                </div>
+                
             </div>
-            @if ($stories->count())
-                <p style="font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;">
-                    <a href="{{ route('story.create') }}" class="btn btn-block" style="margin-top: 10px;">
-                        Create New Story
-                    </a>
-                </p>
-            @endif
         </div>
         <div class="col-md-3">
             <div class="d-flex flex-row col-md-12  ">

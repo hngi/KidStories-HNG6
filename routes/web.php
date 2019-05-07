@@ -23,6 +23,14 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
 Route::get('/subscribe', function () {
     return view('subscribe');
 })->name('subscribe')->middleware('auth');
@@ -40,10 +48,14 @@ Route::get('/favorites', 'BookmarkController@index')->name('bookmark');
 // Routes for stories
 Route::get('/stories', 'StoriesController@index')->name('stories.index');
 Route::get('/stories/{story}', 'StoriesController@show')->name('story.show');
+Route::get('/trending-stories', 'StoriesController@trendingstories')->name('stories.trending');
 
 // Routes for categories
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
 Route::get('/categories/{id}/stories', 'CategoryController@stories')->name('categories.stories');
+
+// Routes for authors
+Route::get('/authors/{author}/stories', 'AuthorController@getStories')->name('author.stories');
 
 
 //routes for payment

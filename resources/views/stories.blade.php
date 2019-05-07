@@ -36,7 +36,7 @@
 
                                 <div class="card-body story-card-body">
                                     <h5 class="card-title"><a href="{{route('story.show',['story'=>$story->slug])}}">{{$story->title}}</a></h5>
-                                    <p class="card-text">By <a href="#">{{$story->author}}</a></p>
+                                    <p class="card-text">By <a href="{{route('author.stories', $story->author)}}">{{$story->author}}</a></p>
                                     <hr style="margin:0 -5px;">
                                     <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
                                     <hr style="margin:0 -20px;">
@@ -90,17 +90,34 @@
                         </form>
                     </div>
                     <hr style="width:10%;">
-                    <p>Sort By</p>
+                     <p>SORT BY</p>
                     <div class="card" style="width: 15rem;">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a href="{{ url()->current(). '?search=' . request()->query('search') . '&sort=age' }}" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
-                            {{-- <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li>  --}}
-                            <li class="list-group-item"><a href="{{ url()->current(). '?search=' . request()->query('search') . '&sort=latest' }}" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
+                        <form action="" method="GET">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <select class="form-control form-control-sm" name="minAge">
+                                        <option value="">Min age</option>
+                                        @for ($i = 0; $i < 15; $i++)
+                                            <option value="{{ $i }}" {{ request()->query('minAge') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                    <select class="form-control form-control-sm" name="maxAge" style="margin-top: 8px;">
+                                        <option value="">Max age</option>
+                                        @for ($i = 1; $i < 16; $i++)
+                                            <option value="{{ $i }}" {{ request()->query('maxAge') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </li>
+                                {{-- <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li> 
+                                <li class="list-group-item"><a href="{{ url()->current(). '?search=' . request()->query('search') . '&sort=latest' }}" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li> --}}
 
-
-                        </ul>
+                                <li class="list-group-item">
+                                    <button type="submit" class="form-control form-control-sm btn-primary">Sort</button>
+                                </li>
+                            </ul>
+                        </form>
                     </div>
-
+                    
                 </div>
             </div>
 

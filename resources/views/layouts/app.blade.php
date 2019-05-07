@@ -171,7 +171,7 @@
         <section>
             <h5>Quick Links</h5>
             <a href="/create-story">Create a Story</a>
-            <a href="#">Favorite Story</a>
+            <a href="{{ route('stories.trending')}}">Trending Stories</a>
             <a href="{{ route('stories.index') }}">Explore Stories</a>
              <a href="https://paystack.com/pay/kidstoriesapp">Make a donation</a>
         </section>
@@ -211,6 +211,7 @@
     <script src="{{ asset('js/wow.js') }}"></script>
     <script src="{{ asset('js/paroller.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="{{ asset('js/index.js') }}"></script>
     @yield('js')
 </body>

@@ -23,14 +23,20 @@ var react = async function(event) {
   event.preventDefault();
   var text = event.target.id;
   var storyId = event.target.dataset.storyId;
-  var favId = event.target.dataset.favId;
   let action = '';
   if (text === "fav-like-"+storyId) {
       action = await axios.post('/api/v1/stories/' + storyId + '/reactions/like');
   } else {
       action = await axios.post('/api/v1/stories/' + storyId + '/reactions/dislike');
   }
-  updateReactionStats(storyId, action.data.likes_count, action.data.dislikes_count, action.data.action);
+  if (action.data.message == 'Kindly log in') {
+    Swal.fire(
+      'Log in to react to a story!'
+    )
+  } else {
+    updateReactionStats(storyId, action.data.likes_count, action.data.dislikes_count, action.data.action);
+  }
+ 
 };
 
 var bookmark = async function(event){

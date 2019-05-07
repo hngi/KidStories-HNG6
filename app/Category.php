@@ -10,7 +10,7 @@ class Category extends Model
 
     //Relationship start
 
-    /*
+    /** 
      * A category has many stories
      */
     public function stories()
