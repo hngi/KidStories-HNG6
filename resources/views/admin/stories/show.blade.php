@@ -2,7 +2,6 @@
 
 @section('content')
     @include('admin.stories.partials.header', ['title' => __('Story Detail')])
-
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col-xl-12 order-xl-1">
@@ -17,11 +16,6 @@
                             </div>
                         </div>
                     </div>
-
-
-                    
-
-
                     <div class="card-body">
                         <form method="post" 
                             autocomplete="off" enctype="multipart/form-data">
@@ -39,7 +33,24 @@
                                 <div class="form-group">
                                     <img src="{{$story->image_url ?? '/images/placeholder.png'}}" style="height:15rem" alt="" 
                                         class="form-control img">
-                                </div>                   
+                                </div>   
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-title">{{ __('Tags') }} </label>
+                                    <select name="tags[]" id="tags" multiple disabled
+                                        class="form-control form-control-alternative">
+                                        <option value=""></option>
+                                        @foreach ($story->tags as $tag)
+                                            <option selected>
+                                                {{$tag->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('tags'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('tags') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>                
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-title">{{ __('Content') }} </label>
                                     <textarea style="height:200px" type="text" 
@@ -94,3 +105,8 @@
         @include('admin.layouts.footers.auth')
     </div>
 @endsection
+@push('js')
+    <script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
+    <script type="text/javascript" src="{{asset('js/select2_init.js')}}"></script>
+@endpush

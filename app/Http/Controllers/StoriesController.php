@@ -194,8 +194,6 @@ class StoriesController extends Controller
     {
         $categories = Category::all();
 
-        $tags = Tag::all();
-        
         return view(
             'create-story', 
             compact('categories','tags')
