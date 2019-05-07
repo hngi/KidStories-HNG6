@@ -316,9 +316,11 @@ class StoriesController extends Controller
     {
         $reactions = Reaction::where('reaction', 1)->orderBy('story_id', 'asc')->get();
         $storyCountArray = [];
+        
         for ($i=0; $i < $reactions->count(); $i++) { 
            $storyCountArray[$i] = $reactions[$i]->story_id;
         }
+
         $occurences = array_count_values($storyCountArray);
         asort($occurences);
         $storyIdArray = array_keys($occurences);
@@ -326,16 +328,28 @@ class StoriesController extends Controller
         $num = count($storyIdArray);
         $stories = [];
         $j = 0;
+        
         for ($i=$num-1; $i >= $num - 9 ; $i--) { 
-            //return $i;
             $stories[$j] = Story::where('id', $storyIdArray[$i])->first();
+
             $like_reaction = Reaction::where('story_id', $stories[$j]->id)
-                        ->where('reaction', 1)->get();
+                                    ->where('reaction', 1)->get();
+            
             $stories[$j]['likes_count'] = count($like_reaction);
+            
             $dislike_reaction = Reaction::where('story_id', $stories[$j]->id)
-                        ->where('reaction', 0)->get();
+                                        ->where('reaction', 0)->get();
+            
             $stories[$j]['dislikes_count'] = count($dislike_reaction);
+            
             $j++;
+        }
+
+        // Sorting feature
+        if ($request->query('sort') == 'latest') {
+            $stories = collect($stories)->sortBy('created_at');
+        } else if ($request->query('sort') == 'age') {
+            $stories = collect($stories)->sortBy('age_from');
         }
 
         $user = $request->user();
