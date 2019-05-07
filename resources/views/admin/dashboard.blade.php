@@ -31,16 +31,16 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">
-                                        0
+                                        {{ $stories }}
                                     </th>
                                     <td>
-                                       0
+                                       {{ $users }}
                                     </td>
                                     <td>
-                                        0
+                                        {{ $premium_stories }}
                                     </td>
                                     <td>
-                                        0
+                                        {{ $paystackBal }}
                                     </td>
                                     <td>
                                         0
