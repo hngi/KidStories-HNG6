@@ -14,6 +14,8 @@
 
 
 
+
+
         <div class="register_wrapper">
             <div class="register">
                 <div class="row">
@@ -101,7 +103,7 @@
                                 required autocomplete="name" autofocus
                             />
                              @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert" style="display: block;">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -136,7 +138,7 @@
                             />
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert" style="display: block;">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -149,7 +151,7 @@
                         <div class="col-lg-12">
                             <input
                                 type="password"
-                                name="password-confirm"
+                                name="password_confirmation"
                                 id="password-confirm"
                                 placeholder = "{{ __('Confirm Password') }}"
                                 class="d-block mt-4 mx-auto pr-2"
