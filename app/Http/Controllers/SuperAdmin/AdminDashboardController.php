@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminPasswordRequest;
 use App\Admin;
 use Illuminate\Support\Facades\Auth;
+use Paystack;
 
 class AdminDashboardController extends Controller
 {
@@ -25,8 +26,28 @@ class AdminDashboardController extends Controller
      * @return \Illuminate\View\View
      */
     public function index()
-    {
-        return view('admin.dashboard');
+    {   $stories=\App\Story::count();
+        $users=\App\User::count();
+        $premium_stories=\App\Story::where('is_premium',true)->count();
+
+        //trying to get the total amount made from subscription. 
+        //this would be a temporal means cos the package used does not offer such functionality
+
+        $transactions=Paystack::getAllTransactions();
+
+        $paystackBal=0;
+
+        foreach ($transactions as $key => $value) {
+            $paystackBal=intval($paystackBal)+intval($value['amount']);
+        }
+        
+        return view('admin.dashboard',
+            compact(
+                'users',
+                'premium_stories',
+                'stories',
+                'paystackBal'
+            ));
     }
     /**
      * @param mixed $old_password, $password,Confirmed_password

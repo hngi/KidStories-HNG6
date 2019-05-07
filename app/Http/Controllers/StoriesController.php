@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use DB;
 use Auth;
-use Validator;
+use App\Tag;
 use App\Story;
+use Validator;
 use App\Bookmark;
 use App\Category;
 use App\Reaction;
@@ -187,10 +188,16 @@ class StoriesController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('create-story', compact('categories'));
+
+        $tags = Tag::all();
+        
+        return view(
+            'create-story', 
+            compact('categories','tags')
+        );
     }
 
-    public function store(Request $request)
+    public function store(Request $request,Tag $tag)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
@@ -220,29 +227,30 @@ class StoriesController extends Controller
                 'code' => 404
             ], 404);
         }
-
+       
         DB::beginTransaction();
 
-        if ($request->hasfile('photo')) {
-            $image = $this->fileUploadService->uploadFile($request->file('photo'));
-        }
+            if ($request->hasfile('photo')) {
+                $image = $this->fileUploadService->uploadFile($request->file('photo'));
+            }
 
-        $age = explode('-', $request->age);
+            $age = explode('-', $request->age);
 
-        $story = Story::create([
-            'title' => $request->title,
-            'body' => $request->body,
-            'category_id' => $request->category_id,
-            'user_id' => auth()->id(),
-            'age_from' => $age[0],
-            'age_to' => $age[1],
-            // 'is_premium' => $request->is_premium,
-            'is_premium' => false,
-            'author' => $request->author,
-            "image_url" => $image['secure_url'] ?? null,
-            "image_name" => $image['public_id'] ?? null
-        ]);
+            $story = Story::create([
+                'title' => $request->title,
+                'body' => $request->body,
+                'category_id' => $request->category_id,
+                'user_id' => auth()->id(),
+                'age_from' => $age[0],
+                'age_to' => $age[1],
+                // 'is_premium' => $request->is_premium,
+                'is_premium' => false,
+                'author' => $request->author,
+                "image_url" => $image['secure_url'] ?? null,
+                "image_name" => $image['public_id'] ?? null
+            ]);
 
+            $story->tags()->attach($tag->getTagsIds($request->tags));
         DB::commit();
         return redirect()->route('story.show', ['story' => $story->slug]);
     }

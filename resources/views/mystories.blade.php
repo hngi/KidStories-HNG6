@@ -81,6 +81,13 @@
                     {{ $stories->appends($_GET)->links() }}
                 </div>
             </div>
+            @if ($stories->count())
+                <p style="font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;">
+                    <a href="{{ route('story.create') }}" class="btn btn-block" style="margin-top: 10px;">
+                        Create New Story
+                    </a>
+                </p>
+            @endif
         </div>
         <div class="col-md-3">
             <div class="d-flex flex-row col-md-12  ">

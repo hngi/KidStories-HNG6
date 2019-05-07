@@ -59,10 +59,10 @@ class AuthController extends Controller
             'first_name' => 'required|min:2|string',
             'last_name' => 'required|min:2|string',
 			'email' => 'required|email|unique:users',
-            'password' => 'required|string',
-            'phone'=>'required|min:8|numeric|max:19',
-            'postal_code'=>'required|string',
-            'location'=>'required|string'
+            'password' => 'required|string|min:8',
+            'phone'=>'required|numeric',
+           // 'postal_code'=>'string',
+            //'location'=>'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -83,9 +83,9 @@ class AuthController extends Controller
             'email'=>$request->get('email'),
             'password'=>bcrypt($request->get('password')),
             'is_admin' => false,
-            'postal_code'=>$request->get('postal_code'),
+            //'postal_code'=>$request->get('postal_code'),
             'phone'=>$request->get('phone'),
-            'location'=>$request->get('location')
+           // 'location'=>$request->get('location')
         ]);
 
 		DB::commit();
