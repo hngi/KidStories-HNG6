@@ -98,7 +98,7 @@
                         </form>
                     </div>
                     <hr style="width:10%;">
-                    <p>Sort By</p>
+<!--                     <p>Sort By</p>
                     <div class="card" style="width: 15rem;">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><a href="{{ url()->current(). '?search=' . request()->query('search') . '&sort=age' }}" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
@@ -107,7 +107,7 @@
 
 
                         </ul>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

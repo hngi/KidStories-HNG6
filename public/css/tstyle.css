@@ -1686,3 +1686,103 @@ img{
 .padding-50{
     padding: 50px;
 }
+
+
+
+/*  Register */
+
+.register {
+	box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	max-width: 800px;
+	margin: 10% auto 10%;
+}
+
+.register .illustration {
+	padding: 160px 50px;
+	background: linear-gradient(218.04deg, #39a1f7 29.19%, #718cfb 81.17%);
+	min-height: 650px;
+	max-height: 650px;
+}
+
+.register .illustration p {
+	font-size: 14px;
+}
+
+.register .illustration .testimonial {
+	background-color: #fff;
+	width: 100%;
+	position: relative;
+	z-index: 3;
+}
+
+.register .testifier img {
+	width: 50px;
+	height: 50px;
+}
+
+.register .illustration .star {
+	width: 20px;
+	height: 20px;
+}
+
+.register .illustration .lines {
+	width: 70px;
+	height: 60px;
+}
+
+.register .illustration .lines:first-of-type {
+	margin-bottom: -25px;
+	margin-left: -25px;
+}
+
+.register .illustration .lines:last-of-type {
+	margin-top: -25px;
+	margin-right: -25px;
+}
+
+.register_form input[type="text"],
+.register_form input[type="email"],
+.register_form input[type="password"] {
+	width: 95%;
+	border: none;
+	border-bottom: 1px solid #a9aebe;
+	font-size: 14px;
+	outline: none;
+	font-family: "Lato", sans-serif;
+}
+
+.register_form a {
+	color: #39a1f7;
+}
+
+.register_form p,
+.register_form a {
+	font-size: 14px;
+}
+
+.register_form .register_btn {
+	background: linear-gradient(184.82deg, #39a1f7 -53.71%, #a875ff 192.78%);
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	border: none;
+	width: 60%;
+	padding: 5px 0 5px;
+	font-size: 14px;
+	margin: 0 auto;
+	cursor: pointer;
+}
+
+@media screen and (min-width: 450px) {
+	.register .illustration .testimonial {
+		width: 80%;
+	}
+
+	.register .illustration .lines:first-of-type {
+		margin-left: 0;
+	}
+
+	.register .illustration .lines:last-of-type {
+		margin-right: 0;
+	}
+}

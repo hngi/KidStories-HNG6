@@ -27,6 +27,10 @@ Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
 
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
 Route::get('/subscribe', function () {
     return view('subscribe');
 })->name('subscribe')->middleware('auth');
