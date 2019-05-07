@@ -82,10 +82,26 @@ class CategoryController extends Controller
                 $stories[$i]['favorite'] = false;
             }
 
+            $reaction_count =  $this->reaction($storyId);
+            $stories[$i]['likes_count'] = $reaction_count[0];
+            $stories[$i]['dislikes_count'] = $reaction_count[1];
+
         }
 
         return view('categories_stories', compact('stories', 'categories', 'currentCategory'));
 
+    }
+
+    public function reaction($id)
+    {
+        $like_reaction = Reaction::where('story_id', $id)
+                        ->where('reaction', 1)->get();
+        $likeCount = count($like_reaction);
+        $dislike_reaction = Reaction::where('story_id', $id)
+                    ->where('reaction', 0)->get();
+        $dislikeCount = count($dislike_reaction);
+
+        return [$likeCount, $dislikeCount];
     }
 }
 
