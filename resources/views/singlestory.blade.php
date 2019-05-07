@@ -10,7 +10,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb arr-right ">
             <li class="breadcrumb-item"><a href="{{ route('homepage') }}">Home</a></li>
-            <li class="breadcrumb-item titlecase active"><a href="{{route('story.show',$story->id)}}"> {{$story->title}} </a></li>
+            <li class="breadcrumb-item titlecase active"><a href="{{route('story.show',$story->slug)}}"> {{$story->title}} </a></li>
         </ol>
     </nav>
 </div>

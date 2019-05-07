@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('custom_css')
+<link href="{{ asset('css/storieslisting.css') }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+@endsection
+
 @section('content')
 <div class="favourites">
     <!-- Header with BG Image -->
@@ -21,36 +27,49 @@
         <div class="stories py-5">
             <h6 class="font-weight-bold">Sort by: Date Added</h6>
             <div class="row">
-                @foreach($bookmarks as $bookmark)
-                <div class="col-md-3" id="bookmark-div-{{ $bookmark->id }}">
-                    <div class="card favorite_story_card mt-4">
-                        <img src="{{ $bookmark->image_url }}" class="card-img-top" alt="{{$bookmark->image_name}}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{$bookmark->title}}</h5>
-                            <p class="card-text mb-1">by <span class="author">{{$bookmark->author}}</span></p>
-                            <hr>
-                            <p class="card-text">For ages {{$bookmark->age_from}} - {{$bookmark->age_to}} years</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between">
-                            <div class="reactions">
-                                @if ($bookmark->reaction == 'dislike')
-                                <i class="fa fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}"></i><small class="mr-3" id="likes-count-{{ $bookmark->id }}">{{$bookmark->likes_count}}</small>
-                                <i class="fa fa-thumbs-down fav-icon fav-red" id="fav-dislike-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $bookmark->id }}">{{$bookmark->dislikes_count}}</small>
-                                @elseif ($bookmark->reaction == 'like')
-                                <i class="fa fa-thumbs-up fav-icon fav-green" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}"></i><small class="mr-3" id="likes-count-{{ $bookmark->id }}">{{$bookmark->likes_count}}</small>
-                                <i class="fa fa-thumbs-down fav-icon " id="fav-dislike-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $bookmark->id }}">{{$bookmark->dislikes_count}}</small>
-                                @else
-                                <i class="fa fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}"></i><small class="mr-3" id="likes-count-{{ $bookmark->id }}">{{$bookmark->likes_count}}</small>
-                                <i class="fa fa-thumbs-down fav-icon" id="fav-dislike-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $bookmark->id }}">{{$bookmark->dislikes_count}}</small>
+            @forelse ($bookmarks as $bookmark)
+                    <div class="col-lg-4 col-xs-12" id = "bookmark-div-{{$bookmark->id}}">
+                    <div class="card col-lg-12 col-md-10 p-0 story-card mb-4 premium-badge-holder">
+                                @if($bookmark->is_premium)
+                                    <span class="badge badge-primary premium-badge">PREMIUM</span>
                                 @endif
-                            </div>
-                            <div class="bookmark">
-                                <a> <i class="fa fa-bookmark fav-icon bookmark-blue" style="margin-left: 8px" onclick="bookmark(event);" id="bookmark-{{ $bookmark->id }}" data-story-id="{{ $bookmark->id }}" data-fav-id = "{{ $bookmark->id }}"></i> </a>
+
+                                @if($bookmark->image_url )
+                                <a href="{{route('story.show',$bookmark->slug)}}"><img src="{{ $bookmark->image_url }}" /></a>
+                                @else
+                                <a href="{{route('story.show',$bookmark->slug)}}"><img src="/images/placeholder.png" /></a>
+                                @endif
+
+                                <div class="card-body story-card-body">
+                                    <h5 class="card-title"><a href="{{route('story.show',$bookmark->slug)}}">{{$bookmark->title}}</a></h5>
+                                    <p class="card-text">By <a href="{{route('author.stories', $bookmark->user_id)}}">{{$bookmark->author}}</a></p>
+                                    <hr style="margin:0 -5px;">
+                                    <p>For Kids {{ $bookmark->age_from .' to '. $bookmark->age_to }} years</p>
+                                    <hr style="margin:0 -17px;">
+                                    <div class="d-flex justify-content-between align-items-center card-">
+                                        <div class="btn-group">
+                                            @if ($bookmark->reaction == 'dislike')
+                                            <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}"></i><small class="mr-3" id="likes-count-{{ $bookmark->id }}">{{$bookmark->likes_count}}</small>
+                                            <i class="fas fa-thumbs-down fav-icon fav-red" id="fav-dislike-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $bookmark->id }}">{{$bookmark->dislikes_count}}</small>
+                                            @elseif ($bookmark->reaction == 'like')
+                                            <i class="fas fa-thumbs-up fav-icon fav-green" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}"></i><small class="mr-3" id="likes-count-{{ $bookmark->id }}">{{$bookmark->likes_count}}</small>
+                                            <i class="fas fa-thumbs-down fav-icon " id="fav-dislike-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $bookmark->id }}">{{$bookmark->dislikes_count}}</small>
+                                            @else
+                                            <i class="fas fa-thumbs-up fav-icon" style="margin-right:8px;margin-top:6px;" id="fav-like-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}"></i><small class="mr-3" id="likes-count-{{ $bookmark->id }}">{{$bookmark->likes_count}}</small>
+                                            <i class="fas fa-thumbs-down fav-icon" id="fav-dislike-{{ $bookmark->id }}" onclick="react(event);" data-story-id="{{ $bookmark->id }}" style="margin-top:10px; margin-right:10px;margin-left:10px;"></i><small id="dislikes-count-{{ $bookmark->id }}">{{$bookmark->dislikes_count}}</small>
+                                            @endif
+                                        </div>
+                                        <span class="verticalLine">
+                                            <a> <i class="far fa-bookmark bookmark-blue" style="margin-left: 8px" onclick="bookmark(event);" id="bookmark-{{ $bookmark->id }}" data-story-id="{{ $bookmark->id }}" data-fav-id="{{ $bookmark->id }}"></i> </a>
+                                            
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                @endforeach
+                    @empty
+                        <p style="font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;">Oops! No stories found.</p>
+                    @endforelse
             </div>
         </div>
     </div>
