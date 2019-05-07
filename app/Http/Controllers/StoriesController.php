@@ -320,7 +320,7 @@ class StoriesController extends Controller
         $storyIdArray = array_keys($occurences);
         
         $num = count($storyIdArray);
-        $stories = '';
+        $stories = [];
         $j = 0;
         for ($i=$num-1; $i >= $num - 9 ; $i--) { 
             //return $i;
