@@ -1,7 +1,7 @@
 @extends('admin.layouts.app', ['title' => __('Manage Stories')])
 
 @section('content')
-    @include('admin.stories.partials.header', ['title' => __('Add Story')])   
+    @include('admin.stories.partials.header', ['title' => __('Edit Story')])   
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col-xl-12 order-xl-1">
@@ -37,24 +37,28 @@
                                 <div class="form-group {{ $errors->has('photo') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Story Image') }} </label>
                                     <p id="for_ad_image" class="valError text-danger small"></p>
-                                    <div class="file-upload-previews">
-                                        <div class="MultiFile-label">
-                                            <a class="MultiFile-remove" href="#" id="removeAdImg" 
-                                                data-item-id="{{$story->id}}" 
-                                                data-img-name="{{$story->image_url}}">x</a> 
-                                            <span>
-                                                <span class="MultiFile-label" 
-                                                    title="File selected: {{$story->image_url}}.jpg">
-                                                    <span class="MultiFile-title">{{$story->image_url}}</span>
-                                                    <img class="MultiFile-preview" 
-                                                            style="max-height:100px; max-width:100px;" 
-                                                            src="{{asset($story->image_url)}}">
+                                    @if ($story->image_url)
+                                        <div class="file-upload-previews">
+                                            <div class="MultiFile-label">
+                                                <a class="MultiFile-remove" href="#" id="removeAdImg" 
+                                                    data-item-id="{{$story->id}}" 
+                                                    data-img-name="{{$story->image_url}}">x</a> 
+                                                <span>
+                                                    <span class="MultiFile-label" 
+                                                        title="File selected: {{$story->image_url}}.jpg">
+                                                        <span class="MultiFile-title">{{$story->image_url}}</span>
+                                                        <img class="MultiFile-preview" 
+                                                                style="max-height:100px; max-width:100px;" 
+                                                                src="{{asset($story->image_url)}}">
+                                                    </span>
                                                 </span>
-                                            </span>
-                                            <input type="hidden" name="previousImage" value="{{$story->image_url}}" />
-                                        </div>
-                                    </div>
-                                    <div class="file-upload" style="display:none">
+                                                <input type="hidden" name="previousImage" value="{{$story->image_url}}" />
+                                            </div>
+                                        </div> 
+                                    @endif
+                                    
+                                    <div class="file-upload" 
+                                        style="display:{{$story->image_url?'none':'block'}}">
                                         <input type="file" name="photo" 
                                         class="file-upload-input with-preview" 
                                         title="Click to add files" 
@@ -63,7 +67,25 @@
                                         <span style="color:#000">CLICK OR DRAG IMAGES HERE</span>
                                         <input type="hidden" id="imgCount" value="1"/>
                                     </div>
-                                </div>                   
+                                </div>         
+                                <div class="form-group {{ $errors->has('tags') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-title">{{ __('Tags') }} </label>
+                                    <select name="tags[]" id="tags" multiple required
+                                        class="form-control form-control-alternative">
+                                        <option value=""></option>
+                                        @foreach ($tags as $tag)
+                                            <option value="{{$tag->id}}"
+                                                {{in_array($tag->id,$story->tags->pluck('id')->all())?'selected':''}}>
+                                                {{$tag->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('tags'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('tags') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>          
                                 <div class="form-group {{ $errors->has('body') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Content') }} *</label>
                                     <textarea style="height:200px" type="text" 
@@ -146,4 +168,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/MultiFileUpload.css')}}">
     <script type="text/javascript" src="{{asset('js/jQuery.MultiFile.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/MultiFileUpload.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
+    <script type="text/javascript" src="{{asset('js/select2_init.js')}}"></script>
 @endpush
