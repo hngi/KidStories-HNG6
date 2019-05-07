@@ -49,13 +49,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
+           'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'postal_code'=>['required','string'],
-            'location'=>['required','string'],
-            'phone'=>['required','string','min:11','max:19']
+           'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+         'password' => ['required', 'string', 'confirmed','min:8'],
+           // 'postal_code'=>['string'],
+           // 'location'=>['required','string'],
+          'phone'=>['required','numeric']
         ]);
     }
 
@@ -67,14 +67,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+    
         return User::create([
             'first_name' => $data['first_name'],
             'last_name'=>$data['last_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'location'=>$data['location'],
+           // 'location'=>$data['location'],
             'phone'=>$data['phone'],
-            'postal_code'=>$data['postal_code']
+           // 'postal_code'=>$data['postal_code']
         ]);
     }
 }

@@ -11,15 +11,15 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb arr-right ">
             <li class="breadcrumb-item"><a href="{{ route('homepage') }}">Home</a></li>
-            <li class="breadcrumb-item active"><a href="#">Stories</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Categories</a></li>
         </ol>
     </nav>
 </div>
 
 <div class="auto-container adjust-padding">
     @if($stories->first())
-    <div class="mb-5">
-        <h3>{{ $stories->first()->category->name }} Category Listing</h3>
+    <div class="mb-5 catheader">
+        <h3>{{ $stories->first()->category->name }} Listing</h3>
     </div>
     @endif
     <div class="col-md-12 d-flex cold p-0 ">
@@ -95,7 +95,7 @@
                         </form>
                     </div>
                     <hr style="width:10%;">
-                    <p>Sort By</p>
+<!--                     <p>Sort By</p>
                     <div class="card" style="width: 15rem;">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><a href="{{ url()->current(). '?search=' . request()->query('search') . '&sort=age' }}" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
@@ -104,7 +104,7 @@
 
 
                         </ul>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
