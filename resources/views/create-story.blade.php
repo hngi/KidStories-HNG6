@@ -29,10 +29,10 @@
                             <label for="age">Age</label>
                             <input type="text" name="age" id="age" required placeholder="eg 1-4">
                         </div>
-                        <div class="form-input">
+                        <!-- <div class="form-input">
                             <label for="author">Author</label>
                             <input type="text" name="author" id="author" required>
-                        </div>
+                        </div> -->
                         <div class="form-input">
                             <label for="category">Category</label>
                             <select name="category_id" id="category" class="form-control form-control-lg" required>
