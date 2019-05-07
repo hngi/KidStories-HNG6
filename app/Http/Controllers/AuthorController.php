@@ -9,9 +9,9 @@ use App\Category;
 
 class AuthorController extends Controller
 {
-    public function getStories(Request $request, $id)
+    public function getStories(Request $request, $author)
     {
-        $stories = Story::where('user_id', $id)->get();
+        $stories = Story::where('author', $author)->get();
         $categories = Category::limit(4)->get();
 
        // return $stories;

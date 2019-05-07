@@ -198,6 +198,7 @@ class StoriesController extends Controller
             'category_id' => 'required|numeric',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'age' => 'required',
+            'author' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -227,11 +228,6 @@ class StoriesController extends Controller
         }
 
         $age = explode('-', $request->age);
-        $user = $request->user('api');
-        $firstname = $user->first_name;
-        $lastname = $user->last_name;
-
-        $author = $firstname.' '.$lastname;
 
         $story = Story::create([
             'title' => $request->title,
@@ -242,7 +238,7 @@ class StoriesController extends Controller
             'age_to' => $age[1],
             // 'is_premium' => $request->is_premium,
             'is_premium' => false,
-            'author' => $author,
+            'author' => $request->author,
             "image_url" => $image['secure_url'] ?? null,
             "image_name" => $image['public_id'] ?? null
         ]);
