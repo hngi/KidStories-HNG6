@@ -125,7 +125,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('payment.index') }}">
                         <i class="ni ni-money-coins text-blue"></i> {{ __('Payments') }}
                     </a>
                 </li>
