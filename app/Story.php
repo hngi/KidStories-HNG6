@@ -97,15 +97,16 @@ class Story extends Model
         return $this->belongsToMany(Users::class,'bookmarks');
     }
 
-    //Relationship end
-
     /*
      * A Story belongs to many tags
      */
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->withTimestamps();
     }
+
+    //Relationship end
+
 
     public function scopeSimilar($query)
     {
