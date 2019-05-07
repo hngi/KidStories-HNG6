@@ -39,7 +39,7 @@
 
                                 <div class="card-body story-card-body">
                                     <h5 class="card-title"><a href="{{route('story.show',$story->slug)}}">{{$story->title}}</a></h5>
-                                    <p class="card-text">By <a href="{{route('author.stories', $story->user_id)}}">{{$story->author}}</a></p>
+                                    <p class="card-text">By <a href="{{route('author.stories', $story->author)}}">{{$story->author}}</a></p>
                                     <hr style="margin:0 -5px;">
                                     <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
                                     <hr style="margin:0 -20px;">

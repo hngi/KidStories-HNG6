@@ -51,7 +51,7 @@ Route::get('/categories', 'CategoryController@index')->name('categories.index');
 Route::get('/categories/{id}/stories', 'CategoryController@stories')->name('categories.stories');
 
 // Routes for authors
-Route::get('/authors/{id}/stories', 'AuthorController@getStories')->name('author.stories');
+Route::get('/authors/{author}/stories', 'AuthorController@getStories')->name('author.stories');
 
 
 //routes for payment

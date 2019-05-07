@@ -78,7 +78,9 @@ class StoriesController extends Controller
                 $stories[$i]['reaction'] = 'nil';
                 $stories[$i]['favorite'] = false;
             }
-
+            $reaction_count =  $this->reaction($storyId);
+            $stories[$i]['likes_count'] = $reaction_count[0];
+            $stories[$i]['dislikes_count'] = $reaction_count[1];
         }
 
         return view('stories', compact('stories', 'categories'));
@@ -139,6 +141,10 @@ class StoriesController extends Controller
                 $stories[$i]['favorite'] = false;
             }
 
+            $reaction_count =  $this->reaction($storyId);
+            $stories[$i]['likes_count'] = $reaction_count[0];
+            $stories[$i]['dislikes_count'] = $reaction_count[1];
+
         }
 
         return view('mystories', compact('stories', 'categories'));
@@ -172,6 +178,10 @@ class StoriesController extends Controller
             return \redirect('home');
         }
 
+        $reaction_count =  $this->reaction($id);
+        $story['likes_count'] = $reaction_count[0];
+        $story['dislikes_count'] = $reaction_count[1];
+
         return view('story', ['story' => $story]);
     }
 
@@ -195,6 +205,7 @@ class StoriesController extends Controller
             'category_id' => 'required|numeric',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'age' => 'required',
+            'author' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -294,6 +305,10 @@ class StoriesController extends Controller
             return \redirect('home');
         }
 
+        $reaction_count =  $this->reaction($storyId);
+        $story['likes_count'] = $reaction_count[0];
+        $story['dislikes_count'] = $reaction_count[1];
+
         return view('singlestory', compact('story', 'similarStories'));
     }
 
@@ -309,7 +324,7 @@ class StoriesController extends Controller
         $storyIdArray = array_keys($occurences);
         
         $num = count($storyIdArray);
-        $stories;
+        $stories = [];
         $j = 0;
         for ($i=$num-1; $i >= $num - 9 ; $i--) { 
             //return $i;
@@ -351,10 +366,26 @@ class StoriesController extends Controller
                 $stories[$i]['favorite'] = false;
             }
 
+            $reaction_count =  $this->reaction($storyId);
+            $stories[$i]['likes_count'] = $reaction_count[0];
+            $stories[$i]['dislikes_count'] = $reaction_count[1];
+
         }
 
         $categories = Category::limit(4)->get();
 
         return view('trendingstories', compact('stories', 'categories'));
+    }
+
+    public function reaction($id)
+    {
+        $like_reaction = Reaction::where('story_id', $id)
+                        ->where('reaction', 1)->get();
+        $likeCount = count($like_reaction);
+        $dislike_reaction = Reaction::where('story_id', $id)
+                    ->where('reaction', 0)->get();
+        $dislikeCount = count($dislike_reaction);
+
+        return [$likeCount, $dislikeCount];
     }
 }

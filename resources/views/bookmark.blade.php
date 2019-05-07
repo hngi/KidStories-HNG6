@@ -42,7 +42,7 @@
 
                                 <div class="card-body story-card-body">
                                     <h5 class="card-title"><a href="{{route('story.show',$bookmark->slug)}}">{{$bookmark->title}}</a></h5>
-                                    <p class="card-text">By <a href="{{route('author.stories', $bookmark->user_id)}}">{{$bookmark->author}}</a></p>
+                                    <p class="card-text">By <a href="{{route('author.stories', $bookmark->author)}}">{{$bookmark->author}}</a></p>
                                     <hr style="margin:0 -5px;">
                                     <p>For Kids {{ $bookmark->age_from .' to '. $bookmark->age_to }} years</p>
                                     <hr style="margin:0 -17px;">
