@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use DB;
 use Auth;
-use Validator;
+use App\Tag;
 use App\Story;
+use Validator;
 use App\Bookmark;
 use App\Category;
 use App\Reaction;
@@ -177,10 +178,16 @@ class StoriesController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('create-story', compact('categories'));
+
+        $tags = Tag::all();
+        
+        return view(
+            'create-story', 
+            compact('categories','tags')
+        );
     }
 
-    public function store(Request $request)
+    public function store(Request $request,Tag $tag)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
@@ -188,6 +195,7 @@ class StoriesController extends Controller
             'category_id' => 'required|numeric',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'age' => 'required',
+            'author' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -209,34 +217,30 @@ class StoriesController extends Controller
                 'code' => 404
             ], 404);
         }
-
+       
         DB::beginTransaction();
 
-        if ($request->hasfile('photo')) {
-            $image = $this->fileUploadService->uploadFile($request->file('photo'));
-        }
+            if ($request->hasfile('photo')) {
+                $image = $this->fileUploadService->uploadFile($request->file('photo'));
+            }
 
-        $age = explode('-', $request->age);
-        $user = $request->user('api');
-        $firstname = $user->first_name;
-        $lastname = $user->last_name;
+            $age = explode('-', $request->age);
 
-        $author = $firstname.' '.$lastname;
+            $story = Story::create([
+                'title' => $request->title,
+                'body' => $request->body,
+                'category_id' => $request->category_id,
+                'user_id' => auth()->id(),
+                'age_from' => $age[0],
+                'age_to' => $age[1],
+                // 'is_premium' => $request->is_premium,
+                'is_premium' => false,
+                'author' => $request->author,
+                "image_url" => $image['secure_url'] ?? null,
+                "image_name" => $image['public_id'] ?? null
+            ]);
 
-        $story = Story::create([
-            'title' => $request->title,
-            'body' => $request->body,
-            'category_id' => $request->category_id,
-            'user_id' => auth()->id(),
-            'age_from' => $age[0],
-            'age_to' => $age[1],
-            // 'is_premium' => $request->is_premium,
-            'is_premium' => false,
-            'author' => $author,
-            "image_url" => $image['secure_url'] ?? null,
-            "image_name" => $image['public_id'] ?? null
-        ]);
-
+            $story->tags()->attach($tag->getTagsIds($request->tags));
         DB::commit();
         return redirect()->route('story.show', ['story' => $story->slug]);
     }
@@ -292,66 +296,5 @@ class StoriesController extends Controller
         }
 
         return view('singlestory', compact('story', 'similarStories'));
-    }
-
-    public function trendingstories(Request $request)
-    {
-        $reactions = Reaction::where('reaction', 1)->orderBy('story_id', 'asc')->get();
-        $storyCountArray = [];
-        for ($i=0; $i < $reactions->count(); $i++) { 
-           $storyCountArray[$i] = $reactions[$i]->story_id;
-        }
-        $occurences = array_count_values($storyCountArray);
-        asort($occurences);
-        $storyIdArray = array_keys($occurences);
-        
-        $num = count($storyIdArray);
-        $stories;
-        $j = 0;
-        for ($i=$num-1; $i >= $num - 9 ; $i--) { 
-            //return $i;
-            $stories[$j] = Story::where('id', $storyIdArray[$i])->first();
-            $like_reaction = Reaction::where('story_id', $stories[$j]->id)
-                        ->where('reaction', 1)->get();
-            $stories[$j]['likes_count'] = count($like_reaction);
-            $dislike_reaction = Reaction::where('story_id', $stories[$j]->id)
-                        ->where('reaction', 0)->get();
-            $stories[$j]['dislikes_count'] = count($dislike_reaction);
-            $j++;
-        }
-
-        $user = $request->user();
-
-        for ($i=0; $i < count($stories); $i++) {
-            $storyId = $stories[$i]->id;
-            if ($user) {
-                $reaction = Reaction::where('story_id', $storyId)
-                    ->where('user_id', $user->id)
-                    ->first();
-                $bookmark = Bookmark::where('user_id', $user->id)
-                    ->where('story_id', $storyId)
-                    ->first();    
-                if ($reaction && $reaction->reaction == 0) {
-                    $stories[$i]['reaction'] = 'dislike';
-                } elseif ($reaction && $reaction->reaction == 1) {
-                    $stories[$i]['reaction'] = 'like';
-                } else {
-                    $stories[$i]['reaction'] = 'nil';
-                }
-                if ($bookmark) {
-                    $stories[$i]['favorite'] = true;
-                } else {
-                    $stories[$i]['favorite'] = false;
-                }
-            } else {
-                $stories[$i]['reaction'] = 'nil';
-                $stories[$i]['favorite'] = false;
-            }
-
-        }
-
-        $categories = Category::limit(4)->get();
-
-        return view('trendingstories', compact('stories', 'categories'));
     }
 }
