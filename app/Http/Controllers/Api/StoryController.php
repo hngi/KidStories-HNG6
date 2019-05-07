@@ -251,6 +251,13 @@ class StoryController extends Controller
     public function like(Request $request, $id)
     {
         $user = $request->user('api');
+        if(!$user){
+            return response()->json([
+                'status' => 'failed',
+                'code' => 400,
+                'message' => 'Kindly log in'
+            ]);
+        }
         $story = $this->findStory($id);
         $like_reaction = Reaction::where('story_id', $id)
                         ->where('reaction', 1)->get();
@@ -324,6 +331,13 @@ class StoryController extends Controller
     public function dislike(Request $request, $id)
     {
         $user = $request->user('api');
+        if(!$user){
+            return response()->json([
+                'status' => 'failed',
+                'code' => 400,
+                'message' => 'Kindly log in'
+            ]);
+        }
         $story = $this->findStory($id);
 
         $like_reaction = Reaction::where('story_id', $id)

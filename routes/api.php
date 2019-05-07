@@ -64,9 +64,9 @@
 
 	Route::middleware('auth:api')->post('/stories/{id}', "StoryController@update");
 
-	Route::middleware('auth:api')->post('/stories/{storyId}/reactions/like', "StoryController@like");
+	Route::post('/stories/{storyId}/reactions/like', "StoryController@like");
 
-	Route::middleware('auth:api')->post('/stories/{storyId}/reactions/dislike', "StoryController@dislike");
+	Route::post('/stories/{storyId}/reactions/dislike', "StoryController@dislike");
 
 	/**
 	 * Routes for comment
