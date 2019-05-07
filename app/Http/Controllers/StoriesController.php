@@ -43,8 +43,13 @@ class StoriesController extends Controller
 
         if ($request->query('sort') == 'latest') {
             $stories = $stories->latest()->paginate(21);
-        } else if ($request->query('sort') == 'age') {
-            $stories = $stories->orderBy("age_from")->paginate(21);
+        } else if (!is_null($request->query('minAge')) && !is_null($request->query('maxAge'))) {
+            $minAge = $request->query('minAge');
+            $maxAge = $request->query('maxAge');
+            
+            $stories = $stories->where('age_from', '>=', $minAge)
+                            ->where('age_to', '<=', $maxAge)
+                            ->orderBy("age_from")->paginate(21);
         } else {
             $stories = $stories->paginate(21);
         }
