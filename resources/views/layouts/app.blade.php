@@ -211,6 +211,7 @@
     <script src="{{ asset('js/wow.js') }}"></script>
     <script src="{{ asset('js/paroller.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="{{ asset('js/index.js') }}"></script>
     @yield('js')
 </body>

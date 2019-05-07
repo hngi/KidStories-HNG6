@@ -51,6 +51,8 @@ Route::resource('/user', 'UserController');
  *
  */
 Route::resource('/stories', 'StoryController',['as'=>'admin']);
+Route::get('/admin/unapproved-stories','StoryController@unApprovedStories')->name('admin.unapprovedstories');
+Route::post('/admin/unapproved-stories/{id}','StoryController@approve')->name('admin.approvestory');
 
 //route for payment
 Route::get('payment','PaymentController@index')->name('payment.index');

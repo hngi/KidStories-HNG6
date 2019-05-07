@@ -33,11 +33,31 @@ class StoryController extends Controller
     public function index()
     {
         $stories = Story::latest()->paginate(25);
-
+        $unApprovedStories=Story::where('is_approved',false)->count();
         return view(
             'admin.stories.index', 
+            compact('stories','unApprovedStories')
+        );
+    }
+
+    public function unApprovedStories()
+    {
+        $stories=Story::where('is_approved',false)->paginate(10);
+
+        return view(
+            "admin.stories.unapproved-stories",
             compact('stories')
         );
+    }
+
+    public function approve($id)
+    {
+        $story=Story::find($id);
+      //  return $story;
+        $story->update(['is_approved'=>true]);
+
+        return back()->with(['status'=>'story has been approved and removed from this list']);
+
     }
 
     /**
@@ -48,6 +68,7 @@ class StoryController extends Controller
     public function create()
     {   
         $categories = Category::all();
+
 
         return view(
             'admin.stories.create',

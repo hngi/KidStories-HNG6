@@ -8,7 +8,7 @@ class Story extends Model
 {
     protected $fillable = [
         'title', 'body', 'category_id', 'age_from', 'age_to', 'author', 
-        'image_url', 'image_name', 'user_id', 'is_premium'
+        'image_url', 'image_name', 'user_id', 'is_premium','is_approved'
     ];
 
     // FIXME: Please, don't uncomment. Understand what you are about to do first.
