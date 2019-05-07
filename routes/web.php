@@ -23,6 +23,10 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
+
 Route::get('/subscribe', function () {
     return view('subscribe');
 })->name('subscribe')->middleware('auth');
