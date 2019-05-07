@@ -1,7 +1,8 @@
 @extends('admin.layouts.app', ['title' => __('Manage Stories')])
 
 @section('content')
-    @include('admin.stories.partials.header', ['title' => __('Story Detail')])   
+    @include('admin.stories.partials.header', ['title' => __('Story Detail')])
+
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col-xl-12 order-xl-1">
@@ -16,10 +17,19 @@
                             </div>
                         </div>
                     </div>
+
+
+                    
+
+
                     <div class="card-body">
                         <form method="post" 
                             autocomplete="off" enctype="multipart/form-data">
-                            <h6 class="heading-small text-muted mb-4">{{ __('Story information') }}</h6>
+                            <h6 class="heading-small text-muted mb-4">{{ __('Story information') }} 
+                               <span>
+                                <a href="{{ route('admin.stories.edit',['id'=>$story->slug]) }}" class="btn btn-sm btn-primary">{{ __('edit') }}</a>
+                            </span>
+                        </h6>
                             <div class="pl-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-title">{{ __('Title') }} </label>
