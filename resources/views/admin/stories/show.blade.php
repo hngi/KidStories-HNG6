@@ -27,7 +27,7 @@
                                         class="form-control form-control-alternative" disabled>
                                 </div>         
                                 <div class="form-group">
-                                    <img src="{{$story->image_url}}" style="height:15rem" alt="" 
+                                    <img src="{{$story->image_url ?? '/images/placeholder.png'}}" style="height:15rem" alt="" 
                                         class="form-control img">
                                 </div>                   
                                 <div class="form-group">
