@@ -123,7 +123,7 @@
                                                 <span class="icon circle-icons fa fa-user"></span> {{ auth()->user()->fullname }} <span class="icon fa fa-caret-down"></span> 
                                             </a>
                                             <ul class="dropdown-menu style-one" aria-labelledby="dropdownMenu2">
-                                                <li><a href="#">Profile</a></li>
+                                                <li><a href="{{ route('profile') }}">Profile</a></li>
                                                 <li><a href="/favorites">My Favorites</a></li>
                                                 <li>
                                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

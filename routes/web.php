@@ -23,9 +23,7 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
+Route::get('/profile', 'UserController@showProfile')->name('profile')->middleware('auth');
 
 Route::get('/contact', function () {
     return view('contact');
