@@ -86,25 +86,28 @@
                     <div class="searchContainer">
                         <i class="fa fa-search searchIcon"></i>
                         <form action="{{ route('stories.index') }}">
-                            <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search..." value="{{ request()->query('search') }}">
+                            <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search..." value="{{ request()->query('search') }}" minlength="2" autocomplete="off">
                         </form>
                     </div>
                     <hr style="width:10%;">
-                     <p>SORT BY</p>
+                    <p>SORT BY</p>
                     <div class="card" style="width: 15rem;">
-                        <form action="" method="GET">
+                        <form action="{{ url()->current() }}" method="GET">
+                            <input type="hidden" name="search" value="{{ request()->query('search') }}">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
+                                    <small style="display: block;">Max Age:</small>
                                     <select class="form-control form-control-sm" name="minAge">
-                                        <option value="">Min age</option>
-                                        @for ($i = 0; $i < 15; $i++)
-                                            <option value="{{ $i }}" {{ request()->query('minAge') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                        <option value="">Any age</option>
+                                        @for ($i = 0; $i < 18; $i++)
+                                            <option value="{{ $i }}" {{ !is_null(request()->query('minAge')) && request()->query('minAge') == $i ? 'selected' : '' }}>{{ $i }}</option>
                                         @endfor
                                     </select>
-                                    <select class="form-control form-control-sm" name="maxAge" style="margin-top: 8px;">
-                                        <option value="">Max age</option>
-                                        @for ($i = 1; $i < 16; $i++)
-                                            <option value="{{ $i }}" {{ request()->query('maxAge') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                    <small style="margin-top: 8px;display: block;">Min Age:</small>
+                                    <select class="form-control form-control-sm" name="maxAge" style="margin-bottom: 8px;">
+                                        <option value="">Any age</option>
+                                        @for ($i = 1; $i < 18; $i++)
+                                            <option value="{{ $i }}" {{ !is_null(request()->query('minAge')) && request()->query('maxAge') == $i ? 'selected' : '' }}>{{ $i }}</option>
                                         @endfor
                                     </select>
                                 </li>

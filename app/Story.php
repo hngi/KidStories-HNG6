@@ -27,9 +27,9 @@ class Story extends Model
             $story->save();
         });
 
-        static::addGlobalScope('approved', function (Builder $builder) {
+       /* static::addGlobalScope('approved', function (Builder $builder) {
             $builder->where('is_approved', '!=', false);
-        });
+        });*/
     }
 
     //Accessors

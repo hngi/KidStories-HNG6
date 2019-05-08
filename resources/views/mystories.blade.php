@@ -92,29 +92,57 @@
         <div class="col-md-3">
             <div class="d-flex flex-row col-md-12  ">
                 <div class="col-md-12" id="category-drop">
-                    <h6>POPULAR CATEGORIES</h6><br>
-                    @foreach ($categories as $category)
+                    <p>Search My Stories</p>
+                    {{-- @foreach ($categories as $category)
                         <a href="{{ route('categories.stories', $category->id) }}">{{ $category->name }}</a><br>
-                    @endforeach
+                    @endforeach--}}
 
-                    <hr style="width:10%;">
+                    <hr style="width:10%;"> 
                     <div class="searchContainer">
                         <i class="fa fa-search searchIcon"></i>
-                        <form action="{{ route('stories.index') }}">
-                            <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search..." value="{{ request()->query('search') }}">
+                        <form action="{{ url()->current() }}">
+                            <input class="searchBox" type="search" style="height:30px; width: 100%;" name="search" placeholder="Search..." value="{{ request()->query('search') }}" minlength="2" autocomplete="off">
                         </form>
                     </div>
                     <hr style="width:10%;">
-<!--                     <p>Sort By</p>
+                    <p>Sort By</p>
                     <div class="card" style="width: 15rem;">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a href="{{ url()->current(). '?search=' . request()->query('search') . '&sort=age' }}" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
-                            {{-- <li class="list-group-item">Duration <i class="fas fa-tools icon-right"></i></li>  --}}
-                            <li class="list-group-item"><a href="{{ url()->current(). '?search=' . request()->query('search') . '&sort=latest' }}" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li>
+                        <form action="{{ url()->current() }}" method="GET">
+                            <input type="hidden" name="search" value="{{ request()->query('search') }}">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <small style="display: block;">Max Age:</small>
+                                    <select class="form-control form-control-sm" name="minAge">
+                                        <option value="">Any age</option>
+                                        @for ($i = 0; $i < 18; $i++)
+                                            <option value="{{ $i }}" {{ !is_null(request()->query('minAge')) && request()->query('minAge') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                    <small style="margin-top: 8px;display: block;">Min Age:</small>
+                                    <select class="form-control form-control-sm" name="maxAge" style="margin-bottom: 8px;">
+                                        <option value="">Any age</option>
+                                        @for ($i = 1; $i < 18; $i++)
+                                            <option value="{{ $i }}" {{ !is_null(request()->query('minAge')) && request()->query('maxAge') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </li>
+                                <li class="list-group-item">
+                                    <small>Category</small>
+                                    <select class="form-control form-control-sm" name="category" style="margin-bottom: 8px;">
+                                        <option value="">All Category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ !is_null(request()->query('category')) && request()->query('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </li> 
+                                {{-- <li class="list-group-item"><a href="{{ url()->current(). '?search=' . request()->query('search') . '&sort=latest' }}" style="color:inherit;">Most Recent </a><i class="fas fa-tint icon-right"></i></li> --}}
 
-
-                        </ul>
-                    </div> -->
+                                <li class="list-group-item">
+                                    <button type="submit" class="form-control form-control-sm btn-primary">Sort</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
 
                 </div>
             </div>
