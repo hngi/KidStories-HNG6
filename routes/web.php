@@ -63,3 +63,7 @@ Route::post('/pay', [
 ])->middleware('auth');
 
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+
+
+Route::get('fblogin/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');
