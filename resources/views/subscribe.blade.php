@@ -44,6 +44,7 @@
 
               <input type="hidden" name="last_name" value="{{ Auth::user()->last_name}}">
 
+              <input type="hidden" name="callback_url" value="{{ route('pay.callback') }}">
 
             <input type="hidden" name="amount" value="100000"> {{-- required in kobo --}}
           
@@ -90,7 +91,8 @@
                 <input type="hidden" name="first_name" value="{{ Auth::user()->first_name}}">
 
               <input type="hidden" name="last_name" value="{{ Auth::user()->last_name}}">
-
+ 
+             <input type="hidden" name="callback_url" value="{{ route('pay.callback') }}">
 
             <input type="hidden" name="amount" value="1000000"> {{-- required in kobo --}}
           
