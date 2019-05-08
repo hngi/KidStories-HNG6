@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Story;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -36,10 +37,8 @@ class StoryRequest extends FormRequest
         $rules['title'] =$this->method() == 'PUT'?
         [
             'required','string','max:255', 
-            Rule::unique('stories')
-                ->ignore($this->route('story')->id)
+            Rule::unique('stories')->ignore($this->route('story')->id)
         ]:'required|string|unique:stories|max:255';
-        
         return $rules;
     }
 }

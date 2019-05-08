@@ -123,7 +123,7 @@
                                                 <span class="icon circle-icons fa fa-user"></span> {{ auth()->user()->fullname }} <span class="icon fa fa-caret-down"></span> 
                                             </a>
                                             <ul class="dropdown-menu style-one" aria-labelledby="dropdownMenu2">
-                                                <li><a href="#">Profile</a></li>
+                                                <li><a href="{{ route('profile') }}">Profile</a></li>
                                                 <li><a href="/favorites">My Favorites</a></li>
                                                 <li>
                                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -196,9 +196,9 @@
         <p class="col-md-10 pull-left">© 2019 Kid Stories. All rights reserved</p>
         <div class="social-iconsb col-md-2 pull-right">
 <!--           <a href="#">  <i class="fa fa-youtube"></i> </a>
- -->          <a href="https://instagram.com/mykidstories">  <i class="fa fa-instagram"></i> </a>
-          <a href="https://facebook.com/mykidstories">  <i class="fa fa-facebook"></i> </a>
-          <a href="https://twitter.com/mykidstories">  <i class="fa fa-twitter"></i> </a>
+ -->          <a target="_blank" href="https://instagram.com/mykidstories">  <i class="fa fa-instagram"></i> </a>
+          <a target="_blank" href="https://facebook.com/mykidstories">  <i class="fa fa-facebook"></i> </a>
+          <a target="_blank" href="https://twitter.com/mykidstories">  <i class="fa fa-twitter"></i> </a>
         </div>
         <div class="clearfix"></div>
     </div>
