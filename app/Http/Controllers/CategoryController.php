@@ -35,19 +35,23 @@ class CategoryController extends Controller
             $search = $request->query('search');
 
             $stories = Story::where('category_id', $id)->where('is_approved', true)
-                            ->where('title', 'LIKE', "%$search%")
-                            ->orWhere('author', 'LIKE', "%$search%");
+                            ->where('title', 'LIKE', "%$search%");
         } else {
             $stories = Story::where('category_id', $id)->where('is_approved', true);
         }
 
-        if ($request->query('sort') == 'latest') {
-            $stories = $stories->latest()->paginate(21);
-        } else if ($request->query('sort') == 'age') {
-            $stories = $stories->orderBy("age_from")->paginate(21);
+        // Sorting feature
+        if (!is_null($request->query('minAge')) && !is_null($request->query('maxAge'))) {
+            $minAge = $request->query('minAge');
+            $maxAge = $request->query('maxAge');
+            
+            $stories = $stories->where('age_from', '>=', $minAge)
+                            ->where('age_to', '<=', $maxAge)
+                            ->orderBy("age_from")->paginate(21);
         } else {
             $stories = $stories->paginate(21);
         }
+        // Sorting feature ends
 
         $categories = Category::limit(4)->get();
 

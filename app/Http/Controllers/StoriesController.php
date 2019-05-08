@@ -35,15 +35,11 @@ class StoriesController extends Controller
         if ($request->query('search')) {
             $search = $request->query('search');
 
-            $stories = Story::where('title', 'LIKE', "%$search%")
-                            ->orWhere('author', 'LIKE', "%$search%");
+            $stories = Story::where('is_approved', 1)->where('title', 'LIKE', "$search%");
         } else {
-            $stories = Story::query();
+            $stories = Story::query()->where('is_approved', 1);
         }
-
-        if ($request->query('sort') == 'latest') {
-            $stories = $stories->latest()->paginate(21);
-        } else if (!is_null($request->query('minAge')) && !is_null($request->query('maxAge'))) {
+        if (!is_null($request->query('minAge')) && !is_null($request->query('maxAge'))) {
             $minAge = $request->query('minAge');
             $maxAge = $request->query('maxAge');
             
@@ -101,22 +97,31 @@ class StoriesController extends Controller
         if ($request->query('search')) {
             $search = $request->query('search');
 
-            $stories = Story::where('user_id', auth()->id())->paginate(21)
-                            ->where('title', 'LIKE', "%$search%")
-                            ->orWhere('author', 'LIKE', "%$search%");
+            $stories = Story::where('user_id', auth()->id())
+                            ->where('title', 'LIKE', "%$search%");
         } else {
             $stories = Story::where('user_id', auth()->id());
         }
 
-        if ($request->query('sort') == 'latest') {
-            $stories = $stories->latest()->paginate(21);
-        } else if ($request->query('sort') == 'age') {
-            $stories = $stories->orderBy("age_from")->paginate(21);
-        } else {
-            $stories = $stories->paginate(21);
+        // Sorting feature
+        if (!is_null($request->query('minAge')) && !is_null($request->query('maxAge'))) {
+            $minAge = $request->query('minAge');
+            $maxAge = $request->query('maxAge');
+            
+            $stories = $stories->where('age_from', '>=', $minAge)
+                            ->where('age_to', '<=', $maxAge)
+                            ->orderBy("age_from");
         }
 
-        $categories = Category::limit(4)->get();
+        if (!is_null($request->query('category'))) {
+            $stories = $stories->where('category_id', $request->query('category'));
+        }
+        
+        $stories = $stories->paginate(21);
+        
+        // Sorting feature ends
+
+        $categories = Category::all();
         
         $user = $request->user();
 
@@ -334,7 +339,7 @@ class StoriesController extends Controller
         
         for ($i=$num-1; $i >= $num - 9 ; $i--) { 
             $stories[$j] = Story::where('id', $storyIdArray[$i])->first();
-
+            
             $like_reaction = Reaction::where('story_id', $stories[$j]->id)
                                     ->where('reaction', 1)->get();
             
@@ -348,17 +353,22 @@ class StoriesController extends Controller
             $j++;
         }
 
-        // Sorting feature
-        if ($request->query('sort') == 'latest') {
-            $stories = collect($stories)->sortBy('created_at');
-        } else if ($request->query('sort') == 'age') {
-            $stories = collect($stories)->sortBy('age_from');
-        }
+        // FIXME: Sorting feature
+        /*if (!is_null($request->query('minAge')) && !is_null($request->query('maxAge'))) {
+            $minAge = $request->query('minAge');
+            $maxAge = $request->query('maxAge');
+            
+            $stories = collect($stories)->where('age_from', '>=', $minAge)
+                            ->where('age_to', '<=', $maxAge)
+                            ->sortBy("age_from");
+        }*/ 
+        // Sorting feature ends
 
         $user = $request->user();
 
         for ($i=0; $i < count($stories); $i++) {
             $storyId = $stories[$i]->id;
+            
             if ($user) {
                 $reaction = Reaction::where('story_id', $storyId)
                     ->where('user_id', $user->id)
@@ -382,13 +392,13 @@ class StoriesController extends Controller
                 $stories[$i]['reaction'] = 'nil';
                 $stories[$i]['favorite'] = false;
             }
-
+            
             $reaction_count =  $this->reaction($storyId);
             $stories[$i]['likes_count'] = $reaction_count[0];
             $stories[$i]['dislikes_count'] = $reaction_count[1];
 
         }
-
+            
         $categories = Category::limit(4)->get();
 
         return view('trendingstories', compact('stories', 'categories'));
