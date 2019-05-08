@@ -10,7 +10,7 @@
         <div class="container mt-50">
             <section id="profile">
                 <div id="image">
-                    <img src="/images/profile/imgIcon.png" alt="Profile Pic" class="profilePic"> 
+                    <img src="{{ ! is_null($user->image_url) ? $user->image_url : '/images/profile/imgIcon.png' }}" alt="Profile Pic" class="profilePic"> 
                    <!--  <a href="#"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" 
                     id="Layer_1" x="0px" y="0px" viewBox="0 0 300 300" style="enable-background:new 0 0 300 300;" 
                     xml:space="preserve" width="512px" height="512px" class=""><g><g><g><path 
@@ -24,42 +24,73 @@
                     </g></g></g> </svg> </a> -->
                 </div>
                 <div class="nameContent">   
-                    <h3 class="profileName"> Tonny Flake </h3>
-                    <p class="location"> Lagos, Nigeria </p>
+                    <h3 class="profileName"> {{ $user->fullname }} </h3>
+                    @if ($user->location)
+                    <p class="location"> {{ $user->location }} </p>
+                    @endif
                 <div>
             </section>
         </div>
 
         <div class="container form-container">  
-            <form action="">
+            @if (session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
+            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                {{ method_field('PUT') }}
                 <div>
                     <label for="inputFirstName"> First Name </label>
-                    <input class="form-control" type="text" id="inputFirstName" placeholder="Enter First Name" />
+                    <input class="form-control" type="text" name="first_name" value="{{ $user->first_name }}" id="inputFirstName" placeholder="Enter First Name" />
+                    @if ($errors->has('first_name'))
+                        <strong class="text-danger">{{ $errors->first('first_name') }}</strong>
+                    @endif
                 </div>
 
                 <div>
                     <label for="inputLastName"> Last Name </label>
-                    <input class="form-control" type="text" id="inputLastName" placeholder="Enter Last Name" />
+                    <input class="form-control" type="text" name="last_name" value="{{ $user->last_name }}" id="inputLastName" placeholder="Enter Last Name" />
+                    @if ($errors->has('last_name'))
+                        <strong class="text-danger">{{ $errors->first('last_name') }}</strong>
+                    @endif
                 </div>
 
                 <div>
                     <label for="inputEmail"> Email </label>
-                    <input class="form-control" type="email" id="inputEmail" placeholder="Enter Email" />
+                    <input class="form-control" type="email" name="email" value="{{ $user->email }}" id="inputEmail" placeholder="Enter Email" />
+                    @if ($errors->has('email'))
+                        <strong class="text-danger">{{ $errors->first('email') }}</strong>
+                    @endif
                 </div>
 
                 <div>
                     <label for="inputPhoneNumber"> Phone Number </label>
-                    <input class="form-control" type="tel" id="inputPhoneNumber" placeholder="Enter Phone Number" />
+                    <input class="form-control" type="tel" name="phone" value="{{ $user->phone }}" id="inputPhoneNumber" placeholder="Enter Phone Number" />
                 </div>
 
                 <div>
                     <label for="inputLocation"> Location </label>
-                    <input class="form-control" type="text" id="inputLocation" placeholder="Enter Location" />
+                    <input class="form-control" type="text" name="location" value="{{ $user->location }}" id="inputLocation" placeholder="Enter Location" />
                 </div>
 
                 <div>
                     <label for="inputPostal"> Postal Code </label>
-                    <input class="form-control" type="text" id="inputPostal" placeholder="Enter Phone Code" />
+                    <input class="form-control" type="text" name="postal_code" value="{{ $user->postal_code }}" id="inputPostal" placeholder="Enter Phone Code" />
                 </div>
 
                 <div>
