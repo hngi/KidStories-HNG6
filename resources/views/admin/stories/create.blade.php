@@ -67,7 +67,24 @@
                                         <input type="hidden" id="previousImages" 
                                                 name="previousImages" value="1">
                                     </div>
-                                </div>                   
+                                </div>    
+                                <div class="form-group {{ $errors->has('tags') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-title">{{ __('Tags') }} </label>
+                                    <select name="tags[]" id="tags" multiple required
+                                        class="form-control form-control-alternative">
+                                        <option value=""></option>
+                                        @foreach ($tags as $tag)
+                                            <option value="{{$tag->id}}">
+                                                {{$tag->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('tags'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('tags') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>            
                                 <div class="form-group {{ $errors->has('body') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Content') }} *</label>
                                     <textarea style="height:200px" type="text" class="form-control form-control-alternative" name="body" required>{{old('body')}}</textarea>
@@ -132,4 +149,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/MultiFileUpload.css')}}">
     <script type="text/javascript" src="{{asset('js/jQuery.MultiFile.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/MultiFileUpload.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
+    <script type="text/javascript" src="{{asset('js/select2_init.js')}}"></script>
 @endpush

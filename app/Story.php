@@ -8,7 +8,7 @@ class Story extends Model
 {
     protected $fillable = [
         'title', 'body', 'category_id', 'age_from', 'age_to', 'author', 
-        'image_url', 'image_name', 'user_id', 'is_premium'
+        'image_url', 'image_name', 'user_id', 'is_premium','is_approved'
     ];
 
     // FIXME: Please, don't uncomment. Understand what you are about to do first.
@@ -56,7 +56,23 @@ class Story extends Model
         return $this->is_premium == 1?'Premium':'Regular';
     }
     // Accessors end
+    //Mutator
 
+    /**
+     * Set the proper slug attribute.
+     *
+     * @param string $value
+     */
+    public function setSlugAttribute($value)
+    {
+        if (static::whereSlug($slug = str_slug($value))->exists()) {
+            $slug = "{$slug}-{$this->id}";
+        }
+
+        $this->attributes['slug'] = $slug;
+    }
+    
+    //Mutator end
     
     //Relationship start
 
@@ -97,15 +113,16 @@ class Story extends Model
         return $this->belongsToMany(Users::class,'bookmarks');
     }
 
-    //Relationship end
-
     /*
      * A Story belongs to many tags
      */
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->withTimestamps();
     }
+
+    //Relationship end
+
 
     public function scopeSimilar($query)
     {
@@ -124,17 +141,4 @@ class Story extends Model
         return 'slug';
     }
 
-    /**
-     * Set the proper slug attribute.
-     *
-     * @param string $value
-     */
-    public function setSlugAttribute($value)
-    {
-        if (static::whereSlug($slug = str_slug($value))->exists()) {
-            $slug = "{$slug}-{$this->id}";
-        }
-
-        $this->attributes['slug'] = $slug;
-    }
 }

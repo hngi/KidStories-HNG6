@@ -23,6 +23,12 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/profile', 'UserController@showProfile')->name('profile')->middleware('auth');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
 Route::get('/subscribe', function () {
     return view('subscribe');
 })->name('subscribe')->middleware('auth');
@@ -47,7 +53,7 @@ Route::get('/categories', 'CategoryController@index')->name('categories.index');
 Route::get('/categories/{id}/stories', 'CategoryController@stories')->name('categories.stories');
 
 // Routes for authors
-Route::get('/authors/{id}/stories', 'AuthorController@getStories')->name('author.stories');
+Route::get('/authors/{author}/stories', 'AuthorController@getStories')->name('author.stories');
 
 
 //routes for payment

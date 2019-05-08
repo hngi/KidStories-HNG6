@@ -50,4 +50,16 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //Relationship start
+
+    /*
+     * A User has  many stories
+     */
+    public function stories()
+    {
+        return $this->hasMany(Story::class,'user_id');
+    }
+
+    //Relatioship end
 }

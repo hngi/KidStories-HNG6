@@ -57,6 +57,13 @@ height: 300px;
  
 
  }
+ .info-space{
+  margin-left: 15px;
+}
+
+.margin-center {
+  margin: 0 auto;
+}
 
 /* Payment */
 .upgrade {

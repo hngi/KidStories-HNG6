@@ -39,7 +39,7 @@
 
                                 <div class="card-body story-card-body">
                                     <h5 class="card-title"><a href="{{route('story.show',$story->slug)}}">{{$story->title}}</a></h5>
-                                    <p class="card-text">By <a href="{{route('author.stories', $story->user_id)}}">{{$story->author}}</a></p>
+                                    <p class="card-text">By <a href="{{route('author.stories', $story->author)}}">{{$story->author}}</a></p>
                                     <hr style="margin:0 -5px;">
                                     <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
                                     <hr style="margin:0 -20px;">
@@ -81,6 +81,13 @@
                     {{ $stories->appends($_GET)->links() }}
                 </div>
             </div>
+            @if ($stories->count())
+                <p style="font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;">
+                    <a href="{{ route('story.create') }}" class="btn btn-block" style="margin-top: 10px;">
+                        Create New Story
+                    </a>
+                </p>
+            @endif
         </div>
         <div class="col-md-3">
             <div class="d-flex flex-row col-md-12  ">
@@ -98,7 +105,7 @@
                         </form>
                     </div>
                     <hr style="width:10%;">
-                    <p>Sort By</p>
+<!--                     <p>Sort By</p>
                     <div class="card" style="width: 15rem;">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><a href="{{ url()->current(). '?search=' . request()->query('search') . '&sort=age' }}" style="color:inherit;">Age </a> <i class="fas fa-graduation-cap icon-right"></i></li>
@@ -107,7 +114,7 @@
 
 
                         </ul>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

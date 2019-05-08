@@ -28,8 +28,8 @@ class StoryResource extends JsonResource
             'author'        => $this->author,
             'story_duration'=> $this->readingTime ,
             'is_premium'    => $this->is_premium,
-            'likes_count'   => $this->likes_count,
-            'dislikes_count'=> $this->dislikes_count,
+            'likes_count'   => $this->likes($this->id),
+            'dislikes_count'=> $this->dislikes($this->id),
             'reaction'      => $this->getReaction($request, $this->id),
             'bookmark'      => $this->getBookmarkStatus($request, $this->id)
         ];
@@ -66,6 +66,24 @@ class StoryResource extends JsonResource
         }
             return false;
         
+    }
+
+    public function likes($id)
+    {
+        $like_reaction = Reaction::where('story_id', $id)
+                        ->where('reaction', 1)->get();
+        $likeCount = count($like_reaction);
+
+        return $likeCount;
+    }
+
+    public function dislikes($id)
+    {
+        $dislike_reaction = Reaction::where('story_id', $id)
+                    ->where('reaction', 0)->get();
+        $dislikeCount = count($dislike_reaction);
+
+        return $dislikeCount;
     }
 
 }

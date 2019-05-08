@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use DB;
+use App\Tag;
 use App\Story;
 use App\Category;
 use Carbon\Carbon;
@@ -33,11 +34,31 @@ class StoryController extends Controller
     public function index()
     {
         $stories = Story::latest()->paginate(25);
-
+        $unApprovedStories=Story::where('is_approved',false)->count();
         return view(
             'admin.stories.index', 
+            compact('stories','unApprovedStories')
+        );
+    }
+
+    public function unApprovedStories()
+    {
+        $stories=Story::where('is_approved',false)->paginate(10);
+
+        return view(
+            "admin.stories.unapproved-stories",
             compact('stories')
         );
+    }
+
+    public function approve($id)
+    {
+        $story=Story::find($id);
+      //  return $story;
+        $story->update(['is_approved'=>true]);
+
+        return back()->with(['status'=>'story has been approved and removed from this list']);
+
     }
 
     /**
@@ -61,8 +82,8 @@ class StoryController extends Controller
      * @param \App\Http\Requests\StoryRequest  $request
      * @return Illuminate\Http\Response
      */
-    public function store(StoryRequest $request)
-    {
+    public function store(StoryRequest $request,Tag $tag)
+    {   
         // Upload image if included in the request
         if($request->hasFile('photo')) {
             $image = $this->fileUploadService
@@ -70,19 +91,18 @@ class StoryController extends Controller
         }
         
         $age = explode('-', $request->age);
-
-        Story::create([
-            'title'=> $request->title,
-            'body' => $request->body,            
-            'age_from' => $age[0],
-            'age_to' => $age[1],
-            'author' => $request->author ?? 'Unknown',      
-            'is_premium' => $request->is_premium,
-            'category_id' => $request->category_id,             
-            "image_url" => $image['secure_url']?? null,
-            "image_name" => $image['public_id'] ?? null,
-            'user_id' =>  auth('admin')->id()
+        $rawStory = $request->except([
+            'age','photo','author','tags'
         ]);
+        $rawStory['author'] = $request->author ??'Unknow';
+        $rawStory['image_url'] = $image['secure_url']?? null;
+        $rawStory['image_name'] = $image['public_id']?? null;
+        $rawStory['age_from']=$age[0];
+        $rawStory['age_to']=$age[1];
+        DB::transaction(function()use($request,$rawStory,$tag){
+            $story = $request->user('admin')->stories()->create($rawStory);
+            $story->tags()->attach($tag->getTagsIds($request->tags));
+        });
 
         return redirect()->back()->withStatus(
             __('Story successfully created.')
@@ -96,6 +116,7 @@ class StoryController extends Controller
      */
     public function edit(Story $story)
     {   
+        $story->load('tags');
         $categories = Category::all();
 
         return view(
@@ -111,7 +132,7 @@ class StoryController extends Controller
      * @param  \App\Story  $story
      * @return Illuminate\Http\Response
      */
-    public function update(StoryRequest $request,Story $story)
+    public function update(StoryRequest $request,Story $story,Tag $tag)
     {
         // Upload image if included in the request
         if($request->hasFile('photo')) {
@@ -126,22 +147,22 @@ class StoryController extends Controller
         }
 
         $age = explode('-', $request->age);
-
-        $story->update([
-            'title'=> $request->title,
-            'body' => $request->body,            
-            'age_from' =>$age[0],
-            'age_to' =>$age[1],
-            'author' => $request->author,      
-            'is_premium' => $request->is_premium,
-            'category_id' => $request->category_id,             
-            "image_url" => $image['secure_url']?? null,
-            "image_name" => $image['public_id'] ?? null,           
-            'user_id' =>  auth('admin')->id()  
+        $rawStory = $request->except([
+            'age','photo','author','tags',
+            '_token','_method','previousImage'
         ]);
+        $rawStory['author'] = $request->author ??'Unknow';
+        $rawStory['image_url'] = $image['secure_url']?? null;
+        $rawStory['image_name'] = $image['public_id']?? null;
+        $rawStory['age_from']=$age[0];
+        $rawStory['age_to']=$age[1]; 
+        DB::transaction(function()use($story,$request,$rawStory,$tag){
+            $story->update($rawStory);
+            $story->tags()->sync($tag->getTagsIds($request->tags));
+        });
 
         return redirect()->route('admin.stories.index')
-            ->withStatus(__('Stories successfully updated.'));
+            ->withStatus(__('Story successfully updated.'));
     }
 
     /**
@@ -171,7 +192,9 @@ class StoryController extends Controller
      * @return Illuminate\Http\Response
      */
     public function show(Story $story)
-    {
+    {   
+        $story->load('tags');
+        
         return view(
             'admin.stories.show', 
             compact('story')

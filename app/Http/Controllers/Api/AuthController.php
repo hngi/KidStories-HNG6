@@ -29,6 +29,7 @@ class AuthController extends Controller
     			'is_admin' => $user->is_admin,
     			'email' => $user->email,
     			'location'=>$user->location,
+                'image_url' => $user->image_url,
     			'postal_code'=>$user->postal_code,
     			'phone'=>$user->phone,
     			'token' => $user->createToken('MyApp')->accessToken
@@ -56,11 +57,13 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|min:2',
-            'last_name' => 'required|min:2',
+            'first_name' => 'required|min:2|string',
+            'last_name' => 'required|min:2|string',
 			'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'phone'=>'nullable|min:8'
+            'password' => 'required|string|min:8',
+            'phone'=>'required|numeric',
+           // 'postal_code'=>'string',
+            //'location'=>'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -81,9 +84,9 @@ class AuthController extends Controller
             'email'=>$request->get('email'),
             'password'=>bcrypt($request->get('password')),
             'is_admin' => false,
-            'postal_code'=>$request->get('postal_code'),
+            //'postal_code'=>$request->get('postal_code'),
             'phone'=>$request->get('phone'),
-            'location'=>$request->get('location')
+           // 'location'=>$request->get('location')
         ]);
 
 		DB::commit();
