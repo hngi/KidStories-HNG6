@@ -303,7 +303,7 @@ class StoriesController extends Controller
                     return view('singlestory', compact('story', 'similarStories'));
                 }
             }
-            return \redirect('home');
+            return \redirect('subscribe');
         } elseif (!$user && $story && $story->is_premium == 1) {
             return \redirect('home');
         }
