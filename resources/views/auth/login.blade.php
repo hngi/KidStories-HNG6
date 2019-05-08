@@ -31,6 +31,8 @@
                     @csrf
 
                         <h5 class="font-weight-bold mt-1">Log in to your account</h5>
+                        <br>
+                        <span><a href="{{ route('auth.google.redirect') }}">login with gmail</a></span>
                     <div class="form-group row">
 
                         <div class="col-md-12">

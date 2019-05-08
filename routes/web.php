@@ -64,3 +64,7 @@ Route::post('/pay', [
 ])->middleware('auth');
 
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('pay.callback');
+
+//routes for google auth
+Route::get('/redirect', 'SocialAuthController@redirect')->name('auth.google.redirect');
+Route::get('/callback', 'SocialAuthController@callback')->name('auth.google.callback');
