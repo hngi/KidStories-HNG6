@@ -48,12 +48,15 @@ class LoginController extends Controller
 
    public function handleProviderCallback($provider)
    {
+       
        try {
-           $user = Socialite::driver($provider)->user();
+           $user = Socialite::driver($provider)
+                ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
+                ->user();
        } catch (Exception $e) {
            return redirect('/login');
        }
-
+       
        $authUser = $this->findOrCreateUser($user, $provider);
        Auth::login($authUser, true);
 
@@ -74,7 +77,7 @@ class LoginController extends Controller
            if (! $user) {
                $user = User::create([
                    'email' => $providerUser->getEmail(),
-                   'name'  => $providerUser->getName(),
+                   'first_name'  => $providerUser->getName(),
                ]);
            }
 
