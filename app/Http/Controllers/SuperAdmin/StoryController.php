@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoryRequest;
 use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
+use Notification;
+use App\Notifications\UserStoryApproved;
 
 class StoryController extends Controller
 {
@@ -56,6 +58,13 @@ class StoryController extends Controller
         $story=Story::find($id);
       //  return $story;
         $story->update(['is_approved'=>true]);
+
+    // send a notification to the user
+        $user=$story->user;
+
+
+
+        Notification::send($user,new UserStoryApproved($story,$user));
 
         return back()->with(['status'=>'story has been approved and removed from this list']);
 
