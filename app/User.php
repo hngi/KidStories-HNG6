@@ -87,5 +87,9 @@ class User extends Authenticatable
         return $this->hasMany(Subscribed::class);
     }
 
+    public function identities() {
+        return $this->hasMany('App\SocialIdentity');
+     }
+
     //Relationship end
 }
