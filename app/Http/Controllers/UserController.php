@@ -6,6 +6,8 @@ use DB;
 use App\User;
 use Illuminate\Http\Request;
 use App\Services\FileUploadService;
+use App\Subscribed;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -26,9 +28,16 @@ class UserController extends Controller
      */
     public function showProfile()
     {
-    	$user = User::findOrFail(auth()->id());
+        $data['user'] = User::findOrFail(auth()->id());
+        $package = Subscribed::where('user_id',auth()->user()->id)->first();
+            if($package){
+            $data['left'] = Carbon::parse($package->expired_date)->longAbsoluteDiffForHumans(Carbon::now());
+        } else {
+            $left = null;
+        }
 
-    	return view('profile', compact('user'));
+
+    	return view('profile')->with($data);
     }
 
     /**
