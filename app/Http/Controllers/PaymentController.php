@@ -9,6 +9,9 @@ use App\User;
 use App\Subscribed;
 use App\Subscription;
 use Carbon\Carbon;
+use Auth;
+use Notification;
+use App\Notifications\PaymentRecieved;
 
 class PaymentController extends Controller
 {
@@ -30,15 +33,17 @@ class PaymentController extends Controller
     {
         $paymentDetails = Paystack::getPaymentData();
 
-        dd($paymentDetails);
+     
 
         $user=User::where('email',$paymentDetails['data']['customer']['email'])->first();
 
-    return    $this->updateDatabase($user,$paymentDetails['data']);
+        // inform user that his payment has been recieved
 
-        // Now you have the payment details,
-        // you can store the authorization_code in your db to allow for recurrent subscriptions
-        // you can then redirect or do whatever you want
+        Notification::send(Auth::user(),new PaymentRecieved($paymentDetails,$user));
+
+        return    $this->updateDatabase($user,$paymentDetails['data']);
+
+    
     }
 
     public function updateDatabase($user,$data)
