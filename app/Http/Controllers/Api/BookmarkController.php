@@ -31,8 +31,16 @@ class BookmarkController extends Controller
      */
     public function add(Request $request, $storyId)
     {
+        $user = $request->user('api');
+        if(!$user){
+            return response()->json([
+                'status' => 'failed',
+                'code' => 400,
+                'message' => 'Kindly log in'
+            ]);
+        }
         //check if the person has bookmarked before
-        $bookmark = Bookmark::where('user_id', auth()->id())
+        $bookmark = Bookmark::where('user_id', $user->id)
                                 ->where('story_id', $storyId)
                                 ->first();
 
@@ -47,7 +55,7 @@ class BookmarkController extends Controller
          }
 
         Bookmark::create([
-            "user_id" => auth()->id(),
+            "user_id" => $user->id,
             "story_id" => $storyId
         ]);
 

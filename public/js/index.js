@@ -30,9 +30,7 @@ var react = async function(event) {
       action = await axios.post('/api/v1/stories/' + storyId + '/reactions/dislike');
   }
   if (action.data.message == 'Kindly log in') {
-    Swal.fire(
-      'Log in to react to a story!'
-    )
+    swalAction();
   } else {
     updateReactionStats(storyId, action.data.likes_count, action.data.dislikes_count, action.data.action);
   }
@@ -46,7 +44,12 @@ var bookmark = async function(event){
   var favId = event.target.dataset.favId;
   
   action = await axios.post('/api/v1/bookmarks/stories/' + storyId);
-  updateBookmarkIcon(storyId, action.data.message, favId);
+
+  if (action.data.message == 'Kindly log in') {
+    swalAction();
+  } else {
+    updateBookmarkIcon(storyId, action.data.message, favId);
+  }
 }
 
 var updateBookmarkIcon = function (storyId, message, favId) {
@@ -61,3 +64,23 @@ var updateBookmarkIcon = function (storyId, message, favId) {
     document.querySelector('#bookmark-div-' + storyId).remove();
   }
 };
+
+var swalAction = function(){
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success swal-react-button',
+      cancelButton: 'btn btn-danger swal-react-button'
+    },
+    buttonsStyling: false,
+  })
+  swalWithBootstrapButtons.fire({
+    title: 'Log In!',
+    showCancelButton: true,
+    confirmButtonText: 'Login'
+  })
+    .then((result) => {
+      if (!result.dismiss) {
+        window.location.href = 'https://kidstories.app/login'
+      }
+  })
+}
