@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Story extends Model
 {
@@ -24,6 +25,10 @@ class Story extends Model
         static::created(function ($story) {
             $story->slug = $story->title;
             $story->save();
+        });
+
+        static::addGlobalScope('approved', function (Builder $builder) {
+            $builder->where('is_approved', '!=', false);
         });
     }
 
@@ -71,7 +76,7 @@ class Story extends Model
 
         $this->attributes['slug'] = $slug;
     }
-    
+
     //Mutator end
     
     //Relationship start
