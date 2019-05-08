@@ -36,6 +36,10 @@ Route::get('/subscribe', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Routes for social media auth
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');
+
 
 // Routes for logged in user
 Route::middleware('auth')->get('/mystories', 'StoriesController@mystories')->name('stories.mystories');
@@ -63,7 +67,3 @@ Route::post('/pay', [
 ])->middleware('auth');
 
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
-
-
-Route::get('fblogin/{provider}', 'Auth\LoginController@redirectToProvider');
-Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');
