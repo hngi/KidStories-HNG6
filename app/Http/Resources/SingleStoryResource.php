@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Bookmark;
+use App\Reaction;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SingleStoryResource extends JsonResource
@@ -80,6 +82,7 @@ class SingleStoryResource extends JsonResource
     {
         $like_reaction = Reaction::where('story_id', $id)
                         ->where('reaction', 1)->get();
+
         $likeCount = count($like_reaction);
 
         return $likeCount;

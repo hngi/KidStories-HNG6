@@ -29,6 +29,7 @@ class AuthController extends Controller
     			'is_admin' => $user->is_admin,
     			'email' => $user->email,
     			'location'=>$user->location,
+                'image_url' => $user->image_url,
     			'postal_code'=>$user->postal_code,
     			'phone'=>$user->phone,
     			'token' => $user->createToken('MyApp')->accessToken
