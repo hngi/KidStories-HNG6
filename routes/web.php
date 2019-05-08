@@ -64,4 +64,4 @@ Route::post('/pay', [
     'as' => 'pay'
 ])->middleware('auth');
 
-Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('pay.callback');

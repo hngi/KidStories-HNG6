@@ -30,7 +30,7 @@ class PaymentController extends Controller
     {
         $paymentDetails = Paystack::getPaymentData();
 
-       // dd($paymentDetails);
+        dd($paymentDetails);
 
         $user=User::where('email',$paymentDetails['data']['customer']['email'])->first();
 
