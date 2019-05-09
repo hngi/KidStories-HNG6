@@ -33,7 +33,7 @@ class UserController extends Controller
             if($package){
             $data['left'] = Carbon::parse($package->expired_date)->longAbsoluteDiffForHumans(Carbon::now());
         } else {
-            $left = null;
+            $data['left'] = null;
         }
 
 
