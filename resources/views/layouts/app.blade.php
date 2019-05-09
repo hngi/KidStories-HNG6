@@ -89,7 +89,7 @@
                                                 <li class=""><a  href="{{ route('stories.mystories') }}">My Stories</a></li>
                                             @endauth
                                             @guest()
-                                                <li><a href="{{ url('/create-story') }}">Create Story</a></li>
+                                                <li><a href="{{ route('story.store') }}">Create Story</a></li>
                                                 <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
                                                 <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
                                             @endguest
@@ -165,12 +165,12 @@
             <a href="{{ route('about') }}">About Us</a>
             <a href="{{ route('subscribe') }}">Subscriptions</a>
             <!-- <a href="#">Contact Us</a> -->
-            <a href="/create-story">Create a Story</a>
+            <a href="{{ route('story.store') }}">Create a Story</a>
 
         </section>
         <section>
             <h5>Quick Links</h5>
-            <a href="/create-story">Create a Story</a>
+            <a href="{{ route('story.store') }}">Create a Story</a>
             <a href="{{ route('stories.trending')}}">Trending Stories</a>
             <a href="{{ route('stories.index') }}">Explore Stories</a>
              <a href="https://paystack.com/pay/kidstoriesapp">Make a donation</a>
