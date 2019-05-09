@@ -50,9 +50,11 @@ class LoginController extends Controller
    {
        
        try {
-           $user = Socialite::driver($provider)
-                ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
+          $user = Socialite::driver($provider)
+            ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
                 ->user();
+                
+               
        } catch (Exception $e) {
            return redirect('/login');
        }
