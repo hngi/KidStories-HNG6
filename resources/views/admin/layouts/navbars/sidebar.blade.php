@@ -15,7 +15,7 @@
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="media align-items-center">
                         <span class="avatar avatar-sm rounded-circle">
-                        <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/team-1-800x800.jpg">
+                        <img alt="Image placeholder" src="{{ asset('argon') }}/img/icons/common/profile-icon.png">
                         </span>
                     </div>
                 </a>
@@ -107,7 +107,7 @@
                 </li> --}}
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.index') }}">
+                    <a class="nav-link" href="{{ route('admin.user.index') }}">
                         <i class="ni ni-circle-08 text-pink"></i> {{ __('Manage Users') }}
                     </a>
                 </li>

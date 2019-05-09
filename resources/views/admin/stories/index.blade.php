@@ -1,7 +1,16 @@
 @extends('admin.layouts.app', ['title' => __('Manage Stories')])
 
+@section('custom_css')
+<style type="text/css">
+    .truncate {
+        overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+    }
+</style>
+@endsection
+
 @section('content')
-    @include('admin.layouts.headers.cards')
+
+    @include('admin.stories.partials.cards')
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -29,14 +38,14 @@
                         @endif
                     </div>
 
-                    @if($unApprovedStories > 0)
+                    {{-- @if($unApprovedStories > 0)
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 you have {{ $unApprovedStories}} stories that have not been approved, check them out <a href="{{ route('admin.unapprovedstories') }}">here</a>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                    @endif
+                    @endif --}}
 
 
 
@@ -45,23 +54,33 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">{{ __('Title') }}</th>
-                                    <th scope="col">{{ __('Category') }}</th>                                                                      
-                                    <th scope="col">{{ __('Age') }}</th>
-                                    <th scope="col">{{ __('Author') }}</th>
-                                    <th scope="col">{{ __('Subscription') }}</th>
+                                    <th scope="col">{{ __('Status') }}</th>           
+                                    <th scope="col">{{ __('Category') }}</th>           
+                                    <th scope="col">{{ __('Type') }}</th>
+                                    <th scope="col">{{ __('Posted By') }}</th>
                                     <th scope="col">{{ __('Posted On') }}</th>
-                                     <th scope="col"></th>
-                          
+                                    <th scope="col"></th>
                                 </tr>                         
                             </thead>
                             <tbody>
                                 @foreach ($stories as $story)
                                     <tr>
-                                        <td>{{ $story->title}}</td>
-                                         <td>{{ $story->category->name }}</td>
-                                        <td>{{ $story->age }}</td>
-                                        <td>{{ $story->author }}</td>
-                                        <td>{{ $story->subscription}}</p></td> 
+                                        <th scope="row" title="{{ $story->title }}">
+                                            <div class="truncate" style="max-width:260px;margin-bottom:5px;">{{ $story->title }}</div>
+                                            <span class="text-muted" style="font-weight: 400;">By {{ $story->author }}</span>
+                                        </th>
+                                        <td>
+                                            <span class="badge {{ $story->status == 'Approved' ? 'badge-success' : 'badge-danger' }}">
+                                                {{ $story->status }}
+                                            </span>
+                                        </td>
+                                         <td>{{ ucfirst($story->category->name) }}</td>
+                                        <td>
+                                            <span class="badge {{ $story->subscription == 'Regular' ? 'badge-primary' : 'bg-yellow' }}">
+                                                {{ $story->subscription }}
+                                            </span>
+                                        </td>
+                                        <td>{{ $story->user->fullname }}</td>
                                         <td>
                                             <abbr title="{{ $story->created_at->format('d-M-Y') . ' @ ' . $story->created_at->format('H:ia') }}">
                                                 {{ $story->created_at->diffForHumans() }}
@@ -94,8 +113,8 @@
                         </table>
                     </div>
                     <div class="card-footer py-4">
-                        <nav class="d-flex justify-content-center" aria-label="...">
-                                {{$stories->render()}} 
+                        <nav class="d-flex justify-content-end" aria-label="...">
+                                {{ $stories->links() }}
                         </nav>
                     </div>
                 </div>

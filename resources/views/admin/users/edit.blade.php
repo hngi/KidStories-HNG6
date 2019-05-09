@@ -1,7 +1,7 @@
 @extends('admin.layouts.app', ['title' => __('User Management')])
 
 @section('content')
-    @include('admin.users.partials.header', ['title' => __('Edit User')])   
+    @include('admin.users.partials.header', ['title' => __('Add User')])   
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -13,12 +13,11 @@
                                 <h3 class="mb-0">{{ __('User Management') }}</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary">{{ __('Back to list') }}</a>
+                                <a href="{{ route('admin.user.index') }}" class="btn btn-sm btn-primary">{{ __('Back to list') }}</a>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-12">
+                    <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session('status') }}
@@ -27,12 +26,17 @@
                                 </button>
                             </div>
                         @endif
-                    </div>
+                        
+                         @if ($errors->all())
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                You have some errors below!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
 
-
-
-                    <div class="card-body">
-                        <form method="post" action="{{ route('user.update', $user) }}" autocomplete="off">
+                        <form method="post" action="{{ route('admin.user.update', $user) }}" autocomplete="off">
                             @csrf
                             @method('put')
 
@@ -40,8 +44,7 @@
                             <div class="pl-lg-4">
                                 <div class="form-group{{ $errors->has('first_name') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-name">{{ __('First Name') }}</label>
-                                    <input type="text" name="first_name" id="input-name" class="form-control form-control-alternative{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ $user->first_name }}" required autofocus>
-
+                                    <input type="text" name="first_name" id="input-name" class="form-control form-control-alternative{{ $errors->has('first_name') ? ' is-invalid' : '' }}" placeholder="{{ __('First name') }}" value="{{ old('first_name') ?? $user->first_name }}">
                                     @if ($errors->has('first_name'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('first_name') }}</strong>
@@ -49,11 +52,9 @@
                                     @endif
                                 </div>
 
-                                  <div class="pl-lg-4">
-                                <div class="form-group{{ $errors->has('last_name') ? ' has-danger' : '' }}">
+                                 <div class="form-group{{ $errors->has('last_name') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-name">{{ __('Last Name') }}</label>
-                                    <input type="text" name="last_name" id="input-name" class="form-control form-control-alternative{{ $errors->has('last_name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ $user->last_name }}" required autofocus>
-
+                                    <input type="text" name="last_name" id="input-name" class="form-control form-control-alternative{{ $errors->has('first_name') ? ' is-invalid' : '' }}" placeholder="{{ __('Last name') }}" value="{{ old('last_name') ?? $user->last_name }}">
                                     @if ($errors->has('last_name'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('last_name') }}</strong>
@@ -61,23 +62,19 @@
                                     @endif
                                 </div>
 
-
                                 <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-email">{{ __('Email') }}</label>
-                                    <input type="email" name="email" id="input-email" class="form-control form-control-alternative{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ $user->email }}" required>
-
+                                    <input type="email" name="email" id="input-email" class="form-control form-control-alternative{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ __('Email') }}" value="{{ old('email') ?? $user->email }}">
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('email') }}</strong>
                                         </span>
                                     @endif
                                 </div>
-                               
 
-                                 <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
+                                <div class="form-group{{ $errors->has('phone') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-email">{{ __('Phone') }}</label>
-                                    <input type="text" name="phone" id="input-email" class="form-control form-control-alternative{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ __('Phone') }}" value="{{ $user->phone }}" required>
-
+                                    <input type="text" name="phone" id="input-email" class="form-control form-control-alternative{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="{{ __('Phone') }}" value="{{ old('phone') ?? $user->phone }}">
                                     @if ($errors->has('phone'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('phone') }}</strong>
@@ -85,31 +82,15 @@
                                     @endif
                                 </div>
 
-
                                   <div class="form-group{{ $errors->has('location') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-email">{{ __('Location') }}</label>
-                                    <input type="text" name="location" id="input-email" class="form-control form-control-alternative{{ $errors->has('location') ? ' is-invalid' : '' }}" placeholder="{{ __('Location') }}" value="{{ $user->location }}" required>
-
-                                    @if ($errors->has('location'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('location') }}</strong>
-                                        </span>
-                                    @endif
+                                    <label class="form-control-label" for="input-location">{{ __('Location') }}</label>
+                                    <input type="text" name="location" id="input-location" class="form-control form-control-alternative" placeholder="{{ __('Location') }}" value="{{ old('location') ?? $user->location }}">
                                 </div>
 
-
-                                 <div class="form-group{{ $errors->has('postal_code') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-email">{{ __('Postal Code') }}</label>
-                                    <input type="text" name="postal_code" id="input-email" class="form-control form-control-alternative{{ $errors->has('postal_code') ? ' is-invalid' : '' }}" placeholder="{{ __('Postal Code') }}" value="{{ $user->postal_code }}" required>
-
-                                    @if ($errors->has('postal_code'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('postal_code') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="form-group{{ $errors->has('postal_code') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-postal-code">{{ __('Postal Code') }}</label>
+                                    <input type="text" name="postal_code" id="input-postal-code" class="form-control form-control-alternative" placeholder="{{ __('Postal Code') }}" value="{{ old('postal_code') ?? $user->postal_code }}">
                                 </div>
-
-
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
