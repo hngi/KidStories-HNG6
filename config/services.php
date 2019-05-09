@@ -43,11 +43,7 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
-    'google' => [
-    'client_id' => "773736358325-tevntbmufv9ptc4r8gg1qn2tn63vrgt5.apps.googleusercontent.com",
-    'client_secret' => "9e-mqVBX_eIZVazPIg-he0ha",
-    'redirect' => 'localhost:8000/callback',
-    ],
+   
 
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),  // Your Facebook App ID
@@ -56,9 +52,12 @@ return [
     ],
 
     'google' => [
-        'client_id'     => env('GOOGLE_CLIENT_ID'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect'      => env('GOOGLE_REDIRECT')
+        'client_id'     => 
+                    "773736358325-tevntbmufv9ptc4r8gg1qn2tn63vrgt5.apps.googleusercontent.com",
+        'client_secret' => 
+                    "9e-mqVBX_eIZVazPIg-he0ha",
+        'redirect'      =>
+                     "http://localhost:8000/login/google/callback"
     ],
 
 ];

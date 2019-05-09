@@ -38,8 +38,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Routes for social media auth
-Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
-Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('auth.social');
+Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback')->name('auth.social.callback');
 
 
 // Routes for logged in user
@@ -69,6 +69,3 @@ Route::post('/pay', [
 
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('pay.callback');
 
-//routes for google auth
-Route::get('/redirect', 'SocialAuthController@redirect')->name('auth.google.redirect');
-Route::get('/callback', 'SocialAuthController@callback')->name('auth.google.callback');
