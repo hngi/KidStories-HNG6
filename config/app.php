@@ -170,6 +170,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         JD\Cloudder\CloudderServiceProvider::class,
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
+           Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -233,6 +234,7 @@ return [
 
         'Cloudder' => 'JD\Cloudder\Facades\Cloudder',
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 
