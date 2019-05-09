@@ -1,7 +1,8 @@
 @extends('admin.layouts.app', ['title' => __('Manage Categories')])
 
 @section('content')
-    @include('admin.layouts.headers.cards')
+
+    @include('admin.categories.partials.cards')
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -35,6 +36,7 @@
                                 <tr>
                                     <th scope="col">{{ __('Name') }}</th>
                                     <th scope="col">{{ __('Image') }}</th>
+                                    <th scope="col">{{ __('Stories') }}</th>
                                     <th scope="col">{{ __('Creation Date') }}</th>
                                     <th scope="col"></th>
                                 </tr>
@@ -50,7 +52,13 @@
                                                 No image yet
                                             @endif
                                         </td>
-                                        <td>{{ $category->created_at->format('d/m/Y @ h:i a') }}</td>
+                                        <td>
+                                            {{ $count = $category->stories->count() }}
+                                            {{ str_plural('story', $count) }}
+                                        </td>
+                                        <td>
+                                            {{ $category->created_at->format('d F, Y @ h:ia') }}
+                                        </td>
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

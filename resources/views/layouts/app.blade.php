@@ -108,7 +108,7 @@
                                                 <li class="panel-outer">
                                                     <div class="form-container">
                                                         <form action="{{ route('stories.index') }}" method="GET">
-                                                            <input class="searchBox" type="search" name="search" placeholder="Search...">
+                                                            <input class="searchBox" type="search" minlength="2" name="search" placeholder="Search...">
                                                         </form>
                                                     </div>
                                                 </li>
