@@ -97,6 +97,14 @@
                     <label for="inputStatus"> Update Profile Image </label>
                     <input type="file" name="photo" id="cover">
                 </div>
+                 <div>
+                    <label for="inputStatus"> Membership Status </label>
+                    @if($left)
+                    <p>Your subscription expires in <strong>{{$left}}</strong></p>
+                    @else
+                    <p> You are yet to subscribe </p>
+                    @endif
+                </div>
                 
                 <div id="button">
                     <input type="submit" value="Save" />

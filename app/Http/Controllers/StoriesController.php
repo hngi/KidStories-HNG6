@@ -39,7 +39,7 @@ class StoriesController extends Controller
         if ($request->query('search')) {
             $search = $request->query('search');
 
-            $stories = Story::where('is_approved', 1)->where('title', 'LIKE', "$search%");
+            $stories = Story::where('is_approved', 1)->where('title', 'LIKE', "%$search%");
         } else {
             $stories = Story::query()->where('is_approved', 1);
         }
@@ -202,6 +202,8 @@ class StoriesController extends Controller
     public function create()
     {
         $categories = Category::all();
+
+        $tags = Tag::all();
 
         return view(
             'create-story', 
