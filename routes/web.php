@@ -38,14 +38,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Routes for social media auth
-Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
-Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('auth.social');
+Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback')->name('auth.social.callback');
 
 
 // Routes for logged in user
 Route::middleware('auth')->get('/mystories', 'StoriesController@mystories')->name('stories.mystories');
-Route::middleware('auth')->get('/create-story', 'StoriesController@create')->name('story.create');
-Route::middleware('auth')->post('/create-story', 'StoriesController@store')->name('story.create');
+Route::middleware('auth')->get('/stories/create', 'StoriesController@create')->name('story.create');
+Route::middleware('auth')->post('/stories/create', 'StoriesController@store')->name('story.store');
 Route::get('/favorites', 'BookmarkController@index')->name('bookmark');
 
 // Routes for stories
@@ -68,3 +68,4 @@ Route::post('/pay', [
 ])->middleware('auth');
 
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('pay.callback');
+
