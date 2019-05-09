@@ -27,9 +27,9 @@ class Story extends Model
             $story->save();
         });
 
-       /* static::addGlobalScope('approved', function (Builder $builder) {
+        static::addGlobalScope('approved', function (Builder $builder) {
             $builder->where('is_approved', '!=', false);
-        });*/
+        });
     }
 
     //Accessors
@@ -48,6 +48,33 @@ class Story extends Model
         return $this->reactions()->where('reaction',0)->count();
     }
 
+    public function getReactionAttribute()
+    {   
+        if(!is_null(auth()->id())){
+            $reaction = $this->reactions()->where(
+                'user_id',auth()->id()
+            )->first();
+                
+            return $reaction->reaction == 1?'like':'dislike';
+        }
+        
+        return 'nil';
+    }
+
+    public function getFavoriteAttribute()
+    {   
+        if(!is_null(auth()->id())){
+            $bookmark = $this->bookmarkedBy()->where(
+                'user_id',auth()->id()
+            )->first();
+    
+            return $bookmark ?true:false;
+        }
+
+        return false;
+        
+    }
+
     public function getreadingTimeAttribute($text) {
         $wordsPerMinute = 200;
         $numberOfWords =  count(explode(' ', $this->body));
@@ -58,12 +85,9 @@ class Story extends Model
     }
 
     public function getSubscriptionAttribute(){
-        return $this->is_premium == 1 ? 'Premium' : 'Regular';
+        return $this->is_premium == 1?'Premium':'Regular';
     }
 
-    public function getStatusAttribute(){
-        return $this->is_approved == 1 ? 'Approved' : 'Pending';
-    }
     // Accessors end
     //Mutator
 
@@ -117,6 +141,11 @@ class Story extends Model
         return $this->hasMany(Reaction::class);
     }
 
+    public function likeReactions()
+    {
+        return $this->hasMany(Reaction::class)->where('reaction',1);
+    }
+
     public function bookmarkedBy()
     {
         return $this->belongsToMany(Users::class,'bookmarks');
@@ -132,14 +161,22 @@ class Story extends Model
 
     //Relationship end
 
-
+    //Local scope start
     public function scopeSimilar($query)
-    {
+    {   
         return $query->where(
             'category_id',$this->category_id
         )->where('id','!=',$this->id)->take(4);
     }
 
+    public function scopeTrending($query)
+    {   
+        return $query->withCount('likeReactions')
+            ->orderBy('like_reactions_count', 'desc');
+        
+    }
+
+    //Local scope end
     /**
      * Get the route key name.
      *
