@@ -23,6 +23,25 @@
                             @csrf  @method('PUT')
                             <h6 class="heading-small text-muted mb-4">{{ __('Story information') }}</h6>
                             <div class="pl-lg-4">
+                                <div class="form-group {{ $errors->has('category_id') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-title">{{ __('Category') }} </label>
+                                    <select name="category_id" class="form-control form-control-alternative">
+                                        <option value="">Select Category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{$category->id}}"
+                                                 {{$category->id == old('category_id')?'selected':
+                                                    $category->id == $story->category_id?'selected':''}}>
+                                                {{$category->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('category_id'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('category_id') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
                                 <div class="form-group {{ $errors->has('title') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Title') }} *</label>
                                     <input  type="text" name="title" 
@@ -33,7 +52,8 @@
                                             <strong>{{ $errors->first('title') }}</strong>
                                         </span>
                                     @endif
-                                </div>         
+                                </div>  
+
                                 <div class="form-group {{ $errors->has('photo') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Story Image') }} </label>
                                     <p id="for_ad_image" class="valError text-danger small"></p>
@@ -46,10 +66,10 @@
                                                 <span>
                                                     <span class="MultiFile-label" 
                                                         title="File selected: {{$story->image_url}}.jpg">
-                                                        <span class="MultiFile-title">{{$story->image_url}}</span>
+                                                        {{-- <span class="MultiFile-title">{{$story->image_url}}</span> --}}
                                                         <img class="MultiFile-preview" 
                                                                 style="max-height:100px; max-width:100px;" 
-                                                                src="{{asset($story->image_url)}}">
+                                                                src="{{$story->image_url}}">
                                                     </span>
                                                 </span>
                                                 <input type="hidden" name="previousImage" value="{{$story->image_url}}" />
@@ -120,24 +140,7 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="form-group {{ $errors->has('category_id') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-title">{{ __('Category') }} </label>
-                                    <select name="category_id" 
-                                        class="form-control form-control-alternative">
-                                        @foreach ($categories as $category)
-                                            <option value="{{$category->id}}"
-                                                 {{$category->id == old('category_id')?'selected':
-                                                    $category->id == $story->category_id?'selected':''}}>
-                                                {{$category->name}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('category_id'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('category_id') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
+
                                 <div class="form-group {{ $errors->has('is_premium') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-is_premium">{{ __('Subscription') }}</label><br>                                    
                                         <input type="radio" name="is_premium" value="1" 

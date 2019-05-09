@@ -58,7 +58,11 @@ class Story extends Model
     }
 
     public function getSubscriptionAttribute(){
-        return $this->is_premium == 1?'Premium':'Regular';
+        return $this->is_premium == 1 ? 'Premium' : 'Regular';
+    }
+
+    public function getStatusAttribute(){
+        return $this->is_approved == 1 ? 'Approved' : 'Pending';
     }
     // Accessors end
     //Mutator

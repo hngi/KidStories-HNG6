@@ -44,7 +44,7 @@ Route::resource('/categories', 'CategoryController', ['as' => 'admin']);
  * User routes for superadmin operations
  *
  */
-Route::resource('/user', 'UserController');
+Route::resource('/user', 'UserController', ['as' => 'admin']);
 
 /**
  * Stories routes for superadmin operations
