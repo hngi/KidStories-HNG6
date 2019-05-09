@@ -55,7 +55,6 @@ class AdminDashboardController extends Controller
         return view('admin.dashboard',
             compact(
                 'users',
-                'stories',
                 'usersCount', 
                 'recentUsers', 
                 'premiumUsers',
