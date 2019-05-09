@@ -13,3 +13,4 @@ package-lock.json
 .rnd
 /fe
 docker-compose.yml
+ngrok.exe

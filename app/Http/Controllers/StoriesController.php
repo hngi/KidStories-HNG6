@@ -12,10 +12,14 @@ use App\Category;
 use App\Reaction;
 use Carbon\Carbon;
 use App\Subscribed;
+Use Notification;
+use App\Notifications\UserCreatedStory;
 use Illuminate\Http\Request;
 use App\Services\FileUploadService;
 use App\Http\Resources\StoryResource;
 use Symfony\Component\HttpFoundation\Response;
+
+
 
 
 class StoriesController extends Controller
@@ -199,6 +203,8 @@ class StoriesController extends Controller
     {
         $categories = Category::all();
 
+        $tags = Tag::all();
+
         return view(
             'create-story', 
             compact('categories','tags')
@@ -260,6 +266,12 @@ class StoriesController extends Controller
 
             $story->tags()->attach($tag->getTagsIds($request->tags));
         DB::commit();
+
+        //notify the admin that user has createdd a story and is awaiting approval
+        $admin=\App\Admin::first();
+        Notification::send($admin,new UserCreatedStory($story,$admin));
+
+
         return redirect()->route('story.show', ['story' => $story->slug]);
     }
 
