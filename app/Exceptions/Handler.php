@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -47,6 +48,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {   
+        $this->JsonModelNotFoundExceptionHandler($request,$exception);
+
+        $this->CsrfTokenExpirationHandler($request,$exception);
+        
+        return parent::render($request, $exception);
+    }
+
+    protected function JsonModelNotFoundExceptionHandler($request, $exception)
+    {
         if ($exception instanceof ModelNotFoundException && $request->wantsJson()) {
             return response()->json([
               'error' => 'Resource not found',
@@ -54,7 +64,17 @@ class Handler extends ExceptionHandler
               'code' => 404
             ], 404);
         }
-        
-        return parent::render($request, $exception);
     }
+
+    protected function CsrfTokenExpirationHandler($request, $exception)
+    {
+        if ($exception instanceof TokenMismatchException) {
+            return redirect()
+                ->back()
+                ->withInput($request->except('password', 'password_confirmation', '_token'))
+                ->with(['error' => 'Your form has expired. Please try again']);
+        }
+
+    }
+
 }
