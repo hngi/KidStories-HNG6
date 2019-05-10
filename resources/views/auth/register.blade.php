@@ -176,13 +176,13 @@
                                 <a href="#">Terms and Conditions</a>
                             </p>
                             <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <a href="{{ url('/login/facebook') }}" class="btn btn-facebook" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                            <div class="col-md-12">
+                                <a href="{{ url('/login/facebook') }}" class="btn btn-facebook col-md-8 col-sm-8" style="margin-bottom:0.5rem;"><i class="fa fa-facebook"></i> Facebook</a>
 
-                                      <a href="{{ url('/login/google') }}" class="btn btn-google" class="btn btn-google"><i class="fa fa-google"></i>Google</a>
+                                <a href="{{ url('/login/google') }}"  class="btn btn-google col-md-8 col-sm-8"><i class="fa fa-google"></i> Google</a>
 
 
-                                </div>
+                            </div>
                             </div>
                         </form>
                     </div>

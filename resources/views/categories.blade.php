@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('custom_css')
-<link rel="stylesheet" type="text/css" href="css/categories.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/categories.css') }}">
 @endsection
 
 @section('content')
@@ -47,20 +47,20 @@
             <div class="row c">
 
                 <!--Image Column-->
-                <div class="col-lg-4 col-md-12 col-sm-12 ">
-                    <img src="images/resources/bottom.jpg" alt=""  />
+                <div class="col-lg-4 col-md-12 col-sm-12 pcab">
+                    <img src="{{ asset('images/resources/bottom.jpg') }}" alt=""  />
                 </div>
 
                 
                 <!--Content Column-->
-                <div class="content-column col-lg-8 col-md-12 col-sm-12">
+                <div class="content-column col-lg-8 pcad col-md-12 col-sm-12">
                     <div class="applink">
                         <h4>Get up close with your child</h4>
                         <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
                         </div>
                         <div class="buttons-box">
                             <!-- <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/apple.png" alt="" /></a> -->
-                            <a href="https://github.com/hnginternship5/kidstories-android/blob/production/Bedtimestory/app/debug/app-debug.apk" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/playstore.png" alt="" /></a>
+                            <a href="https://github.com/hnginternship5/kidstories-android/blob/production/Bedtimestory/app/debug/app-debug.apk" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/playstore.png') }}" alt="" /></a>
                         </div>
                     </div>
                 </div>

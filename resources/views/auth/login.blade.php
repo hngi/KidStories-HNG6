@@ -27,12 +27,12 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <form class="login_form text-center py-3 pr-4"  method="POST" action="{{ route('login') }}">
+                    <form class="login_form text-center py-3 pr-md-4"  method="POST" action="{{ route('login') }}">
                     @csrf
 
                         <h5 class="font-weight-bold mt-1">Log in to your account</h5>
                         <br>
-                        <span><a href="{{ route('auth.social',['provider'=>'google']) }}">login with gmail</a></span>
+                        <span><a href="{{ route('auth.social',['provider'=>'google']) }}">Login with Gmail</a></span>
                     <div class="form-group row">
 
                         <div class="col-md-12">
@@ -58,7 +58,7 @@
                     </div>
 
                             @if (Route::has('password.request'))
-                                <a class="text-right d-block mt-2 pr-2" href="{{ route('password.request') }}">
+                                <a class="text-right d-block mt-2 pr-2" style="margin-right:2rem" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
                             @endif
@@ -78,9 +78,9 @@
                         </p>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <a href="{{ url('/login/facebook') }}" class="btn btn-facebook col-md-6" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                                <a href="{{ url('/login/facebook') }}" class="btn btn-facebook col-md-8 col-sm-8" style="margin-bottom:0.5rem;"><i class="fa fa-facebook"></i> Facebook</a>
 
-                                <a href="{{ url('/login/google') }}"  class="btn btn-google col-md-6"><i class="fa fa-google"></i> Google</a>
+                                <a href="{{ url('/login/google') }}"  class="btn btn-google col-md-8 col-sm-8"><i class="fa fa-google"></i> Google</a>
 
 
                             </div>
