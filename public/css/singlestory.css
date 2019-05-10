@@ -1,0 +1,229 @@
+.container1 {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.titlecase {
+  text-transform: capitalize;
+}
+
+.content1 {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+.content1 .topic {
+  padding-top: 60px;
+  padding-bottom: 20px;
+}
+
+.subcontent-icon i {
+  
+  font-size: 26px;
+}
+
+/* Content and story section */
+.topic > h1 {
+  text-align: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  /* letter-spacing: -0.8px; */
+}
+
+.topic > h3 {
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 0;
+}
+
+.stBookmark {
+  float: right;
+}
+
+img.stories {
+  width: 50%;
+  height: 400px;
+  object-fit: contain;
+}
+
+.subContent {
+  padding: 0px 0px 0 390px;
+}
+
+div.subContent > p {
+  text-align: center;
+  padding-right: 300px;
+}
+
+div.subContent > p.pLast {
+  font-weight: bold;
+}
+
+.end {
+  text-align: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  padding-top: 40px;   
+}
+
+/* Tags */
+div.tags {
+  padding-bottom: 30px;
+}
+
+button[type="submit"] {
+  text-align: center;
+  width: 80px;
+  height: 30px;
+  display: inline-flex;
+  margin-right: 10px;
+  padding: 0 18px 0 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+i.thumbs {
+  float: right;
+  padding-left: 18px;
+  cursor: pointer;
+}
+/* Tags ends */
+
+hr {
+  border-width: 3px;
+  border: 1px solid;
+  background: black;
+}
+
+/* Story Cards */
+img.cards {
+  min-width: 100%;
+  height: 200px;
+}
+
+.story_card .card-title {
+  color: #333333;
+  text-transform: capitalize;
+  margin-bottom: 0;
+}
+
+.story_card .card-text:first-of-type {
+  color: #4F4F4F;
+}
+
+.story_card .card-text:nth-of-type(2) {
+  color: #666666;
+}
+
+.story_card .author {
+  color: #718CFB;
+}
+
+.story_card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.story_card .reactions i {
+  color: #A6A6A6;
+}
+
+.story_card .reactions .liked i,
+.story_card .reactions .disliked i,
+.story_card .bookmarked i {
+  color: #718cfb;
+}
+/*Story Cards ends */
+
+/* App section */
+a.slideInLeft {
+  margin-right: 15px;
+}
+/* App Section ends */
+
+/* Media querries for resposiveness */
+@media(min-width: 2560px) {
+  div.subContent {
+    padding: 0 390px 0 390px;
+  }
+
+  img.stories {
+    width: 500px;
+    margin: 0px 0px 0px 200px;
+    padding-left: 200px;
+  }
+
+  div.subContent > p {
+    padding-right: 100px;
+  }
+}
+
+@media(max-width: 1140px) {
+  .content {
+    margin-top: 0;
+  }
+}
+
+@media(max-width: 1200px) {
+  img.stories {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media(max-width: 1024px) {
+  div.subContent {
+    padding: 0 200px 0 200px;
+  }
+
+  img.stories {
+    width: 320px;
+  }
+
+  div.subContent > p {
+    padding: 0;
+  }
+}
+
+@media(max-width: 768px) {
+  div.subContent {
+    margin: 0;
+    padding: 0;
+  }
+
+  img.stories {
+    margin-left: 150px;
+    padding: 0;
+  }
+}
+
+@media(max-width: 525px) {
+  .content {
+    width: 100%;
+  }
+
+  div.subContent {
+    margin: 0;
+    padding: 0;
+  }
+
+  img.stories {
+    width: 320px;
+    height: 400px;
+    margin: 0;
+    padding-left: 60px;
+  }
+}
+
+@media(max-width: 396px) {
+  a.slideInLeft {
+  padding-bottom: 20px;
+  }
+}
+
+

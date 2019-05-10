@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+/*font-family: 'Nunito', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Poppins', sans-serif;*/
+
+@import url('font-awesome.css');
+@import url('flaticon.css');
+@import url('animate.css');
+@import url('owl.css');
+@import url('jquery.fancybox.min.css');
+@import url('hover.css');
+@import url('jquery-ui.css');
+@import url('custom-animate.css');
+
+/***
+
+====================================================================
+	Reset
+====================================================================
+
+ ***/
+
+* {
+	margin:0px;
+	padding:0px;
+	border:none;
+	outline:none;
+}
+
+/***
+
+====================================================================
+	Global Settings
+====================================================================
+
+ ***/
+
+body {
+	font-size:13px;
+	color:#777777;
+	line-height:1.8em;
+	font-weight:400;
+	background:#ffffff;
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-position:center top;
+	-webkit-font-smoothing: antialiased;
+	font-family: 'Lato', Nunito, sans-serif;
+}
+
+a{
+	text-decoration:none;
+	cursor:pointer;
+	color:#718cfb;
+}
+
+.no-padding{
+	padding:0px !important;
+}
+
+button:focus{
+	outline:none;
+}
+
+.btn,
+a:hover,a:focus,a:visited{
+	text-decoration:none;
+	outline:none;
+}
+
+.btn:focus{
+	box-shadow:none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	position:relative;
+	font-weight:normal;
+	margin:0px;
+	background:none;
+	line-height:1.6em;
+	font-family: 'Lato', sans-serif;
+	color: #333333;
+}
+
+input,button,select{
+
+}
+
+textarea{
+	overflow:hidden;
+}
+
+p,.text{
+	position:relative;
+	line-height:1.8em;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.bg-1 {
+    background: url(../images/icons/maps.png) repeat-x;
+}
+
+.m-t-50 {
+	margin-top: 50px;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.m-b-50 {
+	margin-bottom: 50px;
+}
+
+.primary-color {
+	color: #718CFB !important;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.strike-through{
+	text-decoration:line-through;
+}
+
+.auto-container{
+	position:static;
+	padding:0px 3rem;
+	margin:0 auto;
+}
+
+.page-wrapper{
+	position:relative;
+	margin:0 auto;
+	width:100%;
+	min-width:300px;
+}
+
+
+
+ul,li{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+
+.theme-btn{
+	display:inline-block;
+	transition:all 0.3s ease;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+}
+
+.titlecase {
+	text-transform: capitalize;
+}

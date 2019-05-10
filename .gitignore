@@ -1,0 +1,16 @@
+/node_modules
+/public/hot
+/public/storage
+/vendor
+.env
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+fabric8-analytics.log
+package-lock.json
+.rnd
+/fe
+docker-compose.yml
+ngrok.exe
