@@ -189,6 +189,9 @@ footer p {
         display: flex;
         flex-direction: column;
     }
+    .catcs{
+        margin-left: -1.5rem;
+    }
     .main-banner{
         margin-top: 20px;
     }

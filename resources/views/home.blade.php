@@ -10,7 +10,7 @@
         <div class="row clearfix">
 
             <!--Content Column-->
-            <div class="content-column col-lg-6 col-md-12 col-sm-12">
+            <div class="content-column mobs col-lg-6 col-md-12 col-sm-12">
                 <div class="inner-column wow slideInLeft">
                     <h3>Get personalized bedtime stories<br> tailored just for your child</h3>
                     <div class="text">Read free bedtime stories, fairy tales, poems and short <br> stories for kids</div>
@@ -324,13 +324,13 @@
             <div class="row c">
 
                 <!--Image Column-->
-                <div class="col-lg-4 col-md-12 col-sm-12 ">
+                <div class="col-lg-4 col-md-12 col-sm-12 pcab">
                     <img src="images/resources/bottom.jpg" alt=""  />
                 </div>
 
                 
                 <!--Content Column-->
-                <div class="content-column col-lg-8 col-md-12 col-sm-12">
+                <div class="content-column col-lg-8 pcad col-md-12 col-sm-12">
                     <div class="applink">
                         <h4>Get up close with your child</h4>
                         <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!

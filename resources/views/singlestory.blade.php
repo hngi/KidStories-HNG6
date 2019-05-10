@@ -121,12 +121,12 @@
         <div class="container2">
             <div class="row c">
                 <!--Image Column-->
-                <div class="col-lg-4 col-md-12 col-sm-12 ">
+                <div class="col-lg-4 col-md-12 col-sm-12 pcab">
                     <img src="/images/resources/bottom2.jpg" alt=""  />
                 </div>
 
                 <!--Content Column-->
-                <div class="content-column col-lg-8 col-md-12 col-sm-12">
+                <div class="content-column col-lg-8 pcad col-md-12 col-sm-12">
                     <div class="applink">
                         <h4>Get up close with your child</h4>
                         <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
