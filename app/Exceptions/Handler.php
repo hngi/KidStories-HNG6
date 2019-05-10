@@ -48,14 +48,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {   
-        $this->JsonModelNotFoundExceptionHandler($request,$exception);
+        $this->jsonModelNotFoundExceptionHandler($request,$exception);
 
-        $this->CsrfTokenExpirationHandler($request,$exception);
+        $this->csrfTokenExpirationHandler($request,$exception);
         
         return parent::render($request, $exception);
     }
 
-    protected function JsonModelNotFoundExceptionHandler($request, $exception)
+    protected function jsonModelNotFoundExceptionHandler($request, $exception)
     {
         if ($exception instanceof ModelNotFoundException && $request->wantsJson()) {
             return response()->json([
@@ -66,7 +66,7 @@ class Handler extends ExceptionHandler
         }
     }
 
-    protected function CsrfTokenExpirationHandler($request, $exception)
+    protected function csrfTokenExpirationHandler($request, $exception)
     {
         if ($exception instanceof TokenMismatchException) {
             return redirect()
