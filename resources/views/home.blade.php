@@ -10,7 +10,7 @@
         <div class="row clearfix">
 
             <!--Content Column-->
-            <div class="content-column col-lg-6 col-md-12 col-sm-12">
+            <div class="content-column mobs col-lg-6 col-md-12 col-sm-12">
                 <div class="inner-column wow slideInLeft">
                     <h3>Get personalized bedtime stories<br> tailored just for your child</h3>
                     <div class="text">Read free bedtime stories, fairy tales, poems and short <br> stories for kids</div>

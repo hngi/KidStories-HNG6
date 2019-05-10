@@ -851,7 +851,9 @@
 		font-size:13px;
 		line-height:1.6em;
 	}
-	
+	.mobs{
+		padding: 3rem 1rem;
+	}
 
 }
 
