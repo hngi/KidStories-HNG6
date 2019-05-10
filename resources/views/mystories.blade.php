@@ -20,7 +20,7 @@
     <div class="mb-5">
         <h3>My Stories</h3>
     </div>
-    <div class="col-md-12 d-flex flex-row p-0 ">
+    <div class="col-md-12 d-flex cold p-0 ">
         <div class="col-md-9 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
                 <div class="d-flex flex-row flex-wrap">
@@ -89,7 +89,7 @@
                 </p>
             @endif
         </div>
-        <div class="col-md-3">
+        <div class="col-md-5 col-lg-3 col-sm-6 catcs">
             <div class="d-flex flex-row col-md-12  ">
                 <div class="col-md-12" id="category-drop">
                     <p>Search My Stories</p>
@@ -156,13 +156,13 @@
         <div class="row c">
 
             <!--Image Column-->
-            <div class="col-lg-4 col-md-12 col-sm-12 ">
+            <div class="col-lg-4 col-md-12 col-sm-12 pcab">
                 <img src="{{ asset('images/resources/bottom.jpg') }}" alt="" />
             </div>
 
 
             <!--Content Column-->
-            <div class="content-column col-lg-8 col-md-12 col-sm-12">
+            <div class="content-column col-lg-8 pcad col-md-12 col-sm-12">
                 <div class="applink">
                     <h4>Get up close with your child</h4>
                     <div class="text">The Kids Stories app is your go to app for free bedtime stories, fairy tales, poems and short stories for kids. Get in there and start reading!
