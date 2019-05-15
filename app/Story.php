@@ -55,7 +55,11 @@ class Story extends Model
                 'user_id',auth()->id()
             )->first();
                 
-            return $reaction->reaction == 1?'like':'dislike';
+            if($reaction){
+                return $reaction->reaction == 1?'like':'dislike';
+            }else{
+                return 'nil';
+            }
         }
         
         return 'nil';
@@ -64,10 +68,10 @@ class Story extends Model
     public function getFavoriteAttribute()
     {   
         if(!is_null(auth()->id())){
-            $bookmark = $this->bookmarkedBy()->where(
+            $bookmark = $this->bookmarks()->where(
                 'user_id',auth()->id()
             )->first();
-    
+            
             return $bookmark ?true:false;
         }
 
@@ -146,9 +150,9 @@ class Story extends Model
         return $this->hasMany(Reaction::class)->where('reaction',1);
     }
 
-    public function bookmarkedBy()
+    public function bookmarks()
     {
-        return $this->belongsToMany(Users::class,'bookmarks');
+        return $this->hasMany(Bookmark::class);
     }
 
     /*

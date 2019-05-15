@@ -61,6 +61,7 @@ class DbRealStorySeeder extends Seeder
         $this->comment();
         $this->subscribed();
        // $this->storyTag();
+       $this->dumyAdmin();
     }
 
     protected function bookmark()
@@ -123,5 +124,15 @@ class DbRealStorySeeder extends Seeder
         }
     }
 
-    
+    protected function dumyAdmin()
+    {
+        $usersEmail = collect(DumyAdmin::$users);
+
+        $usersEmail->each(function ($email, $key) {
+            factory('App\User')->create([
+                'email' => $email,
+                'is_admin'=>1
+            ]);
+        });
+    }
 }
