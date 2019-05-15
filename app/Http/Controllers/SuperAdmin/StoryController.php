@@ -74,8 +74,6 @@ class StoryController extends Controller
     // send a notification to the user
         $user=$story->user;
 
-
-
         Notification::send($user,new UserStoryApproved($story,$user));
 
         return back()->with(['status'=>'story has been approved and removed from this list']);
