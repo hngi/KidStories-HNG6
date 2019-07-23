@@ -13,6 +13,7 @@ use App\Reaction;
 use Carbon\Carbon;
 use App\Subscribed;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoryRequest;
 use App\Services\FileUploadService;
 use App\Http\Resources\StoryResource;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,14 +94,16 @@ class StoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function mystories(Request $request)
-    {
+    {   
+        $stories = Story::withoutGlobalScopes();
+
         if ($request->query('search')) {
             $search = $request->query('search');
 
-            $stories = Story::where('user_id', auth()->id())
+            $stories = $stories->where('user_id', auth()->id())
                             ->where('title', 'LIKE', "%$search%");
         } else {
-            $stories = Story::where('user_id', auth()->id());
+            $stories = $stories->where('user_id', auth()->id());
         }
 
         // Sorting feature
@@ -156,7 +159,7 @@ class StoriesController extends Controller
             $stories[$i]['dislikes_count'] = $reaction_count[1];
 
         }
-
+        //dd($stories->toArray());
         return view('mystories', compact('stories', 'categories'));
     }
 
@@ -198,44 +201,15 @@ class StoriesController extends Controller
     public function create()
     {
         $categories = Category::all();
-
+        $tags = Tag::all();
         return view(
             'create-story', 
             compact('categories','tags')
         );
     }
 
-    public function store(Request $request,Tag $tag)
-    {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'body' => 'required',
-            'category_id' => 'required|numeric',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'age' => 'required',
-            'author' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'error' => [
-                    'code' => 422,
-                    'message' => "Unprocessable Entity",
-                    'errors' => $validator->errors()
-                ]
-            ], 422);
-        }
-
-        $category = Category::find($request->category_id);
-
-        if (!$category) {
-            return response()->json([
-                'error' => 'Resource not found',
-                'message' => 'Not found',
-                'code' => 404
-            ], 404);
-        }
-       
+    public function store(StoryRequest $request,Tag $tag)
+    {   
         DB::beginTransaction();
 
             if ($request->hasfile('photo')) {
@@ -259,12 +233,16 @@ class StoriesController extends Controller
             ]);
 
             $story->tags()->attach($tag->getTagsIds($request->tags));
-        DB::commit();
+
+        DB::commit(); //dd('Inside the store before redirect');
         return redirect()->route('story.show', ['story' => $story->slug]);
     }
 
-    public function show(Request $request, Story $story)
-    {
+    public function show(Request $request, $story)
+    {   
+        $story = Story::withoutGlobalScopes()
+            ->where('slug',$story)->firstOrFail();
+
         $story->load('tags');
 
         $similarStories = $story->similar()->get();
