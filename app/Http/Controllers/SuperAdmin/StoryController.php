@@ -109,7 +109,7 @@ class StoryController extends Controller
                 ->uploadFile($request->file('photo'));
         }
         
-        $age = explode('-', $request->age);
+        $age = explode('-', $request->age); 
         $rawStory = $request->except([
             'age','photo','author','tags'
         ]);

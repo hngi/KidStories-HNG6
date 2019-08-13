@@ -23,14 +23,14 @@ class StoryRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules() 
     {
         $rules = [
             'body' => 'required|string',
             'author' => 'required|string|max:255',
-            'is_premium' => 'required|numeric|max:255',            
+            'is_premium' => 'required|numeric',            
             'age' => 'required|string|max:255',
-            'category_id' => 'required|numeric|max:255',            
+            'category_id' => 'required|numeric|exists:categories,id',            
             'photo'=>'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB
         ];
 
