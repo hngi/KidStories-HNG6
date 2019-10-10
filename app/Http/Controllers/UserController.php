@@ -74,7 +74,7 @@ class UserController extends Controller
     		'email' => $request->email,
     		'phone' => $request->phone,
     		'location' => $request->location,
-    		'postal-code' => $request->postal_code,
+    		'postal_code' => $request->postal_code,
     		'image_url' => $image['secure_url'] ?? $user->image_url,
             'image_name' => $image['public_id'] ?? $user->image_name
     	]);
