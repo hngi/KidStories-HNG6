@@ -53,11 +53,12 @@ return [
 
     'google' => [
         'client_id'     => 
-                    "773736358325-tevntbmufv9ptc4r8gg1qn2tn63vrgt5.apps.googleusercontent.com",
+                    "283427793109-h64kmq3arj96n0vaujifg89le4qpcv2l.apps.googleusercontent.com",
         'client_secret' => 
-                    "9e-mqVBX_eIZVazPIg-he0ha",
+                    "16419NNSSyLXJJFbujlTiXvQ",
         'redirect'      =>
-                     "http://localhost:8000/login/google/callback"
+                     "https://localhost.com/home"
     ],
+
 
 ];
