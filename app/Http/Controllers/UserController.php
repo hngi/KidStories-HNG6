@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\FileUploadService;
 use App\Subscribed;
 use Carbon\Carbon;
+use JD\Cloudder\Facades\Cloudder;
 
 class UserController extends Controller
 {
@@ -52,7 +53,7 @@ class UserController extends Controller
         $this->validate($request, [
             'first_name' => 'required|min:2',
             'last_name' => 'required|min:2',
-            'photo'=>'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB
+            'photo'=>'nullable|mimes:jpeg,jpg,png|between:1, 6000', //Max 800KB
             'email' => 'required|string|unique:users,email,'.$user->id,
             'phone'=>'nullable|min:8'
         ]);
@@ -67,16 +68,17 @@ class UserController extends Controller
             }
         }
 
-    	$user->update([
+        $user->update([
     		'first_name' => $request->first_name,
     		'last_name' => $request->last_name,
     		'email' => $request->email,
     		'phone' => $request->phone,
     		'location' => $request->location,
-    		'postal-code' => $request->postal_code,
+    		'postal_code' => $request->postal_code,
     		'image_url' => $image['secure_url'] ?? $user->image_url,
             'image_name' => $image['public_id'] ?? $user->image_name
     	]);
+//        $user->save();
 
     	DB::commit();
 
