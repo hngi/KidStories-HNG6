@@ -14,7 +14,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -29,7 +29,7 @@
     <title>{{ config('app.name', 'Kids Stories') }}</title>
     <script src="{{ asset('js/app.js') }}"></script>
 
-<!--     
+    <!--     
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -40,13 +40,13 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Stylesheets -->
-  <!--   <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/tstyle.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <!--   <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/reset.css" rel="stylesheet">
+    <link href="/css/tstyle.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <!-- Responsive -->
-    <link href="{{ asset('css/tresponsive.css') }}" rel="stylesheet">
+    <link href="/css/tresponsive.css" rel="stylesheet">
 
     @yield('custom_css')
 </head>
@@ -86,12 +86,12 @@
                                             <li class=""><a href="{{ route('stories.index') }}">Browse Stories</a></li>
                                             <li><a href="{{ route('categories.index') }}">Categories</a></li>
                                             @auth()
-                                                <li class=""><a  href="{{ route('stories.mystories') }}">My Stories</a></li>
+                                            <li class=""><a href="{{ route('stories.mystories') }}">My Stories</a></li>
                                             @endauth
                                             @guest()
-                                                <li><a href="{{ route('story.store') }}">Create Story</a></li>
-                                                <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                                                <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                                            <li><a href="{{ route('story.store') }}">Create Story</a></li>
+                                            <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                                            <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
                                             @endguest
                                         </ul>
                                     </div>
@@ -118,25 +118,25 @@
                                     <!--Language-->
 
                                     @auth
-                                        <div class="language dropdown">
-                                            <a class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
-                                                <span class="icon circle-icons fa fa-user"></span> {{ auth()->user()->fullname }} <span class="icon fa fa-caret-down"></span> 
-                                            </a>
-                                            <ul class="dropdown-menu style-one" aria-labelledby="dropdownMenu2">
-                                                <li><a href="{{ route('profile') }}">Profile</a></li>
-                                                <li><a href="/favorites">My Favorites</a></li>
-                                                <li>
-                                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <div class="language dropdown">
+                                        <a class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
+                                            <span class="icon circle-icons fa fa-user"></span> {{ auth()->user()->fullname }} <span class="icon fa fa-caret-down"></span>
+                                        </a>
+                                        <ul class="dropdown-menu style-one" aria-labelledby="dropdownMenu2">
+                                            <li><a href="{{ route('profile') }}">Profile</a></li>
+                                            <li><a href="/favorites">My Favorites</a></li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                                        {{ __('Logout') }}
-                                                    </a>
+                                                    {{ __('Logout') }}
+                                                </a>
 
-                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                    </form>
-                                                </li> 
-                                            </ul>
-                                        </div>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
                                     @endauth
 
                                 </div>
@@ -158,61 +158,61 @@
 
 
         <!-- Footer -->
-<footer class="footer-wrap">
-    <div class="footer-box">
-        <section>
-            <h5>Kid Stories</h5>
-            <a href="{{ route('about') }}">About Us</a>
-            <a href="{{ route('subscribe') }}">Subscriptions</a>
-            <!-- <a href="#">Contact Us</a> -->
-            <a href="{{ route('story.store') }}">Create a Story</a>
+        <footer class="footer-wrap">
+            <div class="footer-box">
+                <section>
+                    <h5>Kid Stories</h5>
+                    <a href="{{ route('about') }}">About Us</a>
+                    <a href="{{ route('subscribe') }}">Subscriptions</a>
+                    <!-- <a href="#">Contact Us</a> -->
+                    <a href="{{ route('story.store') }}">Create a Story</a>
 
-        </section>
-        <section>
-            <h5>Quick Links</h5>
-            <a href="{{ route('story.store') }}">Create a Story</a>
-            <a href="{{ route('stories.trending')}}">Trending Stories</a>
-            <a href="{{ route('stories.index') }}">Explore Stories</a>
-             <a href="https://paystack.com/pay/kidstoriesapp">Make a donation</a>
-        </section>
-<!--         <section>
+                </section>
+                <section>
+                    <h5>Quick Links</h5>
+                    <a href="{{ route('story.store') }}">Create a Story</a>
+                    <a href="{{ route('stories.trending')}}">Trending Stories</a>
+                    <a href="{{ route('stories.index') }}">Explore Stories</a>
+                    <a href="https://paystack.com/pay/kidstoriesapp">Make a donation</a>
+                </section>
+                <!--         <section>
             <h5>Others</h5>
             <a href="#">User FAQs</a>
             <a href="#">Legal</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms and Conditions</a>
         </section> -->
-        <section>
-            <h5>Newsletter</h5>
-            <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
-            <div class="subscribe">
-                <input type="email" name="" id="subscribe-email" placeholder="Type email">
-                <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
+                <section>
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
+                    <div class="subscribe">
+                        <input type="email" name="" id="subscribe-email" placeholder="Type email">
+                        <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
+                    </div>
+                </section>
             </div>
-        </section>
-    </div>
-    <hr>
-    <div class="footer-info">
-        <p class="col-md-10 pull-left">© 2019 Kid Stories. All rights reserved</p>
-        <div class="social-iconsb col-md-2 pull-right">
-<!--           <a href="#">  <i class="fa fa-youtube"></i> </a>
- -->          <a target="_blank" href="https://instagram.com/mykidstories">  <i class="fa fa-instagram"></i> </a>
-          <a target="_blank" href="https://facebook.com/mykidstories">  <i class="fa fa-facebook"></i> </a>
-          <a target="_blank" href="https://twitter.com/mykidstories">  <i class="fa fa-twitter"></i> </a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</footer>
+            <hr>
+            <div class="footer-info">
+                <p class="col-md-10 pull-left">© 2019 Kid Stories. All rights reserved</p>
+                <div class="social-iconsb col-md-2 pull-right">
+                    <!--           <a href="#">  <i class="fa fa-youtube"></i> </a>
+ --> <a target="_blank" href="https://instagram.com/mykidstories"> <i class="fa fa-instagram"></i> </a>
+                    <a target="_blank" href="https://facebook.com/mykidstories"> <i class="fa fa-facebook"></i> </a>
+                    <a target="_blank" href="https://twitter.com/mykidstories"> <i class="fa fa-twitter"></i> </a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </footer>
 
     </div>
-    
-    <script src="{{ asset('js/owl.js') }}"></script>
-    <script src="{{ asset('js/appear.js') }}"></script>
-    <script src="{{ asset('js/wow.js') }}"></script>
-    <script src="{{ asset('js/paroller.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
+
+    <script src="/js/owl.js"></script>
+    <script src="/js/appear.js"></script>
+    <script src="/js/wow.js"></script>
+    <script src="/js/paroller.js"></script>
+    <script src="/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="{{ asset('js/index.js') }}"></script>
+    <script src="/js/index.js"></script>
     @yield('js')
 </body>
 

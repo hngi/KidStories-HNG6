@@ -13,6 +13,7 @@ use App\Reaction;
 use Carbon\Carbon;
 use App\Subscribed;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoryRequest;
 use App\Services\FileUploadService;
 use App\Http\Resources\StoryResource;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,14 +94,16 @@ class StoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function mystories(Request $request)
-    {
+    {   
+        $stories = Story::withoutGlobalScopes();
+
         if ($request->query('search')) {
             $search = $request->query('search');
 
-            $stories = Story::where('user_id', auth()->id())
+            $stories = $stories->where('user_id', auth()->id())
                             ->where('title', 'LIKE', "%$search%");
         } else {
-            $stories = Story::where('user_id', auth()->id());
+            $stories = $stories->where('user_id', auth()->id());
         }
 
         // Sorting feature
@@ -156,7 +159,7 @@ class StoriesController extends Controller
             $stories[$i]['dislikes_count'] = $reaction_count[1];
 
         }
-
+        //dd($stories->toArray());
         return view('mystories', compact('stories', 'categories'));
     }
 
@@ -198,44 +201,15 @@ class StoriesController extends Controller
     public function create()
     {
         $categories = Category::all();
-
+        $tags = Tag::all();
         return view(
             'create-story', 
             compact('categories','tags')
         );
     }
 
-    public function store(Request $request,Tag $tag)
-    {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'body' => 'required',
-            'category_id' => 'required|numeric',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'age' => 'required',
-            'author' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'error' => [
-                    'code' => 422,
-                    'message' => "Unprocessable Entity",
-                    'errors' => $validator->errors()
-                ]
-            ], 422);
-        }
-
-        $category = Category::find($request->category_id);
-
-        if (!$category) {
-            return response()->json([
-                'error' => 'Resource not found',
-                'message' => 'Not found',
-                'code' => 404
-            ], 404);
-        }
-       
+    public function store(StoryRequest $request,Tag $tag)
+    {   
         DB::beginTransaction();
 
             if ($request->hasfile('photo')) {
@@ -259,12 +233,16 @@ class StoriesController extends Controller
             ]);
 
             $story->tags()->attach($tag->getTagsIds($request->tags));
-        DB::commit();
+
+        DB::commit(); //dd('Inside the store before redirect');
         return redirect()->route('story.show', ['story' => $story->slug]);
     }
 
-    public function show(Request $request, Story $story)
-    {
+    public function show(Request $request, $story)
+    {   
+        $story = Story::withoutGlobalScopes()
+            ->where('slug',$story)->firstOrFail();
+
         $story->load('tags');
 
         $similarStories = $story->similar()->get();
@@ -328,90 +306,7 @@ class StoriesController extends Controller
 
         return view('trendingstories', compact('stories', 'categories'));
     }
-    // public function trendingstories(Request $request)
-    // {
-    //     $reactions = Reaction::where('reaction', 1)->orderBy('story_id', 'asc')->get();
-    //     $storyCountArray = [];
-        
-    //     for ($i=0; $i < $reactions->count(); $i++) { 
-    //        $storyCountArray[$i] = $reactions[$i]->story_id;
-    //     }
-
-    //     $occurences = array_count_values($storyCountArray);
-    //     asort($occurences);
-    //     $storyIdArray = array_keys($occurences);
-        
-    //     $num = count($storyIdArray);
-    //     $stories = [];
-    //     $j = 0;
-        
-    //     for ($i=$num-1; $i >= $num - 9 ; $i--) { 
-    //         $stories[$j] = Story::where('id', $storyIdArray[$i])->first();
-            
-    //         $like_reaction = Reaction::where('story_id', $stories[$j]->id)
-    //                                 ->where('reaction', 1)->get();
-            
-    //         $stories[$j]['likes_count'] = count($like_reaction);
-            
-    //         $dislike_reaction = Reaction::where('story_id', $stories[$j]->id)
-    //                                     ->where('reaction', 0)->get();
-            
-    //         $stories[$j]['dislikes_count'] = count($dislike_reaction);
-            
-    //         $j++;
-    //     }
-
-    //     // FIXME: Sorting feature
-    //     /*if (!is_null($request->query('minAge')) && !is_null($request->query('maxAge'))) {
-    //         $minAge = $request->query('minAge');
-    //         $maxAge = $request->query('maxAge');
-            
-    //         $stories = collect($stories)->where('age_from', '>=', $minAge)
-    //                         ->where('age_to', '<=', $maxAge)
-    //                         ->sortBy("age_from");
-    //     }*/ 
-    //     // Sorting feature ends
-
-    //     $user = $request->user();
-
-    //     for ($i=0; $i < count($stories); $i++) {
-    //         $storyId = $stories[$i]->id;
-            
-    //         if ($user) {
-    //             $reaction = Reaction::where('story_id', $storyId)
-    //                 ->where('user_id', $user->id)
-    //                 ->first();
-    //             $bookmark = Bookmark::where('user_id', $user->id)
-    //                 ->where('story_id', $storyId)
-    //                 ->first();    
-    //             if ($reaction && $reaction->reaction == 0) {
-    //                 $stories[$i]['reaction'] = 'dislike';
-    //             } elseif ($reaction && $reaction->reaction == 1) {
-    //                 $stories[$i]['reaction'] = 'like';
-    //             } else {
-    //                 $stories[$i]['reaction'] = 'nil';
-    //             }
-    //             if ($bookmark) {
-    //                 $stories[$i]['favorite'] = true;
-    //             } else {
-    //                 $stories[$i]['favorite'] = false;
-    //             }
-    //         } else {
-    //             $stories[$i]['reaction'] = 'nil';
-    //             $stories[$i]['favorite'] = false;
-    //         }
-            
-    //         $reaction_count =  $this->reaction($storyId);
-    //         $stories[$i]['likes_count'] = $reaction_count[0];
-    //         $stories[$i]['dislikes_count'] = $reaction_count[1];
-
-    //     }
-            
-    //     $categories = Category::limit(4)->get();
-
-    //     return view('trendingstories', compact('stories', 'categories'));
-    // }
-
+    
     public function reaction($id)
     {
         $like_reaction = Reaction::where('story_id', $id)
