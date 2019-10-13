@@ -57,7 +57,7 @@ return [
         'client_secret' => 
                     "KWuoeA43h2Jeh90nBAy8v4j1",
         'redirect'      =>
-                     "https://hng-kidstories.herokuapp.com/login/google/callback"
+                     "http://kidstories.app:8000/login/google/callback"
     ],
 
 ];
