@@ -57,7 +57,7 @@ return [
         'client_secret' => 
                     "KWuoeA43h2Jeh90nBAy8v4j1",
         'redirect'      =>
-                     "http://kidstories.app/login/google/callback"
+                     "https://kidstories.app/login/google/callback"
     ],
 
 ];
