@@ -59,3 +59,10 @@
 	font-size: 14px;
 	cursor: pointer;
 }
+
+@media (min-width: 768px){
+	div.login div.row div.col-md-7 {
+		background: linear-gradient(218.04deg, #39a1f7 29.19%, #718cfb 81.17%)
+	}
+}
+
