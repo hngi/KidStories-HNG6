@@ -91,7 +91,7 @@
         </div>
         <div class="col-md-5 col-lg-3 col-sm-6 catcs">
             <div class="d-flex flex-row col-md-12  ">
-                <div class="col-md-12" id="category-drop">
+                <div class="col-md-12 categories" id="category-drop">
                     <p>Search My Stories</p>
                     {{-- @foreach ($categories as $category)
                         <a href="{{ route('categories.stories', $category->id) }}">{{ $category->name }}</a><br>

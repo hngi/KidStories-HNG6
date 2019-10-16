@@ -22,8 +22,8 @@
 }
 
 .illustration .book {
-	width: 250px;
-	height: 260px;
+	width: 350px;
+	height: 420px;
 }
 
 .login_form .logo {
@@ -58,4 +58,10 @@
 	padding: 5px 0 5px;
 	font-size: 14px;
 	cursor: pointer;
+}
+
+@media (max-width: 380px){
+	.illustration .book {
+		height: 293px !important; 
+	}
 }
