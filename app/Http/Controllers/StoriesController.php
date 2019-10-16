@@ -43,19 +43,19 @@ class StoriesController extends Controller
         if (!is_null($request->query('minAge')) && !is_null($request->query('maxAge'))) {
             $minAge = $request->query('minAge');
             $maxAge = $request->query('maxAge');
-            
+
             $stories = $stories->where('age_from', '>=', $minAge)
-                            ->where('age_to', '<=', $maxAge)
-                            ->orderBy("age_from")->paginate(21);
+                ->where('age_to', '<=', $maxAge)
+                ->orderBy("age_from")->paginate(21);
         } else {
             $stories = $stories->paginate(21);
         }
 
         $categories = Category::limit(4)->get();
-        
+
         $user = $request->user();
 
-        for ($i=0; $i < $stories->count(); $i++) {
+        for ($i = 0; $i < $stories->count(); $i++) {
             $storyId = $stories[$i]->id;
             if ($user) {
                 $reaction = Reaction::where('story_id', $storyId)
@@ -63,7 +63,7 @@ class StoriesController extends Controller
                     ->first();
                 $bookmark = Bookmark::where('user_id', $user->id)
                     ->where('story_id', $storyId)
-                    ->first();    
+                    ->first();
                 if ($reaction && $reaction->reaction == 0) {
                     $stories[$i]['reaction'] = 'dislike';
                 } elseif ($reaction && $reaction->reaction == 1) {
@@ -94,14 +94,14 @@ class StoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function mystories(Request $request)
-    {   
+    {
         $stories = Story::withoutGlobalScopes();
 
         if ($request->query('search')) {
             $search = $request->query('search');
 
             $stories = $stories->where('user_id', auth()->id())
-                            ->where('title', 'LIKE', "%$search%");
+                ->where('title', 'LIKE', "%$search%");
         } else {
             $stories = $stories->where('user_id', auth()->id());
         }
@@ -110,25 +110,25 @@ class StoriesController extends Controller
         if (!is_null($request->query('minAge')) && !is_null($request->query('maxAge'))) {
             $minAge = $request->query('minAge');
             $maxAge = $request->query('maxAge');
-            
+
             $stories = $stories->where('age_from', '>=', $minAge)
-                            ->where('age_to', '<=', $maxAge)
-                            ->orderBy("age_from");
+                ->where('age_to', '<=', $maxAge)
+                ->orderBy("age_from");
         }
 
         if (!is_null($request->query('category'))) {
             $stories = $stories->where('category_id', $request->query('category'));
         }
-        
+
         $stories = $stories->paginate(21);
-        
+
         // Sorting feature ends
 
         $categories = Category::all();
-        
+
         $user = $request->user();
 
-        for ($i=0; $i < $stories->count(); $i++) {
+        for ($i = 0; $i < $stories->count(); $i++) {
             $storyId = $stories[$i]->id;
             if ($user) {
                 $reaction = Reaction::where('story_id', $storyId)
@@ -136,7 +136,7 @@ class StoriesController extends Controller
                     ->first();
                 $bookmark = Bookmark::where('user_id', $user->id)
                     ->where('story_id', $storyId)
-                    ->first();    
+                    ->first();
                 if ($reaction && $reaction->reaction == 0) {
                     $stories[$i]['reaction'] = 'dislike';
                 } elseif ($reaction && $reaction->reaction == 1) {
@@ -157,7 +157,6 @@ class StoriesController extends Controller
             $reaction_count =  $this->reaction($storyId);
             $stories[$i]['likes_count'] = $reaction_count[0];
             $stories[$i]['dislikes_count'] = $reaction_count[1];
-
         }
         //dd($stories->toArray());
         return view('mystories', compact('stories', 'categories'));
@@ -203,45 +202,96 @@ class StoriesController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
         return view(
-            'create-story', 
-            compact('categories','tags')
+            'create-story',
+            compact('categories', 'tags')
         );
     }
 
-    public function store(StoryRequest $request,Tag $tag)
-    {   
+    public function store(StoryRequest $request, Tag $tag)
+    {
         DB::beginTransaction();
 
-            if ($request->hasfile('photo')) {
-                $image = $this->fileUploadService->uploadFile($request->file('photo'));
+        if ($request->hasfile('photo')) {
+            $image = $this->fileUploadService->uploadFile($request->file('photo'));
+        }
+
+        $age = explode('-', $request->age);
+
+        $story = Story::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'category_id' => $request->category_id,
+            'user_id' => auth()->id(),
+            'age_from' => $age[0],
+            'age_to' => $age[1],
+            // 'is_premium' => $request->is_premium,
+            'is_premium' => false,
+            'author' => $request->author,
+            "image_url" => $image['secure_url'] ?? null,
+            "image_name" => $image['public_id'] ?? null
+        ]);
+
+        $story->tags()->attach($tag->getTagsIds($request->tags));
+
+        DB::commit(); //dd('Inside the store before redirect');
+        return redirect()->route('story.show', ['story' => $story->slug]);
+    }
+
+    public function edit($story)
+    {
+        $story = Story::withoutGlobalScopes()
+            ->where('slug', $story)->where('user_id', auth()->id())->firstOrFail();
+
+        $story->load('tags');
+
+
+        if (!$story) return back();
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view(
+            'edit-story',
+            compact('categories', 'tags', 'story')
+        );
+    }
+
+    public function update(StoryRequest $request, Tag $tag, $story)
+    {
+        //dd($request);
+        DB::beginTransaction();
+
+        $story = Story::withoutGlobalScopes()
+            ->where('slug', $story)->where('user_id', auth()->id())->firstOrFail();
+
+        if ($request->hasfile('photo')) {
+            $image = $this->fileUploadService->uploadFile($request->file('photo'));
+            if (!is_null($story->image_name)) {
+                $this->fileUploadService->deleteFile($story->image_name);
             }
+        }
 
-            $age = explode('-', $request->age);
+        $age = explode('-', $request->age);
+        $story->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'category_id' => $request->category_id,
+            'user_id' => auth()->id(),
+            'age_from' => $age[0],
+            'age_to' => $age[1],
+            'author' => $request->author,
+            "image_url" => $image['secure_url'] ?? $story->image_url,
+            "image_name" => $image['public_id'] ?? $story->image_name
+        ]);
 
-            $story = Story::create([
-                'title' => $request->title,
-                'body' => $request->body,
-                'category_id' => $request->category_id,
-                'user_id' => auth()->id(),
-                'age_from' => $age[0],
-                'age_to' => $age[1],
-                // 'is_premium' => $request->is_premium,
-                'is_premium' => false,
-                'author' => $request->author,
-                "image_url" => $image['secure_url'] ?? null,
-                "image_name" => $image['public_id'] ?? null
-            ]);
-
-            $story->tags()->attach($tag->getTagsIds($request->tags));
+        $story->tags()->attach($tag->getTagsIds($request->tags));
 
         DB::commit(); //dd('Inside the store before redirect');
         return redirect()->route('story.show', ['story' => $story->slug]);
     }
 
     public function show(Request $request, $story)
-    {   
+    {
         $story = Story::withoutGlobalScopes()
-            ->where('slug',$story)->firstOrFail();
+            ->where('slug', $story)->firstOrFail();
 
         $story->load('tags');
 
@@ -250,7 +300,7 @@ class StoriesController extends Controller
         $user = $request->user();
         $mytime = Carbon::now();
         $timeNow = $mytime->toDateTimeString();
-        
+
         $storyId = $story->id;
         if ($user) {
             $reaction = Reaction::where('story_id', $storyId)
@@ -258,7 +308,7 @@ class StoriesController extends Controller
                 ->first();
             $bookmark = Bookmark::where('user_id', $user->id)
                 ->where('story_id', $storyId)
-                ->first();    
+                ->first();
             if ($reaction && $reaction->reaction == 0) {
                 $story['reaction'] = 'dislike';
             } elseif ($reaction && $reaction->reaction == 1) {
@@ -299,24 +349,23 @@ class StoriesController extends Controller
     }
 
     public function trendingstories(Request $request)
-    {   
+    {
         $stories = Story::trending()->take(9)->get();
 
         $categories = Category::limit(4)->get();
 
         return view('trendingstories', compact('stories', 'categories'));
     }
-    
+
     public function reaction($id)
     {
         $like_reaction = Reaction::where('story_id', $id)
-                        ->where('reaction', 1)->get();
+            ->where('reaction', 1)->get();
         $likeCount = count($like_reaction);
         $dislike_reaction = Reaction::where('story_id', $id)
-                    ->where('reaction', 0)->get();
+            ->where('reaction', 0)->get();
         $dislikeCount = count($dislike_reaction);
 
         return [$likeCount, $dislikeCount];
     }
-
 }

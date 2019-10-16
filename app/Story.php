@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Builder;
 class Story extends Model
 {
     protected $fillable = [
-        'title', 'body', 'category_id', 'age_from', 'age_to', 'author', 
-        'image_url', 'image_name', 'user_id', 'is_premium','is_approved'
+        'title', 'body', 'category_id', 'age_from', 'age_to', 'author',
+        'image_url', 'image_name', 'user_id', 'is_premium', 'is_approved'
     ];
 
     // FIXME: Please, don't uncomment. Understand what you are about to do first.
     // protected $appends = ['like','dislike'];
 
-     /**
+    /**
      * Boot the model.
      */
     protected static function boot()
@@ -40,46 +40,48 @@ class Story extends Model
 
     public function getLikesAttribute()
     {
-        return $this->reactions()->where('reaction',1)->count();
+        return $this->reactions()->where('reaction', 1)->count();
     }
 
     public function getDislikesAttribute()
     {
-        return $this->reactions()->where('reaction',0)->count();
+        return $this->reactions()->where('reaction', 0)->count();
     }
 
     public function getReactionAttribute()
-    {   
-        if(!is_null(auth()->id())){
+    {
+        if (!is_null(auth()->id())) {
             $reaction = $this->reactions()->where(
-                'user_id',auth()->id()
+                'user_id',
+                auth()->id()
             )->first();
-                
-            if($reaction){
-                return $reaction->reaction == 1?'like':'dislike';
-            }else{
+
+            if ($reaction) {
+                return $reaction->reaction == 1 ? 'like' : 'dislike';
+            } else {
                 return 'nil';
             }
         }
-        
+
         return 'nil';
     }
 
     public function getFavoriteAttribute()
-    {   
-        if(!is_null(auth()->id())){
+    {
+        if (!is_null(auth()->id())) {
             $bookmark = $this->bookmarks()->where(
-                'user_id',auth()->id()
+                'user_id',
+                auth()->id()
             )->first();
-            
-            return $bookmark ?true:false;
+
+            return $bookmark ? true : false;
         }
 
         return false;
-        
     }
 
-    public function getreadingTimeAttribute($text) {
+    public function getreadingTimeAttribute($text)
+    {
         $wordsPerMinute = 200;
         $numberOfWords =  count(explode(' ', $this->body));
         $minutes = $numberOfWords / $wordsPerMinute;
@@ -88,8 +90,9 @@ class Story extends Model
         return  $minutes > 1 ? "$readTime minutes read" : "$readTime minute read";
     }
 
-    public function getSubscriptionAttribute(){
-        return $this->is_premium == 1?'Premium':'Regular';
+    public function getSubscriptionAttribute()
+    {
+        return $this->is_premium == 1 ? 'Premium' : 'Regular';
     }
 
     // Accessors end
@@ -110,7 +113,7 @@ class Story extends Model
     }
 
     //Mutator end
-    
+
     //Relationship start
 
     /*
@@ -147,7 +150,7 @@ class Story extends Model
 
     public function likeReactions()
     {
-        return $this->hasMany(Reaction::class)->where('reaction',1);
+        return $this->hasMany(Reaction::class)->where('reaction', 1);
     }
 
     public function bookmarks()
@@ -167,17 +170,17 @@ class Story extends Model
 
     //Local scope start
     public function scopeSimilar($query)
-    {   
+    {
         return $query->where(
-            'category_id',$this->category_id
-        )->where('id','!=',$this->id)->take(4);
+            'category_id',
+            $this->category_id
+        )->where('id', '!=', $this->id)->take(4);
     }
 
     public function scopeTrending($query)
-    {   
+    {
         return $query->withCount('likeReactions')
             ->orderBy('like_reactions_count', 'desc');
-        
     }
 
     //Local scope end
@@ -190,5 +193,4 @@ class Story extends Model
     {
         return 'slug';
     }
-
 }
