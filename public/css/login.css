@@ -22,8 +22,8 @@
 }
 
 .illustration .book {
-	width: 250px;
-	height: 260px;
+	width: 350px;
+	height: 420px;
 }
 
 .login_form .logo {
@@ -60,9 +60,8 @@
 	cursor: pointer;
 }
 
-@media (min-width: 768px){
-	div.login div.row div.col-md-7 {
-		background: linear-gradient(218.04deg, #39a1f7 29.19%, #718cfb 81.17%)
+@media (max-width: 380px){
+	.illustration .book {
+		height: 293px !important; 
 	}
 }
-
