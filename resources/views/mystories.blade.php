@@ -20,7 +20,7 @@
     <div class="mb-5">
         <h3>My Stories</h3>
     </div>
-    <div class="col-md-12 d-flex cold p-0 ">
+    <div class="col-md-12 d-flex flex-row  p-0 ">
         <div class="col-md-9 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
                 <div class="d-flex flex-row flex-wrap">
@@ -40,10 +40,8 @@
                             <div class="card-body story-card-body">
                                 <h5 class="card-title"><a href="{{route('story.show',$story->slug)}}">{{$story->title}}</a></h5>
 
-                                <p class="card-text">By <a href="{{route('author.stories', $story->author)}}">{{$story->author}}</a></p>
-
-                                <p class="card-text">By <a href="{{route('author.stories', $story->author)}}">{{$story->author}}</a>
-                                    <a href="{{route('story.edit', $story->slug)}}" class="pull-right">Edit Story</a>
+                                <p class="card-text">By <a href="{{route('author.stories', $story->author)}}">{{$story->author}}
+                                        <a href="{{route('story.edit', $story->slug)}}" class="pull-right">Edit Story</a>
 
                                 </p>
 
