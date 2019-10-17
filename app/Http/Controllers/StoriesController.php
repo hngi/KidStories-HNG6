@@ -254,6 +254,16 @@ class StoriesController extends Controller
         );
     }
 
+    public function destroy($story)
+    {
+        $story = Story::withoutGlobalScopes()
+            ->where('slug', $story)->where('user_id', auth()->id())->firstOrFail();
+
+        $story->delete();
+
+        return back();
+    }
+
     public function update(StoryRequest $request, Tag $tag, $story)
     {
         //dd($request);
