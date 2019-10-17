@@ -3,6 +3,49 @@
 @section('custom_css')
 <link href="{{ asset('css/storieslisting.css') }}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<style>
+    div#category-drop {
+        transform: none !important;
+    }
+
+    div#category-drop {
+        transform: none !important;
+        /* margin: 10px auto; */
+    }
+
+    .col-md-3.col-lg-3.catcs {
+        margin-left: auto;
+    }
+
+    h3 {
+        text-align:center;
+    }
+
+    p#createStory {
+        margin: auto;
+        width: 250px
+    }
+
+    .adjust-padding {
+        padding: 2rem 0 0 1rem;
+    }
+
+    @media screen and (min-width: 551px){
+        h3 {
+            text-align:left;
+        }
+
+        p#createStory {
+            margin-left: 0;
+        }
+    }
+
+    @media screen and (min-width: 750px){
+        .adjust-padding {
+            padding: 2rem 0 0 5rem;
+        }
+    }
+</style>
 
 @endsection
 
@@ -19,6 +62,13 @@
 <div class="auto-container adjust-padding">
     <div class="mb-5">
         <h3>My Stories</h3>
+        @if ($stories->count())
+            <p id="createStory" style="font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;">
+                <a href="{{ route('story.create') }}" class="btn btn-block" style="margin-top: 10px;">
+                    Create New Story
+                </a>
+            </p>
+        @endif
     </div>
     <div class="col-md-12 d-flex flex-row  p-0 ">
         <div class="col-md-9 p-0">
@@ -87,13 +137,6 @@
                     {{ $stories->appends($_GET)->links() }}
                 </div>
             </div>
-            @if ($stories->count())
-            <p style="font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;">
-                <a href="{{ route('story.create') }}" class="btn btn-block" style="margin-top: 10px;">
-                    Create New Story
-                </a>
-            </p>
-            @endif
         </div>
         <div class="col-md-3 col-lg-3  catcs">
             <div class="d-flex flex-row col-md-12  ">
