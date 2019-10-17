@@ -103,7 +103,12 @@
 
 
                                 <hr style="margin:0 -5px;">
+                                <div style="display: flex; width: 100px flex-direction: row;
+	                            justify-content: space-between; margin-bottom: 5px;">
                                 <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
+                                <a href="#"><i class="fas fa-pen" style="padding: 5px 4px;"></i></a>
+                                <i class="fas fa-trash-alt" style="padding: 5px 4px;color:red;"></i>
+                                </div>
                                 <hr style="margin:0 -20px;">
                                 <div class="d-flex justify-content-between align-items-center card-">
                                     <div class="btn-group">
