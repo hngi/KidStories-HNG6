@@ -11,10 +11,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BookmarkController extends Controller
 {
+    
+    /**
+     * Fetch bookmarked stories belonging to the logged in user
+     *
+     * @param  int  $storyId
+     * @return \Illuminate\Http\Response
+     */
     public function index (){
-
-         $bookmarks =  \App\User::find(auth()->id())->bookmarks;
-
+         $bookmarks =  App\User::find(auth()->id())->bookmarks;
         return response()->json([
             'status' => 'success',
             'code' => 200,
@@ -22,6 +27,7 @@ class BookmarkController extends Controller
             "data" => StoryResource::collection($bookmarks)
         ], Response::HTTP_OK);
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -32,7 +38,7 @@ class BookmarkController extends Controller
     public function add(Request $request, $storyId)
     {
         $user = $request->user('api');
-        if(!$user){
+        if (!$user) {
             return response()->json([
                 'status' => 'failed',
                 'code' => 400,
@@ -41,18 +47,18 @@ class BookmarkController extends Controller
         }
         //check if the person has bookmarked before
         $bookmark = Bookmark::where('user_id', $user->id)
-                                ->where('story_id', $storyId)
-                                ->first();
+            ->where('story_id', $storyId)
+            ->first();
 
-         if ($bookmark != null) {
-             $bookmark->delete();
+        if ($bookmark != null) {
+            $bookmark->delete();
             return response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'message' => 'Removed',
                 "data" => true
             ], 200);
-         }
+        }
 
         Bookmark::create([
             "user_id" => $user->id,
@@ -65,7 +71,6 @@ class BookmarkController extends Controller
             'message' => 'Created',
             "data" => true
         ], 201);
-
     }
 
     /**
@@ -77,10 +82,10 @@ class BookmarkController extends Controller
     public function remove($storyId)
     {
         Bookmark::where('user_id', auth()->id())
-                ->where('story_id',$storyId)
-                ->delete();
+            ->where('story_id', $storyId)
+            ->delete();
 
-          return response()->json([
+        return response()->json([
             'status' => 'success',
             'code' => 204,
             'message' => 'deleted',
@@ -96,8 +101,8 @@ class BookmarkController extends Controller
     public function status($storyId)
     {
         $status = Bookmark::where('user_id', auth()->id())
-                                ->where('story_id', $storyId)
-                                ->first();
+            ->where('story_id', $storyId)
+            ->first();
 
         $response = is_null($status) ? false : true;
 
@@ -108,5 +113,4 @@ class BookmarkController extends Controller
             "data" => $response
         ], 200);
     }
-
 }
