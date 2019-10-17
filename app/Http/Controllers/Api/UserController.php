@@ -28,17 +28,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-	public function index()
-	{
-		$users = User::all();
+    public function index()
+    {
+        $users = User::all();
 
-    	return response()->json([
-    		"status" => "success",
+        return response()->json([
+            "status" => "success",
             "code" => 200,
-    		"message" => "OK",
-    		"data" => $users
-    	], 200);
-	}
+            "message" => "OK",
+            "data" => $users
+        ], 200);
+    }
 
     /**
      * Get logged in user's profile
@@ -47,14 +47,14 @@ class UserController extends Controller
      */
     public function showProfile()
     {
-    	$user = User::findOrFail(auth()->id());
+        $user = User::findOrFail(auth()->id());
 
-    	return response()->json([
+        return response()->json([
             "status" => "success",
             "code" => 200,
             "message" => "OK",
             "data" => $user
-    	], 200);
+        ], 200);
     }
 
     /**
@@ -64,13 +64,20 @@ class UserController extends Controller
      */
     public function updateProfile(Request $request)
     {
+
+        return response()->json([
+            "status" => "success",
+            "code" => 200,
+            "message" => "OK",
+            "data" => $request->first_name
+        ], 200);
         $user = User::findOrFail(auth()->id());
 
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|min:2',
             'last_name' => 'required|min:2',
-            'email' => 'required|email|unique:users,email,'.$user->id,
-            'phone'=>'nullable|min:8'
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|min:8'
         ]);
 
         if ($validator->fails()) {
@@ -83,11 +90,11 @@ class UserController extends Controller
             ], 422);
         }
 
-        $data = $request->except(['password','photo', 'image_url', 'image_name']);
+        $data = $request->except(['password', 'photo', 'image_url', 'image_name']);
 
-    	$user->update($data);
+        $user->update($data);
 
-    	return response()->json([
+        return response()->json([
             "status" => "success",
             "code" => 200,
             "message" => "OK",
@@ -103,15 +110,15 @@ class UserController extends Controller
     public function updateProfileImage(Request $request)
     {
         $this->validate($request, [
-            'photo'=>'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB
+            'photo' => 'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB
         ]);
 
         $user = User::findOrFail(auth()->id());
 
-        if($request->hasFile('photo')) {
+        if ($request->hasFile('photo')) {
             $image = $this->fileUploadService->uploadFile($request->file('photo'));
 
-            if(!is_null($user->image_name)) {
+            if (!is_null($user->image_name)) {
                 $this->fileUploadService->deleteFile($user->image_name);
             }
         }
@@ -128,7 +135,8 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function stories(){
+    public function stories()
+    {
         $stories = User::find(auth()->id())->stories;
 
         return response()->json([
