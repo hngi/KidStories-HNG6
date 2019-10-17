@@ -17,7 +17,7 @@
 </div>
 
 <div class="auto-container adjust-padding">
-    <div class="col-md-12 d-flex flex-row p-0 ">
+    <div class="col-md-12 d-flex flex-row flex-wrap p-0 ">
         <div class="col-md-9 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
                 <div class="d-flex flex-row flex-wrap">

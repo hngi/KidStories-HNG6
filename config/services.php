@@ -58,6 +58,7 @@ return [
         "9e-mqVBX_eIZVazPIg-he0ha",
         'redirect'      =>
         "https://kidstories.app/login/google/callback"
+
     ],
 
 ];

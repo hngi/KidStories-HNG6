@@ -8,6 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class SingleStoryResource extends JsonResource
 {
+    
     /**
      * Transform the resource into an array.
      *
@@ -28,6 +29,11 @@ class SingleStoryResource extends JsonResource
             'author'        => $this->author,
             'story_duration'=> $this->readingTime ,
             'is_premium'    => $this->is_premium,
+<<<<<<< HEAD
+            'likes_count'   => $this->likes_count,
+            'dislikes_count'=> $this->dislikes_count,
+            'comments' => $this->comments
+=======
             'likes_count'   => $this->likes($this->id),
             'dislikes_count'=> $this->dislikes($this->id),
             'reaction'      => $this->getReaction($request, $this->id),
@@ -35,6 +41,7 @@ class SingleStoryResource extends JsonResource
             'comments' => [
                 'comments' => $this->comments
             ]
+>>>>>>> BE
         ];
     }
 
