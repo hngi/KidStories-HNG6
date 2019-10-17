@@ -149,6 +149,8 @@
                 }
                 draftEntries.tags = arrTag;
             }
+            //Last Modified Time
+            draftEntries.lastModified = Date.now();
 
             console.log(draftEntries);
             return draftEntries;
