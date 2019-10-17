@@ -319,7 +319,7 @@
         draftDiv.innerHTML = ''; //Clear everything draftDiv
 
         // if no draftsData, I will get Error and it will go to else statement
-        if(draftsData.drafts && draftsData.drafts.length > 0){
+        if(draftsData && draftsData.drafts && draftsData.drafts.length > 0){
             const frag = document.createDocumentFragment();
             let drafts = draftsData.drafts;
 
