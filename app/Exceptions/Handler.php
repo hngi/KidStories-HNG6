@@ -48,33 +48,32 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {   
-        $this->jsonModelNotFoundExceptionHandler($request,$exception);
+        if ($exception instanceof ModelNotFoundException && $request->wantsJson()) {
+            return $this->jsonModelNotFoundExceptionHandler();
+        }
 
-        $this->csrfTokenExpirationHandler($request,$exception);
+        if ($exception instanceof TokenMismatchException) {
+            return  $this->csrfTokenExpirationHandler($request);
+        }
         
         return parent::render($request, $exception);
     }
 
-    protected function jsonModelNotFoundExceptionHandler($request, $exception)
+    protected function jsonModelNotFoundExceptionHandler()
     {
-        if ($exception instanceof ModelNotFoundException && $request->wantsJson()) {
-            return response()->json([
-              'error' => 'Resource not found',
-              'message' => 'Not found',
-              'code' => 404
-            ], 404);
-        }
+        return response()->json([
+            'error' => 'Resource not found',
+            'message' => 'Not found',
+            'code' => 404
+        ], 404);
     }
 
-    protected function csrfTokenExpirationHandler($request, $exception)
+    protected function csrfTokenExpirationHandler($request)
     {
-        if ($exception instanceof TokenMismatchException) {
-            return redirect()
-                ->back()
-                ->withInput($request->except('password', 'password_confirmation', '_token'))
-                ->with(['error' => 'Your form has expired. Please try again']);
-        }
-
+        return redirect()
+            ->back()
+            ->withInput($request->except('password', 'password_confirmation', '_token'))
+            ->with(['error' => 'Your form has expired. Please try again']);
     }
 
 }

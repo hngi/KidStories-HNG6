@@ -10,28 +10,35 @@
     <div class="page-wrapper">
         <div class="auto-container">
             <section class="add-story">
+                @include('admin.stories.partials.flash')
                 <form action="{{ route('story.store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field()}}
                      <div class="form-input">
-                        <label for="category">Category:</label>
+                        <label for="category">Category:</label> 
                         <select name="category_id" id="category" class="form-control" required>
                             <option value="">Select category</option>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" 
+                                    {{$category->id == old('category_id')?'selected':''}}>
+                                    {{ $category->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-input title-input" style="margin-top: 20px;">
                         <label for="title">Title:</label>
-                        <input type="text"  class="form-control" name="title" id="title" required>
+                        <input type="text"  class="form-control" name="title" id="title" required
+                            value="{{old('title')}}">
                     </div>
                     <div class="form-input" style="margin-top: 20px;">
                         <label for="age">Age:</label>
-                        <input type="text" class="form-control" name="age" id="age" required placeholder="eg 1-4">
+                        <input type="text" class="form-control" name="age" id="age" required placeholder="eg 1-4"
+                            value="{{old('age')}}">
                     </div>
                     <div class="form-input" style="margin-top: 20px;">
                         <label for="author">Author:</label>
-                        <input type="text" class="form-control" name="author" id="author" required>
+                        <input type="text" class="form-control" name="author" id="author" required
+                            value="{{old('author')}}">
                     </div>
                     <div class="form-input" style="margin-top: 20px;">
                         <label for="cover">Cover Image:</label>
@@ -54,14 +61,21 @@
                         <select name="tags[]" id="tags" class="form-control" multiple required>
                             <option value=""></option>
                             @foreach($tags as $tag)
-                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                <option value="{{ $tag->id }}" 
+                                    {{ in_array($tag->id,old('tags')??[]) ?'selected':''}}>
+                                    {{ $tag->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-input" style="margin-top: 20px;">
                         <label for="content">Content:</label>
-                        <textarea class="form-control" placeholder="And the fish happened to grow wings..." name="body" id="content" cols="50" rows="10" required></textarea>
+                        <textarea class="form-control" placeholder="And the fish happened to grow wings..." 
+                            name="body" id="content" cols="50" rows="10" required>
+                            {{old('body')}}
+                        </textarea>
                     </div>
+                    <input type="hidden" value="0" name="is_premium"/>
                     <div class="buttons">
                         <button class="btn save">Post</button>
                     </div>
