@@ -260,10 +260,10 @@
                 }
             });
             selCategory.addEventListener('change',()=>updateDraft(id));
-            inpTitle.addEventListener('keydown',()=>updateDraft(id));
-            inpAge.addEventListener('keydown',()=>updateDraft(id));
-            inpAuthor.addEventListener('keydown',()=>updateDraft(id));
-            inpContent.addEventListener('keydown',()=>updateDraft(id));
+            inpTitle.addEventListener('keyup',()=>updateDraft(id));
+            inpAge.addEventListener('keyup',()=>updateDraft(id));
+            inpAuthor.addEventListener('keyup',()=>updateDraft(id));
+            inpContent.addEventListener('keyup',()=>updateDraft(id));
             inpImg.addEventListener('change',()=>updateDraft(id));
         }
 
