@@ -47,6 +47,7 @@ Route::middleware('auth')->get('/mystories', 'StoriesController@mystories')->nam
 Route::middleware('auth')->get('/stories/create', 'StoriesController@create')->name('story.create');
 Route::middleware('auth')->post('/stories/create', 'StoriesController@store')->name('story.store');
 Route::middleware('auth')->get('/stories/{story}/edit', 'StoriesController@edit')->name('story.edit');
+Route::middleware('auth')->get('/stories/{story}/delete', 'StoriesController@destroy')->name('story.delete');
 Route::middleware('auth')->put('/stories/{story}', 'StoriesController@update')->name('story.update');
 Route::get('/favorites', 'BookmarkController@index')->name('bookmark');
 
