@@ -27,22 +27,28 @@
     }
 
     .adjust-padding {
-        padding: 2rem 0 0 1rem;
+        padding: 2rem 0 0 0;
+    }
+
+    .applink {
+        margin: 5px 10px;
     }
 
     @media screen and (min-width: 551px){
-        h3 {
-            text-align:left;
-        }
-
-        p#createStory {
-            margin-left: 0;
+        .adjust-padding {
+            padding: 2rem 0 0 1rem;
         }
     }
 
     @media screen and (min-width: 750px){
         .adjust-padding {
             padding: 2rem 0 0 5rem;
+        }
+        h3 {
+            text-align:left;
+        }
+        p#createStory {
+            margin-left: 0;
         }
     }
 </style>
@@ -70,8 +76,8 @@
             </p>
         @endif
     </div>
-    <div class="col-md-12 d-flex flex-row  p-0 ">
-        <div class="col-md-9 p-0">
+    <div class="col-md-12 d-flex cold p-0 ">
+        <div class="col-md-7 col-lg-9 p-0">
             <div class="d-flex flex-column col-md-12  p-0">
                 <div class="d-flex flex-row flex-wrap">
                     @forelse ($stories as $story)
@@ -138,7 +144,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-lg-3  catcs">
+        <div class="col-md-5 col-lg-3  catcs">
             <div class="d-flex flex-row col-md-12  ">
                 <div class="col-md-12 categories" id="category-drop">
                     <p>Search My Stories</p>
