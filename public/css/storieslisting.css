@@ -77,6 +77,9 @@
 
     vertical-align: top;
 }
+.categories{
+   transform: translateX(-6rem) !important;
+}
 
 .btn-group i {
     transition: 0.5s linear;
@@ -210,4 +213,13 @@ footer p {
     .mb-5 h3 {
         font-size: 20px;
     }
+}
+@media (max-width: 380px){
+    .categories{
+        transform: translateX(15px) !important;
+        text-align: center !important;
+     } 
+     .flex-row{
+         flex-direction: column !important;
+     }
 }

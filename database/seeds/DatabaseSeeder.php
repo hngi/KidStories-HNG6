@@ -14,16 +14,15 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         $this->command->call('passport:install');
         if ($this->command->confirm('Do you wish to  seed real story')) {
-            
+
             $this->call(DbRealStorySeeder::class);
 
             $this->command->info('Real story successfully seeded!');
-        }else{
+        } else {
 
             $this->call(DbTableSeeder::class);
 
             $this->command->info('Dummy story successfully seeded!');
         }
-
     }
 }

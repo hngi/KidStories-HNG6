@@ -63,7 +63,7 @@
                                 placeholder="{{ __('First name') }}"
                                 value = "{{ old('first_name') }}"
                                 class="d-block mt-4 mx-auto pr-2 @error('first_name') is-invalid @enderror"
-                                required autocomplete="name" autofocus
+                                required autocomplete="given-name" autofocus
                             />
                              @error('first_name')
                                     <span class="invalid-feedback" role="alert">
@@ -81,7 +81,7 @@
                                 placeholder="{{ __('Last name') }}"
                                 value ="{{ old('last_name') }}"
                                 class="d-block mt-4 mx-auto pr-2 @error('last_name') is-invalid @enderror"
-                                required autocomplete="name" autofocus
+                                required autocomplete="family-name" autofocus
                             />
 
                              @error('last_name')
@@ -100,7 +100,7 @@
                                 placeholder = "{{ __('E-Mail Address') }}"
                                 value="{{ old('email') }}"
                                 class="d-block mt-4 mx-auto pr-2 @error('email') is-invalid @enderror"
-                                required autocomplete="name" autofocus
+                                required autocomplete="email" autofocus
                             />
                              @error('email')
                                     <span class="invalid-feedback" role="alert" style="display: block;">
@@ -119,7 +119,7 @@
                                 id="phone"
                                 placeholder = "{{ __('Phone') }}"
                                 class="d-block mt-4 mx-auto pr-2 @error('email') is-invalid @enderror"
-                                required autocomplete="new-password" @error('phone') is-invalid @enderror"
+                                required autocomplete="tel" @error('phone') is-invalid @enderror"
                             />
                                    <span class="invalid-feedback" role="alert"  style="display: block;">
                                         <strong>{{ $errors->first('phone') }}</strong>

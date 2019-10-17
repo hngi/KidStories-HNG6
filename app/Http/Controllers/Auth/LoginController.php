@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
 use Socialite;
-Use App\User;
+use App\User;
 use App\SocialIdentity;
 
 class LoginController extends Controller
@@ -42,53 +42,53 @@ class LoginController extends Controller
     }
 
     public function redirectToProvider($provider)
-   {
-       return Socialite::driver($provider)->redirect();
-   }
+    {
+        return Socialite::driver($provider)->redirect();
+    }
 
-   public function handleProviderCallback($provider)
-   {
-       
-       try {
-          $user = Socialite::driver($provider)
-            ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
+    public function handleProviderCallback($provider)
+    {
+
+        try {
+            $user = Socialite::driver($provider)
+                ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
                 ->user();
-                
-               
-       } catch (Exception $e) {
-           return redirect('/login');
-       }
-       
-       $authUser = $this->findOrCreateUser($user, $provider);
-       Auth::login($authUser, true);
+        } catch (Exception $e) {
+            return redirect('/login');
+        }
 
-       return redirect($this->redirectTo);
-   }
+        $authUser = $this->findOrCreateUser($user, $provider);
+        Auth::login($authUser, true);
 
-   public function findOrCreateUser($providerUser, $provider)
-   {
-       $account = SocialIdentity::whereProviderName($provider)
-                  ->whereProviderId($providerUser->getId())
-                  ->first();
+        return redirect($this->redirectTo);
+    }
 
-       if ($account) {
-           return $account->user;
-       } else {
-           $user = User::whereEmail($providerUser->getEmail())->first();
+    public function findOrCreateUser($providerUser, $provider)
+    {
+        $account = SocialIdentity::whereProviderName($provider)
+            ->whereProviderId($providerUser->getId())
+            ->first();
 
-           if (! $user) {
-               $user = User::create([
-                   'email' => $providerUser->getEmail(),
-                   'first_name'  => $providerUser->getName(),
-               ]);
-           }
+        if ($account) {
+            return $account->user;
+        } else {
+            $user = User::whereEmail($providerUser->getEmail())->first();
 
-           $user->identities()->create([
-               'provider_id'   => $providerUser->getId(),
-               'provider_name' => $provider,
-           ]);
+            if (!$user) {
+                $name = explode(' ', $providerUser->getName());
+                $user = User::create([
+                    'email' => $providerUser->getEmail(),
+                    'first_name'  => $name[0],
+                    'last_name'  => $name[1]
+                ]);
+            }
 
-           return $user;
-       }
-   }
+            $user->identities()->create([
+                'provider_id'   => $providerUser->getId(),
+                'provider_name' => $provider,
+            ]);
+
+            return $user;
+        }
+    }
 }

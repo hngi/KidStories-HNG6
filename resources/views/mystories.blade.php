@@ -39,7 +39,15 @@
 
                             <div class="card-body story-card-body">
                                 <h5 class="card-title"><a href="{{route('story.show',$story->slug)}}">{{$story->title}}</a></h5>
+
                                 <p class="card-text">By <a href="{{route('author.stories', $story->author)}}">{{$story->author}}</a></p>
+
+                                <p class="card-text">By <a href="{{route('author.stories', $story->author)}}">{{$story->author}}</a>
+                                    <a href="{{route('story.edit', $story->slug)}}" class="pull-right">Edit Story</a>
+
+                                </p>
+
+
                                 <hr style="margin:0 -5px;">
                                 <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
                                 <hr style="margin:0 -20px;">
@@ -91,7 +99,7 @@
         </div>
         <div class="col-md-3 col-lg-3  catcs">
             <div class="d-flex flex-row col-md-12  ">
-                <div class="col-md-12" id="category-drop">
+                <div class="col-md-12 categories" id="category-drop">
                     <p>Search My Stories</p>
                     {{-- @foreach ($categories as $category)
                         <a href="{{ route('categories.stories', $category->id) }}">{{ $category->name }}</a><br>
