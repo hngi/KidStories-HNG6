@@ -23,22 +23,22 @@ class StoryRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() 
+    public function rules()
     {
         $rules = [
             'body' => 'required|string',
             'author' => 'required|string|max:255',
-            'is_premium' => 'required|numeric',            
+            'is_premium' => 'required|numeric',
             'age' => 'required|string|max:255',
-            'category_id' => 'required|numeric|exists:categories,id',            
-            'photo'=>'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB
+            'category_id' => 'required|numeric|exists:categories,id',
+            'photo' => 'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB
         ];
 
-        $rules['title'] =$this->method() == 'PUT'?
-        [
-            'required','string','max:255', 
-            Rule::unique('stories')->ignore($this->route('story')->id)
-        ]:'required|string|unique:stories|max:255';
+        $rules['title'] = $this->method() == 'PUT' ?
+            [
+                'required', 'string', 'max:255',
+                Rule::unique('stories')->ignore($this->id)
+            ] : 'required|string|unique:stories|max:255';
         return $rules;
     }
 }
