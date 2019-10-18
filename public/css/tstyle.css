@@ -785,7 +785,7 @@ img {
     position: relative;
     left: 3px;
     display: inline-block;
-    /*top: 7px;*/
+    top: 7px;
 }
 
 .main-header .search-box-btn {
@@ -1788,4 +1788,10 @@ img {
     .register .illustration .lines:last-of-type {
         margin-right: 0;
     }
+}
+
+@media (min-width: 768px){
+	div.register div.row div.col-md-7 {
+		background: linear-gradient(218.04deg, #39a1f7 29.19%, #718cfb 81.17%)
+	}
 }

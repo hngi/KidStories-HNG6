@@ -19,7 +19,6 @@ class BookmarkController extends Controller
      */
     public function index (){
          $bookmarks =  \App\User::find(auth()->id())->bookmarks;
-
         return response()->json([
             'status' => 'success',
             'code' => 200,
@@ -38,7 +37,7 @@ class BookmarkController extends Controller
     public function add(Request $request, $storyId)
     {
         $user = $request->user('api');
-        if(!$user){
+        if (!$user) {
             return response()->json([
                 'status' => 'failed',
                 'code' => 400,
@@ -47,18 +46,18 @@ class BookmarkController extends Controller
         }
         //check if the person has bookmarked before
         $bookmark = Bookmark::where('user_id', $user->id)
-                                ->where('story_id', $storyId)
-                                ->first();
+            ->where('story_id', $storyId)
+            ->first();
 
-         if ($bookmark != null) {
-             $bookmark->delete();
+        if ($bookmark != null) {
+            $bookmark->delete();
             return response()->json([
                 'status' => 'success',
                 'code' => 200,
                 'message' => 'Removed',
                 "data" => true
             ], 200);
-         }
+        }
 
         Bookmark::create([
             "user_id" => $user->id,
@@ -71,7 +70,6 @@ class BookmarkController extends Controller
             'message' => 'Created',
             "data" => true
         ], 201);
-
     }
 
     /**
@@ -83,10 +81,10 @@ class BookmarkController extends Controller
     public function remove($storyId)
     {
         Bookmark::where('user_id', auth()->id())
-                ->where('story_id',$storyId)
-                ->delete();
+            ->where('story_id', $storyId)
+            ->delete();
 
-          return response()->json([
+        return response()->json([
             'status' => 'success',
             'code' => 204,
             'message' => 'deleted',
@@ -102,8 +100,8 @@ class BookmarkController extends Controller
     public function status($storyId)
     {
         $status = Bookmark::where('user_id', auth()->id())
-                                ->where('story_id', $storyId)
-                                ->first();
+            ->where('story_id', $storyId)
+            ->first();
 
         $response = is_null($status) ? false : true;
 
@@ -114,5 +112,4 @@ class BookmarkController extends Controller
             "data" => $response
         ], 200);
     }
-
 }
