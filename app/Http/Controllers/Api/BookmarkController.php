@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BookmarkController extends Controller
 {
-    
     /**
      * Fetch bookmarked stories belonging to the logged in user
      *
@@ -19,7 +18,7 @@ class BookmarkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index (){
-         $bookmarks =  App\User::find(auth()->id())->bookmarks;
+         $bookmarks =  \App\User::find(auth()->id())->bookmarks;
         return response()->json([
             'status' => 'success',
             'code' => 200,
