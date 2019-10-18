@@ -38,6 +38,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    
 
     <!-- Stylesheets -->
     <!--   <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
@@ -45,6 +46,8 @@
     <link href="/css/reset.css" rel="stylesheet">
     <link href="/css/tstyle.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
     <!-- Responsive -->
     <link href="/css/tresponsive.css" rel="stylesheet">
 

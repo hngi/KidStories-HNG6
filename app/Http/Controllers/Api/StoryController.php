@@ -182,7 +182,6 @@ class StoryController extends Controller
             'bookmark' => $favorite
         ], 200);
     }
-
     /**
      * Update the specified resource in storage.
      *

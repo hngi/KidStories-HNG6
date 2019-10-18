@@ -43,7 +43,7 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
-   
+
 
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),  // Your Facebook App ID
@@ -52,12 +52,13 @@ return [
     ],
 
     'google' => [
-        'client_id'     => 
-                    "185952303440-40p4buaanaqma1cg315n864t109j28jq.apps.googleusercontent.com",
-        'client_secret' => 
-                    "KWuoeA43h2Jeh90nBAy8v4j1",
+        'client_id'     =>
+        "773736358325-tevntbmufv9ptc4r8gg1qn2tn63vrgt5.apps.googleusercontent.com",
+        'client_secret' =>
+        "9e-mqVBX_eIZVazPIg-he0ha",
         'redirect'      =>
-                     "https://kidstories.app:8000/login/google/callback"
+        "https://kidstories.app/login/google/callback"
+
     ],
 
 ];

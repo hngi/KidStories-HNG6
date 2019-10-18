@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BookmarkController extends Controller
 {
-    
     /**
      * Fetch bookmarked stories belonging to the logged in user
      *
