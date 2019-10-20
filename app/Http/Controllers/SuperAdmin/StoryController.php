@@ -211,8 +211,9 @@ class StoryController extends Controller
      * @param  \App\Story  $story
      * @return Illuminate\Http\Response
      */
-    public function show(Story $story)
+    public function show($story)
     {   
+         $story=Story::withoutGlobalScopes()->where('slug',$story)->first();
         $story->load('tags');
         
         return view(
