@@ -39,17 +39,17 @@ class StoryController extends Controller
 
         $stories = $query->latest()->with(['user'])->paginate(15);
         $storyCount = $query->count();
-        $pendingCount = Story::where('is_approved', 0)->count();
-        $premiumCount = Story::where('is_premium', 1)->count();
-        $regularCount = Story::where('is_premium', 0)->count();
+        $pendingCount = Story::withoutGlobalScopes()->where('is_approved', false)->count();
+        $premiumCount = Story::withoutGlobalScopes()->where('is_premium', 1)->count();
+        $regularCount = Story::withoutGlobalScopes()->where('is_premium', false)->count();
 
         return view(
-            'admin.stories.index', 
+            'admin.stories.index',
             compact(
-                'stories', 
-                'storyCount', 
-                'pendingCount', 
-                'premiumCount', 
+                'stories',
+                'storyCount',
+                'pendingCount',
+                'premiumCount',
                 'regularCount'
             )
         );
@@ -57,7 +57,7 @@ class StoryController extends Controller
 
     public function unApprovedStories()
     {
-        $stories=Story::where('is_approved',false)->paginate(10);
+        $stories = Story::withoutGlobalScopes()->where('is_approved', false)->paginate(10);
 
         return view(
             "admin.stories.unapproved-stories",
@@ -67,17 +67,16 @@ class StoryController extends Controller
 
     public function approve($id)
     {
-        $story=Story::find($id);
-      //  return $story;
-        $story->update(['is_approved'=>true]);
+        $story = Story::find($id);
+        //  return $story;
+        $story->update(['is_approved' => true]);
 
-    // send a notification to the user
-        $user=$story->user;
+        // send a notification to the user
+        $user = $story->user;
 
-        Notification::send($user,new UserStoryApproved($story,$user));
+        Notification::send($user, new UserStoryApproved($story, $user));
 
-        return back()->with(['status'=>'story has been approved and removed from this list']);
-
+        return back()->with(['status' => 'story has been approved and removed from this list']);
     }
 
     /**
@@ -86,7 +85,7 @@ class StoryController extends Controller
      * @return \Illuminate\View\View
      */
     public function create()
-    {   
+    {
         $categories = Category::all();
 
         return view(
@@ -101,24 +100,24 @@ class StoryController extends Controller
      * @param \App\Http\Requests\StoryRequest  $request
      * @return Illuminate\Http\Response
      */
-    public function store(StoryRequest $request,Tag $tag)
-    {   
+    public function store(StoryRequest $request, Tag $tag)
+    {
         // Upload image if included in the request
-        if($request->hasFile('photo')) {
+        if ($request->hasFile('photo')) {
             $image = $this->fileUploadService
                 ->uploadFile($request->file('photo'));
         }
-        
-        $age = explode('-', $request->age); 
+
+        $age = explode('-', $request->age);
         $rawStory = $request->except([
-            'age','photo','author','tags'
+            'age', 'photo', 'author', 'tags'
         ]);
-        $rawStory['author'] = $request->author ??'Unknow';
-        $rawStory['image_url'] = $image['secure_url']?? null;
-        $rawStory['image_name'] = $image['public_id']?? null;
-        $rawStory['age_from']=$age[0];
-        $rawStory['age_to']=$age[1];
-        DB::transaction(function()use($request,$rawStory,$tag){
+        $rawStory['author'] = $request->author ?? 'Unknow';
+        $rawStory['image_url'] = $image['secure_url'] ?? null;
+        $rawStory['image_name'] = $image['public_id'] ?? null;
+        $rawStory['age_from'] = $age[0];
+        $rawStory['age_to'] = $age[1];
+        DB::transaction(function () use ($request, $rawStory, $tag) {
             $story = $request->user('admin')->stories()->create($rawStory);
             $story->tags()->attach($tag->getTagsIds($request->tags));
         });
@@ -134,13 +133,13 @@ class StoryController extends Controller
      * @return \Illuminate\View\View
      */
     public function edit(Story $story)
-    {   
+    {
         $story->load('tags');
         $categories = Category::all();
 
         return view(
-            'admin.stories.edit', 
-            compact('story','categories')
+            'admin.stories.edit',
+            compact('story', 'categories')
         );
     }
 
@@ -151,14 +150,14 @@ class StoryController extends Controller
      * @param  \App\Story  $story
      * @return Illuminate\Http\Response
      */
-    public function update(StoryRequest $request,Story $story,Tag $tag)
+    public function update(StoryRequest $request, Story $story, Tag $tag)
     {
         // Upload image if included in the request
-        if($request->hasFile('photo')) {
+        if ($request->hasFile('photo')) {
             $image = $this->fileUploadService
                 ->uploadFile($request->file('photo'));
 
-            if(!is_null($story->image_name)) {
+            if (!is_null($story->image_name)) {
                 $this->fileUploadService->deleteFile(
                     $story->image_name
                 );
@@ -167,15 +166,15 @@ class StoryController extends Controller
 
         $age = explode('-', $request->age);
         $rawStory = $request->except([
-            'age','photo','author','tags',
-            '_token','_method','previousImage'
+            'age', 'photo', 'author', 'tags',
+            '_token', '_method', 'previousImage'
         ]);
-        $rawStory['author'] = $request->author ??'Unknow';
-        $rawStory['image_url'] = $image['secure_url']?? null;
-        $rawStory['image_name'] = $image['public_id']?? null;
-        $rawStory['age_from']=$age[0];
-        $rawStory['age_to']=$age[1]; 
-        DB::transaction(function()use($story,$request,$rawStory,$tag){
+        $rawStory['author'] = $request->author ?? 'Unknow';
+        $rawStory['image_url'] = $image['secure_url'] ?? null;
+        $rawStory['image_name'] = $image['public_id'] ?? null;
+        $rawStory['age_from'] = $age[0];
+        $rawStory['age_to'] = $age[1];
+        DB::transaction(function () use ($story, $request, $rawStory, $tag) {
             $story->update($rawStory);
             $story->tags()->sync($tag->getTagsIds($request->tags));
         });
@@ -194,7 +193,7 @@ class StoryController extends Controller
     {
         $story->delete();
 
-        if(!is_null($story->image_name)) {
+        if (!is_null($story->image_name)) {
             $this->fileUploadService
                 ->deleteFile($story->image_name);
         }
@@ -211,11 +210,11 @@ class StoryController extends Controller
      * @return Illuminate\Http\Response
      */
     public function show(Story $story)
-    {   
+    {
         $story->load('tags');
-        
+
         return view(
-            'admin.stories.show', 
+            'admin.stories.show',
             compact('story')
         );
     }
