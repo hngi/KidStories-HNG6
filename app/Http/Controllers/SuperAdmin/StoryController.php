@@ -67,7 +67,7 @@ class StoryController extends Controller
 
     public function approve($id)
     {
-        $story=Story::find($id);
+        $story=Story::withoutGlobalScopes()->where('id',$id)->first();
       //  return $story;
         $story->update(['is_approved'=>true]);
 
@@ -133,8 +133,9 @@ class StoryController extends Controller
      * @param  \App\Story  $story
      * @return \Illuminate\View\View
      */
-    public function edit(Story $story)
+    public function edit($story)
     {   
+        $story = Story::withoutGlobalScopes()->where('slug',$story)->first();
         $story->load('tags');
         $categories = Category::all();
 
