@@ -39,9 +39,9 @@ class StoryController extends Controller
 
         $stories = $query->latest()->with(['user'])->paginate(15);
         $storyCount = $query->count();
-        $pendingCount = Story::where('is_approved', 0)->count();
-        $premiumCount = Story::where('is_premium', 1)->count();
-        $regularCount = Story::where('is_premium', 0)->count();
+        $pendingCount = Story::withoutGlobalScopes()->where('is_approved', 0)->count();
+        $premiumCount = Story::withoutGlobalScopes()->where('is_premium', 1)->count();
+        $regularCount = Story::withoutGlobalScopes()->where('is_premium', 0)->count();
 
         return view(
             'admin.stories.index', 
@@ -57,7 +57,7 @@ class StoryController extends Controller
 
     public function unApprovedStories()
     {
-        $stories=Story::where('is_approved',false)->paginate(10);
+        $stories=Story::withoutGlobalScopes()->where('is_approved',false)->paginate(10);
 
         return view(
             "admin.stories.unapproved-stories",
