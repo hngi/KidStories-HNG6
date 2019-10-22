@@ -1,8 +1,7 @@
 <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
     <div class="container px-4">
         <a class="navbar-brand" href="{{ route('admin.login') }}">
-            <img src="/images/logo.png" width="80px" height="100px" />
-
+            <img src="{{ asset('argon') }}/img/brand/white.png" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,7 +29,7 @@
                     <a class="nav-link nav-link-icon" href="#">
                         <i class="ni ni-planet"></i>
                         <span class="nav-link-inner--text">{{ __('Dashboard') }}</span>
-                </a>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link nav-link-icon" href="#">
@@ -48,7 +47,7 @@
                     <a class="nav-link nav-link-icon" href="#">
                         <i class="ni ni-single-02"></i>
                         <span class="nav-link-inner--text">{{ __('Profile') }}</span>
-                </a>
+                    </a>
                 </li> --}}
             </ul>
         </div>
