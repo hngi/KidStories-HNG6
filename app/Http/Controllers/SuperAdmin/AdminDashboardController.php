@@ -29,16 +29,16 @@ class AdminDashboardController extends Controller
         $engagements = Reaction::where('created_at', '>' , Carbon::now()->subDays(7))->count();
         $premiumUsers = Subscribed::distinct('user_name')->count();
 
-        $recentStories = Story::where('created_at', '>' , Carbon::now()->subDays(2))
+        $recentStories = Story::withoutGlobalScopes()->where('created_at', '>' , Carbon::now()->subDays(2))
                             ->with(['user'])
                             ->latest()
                             ->limit(5)
                             ->get();
 
-        $storyCount = Story::count();
-        $pendingCount = Story::where('is_approved', 0)->count();
-        $premiumCount = Story::where('is_premium', 1)->count();
-        $regularCount = Story::where('is_premium', 0)->count();
+        $storyCount = Story::withoutGlobalScopes()->count();
+        $pendingCount = Story::withoutGlobalScopes()->where('is_approved', 0)->count();
+        $premiumCount = Story::withoutGlobalScopes()->where('is_premium', 1)->count();
+        $regularCount = Story::withoutGlobalScopes()->where('is_premium', 0)->count();
 
 
         //trying to get the total amount made from subscription. 

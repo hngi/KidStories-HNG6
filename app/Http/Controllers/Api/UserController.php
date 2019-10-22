@@ -110,7 +110,7 @@ class UserController extends Controller
     public function updateProfileImage(Request $request)
     {
         $this->validate($request, [
-            'photo' => 'nullable|mimes:jpeg,jpg,png|max:800', //Max 800KB
+            'photo' => 'nullable|mimes:jpeg,jpg,png|max:2000', //Max 2mb
         ]);
 
         $user = User::findOrFail(auth()->id());
