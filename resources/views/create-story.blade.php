@@ -3,6 +3,12 @@
 @section('custom_css')
 <link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/MultiFileUpload.css')}}">
+<style>
+    table.mceLayout,
+    textarea.tinyMCE {
+        width: 100% !important;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -60,11 +66,11 @@
                 </div>
                 <div class="form-input" style="margin-top: 20px;">
                     <label for="content">Content:</label>
-                    <textarea class="description" placeholder="And the fish happened to grow wings..." name="body" id="content" cols="50" rows="10" required>
-      <input type="hidden" value="0" name="is_premium" />
-                <div class="buttons">
-                    <button class="btn save">Post</button>
-                </div>
+                    <textarea class="description" placeholder="And the fish happened to grow wings..." name="body" id="content" cols="50" rows="10" required>{{old('body')}}</textarea>
+                    <input type="hidden" value="0" name="is_premium" />
+                    <div class="buttons">
+                        <button class="btn save">Post</button>
+                    </div>
             </form>
         </section>
     </div>
@@ -80,14 +86,7 @@
 <script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/select2_init.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/MultiFileUpload.js')}}"></script>
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-<script>
-    tinymce.init({
-        selector: 'textarea.description',
-        width: 900,
-        height: 300
-    });
-</script>
+
 <script>
     //the jQuery $ code. This will make life easy for me. No more array and stuff
     const q$ = (selector, container) => {
@@ -372,5 +371,11 @@
         //Add them listeners
         addListeners(postId);
     };
+</script>
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea.description'
+    });
 </script>
 @endsection
