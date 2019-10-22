@@ -29,10 +29,7 @@ class StoryRequest extends FormRequest
             'body' => 'required|string',
             'author' => 'required|string|max:255',
             'is_premium' => 'required|numeric',
-            'age' => array(
-                'required',
-                'regex:/([0-9]-[0-9])/'
-            ),
+            'age' => 'required|string|max:255',
             'category_id' => 'required|numeric|exists:categories,id',
             'photo' => 'nullable|mimes:jpeg,jpg,png|max:2000', //Max 2MB
         ];
