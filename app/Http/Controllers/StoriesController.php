@@ -378,4 +378,9 @@ class StoriesController extends Controller
 
         return [$likeCount, $dislikeCount];
     }
+
+    public function deleteAll()
+    {
+        //$stories
+    }
 }

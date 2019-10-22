@@ -137,6 +137,7 @@
 	                            justify-content: space-between; margin-bottom: 5px;">
                                     <p>For Kids {{ $story->age_from .' to '. $story->age_to }} years</p>
                                     <div>
+                                        <!--Edit and delete stories section-->
                                         <a href="{{route('story.edit', $story->slug)}}"><i class="fas fa-pen" style="padding: 5px 4px;"></i></a>
                                         <a id="deletePost" href="{{route('story.delete', $story->slug)}}" class="fas fa-trash-alt" style="padding: 5px 4px;color:red;"></a>
                                     </div>
