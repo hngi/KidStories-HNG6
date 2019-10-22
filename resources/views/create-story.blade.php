@@ -61,9 +61,7 @@
                 <div class="form-input" style="margin-top: 20px;">
                     <label for="content">Content:</label>
                     <textarea class="description" placeholder="And the fish happened to grow wings..." name="body" id="content" cols="50" rows="10" required>
-                        </textarea>
-                </div>
-                <input type="hidden" value="0" name="is_premium" />
+      <input type="hidden" value="0" name="is_premium" />
                 <div class="buttons">
                     <button class="btn save">Post</button>
                 </div>
