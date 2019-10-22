@@ -43,7 +43,7 @@
 
             <!-- Stories -->
             <img class="stories" src="{{$story->image_url ?? '/images/placeholder.png'}}">
-            <p>{{$story->body}} </p>
+            {!!$story->body!!}
         </div>
 
         <h1 class="end"> THE END </h1>
