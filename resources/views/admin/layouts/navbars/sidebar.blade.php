@@ -6,7 +6,7 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('admin.dashboard') }}">
-            <img src="/images/logo.png" class="navbar-brand-img" alt="...">
+            <img src="{{url('images/logo.png')}}" width="70px" class="navbar-brand-img" alt="...">
             <h2 style="color: #6C66E5;">KIDSTORIES</h2>
         </a>
         <!-- User -->

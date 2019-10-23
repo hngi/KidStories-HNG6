@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/MultiFileUpload.css')}}">
 <style>
     table.mceLayout,
-    textarea.description {
+    textarea.tinyMCE {
         width: 100% !important;
     }
 </style>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="form-input" style="margin-top: 20px;">
                     <label for="content">Content:</label>
-                    <textarea class="description form-control" placeholder="And the fish happened to grow wings..." name="body" id="content" cols="50" rows="10" required>{!!$story->body!!}</textarea>
+                    <textarea class="description form-control" placeholder="And the fish happened to grow wings..." name="body" id="content" cols="50" rows="10" required>{{old('body')?:$story->body}}</textarea>
                 </div>
                 <input type="hidden" value="0" name="is_premium" />
                 <input type="hidden" value="{{$story->id}}" name="id" />
@@ -94,7 +94,7 @@
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script>
     tinymce.init({
-        selector: 'textarea.description'
+        selector: 'textarea.description',
     });
 </script>
 @endsection

@@ -76,7 +76,7 @@
                             </div>
                             <div class="form-group {{ $errors->has('body') ? ' has-danger' : '' }}">
                                 <label class="form-control-label" for="input-title">{{ __('Content') }} *</label>
-                                <textarea style="height:200px" type="text" class="description" name="body" required>{{old('body')}}</textarea>
+                                <textarea style="height:200px" type="text" class="description form-control form-control-alternative" name="body" required>{{old('body')}}</textarea>
                                 @if ($errors->has('body'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('body') }}</strong>
@@ -139,7 +139,7 @@
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script>
     tinymce.init({
-        selector: 'textarea.description'
+        selector: 'textarea.description',
     });
 </script>
 @endpush

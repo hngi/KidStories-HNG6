@@ -17,9 +17,8 @@ class BookmarkController extends Controller
      * @param  int  $storyId
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $bookmarks =  \App\User::find(auth()->id())->bookmarks;
+    public function index (){
+         $bookmarks =  \App\User::find(auth()->id())->bookmarks;
         return response()->json([
             'status' => 'success',
             'code' => 200,
