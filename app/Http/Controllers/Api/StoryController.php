@@ -366,10 +366,10 @@ class StoryController extends Controller
         DB::beginTransaction();
         if ($reaction && $reaction->reaction == 0) {
             $reaction->delete();
-            $like_reaction = Reaction::where('story_id', $id)
+            $like_reaction = Reaction::where('story_id', $story->id)
                 ->where('reaction', 1)->get();
             $likeCount = count($like_reaction);
-            $dislike_reaction = Reaction::where('story_id', $id)
+            $dislike_reaction = Reaction::where('story_id', $story->id)
                 ->where('reaction', 0)->get();
             $dislikeCount = count($dislike_reaction);
             $action = 'Removed dislike';
@@ -380,20 +380,23 @@ class StoryController extends Controller
                 ['reaction' => 0]
             );
 
-            $like_reaction = Reaction::where('story_id', $id)
+            $like_reaction = Reaction::where('story_id', $story->id)
                 ->where('reaction', 1)->get();
             $likeCount = count($like_reaction);
-            $dislike_reaction = Reaction::where('story_id', $id)
+            $dislike_reaction = Reaction::where('story_id', $story->id)
                 ->where('reaction', 0)->get();
             $dislikeCount = count($dislike_reaction);
             $action = 'Changed to dislike';
             $data = 0;
         } else {
-            $story->increment('dislikes_count', 1);
-            $like_reaction = Reaction::where('story_id', $id)
+            $reaction = Reaction::updateOrCreate(
+                ['story_id' => $id, 'user_id' => $user->id],
+                ['reaction' => 0]
+            );
+            $like_reaction = Reaction::where('story_id', $story->id)
                 ->where('reaction', 1)->get();
             $likeCount = count($like_reaction);
-            $dislike_reaction = Reaction::where('story_id', $id)
+            $dislike_reaction = Reaction::where('story_id', $story->id)
                 ->where('reaction', 0)->get();
             $dislikeCount = count($dislike_reaction);
             $reaction = Reaction::updateOrCreate(
@@ -417,7 +420,7 @@ class StoryController extends Controller
 
     public function findStory($storyId)
     {
-        $story = Story::find($storyId);
+        $story = Story::withoutGlobalScopes()->where('id', $storyId)->first();
         if (!$story) {
             return response()->json([
                 'status' => 'Not found',

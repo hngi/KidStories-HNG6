@@ -296,7 +296,7 @@
 
     // });
 
-    console.log("in0");
+    // console.log("in0");
     const noDraft = () => {
         const p = document.createElement('p');
         p.setAttribute('style', 'font-size:24px; margin-top: 20px; font-weight: 200; text-align: center;')
@@ -436,9 +436,25 @@
                 //Add for Post Excerpt
                 if (draft.postContent) {
                     const txt = draft.postContent;
-                    //If it's greater than 94, get the first 94 characters
-                    const exc = (txt.length > 94) ? txt.substring(0, 94) : txt;
-                    pContent.innerHTML = `${txt}...`;
+                    let contentText = "";
+
+                    // console.log('content', txt);
+                    // console.log('array?', Array.isArray(txt));
+                    if (Array.isArray(txt)) {
+                        txt.forEach(element => {
+                            console.log('element', element);
+                            if (element.insert != "↵") {
+                                // console.log('element insert',element.insert);
+                                contentText = contentText + element.insert;
+                            }
+                        });
+                    } else {
+                        //If it's greater than 94, get the first 94 characters
+                        contentText = txt;
+                    }
+                    contentText ? (null || undefined) : 'no excerpts';
+                    const exc = (contentText.length > 94) ? contentText.substring(0, 94) : contentText;
+                    pContent.innerHTML = `${exc.trim()}...`;
                 } else {
                     pContent.innerHTML = `No Excerpt`;
                 }
