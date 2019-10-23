@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-input" style="margin-top: 20px;">
                         <label for="age">Age:</label>
-                        <input type="text" class="form-control" name="age" id="age" required placeholder="eg 1-4"
+                        <input type="text" pattern="([0-9]-[0-9])" class="form-control" name="age" id="age" required placeholder="eg 1-4"
                             value="{{old('age')}}">
                     </div>
                     <div class="form-input" style="margin-top: 20px;">
