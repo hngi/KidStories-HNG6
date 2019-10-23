@@ -785,7 +785,7 @@ img {
     position: relative;
     left: 3px;
     display: inline-block;
-    top: 7px;
+    /* top: 7px;    This makes search icon/btn on the same level with other elements */
 }
 
 .main-header .search-box-btn {
