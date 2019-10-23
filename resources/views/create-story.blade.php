@@ -28,7 +28,23 @@
         }  
         #content{
             height: 357px;
-        }                                    
+        }  
+        div.form-input{
+            margin: 10px auto;
+        }
+
+        section form{
+            margin: auto;
+        }
+        .form-input label {
+            color: #333333;
+            font-family: 'Lato', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 20px;
+            letter-spacing: -0.5px;
+        }                                  
     </style>
 @endsection
 
@@ -38,9 +54,9 @@
         <div class="auto-container">
             <section class="add-story">
                 @include('admin.stories.partials.flash')
-                <form action="{{ route('story.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('story.store') }}" method="post" enctype="multipart/form-data" class="d-flex flex-row flex-wrap">
                 {{ csrf_field()}}
-                     <div class="form-input">
+                     <div class="form-input col-lg-6">
                         <label for="category">Category:</label> 
                         <select name="category_id" id="category" class="form-control" required>
                             <option value="">Select category</option>
@@ -52,22 +68,22 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-input title-input" style="margin-top: 20px;">
+                    <div class="form-input title-input col-lg-6">
                         <label for="title">Title:</label>
                         <input type="text"  class="form-control" name="title" id="title" required
                             value="{{old('title')}}">
                     </div>
-                    <div class="form-input" style="margin-top: 20px;">
+                    <div class="form-input col-lg-6">
                         <label for="age">Age:</label>
                         <input type="text" pattern="([0-9]-[0-9])" class="form-control" name="age" id="age" required placeholder="eg 1-4"
                             value="{{old('age')}}">
                     </div>
-                    <div class="form-input" style="margin-top: 20px;">
+                    <div class="form-input  col-lg-6">
                         <label for="author">Author:</label>
                         <input type="text" class="form-control" name="author" id="author" required
                             value="{{old('author')}}">
                     </div>
-                    <div class="form-input" style="margin-top: 20px;">
+                    <div class="form-input col-lg-6">
                         <label for="cover">Cover Image:</label>
                         <p id="for_ad_image" class="valError text-danger small"></p>
                         <div class="file-upload-previews"></div>
@@ -83,7 +99,7 @@
                                     name="previousImages" value="1">
                         </div>
                     </div>
-                    <div class="form-input" style="margin-top: 20px;">
+                    <div class="form-input  col-lg-6">
                         <label for="category">Tags:</label>
                         <select name="tags[]" id="tags" class="form-control" multiple required>
                             <option value=""></option>
@@ -95,7 +111,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-input" style="margin-top: 20px;">
+                    <div class="form-input  col-lg-12" style="margin-top: 20px;">
                         <label for="content">Content:</label>
                         <div name="body" id="content"></div>
                         <!-- <textarea class="form-control" placeholder="And the fish happened to grow wings..." 
@@ -103,7 +119,7 @@
                         </textarea> -->
                     </div>
                     <input type="hidden" value="0" name="is_premium"/>
-                    <div class="buttons">
+                    <div class="buttons  col-lg-12">
                         <button class="btn save">Post</button>
                     </div>
                 </form>
