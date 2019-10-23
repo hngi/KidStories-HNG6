@@ -1,12 +1,52 @@
 @extends('layouts.app')
 
 @section('custom_css')
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/MultiFileUpload.css')}}">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <style>
-    table.mceLayout,
-    textarea.tinyMCE {
-        width: 100% !important;
+    span.select2-selection.select2-selection--multiple {
+        padding-left: 13px;
+    }
+
+    span.select2-selection.select2-selection--multiple ul li.select2-selection__choice {
+        background: #718CFB;
+        border-radius: 4px;
+        padding-left: 9px;
+        padding-right: 9px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    span.select2-selection.select2-selection--multiple ul li.select2-selection__choice,
+    span.select2-selection.select2-selection--multiple ul li.select2-selection__choice span {
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+        font-style: normal;
+        font-size: 16px;
+    }
+
+    #content {
+        height: 357px;
+    }
+
+    div.form-input {
+        margin: 10px auto;
+    }
+
+    section form {
+        margin: auto;
+    }
+
+    .form-input label {
+        color: #333333;
+        font-family: 'Lato', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: -0.5px;
     }
 </style>
 @endsection
@@ -17,9 +57,9 @@
     <div class="auto-container">
         <section class="add-story">
             @include('admin.stories.partials.flash')
-            <form action="{{ route('story.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('story.store') }}" method="post" enctype="multipart/form-data" class="d-flex flex-row flex-wrap">
                 {{ csrf_field()}}
-                <div class="form-input">
+                <div class="form-input col-lg-6">
                     <label for="category">Category:</label>
                     <select name="category_id" id="category" class="form-control" required>
                         <option value="">Select category</option>
@@ -30,19 +70,19 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-input title-input" style="margin-top: 20px;">
+                <div class="form-input title-input col-lg-6">
                     <label for="title">Title:</label>
                     <input type="text" class="form-control" name="title" id="title" required value="{{old('title')}}">
                 </div>
-                <div class="form-input" style="margin-top: 20px;">
+                <div class="form-input col-lg-6">
                     <label for="age">Age:</label>
                     <input type="text" pattern="([0-9]-[0-9])" class="form-control" name="age" id="age" required placeholder="eg 1-4" value="{{old('age')}}">
                 </div>
-                <div class="form-input" style="margin-top: 20px;">
+                <div class="form-input  col-lg-6">
                     <label for="author">Author:</label>
                     <input type="text" class="form-control" name="author" id="author" required value="{{old('author')}}">
                 </div>
-                <div class="form-input" style="margin-top: 20px;">
+                <div class="form-input col-lg-6">
                     <label for="cover">Cover Image:</label>
                     <p id="for_ad_image" class="valError text-danger small"></p>
                     <div class="file-upload-previews"></div>
@@ -53,7 +93,7 @@
                         <input type="hidden" id="previousImages" name="previousImages" value="1">
                     </div>
                 </div>
-                <div class="form-input" style="margin-top: 20px;">
+                <div class="form-input  col-lg-6">
                     <label for="category">Tags:</label>
                     <select name="tags[]" id="tags" class="form-control" multiple required>
                         <option value=""></option>
@@ -64,18 +104,21 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-input" style="margin-top: 20px;">
+                <div class="form-input  col-lg-12" style="margin-top: 20px;">
                     <label for="content">Content:</label>
-                    <textarea class="description form-control" placeholder="And the fish happened to grow wings..." name="body" id="content" cols="50" rows="10" required>
-                        </textarea>
+                    <div name="body" id="content"></div>
+                    <!-- <textarea class="form-control" placeholder="And the fish happened to grow wings..." 
+                            name="body" id="content" cols="50" rows="10" required>
+                        </textarea> -->
                 </div>
                 <input type="hidden" value="0" name="is_premium" />
-                <div class="buttons">
+                <div class="buttons  col-lg-12">
                     <button class="btn save">Post</button>
                 </div>
             </form>
         </section>
     </div>
+</div>
 </div>
 <!--End pagewrapper-->
 
@@ -88,10 +131,53 @@
 <script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/select2_init.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/MultiFileUpload.js')}}"></script>
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script>
     //the jQuery $ code. This will make life easy for me. No more array and stuff
     const q$ = (selector, container) => {
         return (container || document).querySelector(selector);
+    }
+
+    //FOr the quill toolbar
+    var quill = new Quill('#content', {
+        modules: {
+            toolbar: [
+                [{
+                    header: [1, 2, false]
+                }, 'blockquote', 'code-block'],
+                ['bold', 'italic', 'underline'],
+                [{
+                    'script': 'super'
+                }, {
+                    'script': 'sub'
+                }],
+                [{
+                    'list': 'ordered'
+                }, {
+                    'list': 'bullet'
+                }, {
+                    'indent': '-1'
+                }, {
+                    'indent': '+1'
+                }],
+                ['link', {
+                    'align': []
+                }],
+            ]
+        },
+        placeholder: 'And the fish happened to grow wings...',
+        theme: 'snow' // or 'bubble'
+    });
+
+    function showQuillaContents() {
+        var delta = quill.getContents();
+        console.log('delta', delta);
+        return delta;
+    }
+
+    function setQuillaContents(content) {
+        quill.setContents(content);
     }
 
     function entryValues() {
@@ -102,7 +188,7 @@
         const inpAge = q$('input#age');
         const inpAuthor = q$('input#author');
         const inpImg = q$('span.MultiFile-label img.MultiFile-preview');
-        const inpContent = q$('textarea#content');
+        const inpContent = q$('div#content');
         const inpTag = q$('ul.select2-selection__rendered');
 
         // console.log('Dem', selCategory, inpTitle, inpAge, inpAuthor, inpImg, inpContent, inpTag);
@@ -116,8 +202,17 @@
             draftEntries.postTitle = inpTitle.value;
         }
 
-        if (inpAge) {
-            draftEntries.postAge = inpAge.value;
+        if (inpTitle) {
+            draftEntries.postTitle = inpTitle.value;
+        }
+
+        const inpContentLen = showQuillaContents();
+        const inpContentLenArr = inpContentLen.ops;
+        console.log('inpContentLen', inpContentLen);
+        console.log('inpContentLenArr', inpContentLenArr);
+
+        if (inpContentLenArr.length > 0) {
+            draftEntries.postContent = inpContentLenArr;
         }
 
         if (inpAuthor) {
@@ -247,7 +342,7 @@
         const inpAge = q$('input#age');
         const inpAuthor = q$('input#author');
         const inpImg = q$('input.file-upload-input.with-preview.MultiFile-applied');
-        const inpContent = q$('textarea#content');
+        // const inpContent = q$('textarea#content');
         const inpTag = q$('span.select2-selection.select2-selection--multiple');
 
         inpTag.addEventListener('keydown', (event) => {
@@ -260,8 +355,9 @@
         inpTitle.addEventListener('keyup', () => updateDraft(id));
         inpAge.addEventListener('keyup', () => updateDraft(id));
         inpAuthor.addEventListener('keyup', () => updateDraft(id));
-        inpContent.addEventListener('keyup', () => updateDraft(id));
+        // inpContent.addEventListener('keyup',()=>updateDraft(id));
         inpImg.addEventListener('change', () => updateDraft(id));
+        quill.on('text-change', () => updateDraft(id))
     }
 
     const populatePostFromDraft = (thePostId) => {
@@ -282,7 +378,7 @@
                 const inpAge = q$('input#age');
                 const inpAuthor = q$('input#author');
                 const inpImg = q$('span.MultiFile-label img.MultiFile-preview');
-                const inpContent = q$('textarea#content');
+                const inpContent = q$('div#content');
                 const inpTag = q$('ul.select2-selection__rendered');
 
                 //Make select
@@ -300,6 +396,19 @@
                 if (thisDraftP.postAge && inpAge) {
                     // select where Age
                     inpAge.value = thisDraftP.postAge;
+                }
+
+                //Make title
+                if (thisDraftP.postTitle && inpTitle) {
+                    // select where title
+                    inpTitle.value = thisDraftP.postTitle;
+                }
+
+                //Make Content
+                if (thisDraftP.postContent && inpContent) {
+                    // select where Content
+                    // inpContent.value = thisDraftP.postContent;
+                    setQuillaContents(thisDraftP.postContent);
                 }
 
                 //Make Auhor
