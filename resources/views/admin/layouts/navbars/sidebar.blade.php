@@ -6,7 +6,7 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('admin.dashboard') }}">
-            {{-- <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="..."> --}}
+            <img src="{{url('images/logo.png')}}" width="70px" class="navbar-brand-img" alt="...">
             <h2 style="color: #6C66E5;">KIDSTORIES</h2>
         </a>
         <!-- User -->
@@ -15,7 +15,7 @@
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="media align-items-center">
                         <span class="avatar avatar-sm rounded-circle">
-                        <img alt="Image placeholder" src="{{ asset('argon') }}/img/icons/common/profile-icon.png">
+                            <img alt="Image placeholder" src="{{ asset('argon') }}/img/icons/common/profile-icon.png">
                         </span>
                     </div>
                 </a>
@@ -88,22 +88,22 @@
                     <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('Laravel Examples') }}</span>
-                    </a>
+                </a>
 
-                    <div class="collapse show" id="navbar-examples">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    {{ __('User profile') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    {{ __('User Management') }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="collapse show" id="navbar-examples">
+                    <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                {{ __('User profile') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                {{ __('User Management') }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 </li> --}}
 
                 <li class="nav-item">
@@ -134,14 +134,14 @@
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="ni ni-pin-3 text-orange"></i> {{ __('Maps') }}
-                    </a>
+                </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="ni ni-key-25 text-info"></i> {{ __('Login') }}
                     </a>
                 </li> --}}
-                
+
 
 
                 {{-- <li class="nav-item mb-5" style="position: absolute; bottom: 0;">
