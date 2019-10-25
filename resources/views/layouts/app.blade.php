@@ -188,10 +188,12 @@
                 <section>
                     <h5>Newsletter</h5>
                     <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
-                    <div class="subscribe">
-                        <input type="email" name="" id="subscribe-email" placeholder="Type email">
-                        <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
-                    </div>
+                    <form action="" id="subscribe_newsletter_form">
+                       <div class="subscribe">
+                            <input type="email" name="" id="subscribe-email" placeholder="Type email" autocomplete="email" required/>
+                            <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
+                        </div> 
+                    </form>     
                 </section>
             </div>
             <hr>
