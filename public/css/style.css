@@ -293,6 +293,9 @@
      margin-bottom: 2em;
      padding-bottom: 5em;
      padding-top: 5em;
+     max-width: 1024px;
+     margin-left: auto;
+     margin-right: auto;
  }
 
  .footer-box h5 {
