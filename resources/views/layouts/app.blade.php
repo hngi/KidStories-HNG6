@@ -26,7 +26,8 @@
     <link rel="manifest" href="/favicon/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#718cfb">
+    <meta name="description" content="Read free bedtime stories, fairy tales, poems and short stories for kids">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -223,6 +224,17 @@
     <script src="/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="/js/index.js"></script>
+    <script>
+        // CODELAB: Register service worker.
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((reg) => {
+                        console.log('Service worker registered.', reg);
+                    });
+            });
+        }
+    </script>
     @yield('js')
 </body>
 
