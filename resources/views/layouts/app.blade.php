@@ -225,7 +225,29 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="/js/index.js"></script>
     <script>
-        // CODELAB: Register service worker.
+        //IIFE for scroll fixed header
+
+        // (function () {
+        //     // When the user scrolls the page, execute scroll Function
+        //     window.onscroll = function() {scrollFunction()};
+
+        //     // Get the header
+        //     var header = document.querySelector("header.main-header");
+        //     // Get the offset position of the navbar
+        //     var sticky = header.offsetTop;
+
+        //     // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        //     function scrollFunction() {
+        //         console.log('iife');
+        //         if (window.pageYOffset > sticky) {
+        //             header.classList.add("sticky");
+        //         } else {
+        //             header.classList.remove("sticky");
+        //         }
+        //     }
+        // })();
+
+        //Register service worker.
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
