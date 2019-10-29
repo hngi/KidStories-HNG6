@@ -130,6 +130,7 @@ img {
 }
 
 .main-header.fixed-header {
+    position: fixed;
     top: 0px;
     background: #718CFB;
     border-bottom: 1px solid rgba(0, 0, 0, 0.10);

@@ -203,13 +203,21 @@
                 </section>
             </div>
             <hr>
-            <div class="footer-info">
-                <p class="col-md-10 pull-left">© 2019 Kid Stories. All rights reserved</p>
-                <div class="social-iconsb col-md-2 pull-right">
-                    <!--           <a href="#">  <i class="fa fa-youtube"></i> </a>
- --> <a target="_blank" href="https://instagram.com/mykidstories"> <i class="fab fa-instagram"></i> </a>
-                    <a target="_blank" href="https://facebook.com/mykidstories"> <i class="fab fa-facebook"></i> </a>
-                    <a target="_blank" href="https://twitter.com/mykidstories"> <i class="fab fa-twitter"></i> </a>
+            <div class="footer-info d-flex flex-wrap">
+                <div class="col-lg-10 pull-left my-auto">
+                    <p class="my-auto">© 2019 Kid Stories. All rights reserved</p>
+                </div>
+                <div class="social-iconsb col-lg-2 pull-right px-0 my-auto">
+                    <!--<a href="#">  <i class="fa fa-youtube"></i> </a>--> 
+                    <a target="_blank" href="https://instagram.com/mykidstories"> 
+                        <i class="fab fa-instagram"></i> 
+                    </a>
+                    <a target="_blank" href="https://facebook.com/mykidstories"> 
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/mykidstories">
+                        <i class="fab fa-twitter"></i>
+                    </a>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -225,7 +233,29 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="/js/index.js"></script>
     <script>
-        // CODELAB: Register service worker.
+        //IIFE for scroll fixed header
+
+        // (function () {
+        //     // When the user scrolls the page, execute scroll Function
+        //     window.onscroll = function() {scrollFunction()};
+
+        //     // Get the header
+        //     var header = document.querySelector("header.main-header");
+        //     // Get the offset position of the navbar
+        //     var sticky = header.offsetTop;
+
+        //     // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        //     function scrollFunction() {
+        //         console.log('iife');
+        //         if (window.pageYOffset > sticky) {
+        //             header.classList.add("sticky");
+        //         } else {
+        //             header.classList.remove("sticky");
+        //         }
+        //     }
+        // })();
+
+        //Register service worker.
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
