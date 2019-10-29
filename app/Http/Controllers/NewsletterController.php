@@ -61,7 +61,7 @@ class NewsletterController extends Controller
         dd($response);
 
 
-        if ($result['errors'])
-            return back()->withErrors($result['errors']);
+        // if ($result['errors'])
+        //     return back()->withErrors($result['errors']);
     }
 }
