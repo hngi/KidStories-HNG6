@@ -10,6 +10,17 @@ use App\Http\Controllers\Controller;
 class CommentsController extends Controller
 {
 
+    public function index($id)
+    {
+        $comments = Comment::where('story_id', $id)->get();
+        return response()->json([
+            'status' => 'suucess',
+            'code' => 201,
+            'message' => 'created',
+            "data" => $comments
+        ], 201);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -17,9 +28,9 @@ class CommentsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $request->validate([
-            'body' => ['required', 'string','min:3'],
+            'body' => ['required', 'string', 'min:3'],
             'story_id' => ['required']
         ]);
 
@@ -50,15 +61,15 @@ class CommentsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'body' => ['required', 'string','min:3']
+            'body' => ['required', 'string', 'min:3']
         ]);
 
         $comment = Comment::where('id', $id)
-                        ->where('user_id', auth()->id())
-                        ->firstOrFail();
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
 
         $comment->update([
-            'body'=>$request->body
+            'body' => $request->body
         ]);
 
         return response()->json([
@@ -78,8 +89,8 @@ class CommentsController extends Controller
     public function destory($id)
     {
         $comment = Comment::where('id', $id)
-                        ->where('user_id', auth()->id())
-                        ->firstOrFail();
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
 
         $comment->delete();
 
