@@ -73,5 +73,5 @@ Route::post('/pay', [
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('pay.callback');
 
 
-Route::get('/newsletter/subscribe', 'NewsLetterController@subscribe')->name('newsletter.subscribe');
-Route::get('/newsletter/api', 'NewsLetterController@sendCampaigns')->name('newsletter.send');
+Route::get('/newsletter/subscribe', 'NewsletterController@subscribe')->name('newsletter.subscribe');
+Route::get('/newsletter/api', 'NewsletterController@sendCampaigns')->name('newsletter.send');
