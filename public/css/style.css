@@ -336,6 +336,11 @@
      border: 1px solid white;
      border-radius: 0;
      background-color: #718cfb;
+     color: #fff;
+ }
+
+ #subscribe-email::placeholder{
+    color: #fff;
  }
 
  @media screen and (max-width: 800px) {
