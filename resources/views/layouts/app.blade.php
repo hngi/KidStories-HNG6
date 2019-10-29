@@ -38,7 +38,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    
+
 
     <!-- Stylesheets -->
     <!--   <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
@@ -156,6 +156,20 @@
 
         <!-- Body -->
         <main>
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+
+
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
             @yield('content')
         </main>
 
@@ -188,12 +202,13 @@
                 <section>
                     <h5>Newsletter</h5>
                     <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
-                    <form action="" id="subscribe_newsletter_form">
-                       <div class="subscribe">
-                            <input type="email" name="" id="subscribe-email" placeholder="Type email" autocomplete="email" required/>
-                            <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
-                        </div> 
-                    </form>     
+                    <form action="{{route('newsletter.subscribe')}}" id="subscribe_newsletter_form">
+                        @csrf
+                        <div class="subscribe">
+                            <input type="email" name="email" id="subscribe-email" placeholder="Type email" autocomplete="email" required />
+                            <button class="send-icon" type="submit"><i class="fa fa-paper-plane"></i></button>
+                        </div>
+                    </form>
                 </section>
             </div>
             <hr>
