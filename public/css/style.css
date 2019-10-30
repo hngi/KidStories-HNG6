@@ -347,6 +347,14 @@
     color: #fff;
  }
 
+ div.privacy-policy ul li{
+     list-style-type: square;
+ }
+
+ div.privacy-policy ul{
+     padding-left: 2em;
+ }
+
  @media screen and (max-width: 800px) {
      .add-story {
          margin: 5em 2em;
