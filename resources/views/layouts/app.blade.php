@@ -189,6 +189,7 @@
                     <a href="{{ route('subscribe') }}">Subscriptions</a>
                     <!-- <a href="#">Contact Us</a> -->
                     <a href="{{ route('story.store') }}">Create a Story</a>
+                    <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
 
                 </section>
                 <section>
