@@ -67,6 +67,8 @@ Route::get('/categories/{id}/stories', 'CategoryController@stories')->name('cate
 // Routes for authors
 Route::get('/authors/{author}/stories', 'AuthorController@getStories')->name('author.stories');
 
+// Routes for feedbacks
+Route::post('/feedbacks', 'FeedbackController@create')->name('feedbacks.create');
 
 //routes for payment
 Route::post('/pay', [

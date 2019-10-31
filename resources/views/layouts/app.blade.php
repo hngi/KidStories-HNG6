@@ -196,18 +196,20 @@
                                     </div>
                                     <p class="feedback__p">Have some compliants or innovations? Let’s hear them</p>
                                 </div>
-                                <form action="" id="frm-feedback" class="feedback__form">
+                                <form method="POST" id="frm-feedback" class="feedback__form" action="{{route('feedbacks.create')}}">
+
+                                    @csrf
                                     <div class="input">
                                         <!-- <label class="feedback__label" for="inpName-feedback">Full Name</label> -->
-                                        <input name="inpName-feedback" id="inpName-feedback" type="text"        autocomplete="name" class="feedbacK__input" placeholder="Full Name" required>
+                                        <input name="name" id="inpName-feedback" type="text" autocomplete="name" class="feedbacK__input" placeholder="Full Name" required>
                                     </div>
                                     <div class="input">
                                         <!-- <label class="feedback__label" for="inpEmail-feedback">E-mail</label> -->
-                                        <input name="inpEmail-feedback" id="inpEmail-feedback" type="email" autocomplete="email" class="feedbacK__input" placeholder="E-mail" required>
+                                        <input name="email" id="inpEmail-feedback" type="email" autocomplete="email" class="feedbacK__input" placeholder="E-mail" required>
                                     </div>
                                     <div class="input">
                                         <!-- <label class="feedback__label" for="txtArea-feedback">Message</label> -->
-                                        <textarea name="txtArea-feedback" id="txtArea-feedback" class="feedbacK__input" placeholder="Message" required></textarea>
+                                        <textarea name="message" id="txtArea-feedback" class="feedbacK__input" placeholder="Message" required></textarea>
                                     </div>
                                     <button id="btn-submit-feedback" class="feedback__submitBtn">
                                         Send
@@ -240,7 +242,7 @@
                     <a href="{{ route('stories.index') }}">Explore Stories</a>
                     <a href="https://paystack.com/pay/kidstoriesapp">Make a donation</a>
                     <button type="button" class="btn btn-feedback" data-toggle="modal" data-target="#feedbackModalCenter">
-                        <i class="fas fa-edit"></i>    
+                        <i class="fas fa-edit"></i>
                         Leave us some feedback
                     </button>
                 </section>
@@ -269,11 +271,11 @@
                     <p class="my-auto">© 2019 Kid Stories. All rights reserved</p>
                 </div>
                 <div class="social-iconsb col-lg-2 pull-right px-0 my-auto">
-                    <!--<a href="#">  <i class="fa fa-youtube"></i> </a>--> 
-                    <a target="_blank" href="https://instagram.com/mykidstories"> 
-                        <i class="fab fa-instagram"></i> 
+                    <!--<a href="#">  <i class="fa fa-youtube"></i> </a>-->
+                    <a target="_blank" href="https://instagram.com/mykidstories">
+                        <i class="fab fa-instagram"></i>
                     </a>
-                    <a target="_blank" href="https://facebook.com/mykidstories"> 
+                    <a target="_blank" href="https://facebook.com/mykidstories">
                         <i class="fab fa-facebook"></i>
                     </a>
                     <a target="_blank" href="https://twitter.com/mykidstories">
