@@ -177,6 +177,47 @@
             </div>
             @endif
             @yield('content')
+
+            <!-- Modal -->
+            <div class="modal fade" id="feedbackModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close btn-outline-danger btn-modal" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="text-center">
+                                    <h3 class="feedback_title">Feedback</h3>
+                                    <div>
+                                        <img class="feedback__img" src="/images/icons/feedback.png" alt="An image of our feedback">
+                                    </div>
+                                    <p class="feedback__p">Have some compliants or innovations? Let’s hear them</p>
+                                </div>
+                                <form action="" id="frm-feedback" class="feedback__form">
+                                    <div class="input">
+                                        <!-- <label class="feedback__label" for="inpName-feedback">Full Name</label> -->
+                                        <input name="inpName-feedback" id="inpName-feedback" type="text"        autocomplete="name" class="feedbacK__input" placeholder="Full Name" required>
+                                    </div>
+                                    <div class="input">
+                                        <!-- <label class="feedback__label" for="inpEmail-feedback">E-mail</label> -->
+                                        <input name="inpEmail-feedback" id="inpEmail-feedback" type="email" autocomplete="email" class="feedbacK__input" placeholder="E-mail" required>
+                                    </div>
+                                    <div class="input">
+                                        <!-- <label class="feedback__label" for="txtArea-feedback">Message</label> -->
+                                        <textarea name="txtArea-feedback" id="txtArea-feedback" class="feedbacK__input" placeholder="Message" required></textarea>
+                                    </div>
+                                    <button id="btn-submit-feedback" class="feedback__submitBtn">
+                                        Send
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
 
@@ -198,6 +239,10 @@
                     <a href="{{ route('stories.trending')}}">Trending Stories</a>
                     <a href="{{ route('stories.index') }}">Explore Stories</a>
                     <a href="https://paystack.com/pay/kidstoriesapp">Make a donation</a>
+                    <button type="button" class="btn btn-feedback" data-toggle="modal" data-target="#feedbackModalCenter">
+                        <i class="fas fa-edit"></i>    
+                        Leave us some feedback
+                    </button>
                 </section>
                 <!--         <section>
             <h5>Others</h5>
