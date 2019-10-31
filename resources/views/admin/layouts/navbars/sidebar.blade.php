@@ -125,6 +125,12 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.feedbacks.index') }}">
+                        <i class="ni ni-email-83 text-blue"></i> {{ __('Manage Feedbacks') }}
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('payment.index') }}">
                         <i class="ni ni-money-coins text-blue"></i> {{ __('Payments') }}
                     </a>
