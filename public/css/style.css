@@ -293,6 +293,9 @@
      margin-bottom: 2em;
      padding-bottom: 5em;
      padding-top: 5em;
+     max-width: 1024px;
+     margin-left: auto;
+     margin-right: auto;
  }
 
  .footer-box h5 {
@@ -309,6 +312,10 @@
      display: block;
      font-size: 14px;
      margin: 10px 0;
+ }
+
+ footer a:hover{
+    color: #333333;
  }
 
  footer p {
@@ -333,7 +340,82 @@
      border: 1px solid white;
      border-radius: 0;
      background-color: #718cfb;
+     color: #fff;
  }
+
+ #subscribe-email::placeholder{
+    color: #fff;
+ }
+
+ div.privacy-policy ul li{
+     list-style-type: square;
+ }
+
+ div.privacy-policy ul{
+     padding-left: 2em;
+ }
+
+/* Send feedback button  */
+
+ button.btn.btn-feedback {
+    padding: 10px;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    transition: all 0.4s;
+}
+
+button.btn.btn-feedback:hover{
+    color: #718cfb;
+    background: #fff;
+}
+
+ /* Modal form  */
+.modal-content h3.feedback_title{
+    text-transform: uppercase;
+}
+
+.modal-content p.feedback__p, .modal-content h3.feedback_title{
+    color: #4A59F7;
+}
+
+.modal-content div.input{
+    margin-bottom: 1.2em;
+}
+
+.modal-content img.feedback__img{
+    max-width: 250px;
+    margin: 68px auto 63px;
+}
+
+.modal-content .feedbacK__input{
+    border: 2px solid #4E53F7;
+    box-sizing: border-box;
+}
+
+.modal-content .feedbacK__input::placeholder{
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content .feedbacK__input{
+    padding: 1em;
+}
+
+.modal-content textarea.feedbacK__input{
+    height: 250px;
+}
+
+.modal-content button.feedback__submitBtn{
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-size: 24px;
+    width: 75%;
+    padding: 0.4em;
+    text-transform: uppercase;
+    margin: 5px auto;
+    max-width: 381px;
+    background: #4E53F7;
+}
 
  @media screen and (max-width: 800px) {
      .add-story {
@@ -362,5 +444,11 @@
      footer section {
          width: 100%;
          margin-bottom: 20px;
+     }
+
+     @media screen and (min-width: 800px) {
+        .modal-content button.feedback__submitBtn{
+            font-size: 45px;
+        }
      }
  }
