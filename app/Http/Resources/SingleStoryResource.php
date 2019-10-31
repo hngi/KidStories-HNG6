@@ -20,7 +20,7 @@ class SingleStoryResource extends JsonResource
         return [
             'id'            => $this->id,
             'title'         => $this->title,
-            'body'          => $this->body,
+            'body'          => strip_tags($this->body),
             'category_id'   => $this->category_id,
             'user_id'       => $this->user_id,
             'image_url'     => $this->image_url,
