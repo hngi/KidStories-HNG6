@@ -5,6 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Add iOS meta tags and icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Kids Stories">
+
     <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -21,7 +26,8 @@
     <link rel="manifest" href="/favicon/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#718cfb">
+    <meta name="description" content="Read free bedtime stories, fairy tales, poems and short stories for kids">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -38,7 +44,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    
+
 
     <!-- Stylesheets -->
     <!--   <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
@@ -156,6 +162,20 @@
 
         <!-- Body -->
         <main>
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+
+
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
             @yield('content')
         </main>
 
@@ -169,6 +189,7 @@
                     <a href="{{ route('subscribe') }}">Subscriptions</a>
                     <!-- <a href="#">Contact Us</a> -->
                     <a href="{{ route('story.store') }}">Create a Story</a>
+                    <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
 
                 </section>
                 <section>
@@ -188,20 +209,31 @@
                 <section>
                     <h5>Newsletter</h5>
                     <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
-                    <div class="subscribe">
-                        <input type="email" name="" id="subscribe-email" placeholder="Type email">
-                        <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
-                    </div>
+                    <form action="{{route('newsletter.subscribe')}}" id="subscribe_newsletter_form">
+                        @csrf
+                        <div class="subscribe">
+                            <input type="email" name="email" id="subscribe-email" placeholder="Type email" autocomplete="email" required />
+                            <button class="send-icon" type="submit"><i class="fa fa-paper-plane"></i></button>
+                        </div>
+                    </form>
                 </section>
             </div>
             <hr>
-            <div class="footer-info">
-                <p class="col-md-10 pull-left">© 2019 Kid Stories. All rights reserved</p>
-                <div class="social-iconsb col-md-2 pull-right">
-                    <!--           <a href="#">  <i class="fa fa-youtube"></i> </a>
- --> <a target="_blank" href="https://instagram.com/mykidstories"> <i class="fab fa-instagram"></i> </a>
-                    <a target="_blank" href="https://facebook.com/mykidstories"> <i class="fab fa-facebook"></i> </a>
-                    <a target="_blank" href="https://twitter.com/mykidstories"> <i class="fab fa-twitter"></i> </a>
+            <div class="footer-info d-flex flex-wrap">
+                <div class="col-lg-10 pull-left my-auto">
+                    <p class="my-auto">© 2019 Kid Stories. All rights reserved</p>
+                </div>
+                <div class="social-iconsb col-lg-2 pull-right px-0 my-auto">
+                    <!--<a href="#">  <i class="fa fa-youtube"></i> </a>--> 
+                    <a target="_blank" href="https://instagram.com/mykidstories"> 
+                        <i class="fab fa-instagram"></i> 
+                    </a>
+                    <a target="_blank" href="https://facebook.com/mykidstories"> 
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/mykidstories">
+                        <i class="fab fa-twitter"></i>
+                    </a>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -216,6 +248,39 @@
     <script src="/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="/js/index.js"></script>
+    <script>
+        //IIFE for scroll fixed header
+
+        // (function () {
+        //     // When the user scrolls the page, execute scroll Function
+        //     window.onscroll = function() {scrollFunction()};
+
+        //     // Get the header
+        //     var header = document.querySelector("header.main-header");
+        //     // Get the offset position of the navbar
+        //     var sticky = header.offsetTop;
+
+        //     // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        //     function scrollFunction() {
+        //         console.log('iife');
+        //         if (window.pageYOffset > sticky) {
+        //             header.classList.add("sticky");
+        //         } else {
+        //             header.classList.remove("sticky");
+        //         }
+        //     }
+        // })();
+
+        //Register service worker.
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((reg) => {
+                        console.log('Service worker registered.', reg);
+                    });
+            });
+        }
+    </script>
     @yield('js')
 </body>
 

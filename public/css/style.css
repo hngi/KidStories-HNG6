@@ -293,6 +293,9 @@
      margin-bottom: 2em;
      padding-bottom: 5em;
      padding-top: 5em;
+     max-width: 1024px;
+     margin-left: auto;
+     margin-right: auto;
  }
 
  .footer-box h5 {
@@ -309,6 +312,10 @@
      display: block;
      font-size: 14px;
      margin: 10px 0;
+ }
+
+ footer a:hover{
+    color: #333333;
  }
 
  footer p {
@@ -333,6 +340,19 @@
      border: 1px solid white;
      border-radius: 0;
      background-color: #718cfb;
+     color: #fff;
+ }
+
+ #subscribe-email::placeholder{
+    color: #fff;
+ }
+
+ div.privacy-policy ul li{
+     list-style-type: square;
+ }
+
+ div.privacy-policy ul{
+     padding-left: 2em;
  }
 
  @media screen and (max-width: 800px) {
