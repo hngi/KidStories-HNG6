@@ -21,6 +21,6 @@ class FeedbackController extends Controller
             'message' => $request->message,
         ]);
 
-        return back()->with('info', 'Thanks for the feedback');
+        return back()->with('success', 'Thanks for the feedback');
     }
 }
