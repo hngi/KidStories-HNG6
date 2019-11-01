@@ -128,7 +128,7 @@
 
                                     @auth
                                     <div class="language dropdown">
-                                        <a class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
+                                        <a class="btn btn-default dropdown-toggle d-flex flex-wrap" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
                                             <span class="icon circle-icons fa fa-user"></span> 
                                             <span class="nav_user_name"> {{ auth()->user()->fullname }}</span>
                                             <span class="icon fa fa-caret-down"></span>
