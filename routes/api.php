@@ -71,6 +71,8 @@ Route::post('/stories/{id}/reactions/dislike', "StoryController@dislike");
 /**
  * Routes for comment
  */
+Route::middleware('auth:api')->get('/comments/{id}', "CommentsController@index");
+
 Route::middleware('auth:api')->post('/comments', "CommentsController@store");
 
 Route::middleware('auth:api')->put('/comments/{id}', "CommentsController@update");
@@ -88,3 +90,9 @@ Route::middleware('auth:api')->post('/payments', "PaymentController@store");
 Route::get('/tags', 'TagController@index');
 
 Route::get('/tags/stories/search/{tagName}', 'TagController@storiesByTag');
+
+
+/**
+ * Routes for feedbacks
+ */
+Route::post('/feedbacks', 'FeedbackController@create');

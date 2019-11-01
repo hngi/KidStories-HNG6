@@ -23,6 +23,10 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy-policy');
+
 Route::get('/profile', 'UserController@showProfile')->name('profile')->middleware('auth');
 Route::put('/profile', 'UserController@updateProfile')->name('profile.update')->middleware('auth');
 
@@ -63,6 +67,8 @@ Route::get('/categories/{id}/stories', 'CategoryController@stories')->name('cate
 // Routes for authors
 Route::get('/authors/{author}/stories', 'AuthorController@getStories')->name('author.stories');
 
+// Routes for feedbacks
+Route::post('/feedbacks', 'FeedbackController@create')->name('feedbacks.create');
 
 //routes for payment
 Route::post('/pay', [
@@ -71,3 +77,7 @@ Route::post('/pay', [
 ])->middleware('auth');
 
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('pay.callback');
+
+
+Route::get('/newsletter/subscribe', 'NewsletterController@subscribe')->name('newsletter.subscribe');
+Route::get('/newsletter/api', 'NewsletterController@sendCampaigns')->name('newsletter.send');

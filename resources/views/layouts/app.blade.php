@@ -44,7 +44,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    
+
 
     <!-- Stylesheets -->
     <!--   <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
@@ -128,8 +128,10 @@
 
                                     @auth
                                     <div class="language dropdown">
-                                        <a class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
-                                            <span class="icon circle-icons fa fa-user"></span> {{ auth()->user()->fullname }} <span class="icon fa fa-caret-down"></span>
+                                        <a class="btn btn-default dropdown-toggle d-flex flex-wrap" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
+                                            <span class="icon circle-icons fa fa-user"></span> 
+                                            <span class="nav_user_name"> {{ auth()->user()->fullname }}</span>
+                                            <span class="icon fa fa-caret-down"></span>
                                         </a>
                                         <ul class="dropdown-menu style-one" aria-labelledby="dropdownMenu2">
                                             <li><a href="{{ route('profile') }}">Profile</a></li>
@@ -162,7 +164,64 @@
 
         <!-- Body -->
         <main>
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+
+
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
             @yield('content')
+
+            <!-- Modal -->
+            <div class="modal fade" id="feedbackModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close btn-outline-danger btn-modal" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="text-center">
+                                    <h3 class="feedback_title">Feedback</h3>
+                                    <div>
+                                        <img class="feedback__img" src="/images/icons/feedback.png" alt="An image of our feedback">
+                                    </div>
+                                    <p class="feedback__p">Have some compliants or innovations? Let’s hear them</p>
+                                </div>
+                                <form method="POST" id="frm-feedback" class="feedback__form" action="{{route('feedbacks.create')}}">
+
+                                    @csrf
+                                    <div class="input">
+                                        <!-- <label class="feedback__label" for="inpName-feedback">Full Name</label> -->
+                                        <input name="name" id="inpName-feedback" type="text" autocomplete="name" class="feedbacK__input" placeholder="Full Name" required>
+                                    </div>
+                                    <div class="input">
+                                        <!-- <label class="feedback__label" for="inpEmail-feedback">E-mail</label> -->
+                                        <input name="email" id="inpEmail-feedback" type="email" autocomplete="email" class="feedbacK__input" placeholder="E-mail" required>
+                                    </div>
+                                    <div class="input">
+                                        <!-- <label class="feedback__label" for="txtArea-feedback">Message</label> -->
+                                        <textarea name="message" id="txtArea-feedback" class="feedbacK__input" placeholder="Message" required></textarea>
+                                    </div>
+                                    <button id="btn-submit-feedback" class="feedback__submitBtn">
+                                        Send
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
 
@@ -175,6 +234,7 @@
                     <a href="{{ route('subscribe') }}">Subscriptions</a>
                     <!-- <a href="#">Contact Us</a> -->
                     <a href="{{ route('story.store') }}">Create a Story</a>
+                    <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
 
                 </section>
                 <section>
@@ -183,6 +243,10 @@
                     <a href="{{ route('stories.trending')}}">Trending Stories</a>
                     <a href="{{ route('stories.index') }}">Explore Stories</a>
                     <a href="https://paystack.com/pay/kidstoriesapp">Make a donation</a>
+                    <button type="button" class="btn btn-feedback" data-toggle="modal" data-target="#feedbackModalCenter">
+                        <i class="fas fa-edit"></i>
+                        Leave us some feedback
+                    </button>
                 </section>
                 <!--         <section>
             <h5>Others</h5>
@@ -194,22 +258,31 @@
                 <section>
                     <h5>Newsletter</h5>
                     <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
-                    <form action="" id="subscribe_newsletter_form">
-                       <div class="subscribe">
-                            <input type="email" name="" id="subscribe-email" placeholder="Type email" autocomplete="email" required/>
+                    <form action="{{route('newsletter.subscribe')}}" id="subscribe_newsletter_form">
+                        @csrf
+                        <div class="subscribe">
+                            <input type="email" name="email" id="subscribe-email" placeholder="Type email" autocomplete="email" required />
                             <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
-                        </div> 
-                    </form>     
+                        </div>
+                    </form>
                 </section>
             </div>
             <hr>
-            <div class="footer-info">
-                <p class="col-md-10 pull-left">© 2019 Kid Stories. All rights reserved</p>
-                <div class="social-iconsb col-md-2 pull-right">
-                    <!--           <a href="#">  <i class="fa fa-youtube"></i> </a>
- --> <a target="_blank" href="https://instagram.com/mykidstories"> <i class="fab fa-instagram"></i> </a>
-                    <a target="_blank" href="https://facebook.com/mykidstories"> <i class="fab fa-facebook"></i> </a>
-                    <a target="_blank" href="https://twitter.com/mykidstories"> <i class="fab fa-twitter"></i> </a>
+            <div class="footer-info d-flex flex-wrap">
+                <div class="col-lg-10 pull-left my-auto">
+                    <p class="my-auto">© 2019 Kid Stories. All rights reserved</p>
+                </div>
+                <div class="social-iconsb col-lg-2 pull-right px-0 my-auto">
+                    <!--<a href="#">  <i class="fa fa-youtube"></i> </a>-->
+                    <a target="_blank" href="https://instagram.com/mykidstories">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a target="_blank" href="https://facebook.com/mykidstories">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/mykidstories">
+                        <i class="fab fa-twitter"></i>
+                    </a>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -225,7 +298,29 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="/js/index.js"></script>
     <script>
-        // CODELAB: Register service worker.
+        //IIFE for scroll fixed header
+
+        // (function () {
+        //     // When the user scrolls the page, execute scroll Function
+        //     window.onscroll = function() {scrollFunction()};
+
+        //     // Get the header
+        //     var header = document.querySelector("header.main-header");
+        //     // Get the offset position of the navbar
+        //     var sticky = header.offsetTop;
+
+        //     // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        //     function scrollFunction() {
+        //         console.log('iife');
+        //         if (window.pageYOffset > sticky) {
+        //             header.classList.add("sticky");
+        //         } else {
+        //             header.classList.remove("sticky");
+        //         }
+        //     }
+        // })();
+
+        //Register service worker.
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
