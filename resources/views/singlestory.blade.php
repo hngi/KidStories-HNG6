@@ -27,9 +27,9 @@
     <div class="content1">
 
         <!-- Bookmark story -->
-        <div class="subContent">
+        <div class="subContent col-md-10 col-lg-8 mx-auto text-center">
 
-            <div class="subcontent-icon" style="margin-buttom:20px;">
+            <div class="subcontent-icon" style="margin-bottom:20px;">
 
                 @if ($story->favorite == true)
                 <a> <i class="far fa-bookmark bookmark-blue stBookmark" onclick="bookmark(event);" id="bookmark-{{ $story->id }}" data-story-id="{{ $story->id }}"></i> </a>
@@ -42,7 +42,9 @@
             </div> <!-- Bookmark story ends -->
 
             <!-- Stories -->
-            <img class="stories" src="{{$story->image_url ?? '/images/placeholder.png'}}">
+            <div>
+                <img class="stories" src="{{$story->image_url ?? '/images/placeholder.png'}}">
+            </div>
             <p>{!! $story->body !!} </p>
         </div>
 
@@ -53,10 +55,11 @@
         <!-- Tags -->
         <div class="tags">
             <div>
-                <div style="float:left;">
+                <div>
                     @foreach ($story->tags as $tag)
                     <button class="" type="submit" id="submit"> {{$tag->name}} </button>
                     @endforeach
+                    <hr>
                 </div>
                 <div style="float:right;">
                     @if ($story->reaction == 'dislike')
@@ -75,7 +78,6 @@
         </div>
 
         <!-- Tags ends -->
-        <hr>
         <h1> Stories You Might Like </h1>
         <!-- Cards section -->
         <div class="stories">
