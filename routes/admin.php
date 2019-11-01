@@ -15,13 +15,10 @@ Route::get('/register', 'Auth\AdminRegisterController@showRegistrationForm')->na
 Route::post('/register', 'Auth\AdminRegisterController@register')->name('admin.post.register');
 
 
-Route::group( ['middleware' => ['admin']], function() {
+Route::group(['middleware' => ['admin']], function () {
     Route::get('/dashboard', 'AdminDashboardController@index')->name('admin.dashboard');
     Route::put('/change-password', 'AdminDashboardController@changePassword')->name('admin.password.change');
     Route::get('/profile', 'AdminDashboardController@profile')->name('admin.profile');
-
-
-
 });
 
 
@@ -46,13 +43,23 @@ Route::resource('/categories', 'CategoryController', ['as' => 'admin']);
  */
 Route::resource('/user', 'UserController', ['as' => 'admin']);
 
+
+
 /**
  * Stories routes for superadmin operations
  *
  */
-Route::resource('/stories', 'StoryController',['as'=>'admin']);
-Route::get('/unapproved-stories','StoryController@unApprovedStories')->name('admin.unapprovedstories');
-Route::post('/unapproved-stories/{id}','StoryController@approve')->name('admin.approvestory');
+Route::resource('/stories', 'StoryController', ['as' => 'admin']);
+Route::get('/unapproved-stories', 'StoryController@unApprovedStories')->name('admin.unapprovedstories');
+Route::post('/unapproved-stories/{id}', 'StoryController@approve')->name('admin.approvestory');
+
+
+/**
+ * Feedback routes for superadmin operations
+ *
+ */
+Route::resource('/feedbacks', 'FeedbackController', ['as' => 'admin']);
+
 
 //route for payment
-Route::get('payment','PaymentController@index')->name('payment.index');
+Route::get('payment', 'PaymentController@index')->name('payment.index');
