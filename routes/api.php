@@ -90,3 +90,9 @@ Route::middleware('auth:api')->post('/payments', "PaymentController@store");
 Route::get('/tags', 'TagController@index');
 
 Route::get('/tags/stories/search/{tagName}', 'TagController@storiesByTag');
+
+
+/**
+ * Routes for feedbacks
+ */
+Route::post('/feedbacks', 'FeedbackController@create');
