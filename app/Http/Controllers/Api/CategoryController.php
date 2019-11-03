@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StoryResource;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-       $categories = Category::all();
+        $categories = Category::all();
 
         return response([
             'status' => 'success',
@@ -52,13 +53,12 @@ class CategoryController extends Controller
     public function categoryStories($id)
     {
         $category = Category::where('id', $id)->with(['stories.user'])->firstOrFail();
-        
+
         return response([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
-            'data' => $category
+            'data' =>  StoryResource::collection($category->stories)
         ], 200);
     }
-
 }

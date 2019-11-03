@@ -57,8 +57,8 @@
 
                                 </th>
 
-                                <td>{{ $feedback->name}}</td>
-                                <td>{{ $feedback->name}}</td>
+                                <td>{{ $feedback->email}}</td>
+                                <td>{{ $feedback->message}}</td>
                                 <td>
                                     <abbr title="{{ $feedback->created_at->format('d-M-Y') . ' @ ' . $feedback->created_at->format('H:ia') }}">
                                         {{ $feedback->created_at->diffForHumans() }}
