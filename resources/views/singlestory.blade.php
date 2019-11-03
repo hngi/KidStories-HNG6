@@ -91,7 +91,7 @@
                         <img src="{{$similarStory->image_url ?? '/images/placeholder.png'}}" class="card-img-top cards" alt="story image">
                         <div class="card-body">
                             <h5 class="card-title" style="font-size:1rem">
-                                <a href="{{route('story.show',$story->slug)}}">
+                                <a href="{{route('story.show',$similarStory->slug)}}">
                                     {{str_limit($similarStory->title,22)}}
                                 </a>
                             </h5>
