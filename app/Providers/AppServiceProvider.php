@@ -3,12 +3,13 @@
 namespace App\Providers;
 
 use App\Tag;
+use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
-{   
-    protected $tags =[
+{
+    protected $tags = [
         'create-story',
         'admin.stories.create',
         'admin.stories.edit'
@@ -36,8 +37,10 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        \View::composer($this->tags, function($view){
-            $view->with('tags',Tag::all());
+        \View::composer($this->tags, function ($view) {
+            $view->with('tags', Tag::all());
         });
+
+        Resource::withoutWrapping();
     }
 }
