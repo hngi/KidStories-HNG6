@@ -10,6 +10,7 @@ Route::get('/test', function () {
 Route::post('/auth/register', "AuthController@register");
 
 Route::post('/auth/login', "AuthController@login");
+Route::post('/social/login', "AuthController@handleSocialLogin");
 
 Route::middleware('auth:api')->post('/auth/logout', "AuthController@logout");
 

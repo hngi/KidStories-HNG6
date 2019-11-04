@@ -13,7 +13,7 @@ class Story extends Model
     ];
 
     // FIXME: Please, don't uncomment. Understand what you are about to do first.
-    // protected $appends = ['like','dislike'];
+    // protected $appends = ['likes', 'dislikes'];
 
     /**
      * Boot the model.
@@ -192,5 +192,32 @@ class Story extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+
+    public function getReaction()
+    {
+        if (auth()->user()) {
+            $reaction = Reaction::where('story_id', $this->id)
+                ->where('user_id', auth()->id())
+                ->first();
+            if ($reaction) {
+                return $reaction->reaction;
+            }
+        }
+        return 'nil';
+    }
+
+    public function getBookmarkStatus()
+    {
+        if (auth()->user()) {
+            $bookmark = Bookmark::where('story_id', $this->id)
+                ->where('user_id', auth()->id())
+                ->first();
+            if ($bookmark) {
+                return true;
+            }
+        }
+        return false;
     }
 }

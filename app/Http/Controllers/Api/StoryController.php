@@ -15,8 +15,9 @@ use Illuminate\Http\Request;
 use App\Traits\Api\UserTrait;
 use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\StoryResource;
+use App\Http\Resources\Story as StoryResource;
 use App\Http\Resources\SingleStoryResource;
+use App\Http\Resources\StoryCollection;
 use Symfony\Component\HttpFoundation\Response;
 
 class StoryController extends Controller
@@ -43,12 +44,13 @@ class StoryController extends Controller
             });
         });
 
-        $stories = $stories->get();
+        $stories = $stories->paginate(15);
+        //dd($stories);
         return response()->json([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
-            'data' => StoryResource::collection($stories)
+            'data' => new StoryCollection($stories)
         ], 200);
     }
     /**

@@ -235,6 +235,64 @@
         ]
     },
     {
+        "name": "coderello/laravel-passport-social-grant",
+        "version": "2.1.0",
+        "version_normalized": "2.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/coderello/laravel-passport-social-grant.git",
+            "reference": "eeecb0ff5ab91cfbd65a6912711f9c25e771bc90"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/coderello/laravel-passport-social-grant/zipball/eeecb0ff5ab91cfbd65a6912711f9c25e771bc90",
+            "reference": "eeecb0ff5ab91cfbd65a6912711f9c25e771bc90",
+            "shasum": ""
+        },
+        "require": {
+            "laravel/passport": "^6.0|^7.0|^8.0",
+            "php": ">=7.1"
+        },
+        "require-dev": {
+            "mockery/mockery": "^1.1",
+            "orchestra/testbench": "~3.0"
+        },
+        "time": "2019-11-04T06:10:55+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Coderello\\SocialGrant\\Providers\\SocialGrantServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Coderello\\SocialGrant\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ilya Sakovich",
+                "email": "me@hivokas.com"
+            }
+        ],
+        "description": "Social Grant for Laravel Passport",
+        "keywords": [
+            "grant",
+            "laravel",
+            "network",
+            "oauth",
+            "passport",
+            "social"
+        ]
+    },
+    {
         "name": "defuse/php-encryption",
         "version": "v2.2.1",
         "version_normalized": "2.2.1.0",
@@ -4589,6 +4647,63 @@
         ],
         "description": "Library that helps with managing the version number of Git-hosted PHP projects",
         "homepage": "https://github.com/sebastianbergmann/version"
+    },
+    {
+        "name": "spatie/laravel-json-api-paginate",
+        "version": "1.6.0",
+        "version_normalized": "1.6.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/laravel-json-api-paginate.git",
+            "reference": "137fbc98d8f3aee9507168c9a73fc575530970bd"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/laravel-json-api-paginate/zipball/137fbc98d8f3aee9507168c9a73fc575530970bd",
+            "reference": "137fbc98d8f3aee9507168c9a73fc575530970bd",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "~5.8.0|^6.0",
+            "php": "^7.2"
+        },
+        "require-dev": {
+            "orchestra/testbench": "~3.8.0|^4.0",
+            "phpunit/phpunit": "^8.0"
+        },
+        "time": "2019-09-04T11:35:38+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Spatie\\JsonApiPaginate\\JsonApiPaginateServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\JsonApiPaginate\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be",
+                "homepage": "https://spatie.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "A paginator that plays nice with the JSON API spec",
+        "homepage": "https://github.com/spatie/laravel-json-api-paginate",
+        "keywords": [
+            "laravel-json-api-paginate",
+            "spatie"
+        ]
     },
     {
         "name": "spatie/laravel-newsletter",
