@@ -18,6 +18,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Story as StoryResource;
 use App\Http\Resources\SingleStoryResource;
 use App\Http\Resources\StoryCollection;
+use App\Notifications\StoryPending;
 use Symfony\Component\HttpFoundation\Response;
 
 class StoryController extends Controller
@@ -102,6 +103,11 @@ class StoryController extends Controller
             "image_url" => $image['secure_url'] ?? null,
             "image_name" => $image['public_id'] ?? null
         ]);
+
+        $user = auth()->user();
+
+        $user->notify(new StoryPending($user, $story));
+
         DB::commit();
         return response()->json([
             'status' => 'success',

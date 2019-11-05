@@ -15,7 +15,7 @@ class Comment extends Model
     protected $fillable = [
         'story_id', 'user_id', 'body',
     ];
-    
+
     //Relationship start
 
     /*

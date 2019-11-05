@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Notifications\UserWelcome;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -49,13 +50,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-           'first_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-           'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-         'password' => ['required', 'string', 'confirmed','min:8'],
-           // 'postal_code'=>['string'],
-           // 'location'=>['required','string'],
-          'phone'=>['required','numeric']
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'confirmed', 'min:8'],
+            // 'postal_code'=>['string'],
+            // 'location'=>['required','string'],
+            'phone' => ['required', 'numeric']
         ]);
     }
 
@@ -67,15 +68,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-    
-        return User::create([
+
+        $user = User::create([
             'first_name' => $data['first_name'],
-            'last_name'=>$data['last_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-           // 'location'=>$data['location'],
-            'phone'=>$data['phone'],
-           // 'postal_code'=>$data['postal_code']
+            // 'location'=>$data['location'],
+            'phone' => $data['phone'],
+            // 'postal_code'=>$data['postal_code']
         ]);
+        $user->notify(new UserWelcome($user));
+
+        return $user;
     }
 }
