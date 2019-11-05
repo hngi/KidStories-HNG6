@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ead5ef3488c7f9960a265b0ecac9fc73",
+    "content-hash": "c2b0f77c1a278ddf2d5bac17e012697d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -171,62 +171,6 @@
                 "sdk"
             ],
             "time": "2018-12-16T15:58:27+00:00"
-        },
-        {
-            "name": "coderello/laravel-passport-social-grant",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/coderello/laravel-passport-social-grant.git",
-                "reference": "eeecb0ff5ab91cfbd65a6912711f9c25e771bc90"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/coderello/laravel-passport-social-grant/zipball/eeecb0ff5ab91cfbd65a6912711f9c25e771bc90",
-                "reference": "eeecb0ff5ab91cfbd65a6912711f9c25e771bc90",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/passport": "^6.0|^7.0|^8.0",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.1",
-                "orchestra/testbench": "~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Coderello\\SocialGrant\\Providers\\SocialGrantServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Coderello\\SocialGrant\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ilya Sakovich",
-                    "email": "me@hivokas.com"
-                }
-            ],
-            "description": "Social Grant for Laravel Passport",
-            "keywords": [
-                "grant",
-                "laravel",
-                "network",
-                "oauth",
-                "passport",
-                "social"
-            ],
-            "time": "2019-11-04T06:10:55+00:00"
         },
         {
             "name": "defuse/php-encryption",

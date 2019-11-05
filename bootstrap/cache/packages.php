@@ -13,13 +13,6 @@
       0 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
     ),
   ),
-  'coderello/laravel-passport-social-grant' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Coderello\\SocialGrant\\Providers\\SocialGrantServiceProvider',
-    ),
-  ),
   'fideloper/proxy' => 
   array (
     'providers' => 
