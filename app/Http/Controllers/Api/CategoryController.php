@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Story as StoryResource;
+use App\Http\Resources\StoryCollection;
 
 class CategoryController extends Controller
 {
@@ -54,11 +55,13 @@ class CategoryController extends Controller
     {
         $category = Category::where('id', $id)->with(['stories.user'])->firstOrFail();
 
+        // dd($category->stories->count());
+
         return response([
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
-            'data' =>  StoryResource::collection($category->stories)
+            'data' => new StoryCollection($category->stories()->paginate(15))
         ], 200);
     }
 }
