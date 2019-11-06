@@ -60,6 +60,14 @@ Route::get('/stories', 'StoriesController@index')->name('stories.index');
 Route::get('/stories/{story}', 'StoriesController@show')->name('story.show');
 Route::get('/trending-stories', 'StoriesController@trendingstories')->name('stories.trending');
 
+/**
+ * Routes for comment
+ */
+// Route::middleware(['auth', 'verified'])->get('/comments/{id}', "CommentsController@index");
+Route::middleware(['auth', 'verified'])->post('/comments', "CommentsController@store")->name('comment.add');
+Route::middleware(['auth', 'verified'])->put('/comments/{id}', "CommentsController@update")->name('comment.update');
+Route::middleware(['auth', 'verified'])->delete('/comments/{id}', "CommentsController@destory")->name('comment.delete');
+
 // Routes for categories
 Route::get('/categories', 'CategoryController@index')->name('categories.index');
 Route::get('/categories/{id}/stories', 'CategoryController@stories')->name('categories.stories');

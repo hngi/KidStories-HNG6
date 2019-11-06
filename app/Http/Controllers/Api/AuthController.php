@@ -8,6 +8,7 @@ use App\User;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\SocialIdentity;
 use Socialite;
 use App\SocialIdentity;
 
