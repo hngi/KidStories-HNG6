@@ -417,6 +417,18 @@ button.btn.btn-feedback:hover{
     background: #4E53F7;
 }
 
+a#dropdownMenu2 span {
+    margin: auto;
+    padding: 5px;
+}
+
+span.nav_user_name {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 150px;
+}
+
  @media screen and (max-width: 800px) {
      .add-story {
          margin: 5em 2em;

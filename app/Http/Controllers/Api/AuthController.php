@@ -9,6 +9,7 @@ use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Socialite;
+use App\SocialIdentity;
 
 class AuthController extends Controller
 {
