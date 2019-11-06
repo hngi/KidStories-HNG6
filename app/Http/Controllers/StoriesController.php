@@ -96,7 +96,7 @@ class StoriesController extends Controller
      */
     public function mystories(Request $request)
     {
-        $stories = Story::withoutGlobalScopes();
+        $stories = Story::withoutGlobalScopes()->with('comments.user');
 
         if ($request->query('search')) {
             $search = $request->query('search');

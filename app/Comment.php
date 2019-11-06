@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -33,6 +34,17 @@ class Comment extends Model
     {
         return $this->belongsTo(Story::class)->withDefault();
     }
+
+    public function getCommentDateAttribute()
+    {
+        return Carbon::parse($this->created_at)->isoFormat('MMM Do YYYY');
+    }
+
+    public function getCommentTimeAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('g:i A');
+    }
+
 
     //Relationship end
 }

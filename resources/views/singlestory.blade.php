@@ -81,57 +81,69 @@
             <!-- comment -->
             <div class="comments-section col-md-10 mx-auto pb-2">
                 <!-- add your comment -->
-                <div class="leave-comment p-2">
-                    <div class="d-flex p-2 leave-comment__block">
-                        <img class="leave-comment__user-img" src="/images/profile/imgIcon.png" alt="your profile picture">
-                        <p class="my-auto mx-1 leave-comment__placeholder">Leave a Comment...</p>
-                    </div>
-                    <div class="leave-comment__add-my-comment">
-                        <!-- this is just to ensure that quill elements stays on theire  own   -->
-                        <div id="add-my-comment"></div>
-                    </div> 
-                </div>
+
 
                 <!-- i think we should have if comment(s) then show this comments here  -->
+                @if(count($story->comments))
                 <div class="comments-block my-2">
                     <h3 class="text-center">Comments</h3>
                     <div class="comments">
+                        @foreach($story->comments as $comment)
                         <div class="comment py-2 px-3">
-                            <img src="/images/profile/imgIcon.png" alt="image of user Seyekemi Sojirin" class="comment__user-img">
-                            <p class="comment__user-name my-auto">Seyekemi Sojirin</p>
+                            <img src="{{ ! is_null($comment->user->image_url) ? $comment->user->image_url : '/images/profile/imgIcon.png' }}" alt="Profile Pic" class="comment__user-img">
+                            <p class="comment__user-name my-auto">{{$comment->user->full_name}}</p>
                             <p class="comment__post-date my-auto">
-                                <span class="comment__post-date__date">Aug 12, 2019</span>
-                                <span class="comment__post-date__time">10:20 PM</span>
+                                <span class="comment__post-date__date">{{$comment->comment_date}}</span>
+                                <span class="comment__post-date__time">{{$comment->comment_time}}</span>
+
+                                @if(auth()->id() === $comment->user_id )
+                                <button data-id="{{$comment->id}}" data-body="{{$comment->body}}">Edit</button><!-- edit button-->
+
+                                <button data-id="{{$comment->id}}" data-url="{{route('comment.delete', $comment->id)}}">Delete</button><!-- delete button-->
+                                <!-- The data in the buttons can be accessed via javascript. for delete we can have a simple confirm that 
+                            will redirect to the url if true and do nothing on cancel note that the url will perfom the delete
+                        As for edit just use the data-body to populate a textarea I'll take it up from there-->
+
+
+                                @endif
+
+
                             </p>
-                            <p class="comment__textContent py-1">
-                                i just wanted to test how this comment of a thing really works with the feature.i just wanted to test how this comment of a thing really works with the feature. i just wanted to test how this comment of a thing really works with the feature.
-                            </p>
+                            <p class="comment__textContent py-1">{{$comment->body}}</p>
                         </div>
-                        <div class="comment py-2 px-3">
-                            <img src="/images/profile/imgIcon.png" alt="image of user Seyekemi Sojirin" class="comment__user-img">
-                            <p class="comment__user-name my-auto">Seyekemi Sojirin</p>
-                            <p class="comment__post-date my-auto">
-                                <span class="comment__post-date__date">Aug 12, 2019</span>
-                                <span class="comment__post-date__time">10:20 PM</span>
-                            </p>
-                            <p class="comment__textContent py-2 text-justify">
-                                i just wanted to test how this comment of a thing really works with the feature.i just wanted to test how this comment of a thing really works with the feature. i just wanted to test how this comment of a thing really works with the feature.
-                            </p>
-                        </div>
-                        <div class="comment py-2 px-3">
-                            <img src="/images/profile/imgIcon.png" alt="image of user Seyekemi Sojirin" class="comment__user-img">
-                            <p class="comment__user-name my-auto">Seyekemi Sojirin</p>
-                            <p class="comment__post-date my-auto">
-                                <span class="comment__post-date__date">Aug 12, 2019</span>
-                                <span class="comment__post-date__time">10:20 PM</span>
-                            </p>
-                            <p class="comment__textContent py-1">
-                                i just wanted to test how this comment of a thing really works with the feature.i just wanted to test how this comment of a thing really works with the feature. i just wanted to test how this comment of a thing really works with the feature.
-                            </p>
-                        </div>
+                        @endforeach
+
+
                     </div>
                 </div>
-            </div>       
+                @endif
+
+                <div class="leave-comment p-2">
+                    <div class="d-flex p-2 leave-comment__block">
+                        <img class="leave-comment__user-img" src="/images/profile/imgIcon.png" alt="your profile picture">
+                        <p class="my-auto mx-1 leave-comment__placeholder">{{auth()->user()->full_name ?? 'Leave a comment'}}</p>
+                    </div>
+                    <div class="leave-comment__add-my-comment">
+                        <form action="{{route('comment.add')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="story_id" value="{{$story->id}}">
+                            <textarea name="body" id="add-my-comment" required></textarea>
+                            @if(auth()->user())
+                            <div class="buttons  col-lg-12">
+                                <button class="btn save">Post Comment</button>
+                            </div>
+                            @else
+                            <div class="buttons  col-lg-12">
+                                <a href="{{url('/login')}}" class="btn save">Login to Comment</a>
+                            </div>
+                            @endif
+                        </form>
+                        <!-- this is just to ensure that quill elements stays on theire  own   -->
+
+                    </div>
+                </div>
+
+            </div>
         </div>
 
         <!-- Tags ends -->
@@ -182,7 +194,7 @@
                     </div>
                     @endforeach
                 </div>
-            </div>       
+            </div>
         </div>
     </div>
 </div>
