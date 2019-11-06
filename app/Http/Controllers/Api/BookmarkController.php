@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Bookmark;
 use Auth;
-use App\Http\Resources\StoryResource;
+use App\Http\Resources\Story as StoryResource;
 use Symfony\Component\HttpFoundation\Response;
 
 class BookmarkController extends Controller
