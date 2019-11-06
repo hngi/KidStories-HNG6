@@ -61,6 +61,20 @@ class CategoryController extends Controller
             'status' => 'success',
             'code' => 200,
             'message' => 'OK',
+            'data' => StoryResource::collection($category->stories)
+        ], 200);
+    }
+
+    public function categoryStoriesPaginated($id)
+    {
+        $category = Category::where('id', $id)->with(['stories.user'])->firstOrFail();
+
+        // dd($category->stories->count());
+
+        return response([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK',
             'data' => new StoryCollection($category->stories()->paginate(15))
         ], 200);
     }

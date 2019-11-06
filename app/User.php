@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
 
@@ -17,8 +17,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'email', 'password','last_name','phone','location',
-        'postal_code','is_admin', 'image_url', 'image_name'
+        'first_name', 'email', 'password', 'last_name', 'phone', 'location',
+        'postal_code', 'is_admin', 'image_url', 'image_name'
     ];
 
     /**
@@ -69,7 +69,7 @@ class User extends Authenticatable
      */
     public function bookmarks()
     {
-        return $this->belongsToMany(Story::class,'bookmarks');
+        return $this->belongsToMany(Story::class, 'bookmarks');
     }
 
     /*
@@ -87,9 +87,10 @@ class User extends Authenticatable
         return $this->hasMany(Subscribed::class);
     }
 
-    public function identities() {
+    public function identities()
+    {
         return $this->hasMany('App\SocialIdentity');
-     }
+    }
 
     //Relationship end
 }

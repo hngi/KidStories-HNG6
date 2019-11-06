@@ -45,6 +45,28 @@ class StoryController extends Controller
             });
         });
 
+        $stories = $stories->get();
+        //dd($stories);
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'message' => 'OK',
+            'data' => StoryResource::collection($stories)
+        ], 200);
+    }
+
+    public function paginated(Request $request)
+    {
+        $stories = Story::query();
+        $stories = $stories->when($request->has('age'), function ($q) use ($request) {
+            $age = explode('-', $request->age);
+            return $q->where(function ($q) use ($age) {
+                foreach ($age as $data) {
+                    $q->orWhereRaw('? between age_from and age_to ', [$data]);
+                }
+            });
+        });
+
         $stories = $stories->paginate(15);
         //dd($stories);
         return response()->json([
