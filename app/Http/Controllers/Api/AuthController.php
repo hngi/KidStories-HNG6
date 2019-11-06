@@ -8,7 +8,7 @@ use App\User;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Laravel\Socialite\Facades\Socialite;
+use Socialite;
 
 class AuthController extends Controller
 {
@@ -168,10 +168,12 @@ class AuthController extends Controller
 
     public function handleSocialLogin(Request $request)
     {
+        //dd($request);
 
         try {
 
             $user = Socialite::driver($request->provider)->userFromToken($request->token);
+            //dd($user);
         } catch (Exception $e) {
             return response()->json([
                 'error' => ['code' => 401, 'message' => 'Unauthorized']
