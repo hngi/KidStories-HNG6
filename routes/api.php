@@ -52,6 +52,7 @@ Route::get('/categories', "CategoryController@index");
 Route::get('/categories/{id}', "CategoryController@show");
 
 Route::get('/categories/{id}/stories', "CategoryController@categoryStories");
+Route::get('/categories/{id}/stories/paginated', "CategoryController@categoryStoriesPaginated");
 
 /**
  * Routes for stories
@@ -59,6 +60,7 @@ Route::get('/categories/{id}/stories', "CategoryController@categoryStories");
 Route::middleware('auth:api')->post('/stories', "StoryController@store");
 
 Route::get('/stories', "StoryController@index");
+Route::get('/stories/paginated', "StoryController@paginated");
 Route::get('/stories/{id}', "StoryController@show");
 
 // Route::get('/stories/{id}', "StoryController@show");
