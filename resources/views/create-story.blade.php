@@ -481,10 +481,10 @@
         addListeners(postId);
     };
 </script>
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<!-- <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script>
     tinymce.init({
         selector: 'textarea.description',
     });
-</script>
+</script> -->
 @endsection

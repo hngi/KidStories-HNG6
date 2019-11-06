@@ -128,8 +128,10 @@
 
                                     @auth
                                     <div class="language dropdown">
-                                        <a class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
-                                            <span class="icon circle-icons fa fa-user"></span> {{ auth()->user()->fullname }} <span class="icon fa fa-caret-down"></span>
+                                        <a class="btn btn-default dropdown-toggle d-flex flex-wrap" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">
+                                            <span class="icon circle-icons fa fa-user"></span> 
+                                            <span class="nav_user_name"> {{ auth()->user()->fullname }}</span>
+                                            <span class="icon fa fa-caret-down"></span>
                                         </a>
                                         <ul class="dropdown-menu style-one" aria-labelledby="dropdownMenu2">
                                             <li><a href="{{ route('profile') }}">Profile</a></li>
@@ -260,7 +262,7 @@
                         @csrf
                         <div class="subscribe">
                             <input type="email" name="email" id="subscribe-email" placeholder="Type email" autocomplete="email" required />
-                            <button class="send-icon" type="submit"><i class="fa fa-paper-plane"></i></button>
+                            <button class="send-icon"><i class="fa fa-paper-plane"></i></button>
                         </div>
                     </form>
                 </section>

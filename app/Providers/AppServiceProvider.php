@@ -41,6 +41,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('tags', Tag::all());
         });
 
-        Resource::withoutWrapping();
+        
     }
 }
