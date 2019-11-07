@@ -153,6 +153,72 @@ a.slideInLeft {
 
 /* Start Add comment section */
 
+.summary-section{
+  a.btn-see-summary{
+    padding-bottom: 5px;
+    transition: all 0.3s;
+
+    &, &:active, &:visited{
+      color: #718CFB;
+
+      &:hover{
+        p{
+          color: #000;
+
+          &::after{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-bottom: 1px solid #718CFB;
+            box-sizing: border-box;
+          }
+        }
+      }
+    }
+    
+  }
+
+  .summary-section_textArea{
+    display: none;
+    transition: all 0.7s;
+    background-color: #fafafa;
+    border-top: 1px solid rgba(51, 51, 51, 0.5);
+
+    p#summary-text{
+      color: #000;
+
+      &.no-summary{
+        color: #777;
+        font-style: italic;
+      }
+    }
+  }
+
+  //on open of summary panel
+  &.active{
+    .summary-section_textArea{
+      display: flex;
+      flex-wrap: wrap;
+      padding: 1em;
+    }
+
+    & a {
+      i.show-summary-icon{
+        transform: rotate(180deg);
+      }
+
+      &:hover{
+        p{
+          &::after{
+            width:0;
+          }
+        }
+      }
+    }
+  }
+}
+
 .leave-comment {
   background: #fff;
   border-radius: 10px;

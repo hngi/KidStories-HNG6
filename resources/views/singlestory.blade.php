@@ -46,7 +46,19 @@
             <div>
                 <img class="stories" src="{{$story->image_url ?? '/images/placeholder.png'}}">
             </div>
-            <p>{!! $story->body !!} </p>
+            <div class="summary-section text-left my-2">
+                <div class='d-flex'>
+                    <a role='button' class="btn-see-summary">
+                        <p class="my-auto d-flex">See Summary <span><i class="fas fa-chevron-down show-summary-icon my-auto px-1"></i></span></p>
+                    </a>
+                </div>
+                <div class="summary-section_textArea">
+                    <p id="summary-text" class="text-left no-summary">
+                        No summary to this story.
+                    </p>
+                </div>
+            </div>
+            <p id="story-body" class="text-justify">{!! $story->body !!} </p>
         </div>
 
         <h1 class="end"> THE END </h1>
