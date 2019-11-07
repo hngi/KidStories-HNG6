@@ -1,7 +1,7 @@
 {
     "name": "Kid Stories",
     "short_name": "KidStories",
-    "start_url": ".",
+    "start_url": "../",
     "display": "standalone",
     "theme_color": "#718cfb",
     "background_color": "#fff",

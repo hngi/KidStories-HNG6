@@ -3,6 +3,7 @@
 <link href="{{ asset('css/storieslisting.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/singlestory.css') }}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
 @endsection
 @section('content')
 
@@ -45,7 +46,19 @@
             <div>
                 <img class="stories" src="{{$story->image_url ?? '/images/placeholder.png'}}">
             </div>
-            <p>{!! $story->body !!} </p>
+            <div class="summary-section text-left my-2">
+                <div class='d-flex'>
+                    <a role='button' class="btn-see-summary">
+                        <p class="my-auto d-flex">See Summary <span><i class="fas fa-chevron-down show-summary-icon my-auto px-1"></i></span></p>
+                    </a>
+                </div>
+                <div class="summary-section_textArea">
+                    <p id="summary-text" class="text-left no-summary">
+                        No summary to this story.
+                    </p>
+                </div>
+            </div>
+            <p id="story-body" class="text-justify">{!! $story->body !!} </p>
         </div>
 
         <h1 class="end"> THE END </h1>
@@ -74,55 +87,125 @@
                     @endif
                 </div>
             </div>
+        </div>
+        <div style="background: #f5f5f5;">
+            <hr>
+            <!-- comment -->
+            <div class="comments-section col-md-10 mx-auto pb-2">
+                <!-- add your comment -->
 
+
+                <!-- i think we should have if comment(s) then show this comments here  -->
+                @if(count($story->comments))
+                <div class="comments-block my-2">
+                    <h3 class="text-center">Comments</h3>
+                    <div class="comments">
+                        @foreach($story->comments as $comment)
+                        <div class="comment py-2 px-3">
+                            <img src="{{ ! is_null($comment->user->image_url) ? $comment->user->image_url : '/images/profile/imgIcon.png' }}" alt="Profile Pic" class="comment__user-img">
+                            <p class="comment__user-name my-auto">{{$comment->user->full_name}}</p>
+                            <p class="comment__post-date my-auto">
+                                <span class="comment__post-date__date">{{$comment->comment_date}}</span>
+                                <span class="comment__post-date__time">{{$comment->comment_time}}</span>
+
+                                @if(auth()->id() === $comment->user_id )
+                                <button data-id="{{$comment->id}}" data-body="{{$comment->body}}">Edit</button><!-- edit button-->
+
+                                <button data-id="{{$comment->id}}" data-url="{{route('comment.delete', $comment->id)}}">Delete</button><!-- delete button-->
+                                <!-- The data in the buttons can be accessed via javascript. for delete we can have a simple confirm that 
+                            will redirect to the url if true and do nothing on cancel note that the url will perfom the delete
+                        As for edit just use the data-body to populate a textarea I'll take it up from there-->
+
+
+                                @endif
+
+
+                            </p>
+                            <p class="comment__textContent py-1">{{$comment->body}}</p>
+                        </div>
+                        @endforeach
+
+
+                    </div>
+                </div>
+                @endif
+
+                <div class="leave-comment p-2">
+                    <div class="d-flex p-2 leave-comment__block">
+                        <img class="leave-comment__user-img" src="/images/profile/imgIcon.png" alt="your profile picture">
+                        <p class="my-auto mx-1 leave-comment__placeholder">{{auth()->user()->full_name ?? 'Leave a comment'}}</p>
+                    </div>
+                    <div class="leave-comment__add-my-comment">
+                        <form action="{{route('comment.add')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="story_id" value="{{$story->id}}">
+                            <textarea name="body" id="add-my-comment" required></textarea>
+                            @if(auth()->user())
+                            <div class="buttons  col-lg-12">
+                                <button class="btn save">Post Comment</button>
+                            </div>
+                            @else
+                            <div class="buttons  col-lg-12">
+                                <a href="{{url('/login')}}" class="btn save">Login to Comment</a>
+                            </div>
+                            @endif
+                        </form>
+                        <!-- this is just to ensure that quill elements stays on theire  own   -->
+
+                    </div>
+                </div>
+
+            </div>
         </div>
 
         <!-- Tags ends -->
-        <h1> Stories You Might Like </h1>
-        <!-- Cards section -->
-        <div class="stories">
-            <div class="row">
-                @foreach ($similarStories as $similarStory)
-                <div class="col-md-3">
-                    <div class="card story_card mt-4">
-                        @if($similarStory->is_premium)
-                        <span class="badge badge-primary premium-badge">PREMIUM</span>
-                        @endif
-                        <img src="{{$similarStory->image_url ?? '/images/placeholder.png'}}" class="card-img-top cards" alt="story image">
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size:1rem">
-                                <a href="{{route('story.show',$similarStory->slug)}}">
-                                    {{str_limit($similarStory->title,22)}}
-                                </a>
-                            </h5>
-                            <p class="card-text mb-1">by
-                                <span class="author">
-                                    {{$similarStory->author}}
-                                </span>
-                            </p>
-                            <hr>
-                            <p class="card-text">For kids {{$similarStory->age}} years</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between">
-                            <div class="reactions">
-                                <a class="like" href="#">
-                                    <i class="fa fa-thumbs-up mr-2"></i>
-                                    <small class="mr-3"> {{$similarStory->likes}} </small>
-                                </a>
-                                <a class="dislike" href="#">
-                                    <i class="fa fa-thumbs-down mr-2"></i>
-                                    <small> {{$similarStory->dislikes}} </small>
-                                </a>
+        <div class="mt-2">
+            <h1> Stories You Might Like </h1>
+            <!-- Cards section -->
+            <div class="stories">
+                <div class="row">
+                    @foreach ($similarStories as $similarStory)
+                    <div class="col-md-3">
+                        <div class="card story_card mt-4">
+                            @if($similarStory->is_premium)
+                            <span class="badge badge-primary premium-badge">PREMIUM</span>
+                            @endif
+                            <img src="{{$similarStory->image_url ?? '/images/placeholder.png'}}" class="card-img-top cards" alt="story image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-size:1rem">
+                                    <a href="{{route('story.show',$similarStory->slug)}}">
+                                        {{str_limit($similarStory->title,22)}}
+                                    </a>
+                                </h5>
+                                <p class="card-text mb-1">by
+                                    <span class="author">
+                                        {{$similarStory->author}}
+                                    </span>
+                                </p>
+                                <hr>
+                                <p class="card-text">For kids {{$similarStory->age}} years</p>
                             </div>
-                            <div class="bookmark">
-                                <a>
-                                    <i class="fa fa-bookmark"></i>
-                                </a>
+                            <div class="card-footer d-flex justify-content-between">
+                                <div class="reactions">
+                                    <a class="like" href="#">
+                                        <i class="fa fa-thumbs-up mr-2"></i>
+                                        <small class="mr-3"> {{$similarStory->likes}} </small>
+                                    </a>
+                                    <a class="dislike" href="#">
+                                        <i class="fa fa-thumbs-down mr-2"></i>
+                                        <small> {{$similarStory->dislikes}} </small>
+                                    </a>
+                                </div>
+                                <div class="bookmark">
+                                    <a>
+                                        <i class="fa fa-bookmark"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
     </div>
@@ -153,4 +236,8 @@
     </div>
 </section>
 <!-- App sections ends -->
+<!-- some scripts  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="/js/singleStory.js"></script>
 @endsection
