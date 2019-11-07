@@ -71,6 +71,13 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'spatie/laravel-json-api-paginate' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\JsonApiPaginate\\JsonApiPaginateServiceProvider',
+    ),
+  ),
   'spatie/laravel-newsletter' => 
   array (
     'providers' => 

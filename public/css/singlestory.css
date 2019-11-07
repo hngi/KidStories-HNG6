@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700&display=swap");
 .container1 {
   width: 80%;
   margin: auto;
@@ -13,13 +14,13 @@
   margin: auto;
   overflow: hidden;
 }
+
 .content1 .topic {
   padding-top: 60px;
   padding-bottom: 20px;
 }
 
 .subcontent-icon i {
-  
   font-size: 26px;
 }
 
@@ -49,18 +50,17 @@
 img.stories {
   width: 50%;
   height: 400px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 /* .subContent {
   padding: 0px 0px 0 390px;
 } */
-
 /* div.subContent > p {
   text-align: center;
   padding-right: 300px;
 } */
-
 div.subContent > p.pLast {
   font-weight: bold;
 }
@@ -70,7 +70,7 @@ div.subContent > p.pLast {
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
-  padding-top: 40px;   
+  padding-top: 40px;
 }
 
 /* Tags */
@@ -82,6 +82,8 @@ button[type="submit"] {
   text-align: center;
   width: 80px;
   height: 30px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
   margin-right: 10px;
   padding: 0 18px 0 16px;
@@ -95,8 +97,8 @@ i.thumbs {
   padding-left: 18px;
   cursor: pointer;
 }
-/* Tags ends */
 
+/* Tags ends */
 hr {
   border-width: 3px;
   border: 1px solid;
@@ -141,80 +143,232 @@ img.cards {
 .story_card .bookmarked i {
   color: #718cfb;
 }
-/*Story Cards ends */
 
+/*Story Cards ends */
 /* App section */
 a.slideInLeft {
   margin-right: 15px;
 }
-/* App Section ends */
 
+/* App Section ends */
+/* Start Add comment section */
+.summary-section a.btn-see-summary {
+  padding-bottom: 5px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.summary-section a.btn-see-summary, .summary-section a.btn-see-summary:active, .summary-section a.btn-see-summary:visited {
+  color: #718CFB;
+}
+
+.summary-section a.btn-see-summary:hover p, .summary-section a.btn-see-summary:active:hover p, .summary-section a.btn-see-summary:visited:hover p {
+  color: #000;
+}
+
+.summary-section a.btn-see-summary:hover p::after, .summary-section a.btn-see-summary:active:hover p::after, .summary-section a.btn-see-summary:visited:hover p::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-bottom: 1px solid #718CFB;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.summary-section .summary-section_textArea {
+  display: none;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+  background-color: #fafafa;
+  border-top: 1px solid rgba(51, 51, 51, 0.5);
+}
+
+.summary-section .summary-section_textArea p#summary-text {
+  color: #000;
+}
+
+.summary-section .summary-section_textArea p#summary-text.no-summary {
+  color: #777;
+  font-style: italic;
+}
+
+.summary-section.active .summary-section_textArea {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 1em;
+}
+
+.summary-section.active a i.show-summary-icon {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.summary-section.active a:hover p::after {
+  width: 0;
+}
+
+.leave-comment {
+  background: #fff;
+  border-radius: 10px;
+}
+
+.leave-comment img.leave-comment__user-img {
+  width: 35px;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.leave-comment .leave-comment__add-my-comment {
+  display: none;
+}
+
+.leave-comment button.btn.save.btn-outline-kidstories {
+  background: transparent;
+  color: #718cfb;
+}
+
+.leave-comment button.btn.save.btn-outline-kidstories:hover {
+  background: #718cfb;
+  color: #fff;
+}
+
+div.comments-block .comments .comment {
+  background-color: #fff;
+  margin: 10px auto 10px auto;
+  border-radius: 8px;
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "userimg username" "userimg dateTime" "text text";
+  -ms-grid-rows: 40px 40px 1fr;
+      grid-template-rows: 40px 40px 1fr;
+  -ms-grid-columns: 80px 1fr;
+      grid-template-columns: 80px 1fr;
+}
+
+div.comments-block .comments .comment p {
+  margin: 0;
+  padding: 0;
+}
+
+div.comments-block .comments .comment img.comment__user-img {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: userimg;
+  width: 90%;
+  height: 90%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  margin: auto;
+  padding: 2px;
+  border: 2px solid #718cfb;
+  border-radius: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+div.comments-block .comments .comment p.comment__user-name {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: username;
+}
+
+div.comments-block .comments .comment p.comment__post-date {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: dateTime;
+}
+
+div.comments-block .comments .comment p.comment__user-name, div.comments-block .comments .comment p.comment__post-date {
+  font-family: 'Lato', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: #828282;
+}
+
+div.comments-block .comments .comment p.comment__post-date, div.comments-block .comments .comment p.comment__user-name {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+div.comments-block .comments .comment p.comment__textContent {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: text;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #333333;
+}
+
+/* End Add comment section */
 /* Media querries for resposiveness */
-@media(min-width: 2560px) {
+@media (min-width: 2560px) {
   /* div.subContent {
     padding: 0 390px 0 390px;
   } */
-
   img.stories {
     width: 500px;
     /* margin: 0px 0px 0px 200px;
     padding-left: 200px; */
   }
-
   /* div.subContent > p {
     padding-right: 100px;
   } */
 }
 
-@media(max-width: 1140px) {
+@media (max-width: 1140px) {
   .content {
     margin-top: 0;
   }
 }
 
-@media(max-width: 1200px) {
+@media (max-width: 1200px) {
   img.stories {
     padding: 0;
     margin: 0;
   }
 }
 
-@media(max-width: 1024px) {
+@media (max-width: 1024px) {
   /* div.subContent {
     padding: 0 200px 0 200px;
   } */
-
   img.stories {
     width: 320px;
   }
-
   div.subContent > p {
     padding: 0;
   }
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
   div.subContent {
     margin: 0;
     padding: 0;
   }
-
   img.stories {
     /* margin-left: 150px; */
     padding: 0;
   }
 }
 
-@media(max-width: 525px) {
+@media (max-width: 525px) {
   .content {
     width: 100%;
   }
-
   div.subContent {
     margin: 0;
     padding: 0;
   }
-
   img.stories {
     width: 320px;
     height: 400px;
@@ -223,10 +377,29 @@ a.slideInLeft {
   }
 }
 
-@media(max-width: 396px) {
+@media (max-width: 396px) {
   a.slideInLeft {
     padding-bottom: 20px;
   }
 }
 
-
+@media screen and (min-width: 950px) {
+  body div.comments-block .comments .comment {
+        grid-template-areas: "userimg username dateTime" "userimg text text" ". text text";
+    -ms-grid-rows: 50px 50px 1fr;
+        grid-template-rows: 50px 50px 1fr;
+    -ms-grid-columns: 100px 1fr 1fr;
+        grid-template-columns: 100px 1fr 1fr;
+  }
+  body div.comments-block .comments .comment p.comment__user-name {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+    grid-area: username;
+  }
+  body div.comments-block .comments .comment p.comment__post-date {
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    grid-area: dateTime;
+  }
+}
+/*# sourceMappingURL=singlestory.css.map */

@@ -20,6 +20,7 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.8",
         "pusher/pusher-php-server": "~3.0",
+        "spatie/laravel-json-api-paginate": "^1.6",
         "spatie/laravel-newsletter": "^4.7",
         "unicodeveloper/laravel-paystack": "^1.0"
     },

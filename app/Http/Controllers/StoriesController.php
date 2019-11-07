@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoryRequest;
 use App\Services\FileUploadService;
 use App\Http\Resources\StoryResource;
+use App\Notifications\StoryPending;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -95,7 +96,7 @@ class StoriesController extends Controller
      */
     public function mystories(Request $request)
     {
-        $stories = Story::withoutGlobalScopes();
+        $stories = Story::withoutGlobalScopes()->with('comments.user');
 
         if ($request->query('search')) {
             $search = $request->query('search');
@@ -232,6 +233,10 @@ class StoriesController extends Controller
         ]);
 
         $story->tags()->attach($tag->getTagsIds($request->tags));
+
+        $user = auth()->user();
+
+        $user->notify(new StoryPending($user, $story));
 
         DB::commit(); //dd('Inside the store before redirect');
         return redirect()->route('story.show', ['story' => $story->slug]);

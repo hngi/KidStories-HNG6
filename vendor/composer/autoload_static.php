@@ -87,6 +87,7 @@ class ComposerStaticInitac8e2b7fa81c493187bef944b0c9d30e
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Bridge\\PsrHttpMessage\\' => 30,
             'Spatie\\Newsletter\\' => 18,
+            'Spatie\\JsonApiPaginate\\' => 23,
         ),
         'R' => 
         array (
@@ -291,6 +292,10 @@ class ComposerStaticInitac8e2b7fa81c493187bef944b0c9d30e
         'Spatie\\Newsletter\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-newsletter/src',
+        ),
+        'Spatie\\JsonApiPaginate\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-json-api-paginate/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -514,6 +519,7 @@ class ComposerStaticInitac8e2b7fa81c493187bef944b0c9d30e
         'App\\Http\\Controllers\\Api\\BookmarkController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/BookmarkController.php',
         'App\\Http\\Controllers\\Api\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/CategoryController.php',
         'App\\Http\\Controllers\\Api\\CommentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/CommentsController.php',
+        'App\\Http\\Controllers\\Api\\FeedbackController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/FeedbackController.php',
         'App\\Http\\Controllers\\Api\\PasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/PasswordController.php',
         'App\\Http\\Controllers\\Api\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/PaymentController.php',
         'App\\Http\\Controllers\\Api\\StoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/StoryController.php',
@@ -528,7 +534,9 @@ class ComposerStaticInitac8e2b7fa81c493187bef944b0c9d30e
         'App\\Http\\Controllers\\AuthorController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthorController.php',
         'App\\Http\\Controllers\\BookmarkController' => __DIR__ . '/../..' . '/app/Http/Controllers/BookmarkController.php',
         'App\\Http\\Controllers\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoryController.php',
+        'App\\Http\\Controllers\\CommentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/CommentsController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\FeedbackController' => __DIR__ . '/../..' . '/app/Http/Controllers/FeedbackController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\MailController' => __DIR__ . '/../..' . '/app/Http/Controllers/MailController.php',
         'App\\Http\\Controllers\\NewsletterController' => __DIR__ . '/../..' . '/app/Http/Controllers/NewsletterController.php',
@@ -542,6 +550,7 @@ class ComposerStaticInitac8e2b7fa81c493187bef944b0c9d30e
         'App\\Http\\Controllers\\SuperAdmin\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/SuperAdmin/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\SuperAdmin\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/SuperAdmin/Auth/VerificationController.php',
         'App\\Http\\Controllers\\SuperAdmin\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/SuperAdmin/CategoryController.php',
+        'App\\Http\\Controllers\\SuperAdmin\\FeedbackController' => __DIR__ . '/../..' . '/app/Http/Controllers/SuperAdmin/FeedbackController.php',
         'App\\Http\\Controllers\\SuperAdmin\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/SuperAdmin/PaymentController.php',
         'App\\Http\\Controllers\\SuperAdmin\\StoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/SuperAdmin/StoryController.php',
         'App\\Http\\Controllers\\SuperAdmin\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/SuperAdmin/UserController.php',
@@ -560,14 +569,17 @@ class ComposerStaticInitac8e2b7fa81c493187bef944b0c9d30e
         'App\\Http\\Resources\\CommentResource' => __DIR__ . '/../..' . '/app/Http/Resources/CommentResource.php',
         'App\\Http\\Resources\\CommentsResource' => __DIR__ . '/../..' . '/app/Http/Resources/CommentsResource.php',
         'App\\Http\\Resources\\SingleStoryResource' => __DIR__ . '/../..' . '/app/Http/Resources/SingleStoryResource.php',
-        'App\\Http\\Resources\\StoryResource' => __DIR__ . '/../..' . '/app/Http/Resources/StoryResource.php',
+        'App\\Http\\Resources\\Story' => __DIR__ . '/../..' . '/app/Http/Resources/Story.php',
+        'App\\Http\\Resources\\StoryCollection' => __DIR__ . '/../..' . '/app/Http/Resources/StoryCollection.php',
         'App\\Mail\\PaymentRecieved' => __DIR__ . '/../..' . '/app/Mail/PaymentRecieved.php',
         'App\\Mail\\SendMailable' => __DIR__ . '/../..' . '/app/Mail/SendMailable.php',
         'App\\Mail\\UserCreatedStory' => __DIR__ . '/../..' . '/app/Mail/UserCreatedStory.php',
         'App\\Mail\\UserStoryApproved' => __DIR__ . '/../..' . '/app/Mail/UserStoryApproved.php',
         'App\\Notifications\\PaymentRecieved' => __DIR__ . '/../..' . '/app/Notifications/PaymentRecieved.php',
+        'App\\Notifications\\StoryPending' => __DIR__ . '/../..' . '/app/Notifications/StoryPending.php',
         'App\\Notifications\\UserCreatedStory' => __DIR__ . '/../..' . '/app/Notifications/UserCreatedStory.php',
         'App\\Notifications\\UserStoryApproved' => __DIR__ . '/../..' . '/app/Notifications/UserStoryApproved.php',
+        'App\\Notifications\\UserWelcome' => __DIR__ . '/../..' . '/app/Notifications/UserWelcome.php',
         'App\\Password' => __DIR__ . '/../..' . '/app/Password.php',
         'App\\Payment' => __DIR__ . '/../..' . '/app/Payment.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -3733,6 +3745,7 @@ class ComposerStaticInitac8e2b7fa81c493187bef944b0c9d30e
         'SebastianBergmann\\Timer\\RuntimeException' => __DIR__ . '/..' . '/phpunit/php-timer/src/RuntimeException.php',
         'SebastianBergmann\\Timer\\Timer' => __DIR__ . '/..' . '/phpunit/php-timer/src/Timer.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Spatie\\JsonApiPaginate\\JsonApiPaginateServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-json-api-paginate/src/JsonApiPaginateServiceProvider.php',
         'Spatie\\Newsletter\\Exceptions\\InvalidNewsletterList' => __DIR__ . '/..' . '/spatie/laravel-newsletter/src/Exceptions/InvalidNewsletterList.php',
         'Spatie\\Newsletter\\Newsletter' => __DIR__ . '/..' . '/spatie/laravel-newsletter/src/Newsletter.php',
         'Spatie\\Newsletter\\NewsletterFacade' => __DIR__ . '/..' . '/spatie/laravel-newsletter/src/NewsletterFacade.php',

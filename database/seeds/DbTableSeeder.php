@@ -6,7 +6,7 @@ class DbTableSeeder extends Seeder
 {
     protected $count = [
         'user' => 10,
-        'story' => 20,
+        'story' => 40,
         'category' => 10,
         'bookmark' => 15,
         'reaction' => 200,
@@ -15,7 +15,7 @@ class DbTableSeeder extends Seeder
         'payment' => 10,
         'subscribed' => 10,
         'tags' => 16,
-        'story_tag'=>3 //story_tag per story
+        'story_tag' => 3 //story_tag per story
     ];
 
     protected $stories = null;
@@ -26,8 +26,8 @@ class DbTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {   
-        factory('App\User')->states('default')->create();//eamil = api@email.com
+    {
+        //factory('App\User')->states('default')->create();//eamil = api@email.com
         factory('App\User', $this->count['user'])->create();
         factory('App\Category', $this->count['category'])->create();
         factory('App\Subscription', $this->count['subscription'])->create();
@@ -116,12 +116,12 @@ class DbTableSeeder extends Seeder
     }
 
     protected function storyTag()
-    {   
-        $this->stories->each(function($story){
-            factory('App\StoryTag',$this->count['story_tag'])->create([
-                'story_id'=>$story->id,
-                'tag_id'=>function(){
-                    return rand(1,$this->count['tags']);
+    {
+        $this->stories->each(function ($story) {
+            factory('App\StoryTag', $this->count['story_tag'])->create([
+                'story_id' => $story->id,
+                'tag_id' => function () {
+                    return rand(1, $this->count['tags']);
                 }
             ]);
         });
@@ -141,9 +141,8 @@ class DbTableSeeder extends Seeder
         $usersEmail->each(function ($email, $key) {
             factory('App\User')->create([
                 'email' => $email,
-                'is_admin'=>1
+                'is_admin' => 1
             ]);
         });
     }
-
 }

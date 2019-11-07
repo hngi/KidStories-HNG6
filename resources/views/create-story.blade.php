@@ -106,10 +106,9 @@
                 </div>
                 <div class="form-input  col-lg-12" style="margin-top: 20px;">
                     <label for="content">Content:</label>
-                    <div name="body" id="content"></div>
-                    <!-- <textarea class="form-control" placeholder="And the fish happened to grow wings..." 
-                            name="body" id="content" cols="50" rows="10" required>
-                        </textarea> -->
+                    <!-- <div name="body" id="content"></div> -->
+                    <textarea class="form-control" placeholder="And the fish happened to grow wings..." name="body" id="content" cols="50" rows="10" required>
+                        </textarea>
                 </div>
                 <input type="hidden" value="0" name="is_premium" />
                 <div class="buttons  col-lg-12">
@@ -482,10 +481,10 @@
         addListeners(postId);
     };
 </script>
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<!-- <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script>
     tinymce.init({
         selector: 'textarea.description',
     });
-</script>
+</script> -->
 @endsection
