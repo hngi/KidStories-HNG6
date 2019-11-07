@@ -226,10 +226,21 @@ a.slideInLeft {
   img.leave-comment__user-img{
     width: 35px;
     height: auto;
+    object-fit: cover;
   }
 
   .leave-comment__add-my-comment{
     display: none;
+  }
+
+  button.btn.save.btn-outline-kidstories {
+    background: transparent;
+    color: #718cfb;
+  }
+
+  button.btn.save.btn-outline-kidstories:hover{
+      background: #718cfb;
+      color: #fff;
   }
 }
 
@@ -268,9 +279,10 @@ div.comments-block{
         object-fit: contain;
         margin: $mauto;
         padding: 2px;
-        border: 2px solid;
+        border: 2px solid #718cfb;
         // border-image: linear-gradient(#777777 33.33%, #fff 33.33% 66.67%, #777777 66.67%);
         border-radius: 100%;
+        object-fit: cover;
       }
 
       p.comment__user-name{

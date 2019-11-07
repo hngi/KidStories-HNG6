@@ -93,7 +93,31 @@
             <!-- comment -->
             <div class="comments-section col-md-10 mx-auto pb-2">
                 <!-- add your comment -->
+                
+                <div class="leave-comment p-2">
+                    <div class="d-flex p-2 leave-comment__block">
+                        <img class="leave-comment__user-img" src="/images/profile/imgIcon.png" alt="your profile picture">
+                        <p class="my-auto mx-1 leave-comment__placeholder"><span class="eif-no-comment">{{auth()->user()->full_name ?? 'Leave a comment...'}}</span><span class="if-comment"></span></p>
+                    </div>
+                    <div class="leave-comment__add-my-comment">
+                        <form action="{{route('comment.add')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="story_id" value="{{$story->id}}">
+                            <textarea name="body" id="add-my-comment" required placeholder="Leave a comment"></textarea>
+                            @if(auth()->user())
+                            <div class="buttons  col-lg-12">
+                                <button class="btn save btn-outline-kidstories">Post Comment</button>
+                            </div>
+                            @else
+                            <div class="buttons  col-lg-12">
+                                <a href="{{url('/login')}}" class="btn save">Login to Comment</a>
+                            </div>
+                            @endif
+                        </form>
+                        <!-- this is just to ensure that quill elements stays on theire  own   -->
 
+                    </div>
+                </div>
 
                 <!-- i think we should have if comment(s) then show this comments here  -->
                 @if(count($story->comments))
@@ -109,14 +133,13 @@
                                 <span class="comment__post-date__time">{{$comment->comment_time}}</span>
 
                                 @if(auth()->id() === $comment->user_id )
-                                <button data-id="{{$comment->id}}" data-body="{{$comment->body}}">Edit</button><!-- edit button-->
+                                    <!-- edit button-->
+                                    <!-- <button data-id="{{$comment->id}}" data-body="{{$comment->body}}">Edit</button> -->
 
-                                <button data-id="{{$comment->id}}" data-url="{{route('comment.delete', $comment->id)}}">Delete</button><!-- delete button-->
-                                <!-- The data in the buttons can be accessed via javascript. for delete we can have a simple confirm that 
-                            will redirect to the url if true and do nothing on cancel note that the url will perfom the delete
-                        As for edit just use the data-body to populate a textarea I'll take it up from there-->
-
-
+                                    <!-- delete button-->
+                                    <!-- <button data-id="{{$comment->id}}" data-url="{{route('comment.delete', $comment->id)}}">Delete</button> -->
+                                    
+                                    <!-- The data in the buttons can be accessed via javascript. for delete we can have a simple confirm that will redirect to the url if true and do nothing on cancel note that the url will perfom the delete As for edit just use the data-body to populate a textarea I'll take it up from there-->
                                 @endif
 
 
@@ -129,32 +152,6 @@
                     </div>
                 </div>
                 @endif
-
-                <div class="leave-comment p-2">
-                    <div class="d-flex p-2 leave-comment__block">
-                        <img class="leave-comment__user-img" src="/images/profile/imgIcon.png" alt="your profile picture">
-                        <p class="my-auto mx-1 leave-comment__placeholder">{{auth()->user()->full_name ?? 'Leave a comment'}}</p>
-                    </div>
-                    <div class="leave-comment__add-my-comment">
-                        <form action="{{route('comment.add')}}" method="POST">
-                            @csrf
-                            <input type="hidden" name="story_id" value="{{$story->id}}">
-                            <textarea name="body" id="add-my-comment" required></textarea>
-                            @if(auth()->user())
-                            <div class="buttons  col-lg-12">
-                                <button class="btn save">Post Comment</button>
-                            </div>
-                            @else
-                            <div class="buttons  col-lg-12">
-                                <a href="{{url('/login')}}" class="btn save">Login to Comment</a>
-                            </div>
-                            @endif
-                        </form>
-                        <!-- this is just to ensure that quill elements stays on theire  own   -->
-
-                    </div>
-                </div>
-
             </div>
         </div>
 
