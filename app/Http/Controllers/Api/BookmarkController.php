@@ -19,7 +19,7 @@ class BookmarkController extends Controller
      */
     public function index()
     {
-        $bookmarks =  \App\User::find(auth()->id())->bookmarks;
+        $bookmarks =  auth()->user()->bookmarks;
         return response()->json([
             'status' => 'success',
             'code' => 200,

@@ -195,11 +195,12 @@ class Story extends Model
     }
 
 
-    public function getReaction()
+    public function getUserReactionAttribute()
     {
-        if (auth()->user()) {
+        $user = auth('api')->user();
+        if ($user) {
             $reaction = Reaction::where('story_id', $this->id)
-                ->where('user_id', auth()->id())
+                ->where('user_id', $user->id)
                 ->first();
             if ($reaction) {
                 return $reaction->reaction;
@@ -208,11 +209,12 @@ class Story extends Model
         return 'nil';
     }
 
-    public function getBookmarkStatus()
+    public function getUserBookmarkAttribute()
     {
-        if (auth()->user()) {
+        $user = auth('api')->user();
+        if ($user) {
             $bookmark = Bookmark::where('story_id', $this->id)
-                ->where('user_id', auth()->id())
+                ->where('user_id', $user->id)
                 ->first();
             if ($bookmark) {
                 return true;
