@@ -1,4 +1,5 @@
  //For the quill toolbar for comments
+ var tt;
  var quill = new Quill('#add-my-comment', {
     modules: {
         toolbar: [
@@ -21,7 +22,10 @@ $('div.leave-comment').on('click', function () {
 });
 
 const addSummary = (data) =>{
+    tt = data;
     const summary = data.summary;
+    console.log('data', data);
+    console.log('summary', summary);
     const pSummary = document.getElementById('summary-text');
 
     if (summary && summary.trim() == '') {
@@ -40,7 +44,7 @@ $('a.btn-see-summary').on('click', function() {
     }
 })
 
-document.addEventListener('DOMContentLoaded', function () {
+window.onload = function () {
     const story = document.getElementById('story-body').textContent;
     // console.log('story', story);
     
@@ -62,4 +66,4 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .then(addSummary)
     .catch(err => console.error(err));
-});
+};
