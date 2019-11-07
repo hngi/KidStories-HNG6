@@ -152,6 +152,65 @@ a.slideInLeft {
 
 /* App Section ends */
 /* Start Add comment section */
+.summary-section a.btn-see-summary {
+  padding-bottom: 5px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.summary-section a.btn-see-summary, .summary-section a.btn-see-summary:active, .summary-section a.btn-see-summary:visited {
+  color: #718CFB;
+}
+
+.summary-section a.btn-see-summary:hover p, .summary-section a.btn-see-summary:active:hover p, .summary-section a.btn-see-summary:visited:hover p {
+  color: #000;
+}
+
+.summary-section a.btn-see-summary:hover p::after, .summary-section a.btn-see-summary:active:hover p::after, .summary-section a.btn-see-summary:visited:hover p::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-bottom: 1px solid #718CFB;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.summary-section .summary-section_textArea {
+  display: none;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+  background-color: #fafafa;
+  border-top: 1px solid rgba(51, 51, 51, 0.5);
+}
+
+.summary-section .summary-section_textArea p#summary-text {
+  color: #000;
+}
+
+.summary-section .summary-section_textArea p#summary-text.no-summary {
+  color: #777;
+  font-style: italic;
+}
+
+.summary-section.active .summary-section_textArea {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 1em;
+}
+
+.summary-section.active a i.show-summary-icon {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.summary-section.active a:hover p::after {
+  width: 0;
+}
+
 .leave-comment {
   background: #fff;
   border-radius: 10px;
