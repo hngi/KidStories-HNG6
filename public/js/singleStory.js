@@ -27,8 +27,8 @@ const addSummary = (data) =>{
     console.log('data', data);
     console.log('summary', summary);
     const pSummary = document.getElementById('summary-text');
-
-    if (summary && summary.trim() == '') {
+    console.log(typeof(summary));
+    if (summary != null && summary != undefined && summary.trim() != "") {
         pSummary.innerHTML = summary;
         pSummary.classList.remove('no-summary');
     } else{
