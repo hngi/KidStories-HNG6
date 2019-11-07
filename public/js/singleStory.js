@@ -1,5 +1,8 @@
  //For the quill toolbar for comments
- var tt;
+ var bembem = function (sel, container) {
+    return (container || document).querySelector(sel);
+ }
+ 
  var quill = new Quill('#add-my-comment', {
     modules: {
         toolbar: [
@@ -14,20 +17,31 @@
 });
 
 const setPlaceholder = () =>{
-
+    const comment = bembem('#add-my-comment').value;
+    const defaultPlaceholder = bembem('span.eif-no-comment');
+    const commentPlaceholder = bembem('span.if-comment');
+    if (comment.trim() != '' && comment != null && comment != undefined) {
+        console.log('comment in');        
+        defaultPlaceholder.style.display = 'none';
+        commentPlaceholder.innerHTML = comment;
+    }else{
+        console.log('comment out');
+        defaultPlaceholder.style.display = '';
+        commentPlaceholder.innerHTML = '';
+    }
+    console.log('comment', comment);
 }
 
-$('div.leave-comment').on('click', function () {
-    $('div.leave-comment__add-my-comment').toggle('slow');
+$('div.leave-comment div.leave-comment__block').on('click', function () {
+    $('div.leave-comment__add-my-comment').toggle('slow', ()=>setPlaceholder());
 });
 
 const addSummary = (data) =>{
-    tt = data;
     const summary = data.summary;
-    console.log('data', data);
-    console.log('summary', summary);
+    // console.log('data', data);
+    // console.log('summary', summary);
     const pSummary = document.getElementById('summary-text');
-    console.log(typeof(summary));
+    // console.log(typeof(summary));
     if (summary != null && summary != undefined && summary.trim() != "") {
         pSummary.innerHTML = summary;
         pSummary.classList.remove('no-summary');
@@ -61,7 +75,7 @@ window.onload = function () {
         },
         body: JSON.stringify(bodyData)
     }).then(resp=> {
-        console.log(resp);
+        // console.log(resp);
         return resp.json();
     })
     .then(addSummary)
