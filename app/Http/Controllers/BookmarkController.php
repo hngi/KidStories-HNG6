@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Reaction;
-use App\Http\Resources\StoryResource;
+use App\Http\Resources\Story as StoryResource;
 
 class BookmarkController extends Controller
 {
@@ -18,7 +18,7 @@ class BookmarkController extends Controller
         $bookmarks =  \App\User::find(auth()->id())->bookmarks;
         $data = StoryResource::collection($bookmarks);
 
-        for ($i=0; $i < $data->count(); $i++) { 
+        for ($i = 0; $i < $data->count(); $i++) {
             $storyId = $data[$i]->id;
             if ($user) {
                 $reaction = Reaction::where('story_id', $storyId)
