@@ -30,8 +30,8 @@ class Story extends JsonResource
             'is_premium'    => $this->is_premium,
             'likes_count'   => $this->likes,
             'dislikes_count' => $this->dislikes,
-            'reaction'      => $this->getReaction(),
-            'bookmark'      => $this->getBookmarkStatus()
+            'reaction'      => $this->user_reaction,
+            'bookmark'      => $this->user_bookmark
         ];
     }
 
