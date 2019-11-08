@@ -248,13 +248,13 @@
                         Leave us some feedback
                     </button>
                 </section>
-                <!--         <section>
-            <h5>Others</h5>
-            <a href="#">User FAQs</a>
-            <a href="#">Legal</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms and Conditions</a>
-        </section> -->
+                    <!--         <section>
+                        <h5>Others</h5>
+                        <a href="#">User FAQs</a>
+                        <a href="#">Legal</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms and Conditions</a>
+                        </section> -->
                 <section>
                     <h5>Newsletter</h5>
                     <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
