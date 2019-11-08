@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('other_head_title')
+About
+@endsection
+
+@section('other_head_description')
+Ensuring awesome quality Kids Stories is part of our core values. Find out more.
+@endsection
+
 @section('custom_css')
     <link href="{{ asset('css/about.css') }}" rel="stylesheet" type="text/css" >
 @endsection

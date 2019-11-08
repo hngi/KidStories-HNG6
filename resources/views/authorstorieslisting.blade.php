@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('other_head_title')
+Kids Stories by {{ ucfirst($stories->first()->author) }}
+@endsection
+
+@section('other_head_description')
+Read amazing free bedtime stories, fairy tales, poems and short stories for kids stories by {{$stories->first()->author}} and many others incredible authors on Kidstories.
+@endsection
+
 @section('custom_css')
 <link href="{{ asset('css/storieslisting.css') }}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">

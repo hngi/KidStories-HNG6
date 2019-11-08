@@ -27,13 +27,15 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#718cfb">
-    <meta name="description" content="Read free bedtime stories, fairy tales, poems and short stories for kids">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Kids Stories') }}</title>
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <!-- other head tags on title and description -->
+    <title>@yield('other_head_title', 'Awesome Kid Stories') | {{ config('app.name') }}</title>
+    <meta name="description" content="@yield('other_head_description','Read free bedtime stories, fairy tales, poems and short stories for kids.')">
 
     <!--     
     <script src="{{ asset('js/jquery.js') }}"></script>
@@ -90,8 +92,8 @@
 
                                     <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
                                         <ul class="navigation clearfix">
-                                            <li class=""><a href="/">Home</a>
-                                            </li>
+                                            <li class=""><a href="/">Home</a></li>
+                                            <!-- <li class=""><a href="/about">About</a></li> -->
                                             <li class=""><a href="{{ route('stories.index') }}">Browse Stories</a></li>
                                             <li><a href="{{ route('categories.index') }}">Categories</a></li>
                                             @auth()
@@ -102,6 +104,7 @@
                                             <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
                                             <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
                                             @endguest
+                                            <!-- <li class=""><a href="/contact">Contact</a></li> -->
                                         </ul>
                                     </div>
 

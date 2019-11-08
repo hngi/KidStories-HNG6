@@ -6,6 +6,14 @@
 
 @endsection
 
+@section('other_head_title')
+{{ ucfirst($stories->first()->category->name) }} Category of Kids Stories
+@endsection
+
+@section('other_head_description')
+Read free bedtime stories, fairy tales, poems and short stories for kids about {{ $stories->first()->category->name }} and many other extraordinary categories of Kid Stories
+@endsection
+
 @section('content')
 <div class="p-0 col-md-12">
     <nav aria-label="breadcrumb">

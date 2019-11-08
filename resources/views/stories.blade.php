@@ -3,7 +3,10 @@
 @section('custom_css')
 <link href="{{ asset('css/storieslisting.css') }}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+@endsection
 
+@section('other_head_title')
+Awesome Categories of Kids Stories
 @endsection
 
 @section('content')

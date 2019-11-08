@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('other_head_title')
+Phenomenal Categories of Kids Stories
+@endsection
+
 @section('custom_css')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/categories.css') }}">
 @endsection

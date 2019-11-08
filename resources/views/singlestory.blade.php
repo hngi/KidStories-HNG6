@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('other_head_title')
+{{ ucfirst($stories->first()->title) }}
+@endsection
+
 @section('custom_css')
 <link href="{{ asset('css/storieslisting.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/singlestory.css') }}" rel="stylesheet" type="text/css">
