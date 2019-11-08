@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('other_head_title')
+Login on Kids Stories
+@endsection
+
 @section('custom_css')
     <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css" >
 @endsection
@@ -31,8 +35,8 @@
                     @csrf
 
                         <h5 class="font-weight-bold mt-1">Log in to your account</h5>
-                        <br>
-                        <span><a href="{{ route('auth.social',['provider'=>'google']) }}">Login with Gmail</a></span>
+                        <!-- <br> -->
+                        <!-- <span><a href="{{ route('auth.social',['provider'=>'google']) }}">Login with Gmail</a></span> -->
                     <div class="form-group row">
 
                         <div class="col-md-12">
