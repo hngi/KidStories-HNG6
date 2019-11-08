@@ -1559,6 +1559,7 @@ img {
     border-radius: 8px;
     padding: 68px 30px 45px;
     border: 1px solid #dedede;
+    min-height: 355px;
 }
 
 .faq-block .inner-box h3 {
