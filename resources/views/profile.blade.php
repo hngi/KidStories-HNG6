@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('other_head_title')
+My Profile Page
+@endsection
+
 @section('custom_css')
 <link rel="stylesheet" type="text/css" href="css/profile.css">
 @endsection

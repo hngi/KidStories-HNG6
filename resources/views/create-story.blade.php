@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('other_head_title')
+Create New Story
+@endsection
+
+@section('other_head_description')
+Create bedtime stories, fairy tales, poems and short stories for kids.
+@endsection
+
 @section('custom_css')
 <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
