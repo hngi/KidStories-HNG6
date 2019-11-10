@@ -14,20 +14,50 @@ Ensuring awesome quality Kids Stories is part of our core values. Find out more.
 
 @section('content')
 
-        <div class="bannerx">
-        <div class="banner__content">
-            <h1 class="faq-text">About Us</h1>
-        </div> 
-    </div>
+<div class="bannerx">
+    <div class="banner__content">
+        <h1 class="faq-text">About Us</h1>
+    </div> 
+</div>
 
 <div class="auto-container m-b-60">
-<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+    <p>Kid Stories is an amazing, interactive and educational app for kids’ bedtime stories and moral lessons.
+    This app is created for parents and their children in order to learn, read and enjoy famous stories.</p>
+    <p>Stories are available in different age categories and genre, the app is embedded with different story kinds such as:</p>
+    <ul class="d-flex flex flex-wrap col-lg-10 mx-auto p-1">
+        <li class="flex flex-wrap col-sm-2 px-2 text-center">
+            <img src="/images/icons/swing.png" alt="" class="story-cat-img">
+            <p class="story-cat-text font-weight-bold">Moral Stories</p>   
+        </li>
+        <li class="flex flex-wrap col-sm-2 px-2 text-center">
+            <img src="/images/icons/fantasy.png" alt="" class="story-cat-img">
+            <p class="story-cat-text font-weight-bold">Fable</p>   
+        </li>
+        <li class="flex flex-wrap col-sm-2 px-2 text-center">
+            <img src="/images/icons/african.png" alt="" class="story-cat-img">
+            <p class="story-cat-text font-weight-bold">African Bedtime Stories</p>   
+        </li>
+        <li class="flex flex-wrap col-sm-2 px-2 text-center">
+            <img src="/images/icons/helmet.png" alt="" class="story-cat-img">
+            <p class="story-cat-text font-weight-bold">Folklore</p>   
+        </li>
+        <li class="flex flex-wrap col-sm-2 px-2 text-center">
+            <img src="/images/icons/fairy_tales.png" alt="" class="story-cat-img">
+            <p class="story-cat-text font-weight-bold">Fairytale</p>   
+        </li>
+        <li class="flex flex-wrap col-sm-2 px-2 text-center">
+            <img src="/images/icons/teddy-bear.png" alt="" class="story-cat-img">
+            <p class="story-cat-text font-weight-bold">Bulah</p>   
+        </li>
+    </ul>
 
-<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham</p>
+    <p>Kids are also welcome to share their own stories and moral lessons for others to learn from them.</p>
+    <p>
+        Kid stories app was designed for primary grade children to learn to read in an interactive and engaging way anytime and anywhere with an array of different stories to help improve their English reading skills in a fun way. Kids can ignite their creativity by writing their own stories.
+        Kid stories come with a reading tutor that can read stories to children
+        Kid stories app is free with no ads and no subscription necessary, We are always adding new content to keep children engaged learning is fun with kid stories. <a href="https://play.google.com/store/apps/details?id=com.project.android_kidstories">Download kid stories</a> to inspire your children to become better readers
+    </p>
 
-<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
-
-<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham..</p>
 </div>
 
 
