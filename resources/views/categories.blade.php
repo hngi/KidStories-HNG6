@@ -36,8 +36,12 @@ Phenomenal Categories of Kids Stories
             @foreach ($categories as $category)
 
                 <div class="item">
-                    <a href="{{ route('categories.stories', $category->id) }}"> 
-                        <img class="category" src="{{ $category->image_url }}"> 
+                    <a href="{{ route('categories.stories', $category->id) }}">
+                        @if($category->image_url )
+                        <img class="category" src="{{ $category->image_url }}">
+                        @else
+                        <img class="category" src="/favicon/android-icon-512x512.png">
+                        @endif
                         <div class="info"> {{ $category->name }} </div> 
                     </a>
                 </div>
@@ -64,7 +68,7 @@ Phenomenal Categories of Kids Stories
                         </div>
                         <div class="buttons-box">
                             <!-- <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="images/icons/apple.png" alt="" /></a> -->
-                            <a href="https://github.com/hnginternship5/kidstories-android/blob/production/Bedtimestory/app/debug/app-debug.apk" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/playstore.png') }}" alt="" /></a>
+                            <a href="https://play.google.com/store/apps/details?id=com.project.android_kidstories" class="theme-btn slideInRight"><img src="{{ asset('images/icons/playstore.png') }}" alt="" /></a>
                         </div>
                     </div>
                 </div>
