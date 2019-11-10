@@ -203,7 +203,7 @@ class Story extends Model
                 ->where('user_id', $user->id)
                 ->first();
             if ($reaction) {
-                return $reaction->reaction;
+                return true;
             }
         }
         return 'nil';
