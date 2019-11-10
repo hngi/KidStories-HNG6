@@ -27,27 +27,27 @@ Ensuring awesome quality Kids Stories is part of our core values. Find out more.
     <ul class="d-flex flex flex-wrap col-lg-10 mx-auto p-1">
         <li class="flex flex-wrap col-sm-2 px-2 text-center">
             <img src="/images/icons/swing.png" alt="" class="story-cat-img">
-            <p class="story-cat-img">Moral Stories</p>   
+            <p class="story-cat-text font-weight-bold">Moral Stories</p>   
         </li>
         <li class="flex flex-wrap col-sm-2 px-2 text-center">
             <img src="/images/icons/fantasy.png" alt="" class="story-cat-img">
-            <p class="story-cat-img">Fable</p>   
+            <p class="story-cat-text font-weight-bold">Fable</p>   
         </li>
         <li class="flex flex-wrap col-sm-2 px-2 text-center">
             <img src="/images/icons/african.png" alt="" class="story-cat-img">
-            <p class="story-cat-img">African Bedtime Stories</p>   
+            <p class="story-cat-text font-weight-bold">African Bedtime Stories</p>   
         </li>
         <li class="flex flex-wrap col-sm-2 px-2 text-center">
             <img src="/images/icons/helmet.png" alt="" class="story-cat-img">
-            <p class="story-cat-img">Folklore</p>   
+            <p class="story-cat-text font-weight-bold">Folklore</p>   
         </li>
         <li class="flex flex-wrap col-sm-2 px-2 text-center">
             <img src="/images/icons/fairy_tales.png" alt="" class="story-cat-img">
-            <p class="story-cat-img">Fairytale</p>   
+            <p class="story-cat-text font-weight-bold">Fairytale</p>   
         </li>
         <li class="flex flex-wrap col-sm-2 px-2 text-center">
             <img src="/images/icons/teddy-bear.png" alt="" class="story-cat-img">
-            <p class="story-cat-img">Bulah</p>   
+            <p class="story-cat-text font-weight-bold">Bulah</p>   
         </li>
     </ul>
 
