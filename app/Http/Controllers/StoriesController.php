@@ -15,7 +15,7 @@ use App\Subscribed;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoryRequest;
 use App\Services\FileUploadService;
-use App\Http\Resources\StoryResource;
+use App\Http\Resources\Story as StoryResource;
 use App\Notifications\StoryPending;
 use Symfony\Component\HttpFoundation\Response;
 
