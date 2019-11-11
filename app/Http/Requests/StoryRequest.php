@@ -37,11 +37,14 @@ class StoryRequest extends FormRequest
             'photo' => 'nullable|mimes:jpeg,jpg,png|max:2000', //Max 2MB
         ];
 
-        $rules['title'] = $this->method() == 'PUT' ?
-            [
-                'required', 'string', 'max:255',
-                Rule::unique('stories')->ignore($this->id)
-            ] : 'required|string|unique:stories|max:255';
+        $rules['title'] = in_array($this->method(), ['PATCH', 'PUT']) ?
+
+            'required|string|max:255|unique:stories,title,' . $this->id
+            //Rule::unique('stories')->ignore($this->id)
+            : 'required|string|unique:stories|max:255';
+
+        //dd($rules);
+
         return $rules;
     }
 }
