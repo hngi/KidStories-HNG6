@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('other_head_title')
-{{ ucfirst($stories->first()->title) }}
+{{ ucfirst($story->title) }}
 @endsection
 
 @section('custom_css')
