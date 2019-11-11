@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use App\Services\FileUploadService;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use App\Http\Resources\StoryResource;
+use App\Http\Resources\Story as StoryResource;
+use App\Http\Resources\StoryCollection;
 
 class UserController extends Controller
 {
@@ -137,13 +138,13 @@ class UserController extends Controller
 
     public function stories()
     {
-        $stories = User::find(auth()->id())->stories;
+        $stories = auth()->user()->stories;
 
         return response()->json([
             'status' => 'success',
             'code' => 200,
             'message' => 'ok',
-            'data' => StoryResource::collection($stories)
+            'data' => StoryCollection($stories->paginate(15))
         ], Response::HTTP_OK);
     }
 }
