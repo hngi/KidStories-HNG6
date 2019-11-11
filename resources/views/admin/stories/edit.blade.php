@@ -132,6 +132,7 @@
                                 </span>
                                 @endif
                             </div>
+                            <input type="hidden" name="id" value="{{$story->id}}" />
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success mt-4">{{ __('Update') }}</button>
                             </div>
