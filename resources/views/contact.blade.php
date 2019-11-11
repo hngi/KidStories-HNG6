@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('other_head_title')
+Contacts
+@endsection
+
+@section('other_head_description')
+For any enquire, suggestion or message, kindly get in touch with us. Also feel free to read free bedtime stories, fairy tales, poems and short stories for kids.
+@endsection
+
 @section('custom_css')
     <link href="{{ asset('css/about.css') }}" rel="stylesheet" type="text/css" >
 @endsection

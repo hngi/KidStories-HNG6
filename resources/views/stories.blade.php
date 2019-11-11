@@ -3,7 +3,10 @@
 @section('custom_css')
 <link href="{{ asset('css/storieslisting.css') }}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+@endsection
 
+@section('other_head_title')
+Awesome Categories of Kids Stories
 @endsection
 
 @section('content')
@@ -144,7 +147,7 @@
                     </div>
                     <div class="buttons-box">
                         <!--      <a href="#" class="theme-btn wow slideInLeft" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/apple.png') }}" alt="" /></a> -->
-                        <a href="https://github.com/hnginternship5/kidstories-android/blob/production/Bedtimestory/app/debug/app-debug.apk" class="theme-btn wow slideInRight" data-wow-delay="0ms" data-wow-duration="1500ms"><img src="{{ asset('images/icons/playstore.png') }}" alt="" /></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.project.android_kidstories" target="_blank" class="theme-btn"><img src="{{ asset('images/icons/playstore.png') }}" alt="" /></a>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('other_head_title')
+Edit Story
+@endsection
+
 @section('custom_css')
 <link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/MultiFileUpload.css')}}">

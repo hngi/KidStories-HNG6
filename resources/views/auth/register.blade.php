@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('other_head_title')
+Register on Kids Stories
+@endsection
+
 @section('content')
 <!-- <div class="container-fluid">
     <div class="row justify-content-center">

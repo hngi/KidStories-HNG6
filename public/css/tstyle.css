@@ -78,16 +78,16 @@ img {
     right: 15px;
     width: 50px;
     height: 50px;
-    color: #ffffff;
+    color: #718CFB;
     font-size: 24px;
     text-transform: uppercase;
     line-height: 45px;
     text-align: center;
     z-index: 99999;
     cursor: pointer;
-    background: #A875FF;
+    background: #fff;
     display: none;
-    border: 2px solid #A875FF;
+    border: 2px solid #718CFB;
     -webkit-transition: all 300ms ease;
     -ms-transition: all 300ms ease;
     -o-transition: all 300ms ease;
@@ -1559,6 +1559,7 @@ img {
     border-radius: 8px;
     padding: 68px 30px 45px;
     border: 1px solid #dedede;
+    min-height: 355px;
 }
 
 .faq-block .inner-box h3 {

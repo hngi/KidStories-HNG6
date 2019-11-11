@@ -27,13 +27,15 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#718cfb">
-    <meta name="description" content="Read free bedtime stories, fairy tales, poems and short stories for kids">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Kids Stories') }}</title>
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <!-- other head tags on title and description -->
+    <title>@yield('other_head_title', 'Awesome Kid Stories') | {{ config('app.name') }}</title>
+    <meta name="description" content="@yield('other_head_description','Read free bedtime stories, fairy tales, poems and short stories for kids.')">
 
     <!--     
     <script src="{{ asset('js/jquery.js') }}"></script>
@@ -90,8 +92,8 @@
 
                                     <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
                                         <ul class="navigation clearfix">
-                                            <li class=""><a href="/">Home</a>
-                                            </li>
+                                            <li class=""><a href="/">Home</a></li>
+                                            <!-- <li class=""><a href="/about">About</a></li> -->
                                             <li class=""><a href="{{ route('stories.index') }}">Browse Stories</a></li>
                                             <li><a href="{{ route('categories.index') }}">Categories</a></li>
                                             @auth()
@@ -102,6 +104,7 @@
                                             <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
                                             <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
                                             @endguest
+                                            <!-- <li class=""><a href="/contact">Contact</a></li> -->
                                         </ul>
                                     </div>
 
@@ -117,7 +120,9 @@
                                                 <li class="panel-outer">
                                                     <div class="form-container">
                                                         <form action="{{ route('stories.index') }}" method="GET">
-                                                            <input class="searchBox" type="search" minlength="2" name="search" placeholder="Search...">
+                                                            <input id="search_Box" class="searchBox" type="search" minlength="2" name="search" placeholder="Search...">
+                                                            <datalist id="search_Box">
+                                                            </datalist>    
                                                         </form>
                                                     </div>
                                                 </li>
@@ -248,13 +253,13 @@
                         Leave us some feedback
                     </button>
                 </section>
-                <!--         <section>
-            <h5>Others</h5>
-            <a href="#">User FAQs</a>
-            <a href="#">Legal</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms and Conditions</a>
-        </section> -->
+                    <!--         <section>
+                        <h5>Others</h5>
+                        <a href="#">User FAQs</a>
+                        <a href="#">Legal</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms and Conditions</a>
+                        </section> -->
                 <section>
                     <h5>Newsletter</h5>
                     <p>Subscribe to our newsletter and be the first to get latest updates about new stories from us</p>
