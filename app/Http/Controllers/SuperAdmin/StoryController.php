@@ -80,6 +80,25 @@ class StoryController extends Controller
     }
 
     /**
+     * unapprove resource
+     *
+     * @param  \App\Story  $story
+     * @return Illuminate\Http\Response
+     */
+    public function unApprove($id)
+    {
+        $story = Story::where('id', $id)->first();
+        $story->update([
+            'is_approved' => false
+        ]);
+
+        return redirect()->back()->withStatus(
+            __('Story successfully unpublished.')
+        );
+    }
+
+
+    /**
      * VDisplay form to create resource
      *
      * @return \Illuminate\View\View

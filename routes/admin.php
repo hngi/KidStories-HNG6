@@ -52,6 +52,7 @@ Route::resource('/user', 'UserController', ['as' => 'admin']);
 Route::resource('/stories', 'StoryController', ['as' => 'admin']);
 Route::get('/unapproved-stories', 'StoryController@unApprovedStories')->name('admin.unapprovedstories');
 Route::post('/unapproved-stories/{id}', 'StoryController@approve')->name('admin.approvestory');
+Route::post('/approved-stories/{id}', 'StoryController@unApprove')->name('admin.unapprovestory');
 
 
 /**
